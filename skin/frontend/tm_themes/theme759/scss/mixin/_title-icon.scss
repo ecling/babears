@@ -1,0 +1,77 @@
+//
+// Magento
+//
+
+// =============================================
+// Mixin - titleIcon
+// =============================================
+
+// From http://blog.14islands.com/post/37259603246/sass-resolution-mixin
+
+@mixin titleIcon($icon, $size:55px) {
+    
+    &:before{
+        @include custom-icon($font-family-icon, $icon);
+        font-size: $size;
+        color: $accent-color-1;
+        padding-right: 0.244em;
+    }
+
+    @include bp(max-width, $bp-medium) {
+    	&:before{
+	        font-size: 30px;
+	    }
+        
+    }
+}
+
+
+@mixin themeTitle($title_size: $f-size-xl, $icon: '\e048', $icon_size: 27px, $icon_direct: left, $dimensions: default, $icon-Lheight: default) {
+
+    font-size: $title_size;
+    color: $accent-color-1;
+    line-height: $title_size + 6;
+    font-weight: 500;
+    padding: 0;
+    margin: 0 0 15px 0;
+    position: relative;
+
+    @if($icon_direct == top){
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    &:before{
+        @include custom-icon($font-family-icon, $icon);
+        font-size: $icon_size;
+        border: solid 2px $accent-color-1;
+        border-radius: 50%;
+        text-align: center;
+        vertical-align: middle;
+
+        @if($icon_direct == left){
+            margin-right: 15px;
+        }
+
+        @if($icon_direct == top){
+            display: block;
+            margin: 0 auto 35px;
+        }
+
+        @if($icon-Lheight == default){
+            line-height: $icon_size * 1.8;
+        } @else{
+            line-height: $icon-Lheight;
+        }
+
+        @if($dimensions == default){
+            width: $icon_size * 2;
+            height: $icon_size * 2;
+        } @else{
+            width: $dimensions;
+            height: $dimensions;
+        }
+    }
+
+}
+

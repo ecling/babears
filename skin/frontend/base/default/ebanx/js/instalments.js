@@ -1,0 +1,2 @@
+"use strict";var initInstalments=function(e,t){var n=document.querySelector("#"+e+"_instalments");"undefined"!=typeof ebanxUpdateFireInterest&&n&&n.addEventListener("change",function(){ebanxUpdateFireInterest()});var a=function(){var e=document.querySelector("#cc-"+t+"-local-amount"),a=n.options[n.selectedIndex],r=!(!a||!a.getAttribute)&&a.getAttribute("data-local-amount");e&&e.innerHTML&&r&&(e.innerHTML="<strong> "+r+" </strong>")};n&&(document.addEventListener("DOMContentLoaded",a),n.addEventListener("change",a))};
+//# sourceMappingURL=instalments.js.map

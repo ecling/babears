@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_bestseller_index>
+	    <reference name="content">
+ 		    <block type="bestseller/adminhtml_bestseller"  name="bestseller" />
+        </reference>
+    </adminhtml_bestseller_index>
+    <adminhtml_bestseller_edit>
+		<reference name="head">
+			<action method="addJs"><script>bestseller/product-selector.js</script></action>
+        </reference>
+    </adminhtml_bestseller_edit>
+</layout>

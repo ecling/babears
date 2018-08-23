@@ -1,0 +1,77 @@
+<?php
+$data = $this->getCollection();
+$title_array[] = 'Date';
+$rows = array();
+$total_num[] = '汇总';
+$total[] = '总金额';
+$has_others = false;
+foreach ($data as $item){
+    if($item->getCnt()>4&&!in_array($item->getCountry(),$title_array)){
+        $title_array[] = $item->getCountry();
+    }else{
+        $has_other = true;
+    }
+}
+
+if($has_other){
+    $title_array[] = 'Others';
+}
+
+$title_total = count($title_array);
+
+$data_row = array();
+foreach ($data as $item){
+    foreach ($title_array as $key=>$title){
+        if($key==0){
+            $data_row[$item->getDa()][$key] = $item->getDa();
+        }else{
+            if(!isset($data_row[$item->getDa()][$key])) {
+                $data_row[$item->getDa()][$key] = 0;
+            }
+            if($title==$item->getCountry()){
+                if($item->getCnt()>4) {
+                    $data_row[$item->getDa()][$key] += $item->getCnt();
+                    $total_num[$key] +=  $item->getCnt();
+                    $total[$key] += $item->getTotal();
+                }
+            }
+        }
+    }
+    if($item->getCnt()<5){
+        $data_row[$item->getDa()][$title_total-1] += $item->getCnt();
+        $total_num[$title_total-1] +=  $item->getCnt();
+        $total[$title_total-1] += $item->getTotal();
+    }
+}
+ksort($total_num);
+ksort($total);
+$data_row['total_null'] = $total_num;
+$data_row['total'] = $total;
+$rows = array_values($data_row);
+$jsonData = Mage::helper('core')->jsonEncode($rows);
+?>
+
+<?php if($data->getSize()>0):?>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['table']});
+    google.charts.setOnLoadCallback(drawTable);
+
+    function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Data');
+        <?php foreach ($title_array as $key=>$title): ?>
+        <?php if($key>0): ?>
+        data.addColumn('number', '<?php echo $title;?>');
+        <?php endif;?>
+        <?php endforeach;?>
+        data.addRows(<?php echo $jsonData;?>);
+
+        var table = new google.visualization.Table(document.getElementById('table_div_country'));
+
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+    }
+</script>
+
+<div id="table_div_country" style="margin-top: 50px;"></div>
+<?php endif;?>

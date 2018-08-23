@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<tabs>
+		<tm translate="label">
+			<label>TemplateMonster</label>
+			<sort_order>100</sort_order>
+		</tm>
+	</tabs>
+	<sections>
+		<twitter translate="label" module="twitter">
+			<class>separator-top</class>
+			<label>Twitter</label>
+			<tab>tm</tab>
+			<sort_order>130</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<twitter_timeline>
+					<label>Twitter Timeline</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>20</sort_order>
+					<show_in_default>1</show_in_default>f
+					<show_in_website>0</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enable/Disable</label>
+							<comment><![CDATA[Enable/Disable Twitter Timeline module.]]></comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+
+						<widget_id translate="label comment">
+							<label>Widget ID: </label>
+							<comment><![CDATA[Twitter widget ID. Can be taked from widget edit page URL or from the 'data-widget-id' attribute in the widget embed code.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</widget_id>
+
+						<account_name translate="label comment">
+							<label>Account name: </label>
+							<comment><![CDATA[Twitter account name.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</account_name>
+
+						<color_scheme translate="label comment">
+							<label>Color Scheme: </label>
+							<comment><![CDATA[The color scheme used by the timeline. Can be "light" or "dark".]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>twitter/source_colorscheme_values</source_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</color_scheme>
+
+						<link_color translate="label comment">
+							<label>Link color: </label>
+							<comment><![CDATA[The color of the links in timeline.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</link_color>
+
+						<border_color translate="label comment">
+							<label>Border color: </label>
+							<comment><![CDATA[The color of the borders in timeline.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</border_color>
+
+						<tweet_limit translate="label comment">
+							<label>Tweet limit: </label>
+							<comment><![CDATA[Number of tweets displayed in timeline. (Allowed range is 1 to 20)]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</tweet_limit>
+
+						<chrome_layout translate="label comment">
+							<label>Layout enhancements: </label>
+							<comment><![CDATA[Allow to edit widget layout hiding default elements.]]></comment>
+							<frontend_type>multiselect</frontend_type>
+							<source_model>twitter/source_chrome_layouts</source_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</chrome_layout>
+
+						<data_width translate="label comment">
+							<label>Width: </label>  
+							<comment><![CDATA[The width of the timeline in pixels.]]></comment> 
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</data_width>
+
+						<data_height translate="label comment">
+							<label>Height: </label>  
+							<comment><![CDATA[The height of the timeline in pixels.]]></comment> 
+							<frontend_type>text</frontend_type>
+							<sort_order>90</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</data_height>						
+					</fields>
+				</twitter_timeline>
+			</groups>
+		</twitter>
+	</sections>
+</config>

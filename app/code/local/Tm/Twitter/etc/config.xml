@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Tm_Twitter>
+			<version>0.1.0</version>		
+		</Tm_Twitter>
+	</modules>
+	<frontend>
+		<layout>
+			<updates>
+				<twitter>
+					<file>tm_twitter.xml</file>
+				</twitter>
+			</updates>
+		</layout>		
+	</frontend>	
+	<global>	
+		<models>
+			<twitter>
+				<class>Tm_Twitter_Model</class>
+			</twitter>
+		</models>
+		<helpers>
+			<twitter>
+				<class>Tm_Twitter_Helper</class>
+			</twitter>
+		</helpers>		
+	</global>
+	<adminhtml>
+		<acl>
+			<resources>
+				<all>
+	                <title>Allow everything</title>
+	            </all>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<twitter translate="title" module="twitter">
+											<title>Twitter Section</title>
+										</twitter>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</adminhtml>
+</config>

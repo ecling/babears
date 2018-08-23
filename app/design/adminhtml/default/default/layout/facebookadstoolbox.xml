@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<layout>
+  <adminhtml_fbpixel_index>
+    <reference name="head">
+      <action method="setTitle" translate="title">
+        <title>Facebook Pixel</title>
+      </action>
+      <action method="addJs">
+        <script>Facebook/AdsToolbox/Adminhtml/lib/react.min.js</script>
+      </action>
+      <action method="addJs">
+        <script>Facebook/AdsToolbox/Adminhtml/lib/react-dom.min.js</script>
+      </action>
+      <action method="addJs">
+        <script>Facebook/AdsToolbox/Adminhtml/pixel.js</script>
+      </action>
+      <action method="addCss">
+        <stylesheet>Facebook/AdsToolbox/css/Adminhtml/pixel.css</stylesheet>
+      </action>
+    </reference>
+    <reference name="content">
+      <block type="Facebook_AdsToolbox/Adminhtml_pixelindex"
+             name="Facebook_AdsToolbox.PixelIndex"
+             template="facebookadstoolbox/pixel_index.phtml" />
+    </reference>
+  </adminhtml_fbpixel_index>
+
+  <adminhtml_fbfeed_index>
+    <reference name="head">
+      <action method="setTitle" translate="title">
+        <title>Facebook Product Feed</title>
+      </action>
+      <action method="addJs">
+        <script>Facebook/AdsToolbox/Adminhtml/lib/react.min.js</script>
+      </action>
+      <action method="addJs">
+        <script>Facebook/AdsToolbox/Adminhtml/lib/react-dom.min.js</script>
+      </action>
+      <action method="addJs">
+        <script>Facebook/AdsToolbox/Adminhtml/feed.js</script>
+      </action>
+      <action method="addCss">
+        <stylesheet>Facebook/AdsToolbox/css/Adminhtml/feed.css</stylesheet>
+      </action>
+    </reference>
+    <reference name="content">
+      <block type="Facebook_AdsToolbox/Adminhtml_feedindex"
+             name="Facebook_AdsToolbox.FeedIndex"
+             template="facebookadstoolbox/feed_index.phtml" />
+    </reference>
+  </adminhtml_fbfeed_index>
+
+  <adminhtml_fbmain_index>
+    <reference name="head">
+      <action method="setTitle" translate="title">
+        <title>Facebook Dynamic Ads</title>
+      </action>
+      <action method="addJs">
+        <script>Facebook/AdsToolbox/Adminhtml/lib/react.min.js</script>
+      </action>
+      <action method="addJs">
+        <script>Facebook/AdsToolbox/Adminhtml/lib/react-dom.min.js</script>
+      </action>
+      <action method="addJs">
+        <script>Facebook/AdsToolbox/Adminhtml/dia.js</script>
+      </action>
+      <action method="addCss">
+        <stylesheet>Facebook/AdsToolbox/css/Adminhtml/dia.css</stylesheet>
+      </action>
+    </reference>
+    <reference name="content">
+      <block type="Facebook_AdsToolbox/Adminhtml_diaindex"
+             name="Facebook_AdsToolbox.DiaIndex"
+             template="facebookadstoolbox/dia_index.phtml" />
+    </reference>
+  </adminhtml_fbmain_index>
+</layout>

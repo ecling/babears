@@ -1,0 +1,112 @@
+//
+// Magento
+//
+
+/* ============================================ *
+ * Linearize Table
+ * ============================================ */
+
+@mixin linearize-table {
+
+    tr,
+    th,
+    td {
+        display: block;
+    }
+    
+    thead{
+        display: none;
+    }
+    thead th {
+        border-right: 0;
+        border-left: 0;
+    }
+
+
+    thead th.lin-hide {
+        display: none;
+    }
+
+    thead th:nth-child(1n+2) {
+        display: none;
+    }
+
+    tbody tr {
+        position: relative;
+        border-bottom: 1px solid $c-module-border;
+    }
+
+    tbody td {
+        padding: 0 10px 4px;
+        border-right: 0;
+        border-bottom: 0;
+    }
+
+    tbody td.lin-hide {
+        display: none;
+    }
+
+    tbody td:first-child {
+        padding-top: 10px;
+    }
+
+    tbody td:first-child,
+    tbody td:first-child h3 {
+        font-weight: bold;
+    }
+
+    tbody td[data-rwd-label] {
+        text-align: left;
+        padding-left: 30px;
+    }
+
+    tbody td[data-rwd-label]:before {
+        content: attr(data-rwd-label) ":";
+        font-size: $f-size-xs;
+        font-family: $f-stack-special;
+        padding: 5px 5px 5px 0;
+        text-transform: uppercase;
+    }
+
+    tfoot tr {
+        display: block;
+        text-align: right;
+    }
+
+    tfoot tr:after {
+        @include clearfix();
+    }
+
+    tfoot td {
+        display: block;
+        float: left;
+    }
+
+    tfoot td.lin-hide {
+        display: none;
+    }
+
+    tfoot td:nth-child(odd) {
+        clear: left;
+        width: percentage(3/5);
+    }
+
+    tfoot td:nth-child(even) {
+        text-align: left;
+        width: percentage(2/5);
+    }
+
+    /* Helpers */
+
+    .linearize-hide {
+        display: none;
+    }
+
+    .linearize-unpad {
+        padding: 0;
+    }
+
+    .linearize-show {
+        display: block;
+    }
+}

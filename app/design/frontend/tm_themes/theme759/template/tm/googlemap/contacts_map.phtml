@@ -1,0 +1,227 @@
+<?php 
+$_gm_helper = Mage::helper('googlemap/data');
+
+if ($_gm_helper->getConfig('googlemap/contacts/active')):
+
+	$contacts_map_settings = array(
+		'api_key'       => $_gm_helper->getConfig('googlemap/contacts/api_key'),
+		'sensor'		=> $_gm_helper->getConfig('googlemap/contacts/sensor'),	
+		'zoom'			=> $_gm_helper->getConfig('googlemap/contacts/zoom'),		
+		'type'			=> $_gm_helper->getConfig('googlemap/contacts/type'),		
+		'styles'		=> $_gm_helper->getConfig('googlemap/contacts/styles'),	
+		'coordinates'	=> $_gm_helper->getConfig('googlemap/contacts/coordinates'),
+		'width'			=> $_gm_helper->getConfig('googlemap/contacts/width'),
+		'height'		=> $_gm_helper->getConfig('googlemap/contacts/height'),	
+		'ui'			=> $_gm_helper->getConfig('googlemap/contacts/ui'),
+		'scrollwheel'	=> $_gm_helper->getConfig('googlemap/contacts/scrollwheel'),
+		'draggable'		=> $_gm_helper->getConfig('googlemap/contacts/draggable')
+		);
+
+	$markers = $_gm_helper->configContactsMarker();
+
+?>
+
+	<div class="block block-contacts-googlemap">	    
+		<div class="block-content">
+			<div id="map_canvas" style="width:<?php echo $contacts_map_settings['width']; ?>; height:<?php echo $contacts_map_settings['height']; ?>"></div>
+	    </div>
+	</div>
+
+	<script type="text/javascript">
+
+		jQuery(document).ready(function(){
+			jQuery('.block-contacts-googlemap').insertBefore('#contactForm');
+		})
+
+		function tm_googlemap_contacts_initialize() {
+			var mapOptions = {
+				zoom: <?php echo $contacts_map_settings['zoom']; ?>,
+				center: new google.maps.LatLng(<?php echo $contacts_map_settings['coordinates']; ?>),
+				mapTypeId: google.maps.MapTypeId.<?php echo $contacts_map_settings['type']; ?>,
+				<?php if (strlen($contacts_map_settings['styles']) > 0) { ?>
+					styles: <?php echo $contacts_map_settings['styles']; ?>,
+				<?php } else{ ?>
+					styles: [
+						    {
+						        "featureType": "landscape",
+						        "stylers": [
+						            {
+						                "saturation": -100
+						            },
+						            {
+						                "lightness": 65
+						            },
+						            {
+						                "visibility": "on"
+						            }
+						        ]
+						    },
+						    {
+						        "featureType": "poi",
+						        "stylers": [
+						            {
+						                "saturation": -100
+						            },
+						            {
+						                "lightness": 51
+						            },
+						            {
+						                "visibility": "simplified"
+						            }
+						        ]
+						    },
+						    {
+						        "featureType": "road.highway",
+						        "stylers": [
+						            {
+						                "saturation": -100
+						            },
+						            {
+						                "visibility": "simplified"
+						            }
+						        ]
+						    },
+						    {
+						        "featureType": "road.arterial",
+						        "stylers": [
+						            {
+						                "saturation": -100
+						            },
+						            {
+						                "lightness": 30
+						            },
+						            {
+						                "visibility": "on"
+						            }
+						        ]
+						    },
+						    {
+						        "featureType": "road.local",
+						        "stylers": [
+						            {
+						                "saturation": -100
+						            },
+						            {
+						                "lightness": 40
+						            },
+						            {
+						                "visibility": "on"
+						            }
+						        ]
+						    },
+						    {
+						        "featureType": "transit",
+						        "stylers": [
+						            {
+						                "saturation": -100
+						            },
+						            {
+						                "visibility": "simplified"
+						            }
+						        ]
+						    },
+						    {
+						        "featureType": "administrative.province",
+						        "stylers": [
+						            {
+						                "visibility": "off"
+						            }
+						        ]
+						    },
+						    {
+						        "featureType": "water",
+						        "elementType": "labels",
+						        "stylers": [
+						            {
+						                "visibility": "on"
+						            },
+						            {
+						                "lightness": -25
+						            },
+						            {
+						                "saturation": -100
+						            }
+						        ]
+						    },
+						    {
+						        "featureType": "water",
+						        "elementType": "geometry",
+						        "stylers": [
+						            {
+						                "hue": "#ffff00"
+						            },
+						            {
+						                "lightness": -25
+						            },
+						            {
+						                "saturation": -97
+						            }
+						        ]
+						    }
+						],
+				<?php }?>
+				disableDefaultUI: <?php echo $contacts_map_settings['ui']; ?>,
+				scrollwheel: 	  <?php echo $contacts_map_settings['scrollwheel']; ?>,
+			    draggable: 	      <?php echo $contacts_map_settings['draggable']; ?>
+			}
+			var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+			<?php if ($markers): ?>
+
+				<?php ob_start(); ?>
+				<?php $counter = 0; ?>
+
+				<?php foreach ($markers as $marker):?>	
+					<?php $counter++; ?>
+
+				<?php if (strlen($marker['image']) > 0):
+					$marker_image = $this->getSkinUrl('images/' . $marker['image'], array('_secure'=>true)); ?>
+					var image<?php echo $counter ?> = {
+						url: "<?php echo $marker_image; ?>"
+					};
+				<?php endif; ?>
+
+				// Marker settings
+				var pos<?php echo $counter ?> = new google.maps.LatLng(<?php echo $marker['coordinates']; ?>);
+
+				var marker = new google.maps.Marker({
+					position: pos<?php echo $counter ?>,
+					map:map,
+					title: "<?php echo $marker['title'] ?>"
+					<?php if (strlen($marker['image']) > 0) { ?>
+					,	icon: image<?php echo $counter; ?>
+					<?php }; ?>	
+				});
+
+				var content = "<?php echo preg_replace('/[\r\n]+(?![^(]*\))/', '', $marker['infowindow']) ?>";
+				var infowindow = new google.maps.InfoWindow({
+					content: content
+				});
+
+				google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+				    return function() {
+				        infowindow.setContent(content);
+				        infowindow.open(map,marker);
+				    };
+				})(marker,content,infowindow)); 
+
+				<?php endforeach; ?>
+				<?php ob_get_contents(); ?>
+				
+				marker.setMap(map);
+				
+				<?php ob_end_flush(); ?>
+			<?php endif; ?>
+		}
+
+		function tm_googlemap_contacts_loadScript() {
+			var script = document.createElement("script");
+			script.type = "text/javascript";
+			script.src = "//maps.googleapis.com/maps/api/js?v=3.9&key=<?php echo $contacts_map_settings['api_key']; ?>&sensor=<?php echo $contacts_map_settings['sensor']; ?>&callback=tm_googlemap_contacts_initialize";
+			document.body.appendChild(script);
+		}
+
+		window.onload = tm_googlemap_contacts_loadScript;
+		
+	</script>
+<?php endif; ?>

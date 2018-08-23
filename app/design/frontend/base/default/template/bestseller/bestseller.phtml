@@ -1,0 +1,123 @@
+<?php
+/***************************************************************************
+ Extension Name	: Bestseller Products
+ Extension URL	: http://www.magebees.com/magento-bestseller-products-extension.html
+ Copyright		: Copyright (c) 2015 MageBees, http://www.magebees.com
+ Support Email	: support@magebees.com 
+ ***************************************************************************/
+?>
+<?php
+	$result = array();
+	$pro = array();
+	$bestseller_collection = $this->getBestsellerProduct();
+	foreach($bestseller_collection as $collection){
+		$pro[] = $collection->getEntityId();
+	}
+    if($this->getChooseProducts() == "1") {
+		$result = $pro;
+	}elseif($this->getChooseProducts() == "2") {
+	   $result = $this->getProductIds();
+	}else{
+		if($this->getSortOrder() == 1){
+			$result = array_unique(array_merge($pro, $this->getProductIds()));
+		}elseif($this->getSortOrder() == 2){
+			$result = array_unique(array_merge($this->getProductIds(),$pro));
+		}else{
+			$result = array_unique(array_merge($pro, $this->getProductIds()));
+			shuffle($result);
+		}
+	}
+	$upperLimit = ($this->getLimit()) ? $this->getLimit() : 1; 
+	$itemPerRow = ($this->getItemsPerRow()) ? $this->getItemsPerRow() : 1 ;
+?>
+<?php if($this->getEnabled()): ?>
+<?php if($this->getDisplayHeader()): ?>
+<div class="widget-title"><h2><?php if(count($result) > 0) { echo $this->getHeader(); } ?></h2></div>
+ <?php endif; ?>
+	<div class="category-products" >
+	  	<ul class="products-grid row">
+        <?php
+		$i=0; $x = 1;
+		foreach($result as $result){
+			$_product = $this->getProducts($result);
+			if(!$_product){
+				continue;
+			}
+			if($x <= $upperLimit)  {
+				if($i>($itemPerRow-1))
+					echo '<tr valign="top">';
+		?>
+			 <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?> col-xs-12 col-sm-4" itemscope itemtype="http://schema.org/product">
+			 <div class="wrapper-hover">
+				<div class="product-image-container">
+					<a  href="<?php echo $this->getBaseUrl().$_product['url_path']; ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>" class="product-image" itemprop="url">
+						<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(($this->getImageHeight()) ? $this->getImageHeight() : 135,($this->getImageWidth()) ? $this->getImageWidth() : 135); ?>" alt="<?php echo $this->htmlEscape($_product['name']) ?>"/>
+					</a>
+				</div>
+				<div calss="product-details">
+				
+					<h2 class="product-name" itemprop="name">
+						<a href="<?php echo $this->getBaseUrl().$_product['url_path'] ?>" title="<?php echo $this->htmlEscape($_product['name']) ?>">
+							<?php echo substr($this->htmlEscape($_product['name']),0,70); ?>
+						</a>
+					</h2>	
+						<?php 
+						    if($this->getReview()) {
+								$_product = Mage::getModel('catalog/product')->load($_product->getId());
+								echo $this->getReviewsSummaryHtml($_product, 'short'); 
+							}
+							if($this->getProductsPrice()) {
+								$_product = Mage::getModel('catalog/product')->load($_product->getId());
+								echo $this->getPriceHtml($_product, true); 
+							}
+						?> 
+						<div class="wrapper-hover-hiden">
+                            <div class="actions">
+                        <?php if($this->getAddToCart()): ?>
+						<?php if($_product->isSaleable()): ?>
+						 
+							<button class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><?php echo $this->__('Add to Cart') ?></span></button>
+						<?php else: ?>
+							<span class="out-of-stock"><?php echo $this->__('Out of stock') ?></span>
+							</div>
+							</div>
+						<?php endif; ?>
+					<?php endif; ?>						
+					</div>
+					
+				</div>
+				<?php if($this->getActive()):?>
+				<div class="cl">
+					<?php if ($this->helper('wishlist')->isAllow()) : ?>
+						<a href="<?php echo $this->getAddToWishlistUrl($_product) ?>" class="addWishlist">
+							<?php echo $this->__('Add to Wishlist') ?>
+						</a>
+					<?php endif; ?>
+				</div>	
+				<?php endif; ?>
+				<?php if($this->getAddToCompare()): ?>
+				<div class="cl">
+					<?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+						&nbsp;<a href="<?php echo $_compareUrl; ?>" class="addCompare"><?php echo $this->__('Add to Compare') ?></a>
+				<?php endif; ?>
+				</div>
+				<?php endif; ?>
+				</div>
+			</li>
+		    <?php
+			    $i++;
+				if($i>($itemPerRow-1)) {
+					$i=0;
+					echo "</tr>";
+					echo '<tr><td colspan="3" class="hline"></td></tr>';
+				}
+				if($i==($itemPerRow)){ 
+					echo '<td class="vline"></td>';
+				}
+			}
+			$x++;
+		} 
+		?>
+       </ul>
+	</div>
+ <?php endif; ?>

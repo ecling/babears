@@ -1,0 +1,280 @@
+//
+// Magento
+//
+// NOTICE OF LICENSE
+//
+// This source file is subject to the Academic Free License (AFL 3.0)
+// that is bundled with this package in the file LICENSE_AFL.txt.
+// It is also available through the world-wide-web at this URL:
+// http://opensource.org/licenses/afl-3.0.php
+// If you did not receive a copy of the license and are unable to
+// obtain it through the world-wide-web, please send an email
+// to license@magento.com so we can send you a copy immediately.
+//
+// DISCLAIMER
+//
+// Do not edit or add to this file if you wish to upgrade Magento to newer
+// versions in the future. If you wish to customize Magento for your
+// needs please refer to http://www.magento.com for more information.
+//
+// @category    design
+// @package     rwd_default
+// @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+// @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+//
+/* ============================================ *
+ * Contacts
+ * ============================================ */
+@import "../includes";
+
+.contacts-index-index {
+
+  h1 {
+
+  }
+
+  .address {
+
+    line-height: 1.714em;
+    h3 {
+      @include themeTitle($icon: '\e0ba');
+    }
+  }
+
+  .phone {
+
+    overflow: hidden;
+    font-size: 24px;
+    margin-bottom: 10px;
+
+    h3 {
+      @include themeTitle($icon: '\e0f4');
+      float: left;
+    }
+
+    div {
+      float: right;
+      padding: 8px 48px 0 10px;
+      line-height: 1.4em;
+
+      span {
+        display: block;
+      }
+    }
+  }
+  .fax {
+
+    overflow: hidden;
+    font-size: 24px;
+
+    h3 {
+      @include themeTitle($icon: '\e0f4');
+      float: left;
+
+      &:before {
+        font-family: FontAwesome;
+        content: '\f1ac';
+        font-size: 26px;
+
+      }
+    }
+    div {
+      float: right;
+      padding: 8px 53px 0 10px;
+      line-height: 1.4em;
+
+      span {
+        display: block;
+      }
+    }
+  }
+  .email {
+    h3 {
+      @include themeTitle($icon: '\e070');
+      float: left;
+      padding-right: 10px;
+    }
+    a {
+      text-decoration: underline;
+      display: inline-block;
+      margin: 15px 0 0;
+    }
+  }
+
+  #contactForm {
+    padding: 0px;
+
+    p.required {
+      float: none;
+      text-align: right;
+    }
+
+    label {
+      @extend %label-example;
+    }
+
+    .form-list {
+      margin-right: -20px;
+    }
+
+    .fields {
+
+      overflow: hidden;
+      margin: 0;
+
+      .field {
+        float: left;
+        width: 33%;
+
+        input {
+          width: 95%;
+        }
+      }
+    }
+
+    textarea {
+      width: 97.5%;
+      max-width: 97.5%;
+      height: 185px;
+    }
+
+    &:after {
+      @include clearfix;
+    }
+
+    .fieldset {
+
+      margin-top: 30px;
+
+      .legend {
+        @include pageTitle;
+        @extend .title-border;
+        text-align: center;
+        border-color: $accent-color-1;
+      }
+      .legend + .required {
+        display: none;
+      }
+    }
+
+  }
+
+  @include bp(max-width, $bp-xlarge) {
+    .phone,
+    .fax,
+    .email {
+
+      h3 {
+        float: none;
+      }
+
+      div {
+        float: none;
+        padding: 0;
+
+      }
+
+      a {
+        margin: 0;
+      }
+    }
+  }
+
+  @include bp(max-width, $bp-medium) {
+
+    #contactForm {
+      padding-left: 0;
+
+      > ul > li {
+        margin-bottom: 20px;
+      }
+
+      .form-list {
+        margin-right: 0;
+      }
+
+      .fields {
+
+        .field {
+          float: none;
+          width: 100%;
+
+          input {
+            width: 100%;
+          }
+        }
+      }
+
+      textarea,
+      .buttons-set {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+
+  @include bp(max-width, $bp-small) {
+    .contacts-index-index {
+      .buttons-set {
+        button {
+          float: right;
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+
+  .block-contacts-googlemap {
+    border-top: solid 2px $accent-color-1;
+    margin-bottom: 50px;
+  }
+
+  .buttons-set {
+
+    text-align: left;
+    border-top: 0;
+    padding-top: 0;
+    margin: 30px 0 0;
+
+    .button {
+      float: left;
+      margin: 0 17px 10px 0;
+
+      &.btn-submit {
+        @include buttonIcon('\e070');
+
+        &:hover span span::before {
+          @include transform(rotate(20deg));
+        }
+      }
+
+      &.btn-reset {
+
+        @include buttonIcon('\e169');
+        @extend %secondary-button;
+
+        &:hover span span::before {
+          @include transform(rotate(181deg));
+        }
+      }
+    }
+
+    p.required {
+      float: left;
+    }
+
+    @include bp(max-width, $bp-small) {
+      max-width: 330px;
+      margin-left: 0;
+
+      button {
+        float: left;
+        margin-left: 0px;
+      }
+
+      p.required {
+        float: right;
+      }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+<?php
+/**
+ * Template for checkout page
+ *
+ * @version 20151002
+ */
+?>
+<?php $isActive = $this->isActive();?>
+<?php $isVisibleCcType = $this->isVisibleCcType();?>
+<?php if ($isActive):?>
+    <ul class="form-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+        <?php if($this->isCustomerLogged()): ?>
+            <?php $cardList = $this->getCustomerCardList();?>
+            <?php if(!empty($cardList)): ?>
+                <?php foreach($cardList as $index => $card):?>
+                    <li>
+                        <input class="checkoutapi-saved-card validate-one-required-by-name" type="radio" id="card-<?php echo $index;?>" value="<?php echo $card['value'];?>" name="payment[customer_card]"/>
+                        <label for="card-<?php echo $index;?>"><?php echo $card['type'] . ' ' . $card['title'];?></label>
+                    </li>
+                <?php endforeach;?>
+                <li>
+                    <input id="checkoutapi-new-card" class="validate-one-required-by-name" type="radio" name="payment[customer_card]" value="new_card"/>
+                    <label for="checkoutapi-new-card">Use New Card</label>
+                </li>
+            <?php endif;?>
+        <?php endif;?>
+        <li class="checkoutapi-li">
+            <p class="required">* Required Fields</p>
+            <label class="required" for="<?php echo $this->getMethodCode() ?>_cc_owner"><em>*</em><?php echo $this->__('Name on Card') ?></label>
+            <div class="input-box">
+                <input type="text" value="<?php echo $this->getCcOwner();?>" name="payment[cc_owner]" id="<?php echo $this->getMethodCode() ?>_cc_owner" class="input-text required-entry" title="Name on Card" autocomplete="off">
+            </div>
+        </li>
+        <?php if($isVisibleCcType): ?>
+            <li class="checkoutapi-li">
+                <label for="<?php echo $this->getMethodCode() ?>_cc_type" class="required"><em>*</em><?php echo $this->__('Credit Card Type') ?></label>
+                <div class="input-box">
+                    <select id="<?php echo $this->getMethodCode() ?>_cc_type" name="payment[cc_type]" class="required-entry validate-cc-type-select">
+                        <option value=""><?php echo $this->__('--Please Select--')?></option>
+                        <?php $_ccType = $this->getInfoData('cc_type') ?>
+                        <?php foreach ($this->getCcAvailableTypes() as $_typeCode => $_typeName): ?>
+                            <option value="<?php echo $_typeCode ?>"<?php if($_typeCode==$_ccType): ?> selected="selected"<?php endif ?>><?php echo $_typeName ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+            </li>
+        <?php endif;?>
+        <li class="checkoutapi-li">
+            <label class="required" for="<?php echo $this->getMethodCode() ?>_cc_number"><em>*</em><?php echo $this->__('Credit Card Number') ?></label>
+            <div class="input-box">
+                <?php if ($isVisibleCcType):?>
+                    <input type="text" value="<?php echo $this->getCcNumber();?>" class="input-text required-entry validate-cc-number validate-cc-type" title="Credit Card Number" name="payment[cc_number]" id="<?php echo $this->getMethodCode() ?>_cc_number" pattern="\d*" autocomplete="off">
+                <?php else:?>
+                    <input type="text" value="<?php echo $this->getCcNumber();?>" class="input-text required-entry validate-cc-number" title="Credit Card Number" name="payment[cc_number]" id="<?php echo $this->getMethodCode() ?>_cc_number" pattern="\d*" autocomplete="off">
+                <?php endif?>
+            </div>
+        </li>
+        <li class="checkoutapi-li">
+            <label class="required" for="<?php echo $this->getMethodCode() ?>_expiration"><em>*</em><?php echo $this->__('Expiration Date') ?></label>
+            <div class="input-box">
+                <div class="v-fix">
+                    <select id="<?php echo $this->getMethodCode() ?>_expiration" name="payment[cc_exp_month]" class="month validate-cc-exp required-entry">
+                        <?php $_ccExpMonth = $this->getInfoData('cc_exp_month') ?>
+                        <?php foreach ($this->getCcMonths() as $k=>$v): ?>
+                            <option value="<?php echo $k?$k:'' ?>"<?php if($k==$_ccExpMonth): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+                <div class="v-fix">
+                    <?php $_ccExpYear = $this->getInfoData('cc_exp_year') ?>
+                    <select id="<?php echo $this->getMethodCode() ?>_expiration_yr" name="payment[cc_exp_year]" class="year required-entry">
+                        <?php foreach ($this->getCcYears() as $k=>$v): ?>
+                            <option value="<?php echo $k?$k:'' ?>"<?php if($k==$_ccExpYear): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+            </div>
+        </li>
+        <li class="checkoutapi-li">
+            <label class="required" for="<?php echo $this->getMethodCode() ?>_cc_cid"><em>*</em><?php echo $this->__('Card Verification Number') ?></label>
+            <div class="input-box">
+                <div class="v-fix">
+                    <input type="text" value="" name="payment[cc_cid]" id="<?php echo $this->getMethodCode() ?>_cc_cid" class="input-text cvv required-entry validate-cc-cvn" title="Card Verification Number" pattern="\d*" autocomplete="off" value="<?php echo $this->getCcCid();?>">
+                </div>
+                <a class="cvv-what-is-this" href="#"><?php echo $this->__('What is this?') ?></a>
+            </div>
+        </li>
+    </ul>
+    <?php if (!empty($cardList)):?>
+        <script type="application/javascript">
+            hideNewCard();
+
+            $$('.checkoutapi-saved-card').invoke('observe', 'change', hideNewCard);
+            $('checkoutapi-new-card').observe('change', showNewCard);
+
+            function hideNewCard() {
+                $$('.checkoutapi-li').each(Element.hide);
+            }
+
+            function showNewCard() {
+                $$('.checkoutapi-li').each(Element.show);
+            }
+        </script>
+    <?php endif;?>
+<?php else :?>
+    <ul class="form-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+        <li><?php echo $this->__('Selected Payment Type is not allowed.') ?></li>
+    </ul>
+<?php endif?>

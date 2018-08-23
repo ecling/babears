@@ -1,0 +1,2 @@
+"use strict";document.addEventListener("DOMContentLoaded",function(){var e=new Clipboard(".ebanx-button--copy"),n=document.querySelector(".ebanx-cash-payment iframe");e.on("success",function(e){var n=e.trigger.innerText;e.trigger.innerText="Copiado!",setTimeout(function(){e.trigger.innerText=n},2e3)});var t=function(e){e.style.height=e.contentWindow.document.body.parentElement.scrollHeight+" px"};n&&(window.addEventListener("load",function(){t(n)}),n.contentWindow.addEventListener("resize",function(){t(n)}))});
+//# sourceMappingURL=success.js.map

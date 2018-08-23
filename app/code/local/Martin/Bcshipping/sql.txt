@@ -1,0 +1,9 @@
+CREATE TABLE `shipping_price` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `country` varchar(16) DEFAULT NULL,
+   `condition_num` float DEFAULT NULL,
+   `shipping_name` varchar(64) DEFAULT NULL,
+   `price` float DEFAULT NULL,
+   `additional_price` float DEFAULT NULL,
+   PRIMARY KEY (`id`)
+ ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8

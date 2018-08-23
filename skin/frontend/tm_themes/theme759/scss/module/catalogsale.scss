@@ -1,0 +1,64 @@
+
+@import "../includes"; 
+
+.widget-catalogsale-products-carousel{  
+
+    position: relative;
+    
+    .sale-carousel{
+        margin: 0 -15px;
+        width: auto;
+
+        .owl-controls .owl-buttons div{
+            background:none;
+            opacity: 1;
+            position: absolute;
+            margin: 0;
+
+            &.owl-prev,
+            &.owl-next{
+                position: absolute;
+                top: 30%;
+                left: -15px;
+                right: auto;
+                background: none;
+
+                &:hover{
+                    opacity: 0.7;
+                }
+
+                &:before{
+                    @include fa-icon;
+                    font-size: 30px;
+                    color: $accent-color-1;
+                    background: none;
+                }
+
+            }
+
+            &.owl-next{
+                right: -15px;
+                left: auto;
+            }
+
+
+            &.owl-prev:before{
+                content: $fa-var-angle-left;
+            }
+
+            &.owl-next:before{
+                content: $fa-var-angle-right;
+            }
+
+            @include bp(max-width, $bp-large) {
+                &.owl-prev{
+                    left: 10px;
+                }
+
+                &.owl-next{
+                    right: 10px;
+                }
+            }
+        }
+    }
+}

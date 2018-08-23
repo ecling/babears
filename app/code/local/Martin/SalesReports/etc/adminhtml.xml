@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <menu>
+        <salesreports module="salesreports">
+            <title>Sales Reports</title>
+            <sort_order>81</sort_order>
+            <children>
+                <order module="salesreports" translate="title">
+                    <title>Order Reports</title>
+                    <sort_order>0</sort_order>
+                    <action>adminhtml/salesreports_order/index</action>
+                </order>
+                <product module="salesreports" translate="title">
+                    <title>Product Reports</title>
+                    <sort_order>1</sort_order>
+                    <action>adminhtml/salesreports_product/index</action>
+                </product>
+                <new module="salesreports" translate="title">
+                    <title>New Product Reports</title>
+                    <sort_order>2</sort_order>
+                    <action>adminhtml/salesreports_new/index</action>
+                </new>
+                <!--<order_status module="salesreports" translate="title">
+                    <title>Order Status Reports</title>
+                    <sort_order>2</sort_order>
+                    <action>adminhtml/salesreports_product/index</action>
+                </order_status>
+                <order_ordered module="salesreports" translate="title">
+                    <title>Ordered Product Reports</title>
+                    <sort_order>3</sort_order>
+                    <action>adminhtml/salesreports_product/index</action>
+                </order_ordered>-->
+            </children>
+        </salesreports>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <salesreports>
+                        <title>Sales Reports</title>
+                        <sort_order>81</sort_order>
+                        <children>
+                            <order>
+                                <title>Order Reports</title>
+                                <sort_order>0</sort_order>
+                            </order>
+                            <product>
+                                <title>Product Reports</title>
+                                <sort_order>1</sort_order>
+                            </product>
+                            <new>
+                                <title>New Product Reports</title>
+                                <sort_order>2</sort_order>
+                            </new>
+                        </children>
+                    </salesreports>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

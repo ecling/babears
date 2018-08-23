@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Tm_LiveSearch>
+            <active>true</active>
+            <codePool>local</codePool>            
+        </Tm_LiveSearch>
+    </modules>
+</config>

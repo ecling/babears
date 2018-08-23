@@ -1,0 +1,24 @@
+<?php 
+if (Mage::getStoreConfig('facebook/facebook_page/active', Mage::app()->getStore())):	
+
+	$tm_facebook_settings = array(
+		'page_url' 			=> Mage::getStoreConfig('facebook/facebook_page/page_url', Mage::app()->getStore()),
+		'hide_cover' 		=> Mage::getStoreConfig('facebook/facebook_page/hide_cover', Mage::app()->getStore()),
+		'show_facepile' 	=> Mage::getStoreConfig('facebook/facebook_page/show_facepile', Mage::app()->getStore()),
+		'show_posts' 		=> Mage::getStoreConfig('facebook/facebook_page/show_posts', Mage::app()->getStore()),
+		'data_height' 		=> Mage::getStoreConfig('facebook/facebook_page/data_height', Mage::app()->getStore()),
+		'data_width' 		=> Mage::getStoreConfig('facebook/facebook_page/data_width', Mage::app()->getStore()),
+		);
+	?>
+
+	<div class="block block-facebook-page">
+	    <div>
+	        <h4><?php echo $this->__('Facebook Page') ?></h4>
+	    </div>
+		<div>
+
+			<div class="fb-page" data-href="<?php echo $tm_facebook_settings['page_url']; ?>" data-hide-cover="<?php echo $tm_facebook_settings['hide_cover']; ?>" data-show-facepile="<?php echo $tm_facebook_settings['show_facepile']; ?>" data-show-posts="<?php echo $tm_facebook_settings['show_posts']; ?>"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/facebook"><a href="https://www.facebook.com/facebook">Facebook</a></blockquote></div></div>
+
+	    </div>
+	</div>
+<?php endif; ?>

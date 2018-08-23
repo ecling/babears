@@ -1,0 +1,30 @@
+<?php if ($posts = $this->getRecent()):  ?>
+	<div class="blog-bg" data-source-url="skin url='images/blog-bg.jpg">
+		<div class="widget-latest">
+			<div class="widget-title">
+				<h4><?php echo Mage::helper('blog')->__('Latest Posts');  ?></h4>
+			</div>
+			<ul class="row">
+				<?php $i = 0; ?>
+				<?php foreach ($posts as $post): ?>
+					<?php if ($i<3): ?>
+						<li class="col-xs-12 col-sm-6">
+
+							<div class="postWidget">
+								<div class="postImage"><a href="<?php echo $post->getAddress(); ?>" ><?php echo Mage::helper('cms')->getBlockTemplateProcessor()->filter($post->getExerptImage()); ?></a></div>
+								<div class="widget-latest-title"><a href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a></div>
+								<div class="postContent"><?php echo Mage::helper('cms')->getBlockTemplateProcessor()->filter($post->getShortContent()); ?></div>
+								
+								
+							</div>
+						</li>
+					<?php endif; ?>
+					<?php $i++; ?>
+				<?php endforeach; ?>
+			</ul>
+		   <!-- <a href="<?php // echo $this->getBlogUrl() ?>"class="aw-blog-read-more all-blog"><?php // echo Mage::helper('blog')->__('View all posts');  ?></a> -->
+		</div>
+	</div>
+<?php endif; ?>
+
+<?php // $tt = count($this->getRecent()); print_r($tt) ; ?>

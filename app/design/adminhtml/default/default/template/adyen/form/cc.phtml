@@ -1,0 +1,183 @@
+<?php
+/**
+ * Adyen Payment Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category	Adyen
+ * @package	Adyen_Payment
+ * @copyright	Copyright (c) 2011 Adyen (http://www.adyen.com)
+ * @license	http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/**
+ * @category   Payment Gateway
+ * @package    Adyen_Payment
+ * @author     Adyen
+ * @property   Adyen B.V
+ * @copyright  Copyright (c) 2014 Adyen BV (http://www.adyen.com)
+ */
+?>
+<?php /** @var Adyen_Payment_Block_Form_Cc $this */; ?>
+<?php $_code=$this->getMethodCode() ?>
+<ul id="payment_form_<?php echo $_code ?>" style="display:none;">
+    <li>
+        <div class="input-box">
+            <label for="<?php echo $_code ?>_cc_owner"><?php echo Mage::helper('payment')->__('Name on Card') ?> <span class="required">*</span></label><br/>
+            <input type="text" title="<?php echo $this->__('Name on Card') ?>" class="input-text required-entry" id="<?php echo $_code ?>_cc_owner" <?php echo (!$this->isCseEnabled() ? "name=\"payment[cc_owner]\"" : "data-encrypted-name=\"holderName\""); ?> value="<?php echo $this->htmlEscape($this->getInfoData('cc_owner')) ?>" maxlength="100" />
+        </div>
+    </li>
+    <li>
+        <div class="input-box">
+            <label for="<?php echo $_code ?>_cc_type"><?php echo Mage::helper('payment')->__('Credit Card Type') ?> <span class="required">*</span></label><br/>
+            <select id="<?php echo $_code ?>_cc_type" <?php echo (!$this->isCseEnabled() ? "name=\"payment[cc_type]\"" : ""); ?> title="<?php echo $this->__('Credit Card Type') ?>" class="required-entry">
+                <option value=""><?php echo $this->__('--Please Select--') ?></option>
+                <?php $_ccType = $this->getInfoData('cc_type') ?>
+                <?php foreach ($this->getCcAvailableTypes() as $_typeCode => $_data): ?>
+                    <option value="<?php echo $_typeCode ?>"<?php if($_typeCode==$_ccType): ?> selected="selected"<?php endif ?>><?php echo $_data['name'] ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+    </li>
+    <li>
+        <div class="input-box">
+            <label for="<?php echo $_code ?>_cc_number"><?php echo Mage::helper('payment')->__('Credit Card Number') ?> <span class="required">*</span></label><br/>
+            <input type="text" pattern="[0-9]*" id="<?php echo $_code ?>_cc_number" <?php echo (!$this->isCseEnabled() ? "name=\"payment[cc_number]\"" : " data-encrypted-name=\"number\""); ?> title="<?php echo $this->__('Credit Card Number') ?>" class="input-text validate-cc-number validate-cc-type" value="" maxlength="23"/>
+            <?php if ($this->isCseEnabled()): ?>
+                <input type="hidden" id="payment_cc_type_cse" name="payment[cc_type]" />
+                <input type="hidden" id="payment_cc_number_cse" name="payment[cc_number]" />
+            <?php endif; ?>
+        </div>
+    </li>
+    <li>
+        <div class="input-box">
+            <label for="<?php echo $_code ?>_expiration"><?php echo Mage::helper('payment')->__('Expiration Date') ?> <span class="required">*</span></label><br/>
+
+            <div class="v-fix">
+                <select id="<?php echo $_code ?>_expiration" <?php echo (!$this->isCseEnabled() ? "name=\"payment[cc_exp_month]\"" : "data-encrypted-name=\"expiryMonth\""); ?> class="month validate-cc-exp required-entry">
+                    <?php $_ccExpMonth = $this->getInfoData('cc_exp_month') ?>
+                    <?php foreach ($this->getCcMonths() as $k=>$v): ?>
+                        <option value="<?php echo $k?$k:'' ?>"<?php if($k==$_ccExpMonth): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <div class="v-fix">
+                <?php $_ccExpYear = $this->getInfoData('cc_exp_year') ?>
+                <select id="<?php echo $_code ?>_expiration_yr" <?php echo (!$this->isCseEnabled() ? "name=\"payment[cc_exp_year]\"" : "data-encrypted-name=\"expiryYear\""); ?> class="year required-entry">
+                    <?php foreach ($this->getCcYears() as $k=>$v): ?>
+                        <option value="<?php echo $k?$k:'' ?>"<?php if($k==$_ccExpYear): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+    </li>
+    <?php echo $this->getChildHtml() ?>
+    <?php if($this->hasVerification()): ?>
+        <li>
+            <div class="input-box">
+                <label for="<?php echo $_code ?>_cc_cid"><?php echo Mage::helper('payment')->__('Card Verification Number') ?> <span class="required">*</span></label><br/>
+
+                <div class="v-fix">
+                    <input type="text" pattern="[0-9]{3,}" title="<?php echo $this->__('Card Verification Number') ?>" class="input-text cvv required-entry" id="<?php echo $_code ?>_cc_cid" <?php echo (!$this->isCseEnabled() ? "name=\"payment[cc_cid]\"" : "data-encrypted-name=\"cvc\""); ?> value="" maxlength="4" />
+                </div>
+            </div>
+        </li>
+    <?php endif; ?>
+    <?php if($this->hasInstallments()): ?>
+        <li>
+            <div class="input-box">
+                <label for="<?php echo $_code ?>_installments" class="required"><em>*</em><?php echo $this->__('Installments') ?></label>
+                <div class="v-fix">
+                    <select id="<?php echo $_code ?>_installments" name="payment[additional_data]" class="number required-entry">
+                        <?php foreach ($this->getPossibleInstallments() as $k=>$v): ?>
+                            <option value="<?php echo $k?$k:'' ?>"><?php echo $v ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+            </div>
+        </li>
+    <?php endif;?>
+</ul>
+<?php if ($this->isCseEnabled()): ?>
+    <input type="hidden" id="<?php echo $_code ?>_encrypted_form_expiry_generationtime" value="<?php echo date("c"); ?>" data-encrypted-name="generationtime" />
+    <script type="text/javascript">
+        //<![CDATA[
+        var element = $('payment_form_<?php echo $_code ?>');
+        var cse_form =  element.match('form') ? element : element.up('form');
+        var cse_key = <?php echo json_encode($this->getCsePublicKey()); ?>;
+        var cse_options = {
+            name:  'payment[encrypted_data]',
+            force: true
+        };
+        var cse = function() {
+
+            if (order.paymentMethod && order.paymentMethod == '<?php echo $_code ?>') {
+                try {
+                    cse_form.cseForm = cse_form.cseForm || adyen.encrypt.createEncryptedForm(cse_form, cse_key, cse_options);
+                    // encrypt data directly because submit button is not always on the page
+                    cse_form.cseForm.createEncryptedField(cse_form.cseForm.encrypt());
+                } catch (e) {
+                    var encryptionFailed = true;
+                }
+                var encryptedForm = document.getElementById(cse_options.name);
+                if (encryptionFailed || !encryptedForm || encryptedForm.value.length == 0) {
+                    alert("Warning: Adyen Client Side Encryption cannot succeed.");
+                }
+            }
+        }
+        var cse_initialize = function() {
+            $('payment_form_<?=$_code;?>').select('input', 'select', 'textarea').each(function(field) {
+                var quoteId = '<?=$this->getQuoteId()?>';
+                var quoteItemIds = quoteId + field.id;
+                field.value = localStorage.getItem(quoteItemIds);
+            });
+
+            if (typeof adyen === 'undefined') {
+                js = document.createElement("script");
+                js.type = "text/javascript";
+                js.src = "<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>adyen/payment/adyen.encrypt_0_1_18.js";
+                document.body.appendChild(js);
+            }
+
+            order.submit = order.submit.wrap(function(originalSaveMethod) {
+                cse.call(this);
+                originalSaveMethod();
+            });
+        }
+
+        if (document.readyState === "complete") {
+            cse_initialize();
+        }
+        else {
+            Event.observe(window, 'load', cse_initialize);
+        }
+
+        $('payment_form_<?=$_code;?>').select('input', 'select', 'textarea').each(function(field) {
+            field.observe('change', function() {
+                // get quoteid
+                var quoteId = '<?=$this->getQuoteId()?>';
+                var quoteItemIds = quoteId + field.id;
+                localStorage.setItem(quoteItemIds, field.value);
+            });
+        });
+
+        // Set cc_number and cc_type on hidden input field
+        var cc_type = document.getElementById('<?php echo $_code ?>_cc_type'),
+            cc_number = document.getElementById('<?php echo $_code ?>_cc_number'),
+            hidden_cc_number = document.getElementById('payment_cc_number_cse'),
+            hidden_cc_type = document.getElementById('payment_cc_type_cse');
+
+        cc_number.addEventListener('change', function() {
+            hidden_cc_type.value = cc_type.value != '' ? 1 : '';
+            hidden_cc_number.value = cc_number.value != '' ? 1 : '';
+        }, false);
+        //]]>
+    </script>
+<?php endif;?>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <tm translate="label">
+            <label>TemplateMonster</label>
+            <sort_order>100</sort_order>
+        </tm>
+    </tabs>
+    <sections>
+        <livesearch translate="label" module="tm_livesearch">
+            <class>separator-top</class>
+            <label>Live Search</label>
+            <tab>tm</tab>
+            <sort_order>140</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <livesearch_set>
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enable/Disable</label>
+                            <comment><![CDATA[Enable/Disable module.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <livesearch_img_width translate="label">
+                            <label>Image Width</label>
+                            <comment><![CDATA[Product image width.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </livesearch_img_width>
+                        <livesearch_img_height translate="label">
+                            <label>Image Height</label>
+                            <comment><![CDATA[Product image height.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </livesearch_img_height>
+                        <livesearch_desc translate="label">
+                            <label>Description</label>
+                            <comment><![CDATA[Enable/Disable Product Description.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>40</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </livesearch_desc>
+                        <livesearch_placeholder translate="label">
+                            <label>Placeholder Text</label>
+                            <comment><![CDATA[Placeholder Text. Default (Search entire store here...)]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </livesearch_placeholder>
+                        <livesearch_item translate="label">
+                            <label>Number Product Show</label>
+                            <comment><![CDATA[Max Count Items.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </livesearch_item>
+
+                    </fields>
+                </livesearch_set>
+                <!--<results>-->
+                    <!--<label>Results</label>-->
+                    <!--<frontend_type>text</frontend_type>-->
+                    <!--<sort_order>30</sort_order>-->
+                    <!--<show_in_default>1</show_in_default>-->
+                    <!--<show_in_website>0</show_in_website>-->
+                    <!--<show_in_store>1</show_in_store>-->
+                    <!--<fields>-->
+                        <!--<img_width translate="label">-->
+                            <!--<label>Image Width</label>-->
+                            <!--<comment><![CDATA[Product image width.]]></comment>-->
+                            <!--<frontend_type>text</frontend_type>-->
+                            <!--<sort_order>10</sort_order>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>1</show_in_store>-->
+                        <!--</img_width>-->
+                        <!--<img_height translate="label">-->
+                            <!--<label>Image Height</label>-->
+                            <!--<comment><![CDATA[Product image height.]]></comment>-->
+                            <!--<frontend_type>text</frontend_type>-->
+                            <!--<sort_order>10</sort_order>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>1</show_in_store>-->
+                        <!--</img_height>-->
+                    <!--</fields>-->
+                <!--</results>-->
+            </groups>
+        </livesearch>
+    </sections>
+</config>

@@ -1,0 +1,191 @@
+//
+// Magento
+//
+// NOTICE OF LICENSE
+//
+// This source file is subject to the Academic Free License (AFL 3.0)
+// that is bundled with this package in the file LICENSE_AFL.txt.
+// It is also available through the world-wide-web at this URL:
+// http://opensource.org/licenses/afl-3.0.php
+// If you did not receive a copy of the license and are unable to
+// obtain it through the world-wide-web, please send an email
+// to license@magento.com so we can send you a copy immediately.
+//
+// DISCLAIMER
+//
+// Do not edit or add to this file if you wish to upgrade Magento to newer
+// versions in the future. If you wish to customize Magento for your
+// needs please refer to http://www.magento.com for more information.
+//
+// @category    design
+// @package     rwd_default
+// @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+// @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+//
+/* ============================================ *
+ * Header - Account
+ * ============================================ */
+@import "../includes";
+
+/* -------------------------------------------- *
+ * Skip Link - Account in Mobile
+ */
+
+.skip-account {
+
+  .icon:before {
+    @include custom-icon($font-family-icon, '\e0ce');
+  }
+
+}
+
+@include bp(min-width, $bp-large + 1) {
+
+  .skip-account {
+    float: none;
+    width: auto;
+    vertical-align: top;
+    display: inline-block;
+    padding: 0 10px;
+    text-transform: uppercase;
+
+  }
+
+  #header-account.skip-active {
+    @include menu;
+    display: block;
+    position: absolute;
+    z-index: 200;
+    top: 40px;
+    right: 115px;
+    width: 200px;
+  }
+
+  #header-account a {
+    display: block;
+    padding: 5px 10px;
+    color: $c-text;
+    line-height: 2;
+    text-decoration: none;
+  }
+
+  #header-account a:hover {
+    color: $c-action;
+  }
+
+}
+
+/* -------------------------------------------- *
+ * Account Links
+ */
+
+#header-account {
+  padding: 0;
+
+  .header-button {
+    .current {
+      font-weight: normal;
+      padding-left: 5px;
+      color: $c-dark;
+    }
+
+    ul {
+      border-bottom: 1px solid $c-module-border;
+      padding: 0 10px;
+      background: $c-module-background;
+    }
+
+    li {
+      display: inline-block;
+
+      a {
+        padding: 3px 15px;
+        border-bottom: none;
+        text-transform: uppercase;
+
+        &:hover,
+        &.selected {
+          background: #fff;
+          color: $c-dark;
+        }
+      }
+    }
+  }
+
+  a {
+    position: relative;
+    display: block;
+    padding: 5px 10px;
+    line-height: 23px;
+    text-align: left;
+  }
+  .header-button:hover .label,
+  a:hover {
+    color: $c-dark;
+  }
+}
+
+/* ============================================ *
+ * Top links
+ * ============================================ */
+
+.top-links {
+  position: relative;
+  float: left;
+  /****/
+  .top-links-inline {
+    float: right;
+    .links {
+      li {
+        float: left;
+        line-height: 21px;
+        border-left: solid 1px #dfdfdf;
+        padding: 0 15px;
+        @include bp(max-width, $bp-xlarge) {
+          padding: 0 8px;
+        }
+        &.last {
+          padding-right: 0;
+        }
+        a {
+          &.top-links-cart {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  /***/
+
+  a.account-dropdown {
+    margin-left: 20px;
+
+    &:hover span {
+      color: $accent-color-1 !important;
+    }
+
+    &::before {
+      @include custom-icon($font-family-icon, '\e18b');
+      font-size: 22px;
+      line-height: 20px;
+      color: $accent-color-1;
+      padding-right: 7px;
+    }
+  }
+
+  .skip-content {
+
+    &.skip-active {
+      width: 250px;
+      right: 0;
+      left: auto;
+    }
+  }
+
+}
+
+@include bp(max-width, $bp-large) {
+  .top-links {
+    display: none;
+  }
+}

@@ -1,0 +1,27 @@
+<?php
+/**
+ * Template for Checkout Kit page
+ *
+ * @version 20160502
+ */
+?>
+<?php
+    $_isKit         = $this->isKitPaymentMethod();
+    $_controller    = Mage::app()->getFrontController()->getRequest()->getControllerName();
+    $_code          = $this->getPaymentCode();
+    $currentCode    = Mage::app()->getStore()->getCurrentCurrencyCode();
+    $baseCode       = Mage::app()->getStore()->getBaseCurrencyCode();
+?>
+<?php if($_isKit): ?>
+    <script type="text/javascript">
+        var kitCheckoutApi = new checkoutApi(
+            '<?php echo $_code ?>',
+            '<?php echo $_controller ?>',
+            null
+        );
+
+        <?php if ($currentCode !== $baseCode):?>
+            $$('#checkout-review-table tfoot tr').last().hide();
+        <?php endif ?>
+    </script>
+<?php endif?>

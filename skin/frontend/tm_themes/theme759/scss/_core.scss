@@ -1,0 +1,27 @@
+//
+// Magento
+//
+
+// ==============================================
+// Core Application
+// ==============================================
+
+// ----------------------------------------------
+// Browser Resets
+
+@import "vendor/normalize";
+@import "core/reset";
+
+
+// ----------------------------------------------
+// Core
+
+@import "core/common";
+@import "core/form";
+@import "core/table";
+
+// ----------------------------------------------
+
+// Override
+@import "override/plugin";
+

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Adyen Payment Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category	Adyen
+ * @package	Adyen_Payment
+ * @copyright	Copyright (c) 2011 Adyen (http://www.adyen.com)
+ * @license	http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/**
+ * @category   Payment Gateway
+ * @package    Adyen_Payment
+ * @author     Adyen
+ * @property   Adyen B.V
+ * @copyright  Copyright (c) 2014 Adyen BV (http://www.adyen.com)
+ */
+-->
+<layout>
+    <!-- adding sales adyen status column on sales grid -->
+    <add_order_grid_column_handle>
+        <reference name="sales_order.grid">
+            <action method="addColumnAfter">
+                <columnId>adyen_event_code</columnId>
+                <arguments module="ordergrid" translate="header">
+                    <header>Adyen Status</header>
+                    <index>adyen_event_code</index>
+                    <filter_index>main_table.adyen_event_code</filter_index>
+                    <width>50px</width>
+                    <type>options</type>
+                    <filter>adyen/adminhtml_sales_order_filter_adyen</filter>
+                    <renderer>adyen/adminhtml_sales_order_renderer_adyen</renderer>
+                </arguments>
+                <after>status</after>
+            </action>
+        </reference>
+    </add_order_grid_column_handle>
+    <!-- order grid action -->
+    <adminhtml_sales_order_grid>
+    <!-- apply the layout handle defined above -->
+        <update handle="add_order_grid_column_handle" />
+    </adminhtml_sales_order_grid>
+    <!-- order grid view action -->
+    <adminhtml_sales_order_index>
+        <!-- apply the layout handle defined above -->
+        <update handle="add_order_grid_column_handle" />
+    </adminhtml_sales_order_index>
+
+    <adminhtml_adyen_event_queue_index>
+        <reference name="content">
+            <block type="adyen/adminhtml_adyen_event_queue" name="adyen.adyen_event.queue.grid.container"/>
+        </reference>
+    </adminhtml_adyen_event_queue_index>
+
+    <adminhtml_adyen_event_queue_grid>
+        <remove name="root"/>
+        <block type="adyen/adminhtml_adyen_event_queue_grid" name="adyen.adyen.adyen_event.queue.grid" output="toHtml"/>
+    </adminhtml_adyen_event_queue_grid>
+
+    <adminhtml_sales_order_create_index>
+        <reference name="head">
+            <action method="addJs"><script>adyen/payment/iban.js</script></action>
+            <action method="addJs"><script>adyen/adminhtml/sales.js</script></action>
+        </reference>
+    </adminhtml_sales_order_create_index>
+
+    <default>
+        <reference name="notifications">
+            <block type="adyen/adminhtml_notifications" name="adyen_notifications" template="adyen/payment/notifications.phtml"/>
+            <block type="adyen/adminhtml_messageversion" name="adyen_messageversion" template="adyen/payment/messageversion.phtml"/>
+        </reference>
+    </default>
+</layout>

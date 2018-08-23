@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Tm_CustomLogo>
+			<version>0.1.0</version>		
+		</Tm_CustomLogo>
+	</modules>
+	<global>
+		<models>
+			<customlogo>
+				<class>Tm_CustomLogo_Model</class>
+			</customlogo>
+		</models>
+        <blocks>
+            <customlogo>
+                <class>Tm_CustomLogo_Block</class>
+            </customlogo>
+        </blocks>
+		<helpers>
+			<customlogo>
+				<class>Tm_CustomLogo_Helper</class>
+			</customlogo>
+		</helpers>
+	</global>
+	<adminhtml>
+		<acl>
+			<resources>
+				<all>
+	                <title>Allow everything</title>
+	            </all>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<customlogo translate="title" module="customlogo">
+											<title>Template Monster</title>
+										</customlogo>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</adminhtml>
+	<default>
+		<customlogo>
+            <customlogo_set>
+                <logo_desc>Tm Magento</logo_desc>
+            </customlogo_set>
+		</customlogo>
+	</default>
+</config>

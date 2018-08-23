@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+	
+	<cms_index_index>		
+			<reference name="before_body_end">
+			<block type="core/template" name="tm_facebook_js_sdk" as="tm_facebook_js_sdk" template="tm/facebook/facebook_js_sdk.phtml"/>
+		</reference>
+		<!-- <reference name="right">
+			<block type="core/template" name="tm_facebook_like_right" as="tm_facebook_like_right" template="tm/facebook/facebook_like.phtml"/>
+		</reference> -->
+		<!-- <reference name="left">
+			<block type="core/template" name="tm_facebook_like_right" as="tm_facebook_like_right" template="tm/facebook/facebook_like.phtml"/>
+		</reference> -->
+		<reference name="footer">
+			<block type="core/template" name="tm_facebook_like_footer" as="tm_facebook_like_footer" template="tm/facebook/facebook_like.phtml"/>
+		</reference>
+		</cms_index_index>
+</layout>

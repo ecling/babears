@@ -1,0 +1,37 @@
+<?php
+/**
+ * Template for My Account
+ *
+ * @version 20151030
+ */
+?>
+<div class="page-title">
+    <h1><?php echo $this->__('My Saved Cards (Checkout.com)');?></h1>
+</div>
+<?php if($this->isActive()): ?>
+    <?php $cardList = $this->getCustomerCardList();?>
+    <?php if (!empty($cardList)):?>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th><?php echo $this->__('Card #');?></th>
+                    <th><?php echo $this->__('Type');?></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($cardList as $card):?>
+                    <tr>
+                        <td><?php echo $card['title'];?></td>
+                        <td><?php echo $card['type'];?></td>
+                        <td><a href="<?php echo $this->getUrl("*/cards/remove", array("card" => $card['value']));?>"><?php echo $this->__('Remove');?></a></td>
+                    </tr>
+                <?php endforeach?>
+            </tbody>
+        </table>
+    <?php else:?>
+        <p><?php echo $this->__('No cards added.');?></p>
+    <?php endif?>
+<?php else:?>
+    <p><?php echo $this->__('This Payment Type is not allowed.');?></p>
+<?php endif?>

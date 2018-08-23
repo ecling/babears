@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config>
+	<menu>
+		<cws module="bestseller">
+			<title>MageBees</title>
+			<sort_order>70</sort_order> 
+			<children>
+				<bestseller module="bestseller">
+					<title>Bestseller Products</title>
+					<sort_order>70</sort_order>               
+					<children>
+						<groups module="bestseller">
+							<title>Manage Products Manually</title>
+							<sort_order>10</sort_order>
+							<action>adminhtml/bestseller</action>
+						</groups>
+						<settings>
+							<title>Manage Settings</title>
+							<sort_order>20</sort_order>
+							<action>adminhtml/system_config/edit/section/bestseller</action>
+						</settings>
+					</children>
+				</bestseller>
+			</children>
+		</cws>
+	</menu>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<bestseller>
+										<title>Bestseller Section</title>
+									</bestseller>
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

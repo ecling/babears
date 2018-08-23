@@ -1,0 +1,89 @@
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+<?php
+$array[] = array('Data','Sales');
+$array_table = array();
+$data = $this->getCollection();
+foreach($data as $item){
+    $array[] = array($item->getDate(),round($item->getSubtotal()));
+    $array_table[] = array($item->getDate(),round($item->getSubtotal()));
+}
+$tableJson = Mage::helper('core')->jsonEncode($array_table);
+$jsonData = Mage::helper('core')->jsonEncode($array);
+
+$country = $this->getCountry();
+$country_table = array();
+foreach ($country as $item){
+    $days = ceil((time()-strtotime($item['created_at']))/(3600*24));
+    $country_table[] = array($item['sku'],number_format($item['price'],2),$item['country_id'],(int)$item['qty'],$days);
+}
+$countryJson = Mage::helper('core')->jsonEncode($country_table);
+?>
+<?php if(count($array)>1): ?>
+
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['table']});
+        google.charts.setOnLoadCallback(drawTable);
+
+        function drawTable() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'sku');
+            data.addColumn('string', 'Price');
+            data.addColumn('string', 'Country');
+            data.addColumn('number', 'Qty Ordered');
+            data.addColumn('number', 'Created Days');
+            data.addRows(<?php echo $countryJson;?>);
+
+            var table = new google.visualization.Table(document.getElementById('table_div_country'));
+
+            table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
+        }
+    </script>
+
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['table']});
+        google.charts.setOnLoadCallback(drawTable);
+
+        function drawTable() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Date');
+            data.addColumn('number', 'Amount');
+            data.addRows(<?php echo $tableJson;?>);
+
+            var table = new google.visualization.Table(document.getElementById('table_div_amount'));
+
+            table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
+        }
+    </script>
+
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(<?php echo $jsonData;?>);
+
+            var options = {
+                title: 'Company Performance',
+                hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
+                vAxis: {minValue: 0}
+            };
+
+            var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+
+    <div id="table_div_country" style="margin-top: 50px; margin-bottom: 100px; width:500px;"></div>
+
+    <div id="table_div_amount" style="margin-top: 50px; width:500px;"></div>
+
+    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+<?php else: ?>
+    <p>No Data</p>
+<?php endif;?>
+</body>
+</html>

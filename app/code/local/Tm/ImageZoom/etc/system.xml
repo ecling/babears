@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<tabs>
+		<tm translate="label">
+			<label>TemplateMonster</label>
+			<sort_order>100</sort_order>
+		</tm>
+	</tabs>
+	<sections>
+		<imagezoom translate="label" module="imagezoom">
+			<label>Product Image Zoom</label>
+			<tab>tm</tab>
+			<sort_order>10</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<general>
+					<label>General</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>100</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Activation Image Zoom:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<zoom_variant translate="label">
+							<label>Select Product Image Zoom:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>imagezoom/system_config_source_values</source_model>
+							<sort_order>101</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</zoom_variant>
+						<heading_zoom translate="label">
+                            <label>General Settings:</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>102</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <zoom_variant>unitegallery</zoom_variant>
+                            </depends>
+                        </heading_zoom>
+
+						<unite_skin translate="label">
+							<label>Skin:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>imagezoom/system_config_unitegallery_skin</source_model>
+							<sort_order>103</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+                                <zoom_variant>unitegallery</zoom_variant>
+                            </depends>
+						</unite_skin>
+						<unite_strippanel_enable translate="label">
+							<label>Show Thumbs Panel Button:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>104</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+                                <zoom_variant>unitegallery</zoom_variant>
+                            </depends>
+						</unite_strippanel_enable>
+						<unite_panel_position translate="label">
+							<label>Thumbs Panel Position:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>imagezoom/system_config_unitegallery_positions</source_model>
+							<sort_order>105</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+                                <zoom_variant>unitegallery</zoom_variant>
+                            </depends>
+						</unite_panel_position>
+						<unite_thumb_width translate="label">
+							<label>Thumb Width:</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>106</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+                                <zoom_variant>unitegallery</zoom_variant>
+                            </depends>
+						</unite_thumb_width>
+						<unite_thumb_height translate="label">
+							<label>Thumb Height:</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>107</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+                                <zoom_variant>unitegallery</zoom_variant>
+                            </depends>
+						</unite_thumb_height>
+						<unite_arrows translate="label">
+							<label>Enable Arrows:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>108</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+                                <zoom_variant>unitegallery</zoom_variant>
+                            </depends>
+						</unite_arrows>
+						<unite_fullscreen translate="label">
+							<label>Enable Fullscreen Button:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>109</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+                                <zoom_variant>unitegallery</zoom_variant>
+                            </depends>
+						</unite_fullscreen>
+						<unite_fullwindow translate="label">
+							<label>Enable Fullwindow Button:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>110</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+                                <zoom_variant>unitegallery</zoom_variant>
+                            </depends>
+						</unite_fullwindow>
+						<unite_zoom_panel translate="label">
+							<label>Enable Zoom Panel:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>111</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+                                <zoom_variant>unitegallery</zoom_variant>
+                            </depends>
+						</unite_zoom_panel>
+						<unite_play translate="label">
+							<label>Enable Play Button:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>112</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+                                <zoom_variant>unitegallery</zoom_variant>
+                            </depends>
+						</unite_play>
+						<unite_play_interval translate="label">
+							<label>Play Interval:</label>
+							<frontend_type>text</frontend_type>
+							<comment>Set the play interval, in milliseconds.</comment>
+							<sort_order>113</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<zoom_variant>unitegallery</zoom_variant>
+                                <unite_play>1</unite_play>
+                            </depends>
+						</unite_play_interval>
+						<unite_pause_on_mouseover translate="label">
+							<label>Pause on Mouseover:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>114</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<zoom_variant>unitegallery</zoom_variant>
+                                <unite_play>1</unite_play>
+                            </depends>
+						</unite_pause_on_mouseover>
+						<unite_controls_always_on translate="label">
+							<label>Controls Always On:</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<comment>If "No", controls shown on moseover only.</comment>
+							<sort_order>115</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+                                <zoom_variant>unitegallery</zoom_variant>
+                            </depends>
+						</unite_controls_always_on>
+
+						<!-- ***** -->
+					</fields>
+				</general>	
+			</groups>
+		</imagezoom>
+	</sections>
+</config>

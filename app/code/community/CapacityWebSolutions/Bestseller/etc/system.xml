@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <cws>
+            <label>MageBees</label>
+            <sort_order>100</sort_order>
+        </cws>
+    </tabs>
+    <sections>
+        <bestseller translate="label">
+            <class>separator-top</class>
+            <label>Best Seller Products</label>
+            <tab>cws</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>40</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+				<default_code translate="label">
+					<label>Default Package Code</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>80</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+					<fields>
+						<bsxml translate="label comment">
+                            <comment><![CDATA[]]></comment>
+                            <label>XML Tag Representation</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>CapacityWebSolutions_Bestseller_Block_Adminhtml_DefaultXML</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+						</bsxml>
+						<bstemplated translate="label comment">
+                            <comment><![CDATA[]]></comment>
+                            <label>Template Tag Representation</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>CapacityWebSolutions_Bestseller_Block_Adminhtml_DefaultTemplate</frontend_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </bstemplated>
+						<bsdirect translate="label comment">
+                            <comment><![CDATA[]]></comment>
+                            <label>Call Via Frontend Template File</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>CapacityWebSolutions_Bestseller_Block_Adminhtml_DefaultDirectCode</frontend_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+						</bsdirect>
+					</fields>
+				</default_code>
+				<rwd_code translate="label">
+					<label>RWD Package Code</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>90</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+					<fields>
+						<bsxml translate="label comment">
+                            <comment><![CDATA[]]></comment>
+                            <label>XML Tag Representation</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>CapacityWebSolutions_Bestseller_Block_Adminhtml_RwdXML</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </bsxml>
+						<bstemplated translate="label comment">
+                            <comment><![CDATA[]]></comment>
+                            <label>Template Tag Representation</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>CapacityWebSolutions_Bestseller_Block_Adminhtml_RwdTemplate</frontend_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </bstemplated>
+						<bsdirect translate="label comment">
+                            <comment><![CDATA[]]></comment>
+                            <label>Call Via Frontend Template File</label>
+                            <frontend_type>text</frontend_type>
+						<frontend_model>CapacityWebSolutions_Bestseller_Block_Adminhtml_RwdDirectCode</frontend_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+						</bsdirect>
+					</fields>
+				</rwd_code>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+							<label>Enabled</label>	
+							<comment><![CDATA[Select Yes for display the Bestseller Products Extension on frontend.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>0</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</enabled>
+						<display_heading translate="label">
+                            <label>Display Heading</label>
+							<comment><![CDATA[Select Yes for display page heading.]]></comment>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </display_heading>
+						<heading translate="label">
+                            <label>Heading</label>
+							<comment><![CDATA[Here, We can Set Heading.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<display_heading>1</display_heading>
+							</depends>
+                        </heading>
+						<choose_products translate="label">
+							<label>Best Seller Products</label>
+							<comment><![CDATA[Auto >> Show system generated products.<br>
+							Manually >> Show manually added products.<br>
+							Both >> Show both system generated and manually added products.]]>
+							</comment>
+							<source_model>bestseller/system_config_source_chooseproducts</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>15</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</choose_products>
+						<sort_order_both>
+							<label>Sort Order for Both</label>
+							<comment><![CDATA[Auto >> Show System generated products first then manually added products.<br>
+							Manually >> Show manually added products first then system generated products.
+							]]></comment>
+							<source_model>bestseller/system_config_source_sortorder</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends><choose_products>3</choose_products></depends>
+						</sort_order_both>
+						<bundle_products>
+							<label>Display Bundle and Configurable Products</label>
+							<comment><![CDATA[Applied only if "Best Seller Products" field is set to "Auto" or "Both".]]>
+							</comment>
+							<source_model>bestseller/system_config_source_bundleproducts</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>25</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</bundle_products>
+						<number_of_items translate="label comment">
+                            <label>Number Of Items in Main Block</label>
+                            <comment><![CDATA[Show Number of best seller products in main block]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </number_of_items>
+                        <number_of_items_per_row translate="label comment">
+                            <label>Number Of Items per row in Main Block</label>
+                            <comment><![CDATA[Show Number of best seller products in per row]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </number_of_items_per_row>   
+						<thumbnail_height translate="label">
+							<label>Thumbnail Width</label>
+							<comment><![CDATA[Default Thumbnail Width: 135px]]></comment>				
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</thumbnail_height> 
+						<thumbnail_width translate="label">
+							<label>Thumbnail Height </label>
+							<comment><![CDATA[Default Thumbnail Height: 135px]]></comment>				
+							<frontend_type>text</frontend_type>
+							<sort_order>45</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</thumbnail_width>
+						<time_period translate="label">
+							<label>Time Period</label>	
+							<comment><![CDATA[Days bestselling product. Default 60 days.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</time_period>                    
+						<products_price translate="label">
+							<label>Show Products Price</label>	
+							<comment><![CDATA[Select Yes for display the Products Price on frontend.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>55</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</products_price> 
+					    <review translate="label">
+							<label>Show Reviews Ratings</label>	
+							<comment><![CDATA[Select Yes for display the Reviews Ratings on frontend.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</review> 
+						<add_to_cart translate="label">
+							<label>Add to Cart</label>	
+							<comment><![CDATA[Select Yes for display the Add to cart button on frontend.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>65</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</add_to_cart> 
+   					    <active translate="label">
+							<label>Add to Wishlist</label>	
+							<comment><![CDATA[Select Yes for display the Add to Wishlist Link on frontend.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+						<add_to_compare translate="label">
+							<label>Add to Compare</label>	
+							<comment><![CDATA[Select Yes for display the Add to Compare Link on frontend.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>75</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</add_to_compare>
+                        <out_of_stoke translate="label">
+							<label>Display out of stock items</label>	
+							<comment><![CDATA[Select Yes for display the out of stock items on frontend.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>80</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</out_of_stoke>
+						<order_status translate="label">
+							<label>Order Status</label>
+							<comment><![CDATA[Applied only if "Best Seller Products" field is set to "Auto" or "Both".]]></comment>
+							<source_model>bestseller/system_config_source_orderstatus</source_model>
+							<frontend_type>multiselect</frontend_type>
+							<sort_order>85</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</order_status>
+					</fields>
+                </general>
+            </groups>
+        </bestseller>
+    </sections>
+</config>

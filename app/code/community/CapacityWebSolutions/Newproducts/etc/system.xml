@@ -1,0 +1,350 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <cws>
+            <label>MageBees</label>
+            <sort_order>100</sort_order>
+        </cws>
+    </tabs>
+    <sections>
+        <newproducts translate="label">
+            <class>separator-top</class>
+            <label>New Products</label>
+            <tab>cws</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>40</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+				<code translate="label">
+					<label>Code</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+					<fields>
+						<xml translate="label comment">
+                            <comment><![CDATA[]]></comment>
+                            <label>XML Tag Representation</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>CapacityWebSolutions_Newproducts_Block_Adminhtml_DefaultXML</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+						</xml>
+						<templated translate="label comment">
+                            <comment><![CDATA[]]></comment>
+                            <label>Template Tag Representation</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>CapacityWebSolutions_Newproducts_Block_Adminhtml_DefaultTemplate</frontend_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </templated>
+						<direct translate="label comment">
+                            <comment><![CDATA[]]></comment>
+                            <label>Call Via Frontend Template File</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>CapacityWebSolutions_Newproducts_Block_Adminhtml_DefaultDirectCode</frontend_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+						</direct>
+					</fields>
+				</code>
+				<general translate="label">
+					<label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+					<fields>
+						 <enabled translate="label">
+							<label>Enabled</label>	
+							<comment><![CDATA[Select Yes for display the New Products on frontend.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>0</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</enabled>
+						<isresponsive translate="label">
+							<label>Is Responsive Theme</label>	
+							<comment><![CDATA[Select Yes for display Responsive Theme Template.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</isresponsive>
+						<display_heading translate="label">
+                            <label>Display Heading</label>
+							<comment><![CDATA[Select Yes for display page heading.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </display_heading>
+						<heading translate="label">
+                            <label>Heading</label>
+							<comment><![CDATA[Set page heading.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<display_heading>1</display_heading>
+							</depends>
+							<validate>required-entry</validate>
+                        </heading>
+						<choose_products translate="label">
+							<label>New Products</label>
+							<comment><![CDATA[Auto >> Show system generated products.<br>
+							Manually >> Show manually added products.<br>
+							Both >> Show both system generated and manually added products.]]>
+							</comment>
+							<source_model>newproducts/system_config_source_chooseproducts</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>15</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</choose_products>
+						
+						<choose_type>
+							<label>Use 'New from Date' and 'New to Date'</label>
+							<comment><![CDATA[Applied only if "New Products" field is set to "Auto" or "Both".]]>
+							</comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>25</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</choose_type>
+						<new_days>
+							<label>Product is new threshold</label>
+							<comment><![CDATA[Used Product Creation Date.<br>
+								Default days for new products: 10 days.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<choose_type>0</choose_type>
+							</depends>
+							<validate>required-entry</validate>
+						</new_days>
+						<display_by>
+							<label>Select New Products Type</label>
+							<comment><![CDATA[You can display all products or display by categories.]]></comment>
+							<source_model>newproducts/system_config_source_choosetype</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>35</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</display_by>
+						<categories translate="label">
+                            <label>Categories</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>newproducts/system_config_source_category</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+								<display_by>2</display_by>
+                            </depends>
+							<validate>required-entry</validate>
+                        </categories>
+						<sort_by>
+							<label>Sort By</label>
+							<comment><![CDATA[Set attribute that is initially used to sort the new products list. 
+							]]></comment>
+							<source_model>newproducts/system_config_source_sortby</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>43</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_by>
+						<sort_order>
+							<label>Sort Order</label>
+							<comment><![CDATA[If you select "Random" then Sort By atrributes is not applicable.]]></comment>
+							<source_model>newproducts/system_config_source_sortorder</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>44</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+						<products_price translate="label">
+							<label>Show Products Price</label>	
+							<comment><![CDATA[Select Yes for display the Products' Price on frontend.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>45</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</products_price> 
+						
+					    <review translate="label">
+							<label>Show Ratings</label>	
+							<comment><![CDATA[Select Yes for display the Ratings on frontend.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</review> 
+						<short_desc translate="label">
+							<label>Show Short Description</label>	
+							<comment><![CDATA[Select Yes for display the Short Description on frontend.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>55</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</short_desc> 
+						<desc_limit translate="label">
+							<label>Short Description Word Limit</label>	
+							<comment><![CDATA[Set number of words display on frontend.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<short_desc>1</short_desc>
+							</depends>
+							<validate>required-entry</validate>
+						</desc_limit>
+						<add_to_cart translate="label">
+							<label>Add to Cart</label>	
+							<comment><![CDATA[Select Yes for display the "Add to Cart" button on frontend.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>65</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</add_to_cart> 
+   					    <add_to_wishlist translate="label">
+							<label>Add to Wishlist</label>	
+							<comment><![CDATA[Select Yes for display the "Add to Wishlist" link on frontend.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </add_to_wishlist>
+						<add_to_compare translate="label">
+							<label>Add to Compare</label>	
+							<comment><![CDATA[Select Yes for display the "Add to Compare" link on frontend.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>75</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</add_to_compare>
+                        <out_of_stock translate="label">
+							<label>Display out of stock items</label>	
+							<comment><![CDATA[Select Yes for display the out of stock items on frontend.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>80</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</out_of_stock>
+					</fields>
+				</general>
+				<template>
+					<label>Template Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+					<fields>
+						<select_template>
+							<label>Template</label>
+							<comment><![CDATA[Select template for new products list.]]></comment>
+							<source_model>newproducts/system_config_source_template</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</select_template>
+						<number_of_items translate="label comment">
+                            <label>Number of Products to Display</label>
+                            <comment><![CDATA[Show Number of new products in main block.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<validate>required-entry</validate>
+                        </number_of_items>
+						<show_pager translate="label comment">
+                            <label>Display Page Control</label>
+                            <comment><![CDATA[Show pagination and total number of items.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_pager>
+						<products_per_page translate="label comment">
+                            <label>Number of Products per Page</label>
+                            <comment><![CDATA[Show number of products per page.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<show_pager>1</show_pager>
+							</depends>
+							<validate>required-entry</validate>
+                        </products_per_page>
+                       	<thumbnail_height translate="label">
+							<label>Thumbnail Width</label>
+							<comment><![CDATA[Default Thumbnail Width: 135px]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>25</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<validate>required-entry</validate>
+						</thumbnail_height> 
+						<thumbnail_width translate="label">
+							<label>Thumbnail Height </label>
+							<comment><![CDATA[Default Thumbnail Height: 135px]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<validate>required-entry</validate>
+						</thumbnail_width>
+					</fields>
+				</template>
+			</groups>
+        </newproducts>
+    </sections>
+</config>

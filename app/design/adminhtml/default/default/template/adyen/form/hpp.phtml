@@ -1,0 +1,90 @@
+<?php
+/**
+ * Adyen Payment Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Adyen
+ * @package    Adyen_Payment
+ * @copyright    Copyright (c) 2011 Adyen (http://www.adyen.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/**
+ * @category   Payment Gateway
+ * @package    Adyen_Payment
+ * @author     Adyen
+ * @property   Adyen B.V
+ * @copyright  Copyright (c) 2014 Adyen BV (http://www.adyen.com)
+ */
+?>
+<?php $_code = $this->getMethodCode() ?>
+
+<?php $disabled = $this->getHppOptionsDisabled(); ?>
+<?php $enabledTypes = $this->getHppAvailableTypes(); ?>
+<?php $idealList = $this->getIdealAvailableTypes(); ?>
+
+
+<ul id="payment_form_<?php echo $_code ?>" style="display:none">
+    <li>
+        <?php echo $this->__('You will be redirected to Adyen website when you place an order.') ?>
+    </li>
+    <?php if (empty($disabled) && !empty($enabledTypes)): ?>
+        <li>
+            <label for="<?php echo $_code ?>_hpp_type"
+                   class="required"><em>*</em><?php echo $this->__('Hosted Payment Type') ?></label>
+            <div class="input-box required-entry">
+                <?php foreach ($enabledTypes as $_typeCode => $_typeName): ?>
+                    <?php $filename = Mage::getBaseDir() . DS . 'skin' . DS . 'frontend' . DS . 'base' . DS . 'default' . DS . 'images' . DS . 'adyen' . DS . "$_typeCode.png" ?>
+                    <table>
+                        <tr>
+                            <td width="20px">
+                                <input type="radio" id="hpp_type_<?php echo $_typeCode ?>" name="payment[hpp_type]"
+                                       value="<?php echo $_typeCode ?>"
+                                       onclick="enableOptions('<?php echo $_typeCode ?>')"/>
+                            </td>
+                            <?php if (file_exists($filename)): ?>
+                                <td width="80px"><label for="hpp_type_<?php echo $_typeCode ?>"><img
+                                                src="<?php echo $this->getSkinUrl("images/adyen/$_typeCode.png") ?>"
+                                                alt="<?php echo $_typeName ?>"/></label></td>
+                            <?php endif ?>
+
+                            <td>
+                                <label for="hpp_type_<?php echo $_typeCode ?>"><?php echo $this->__($_typeName) ?></label>
+                            </td>
+                        </tr>
+                    </table>
+                    <script type="text/javascript">
+                        //<![CDATA[
+                        function enableOptions(code) {
+                            if (code == 'ideal') {
+                                $('payment_form_ideal').show();
+                            } else {
+                                $('payment_form_ideal').hide();
+                            }
+                        }
+                        <?php /*
+                            var IdealChecked= function() {
+                                var method = $('hpp_type_<?php echo $_typeCode?>');
+                                if (method.value == 'ideal') {
+                                    $('payment_form_ideal').show();
+                                } else {
+                                    $('payment_form_ideal').hide();
+                                }
+                            };
+                            Event.observe($('hpp_type_<?php echo $_typeCode?>'), 'change', IdealChecked);
+                             */ ?>
+                        //]]>
+                    </script>
+                <?php endforeach ?>
+            </div>
+        </li>
+    <?php endif; ?>
+</ul>

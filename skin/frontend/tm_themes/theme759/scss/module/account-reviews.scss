@@ -1,0 +1,133 @@
+//
+// Magento
+//
+// NOTICE OF LICENSE
+//
+// This source file is subject to the Academic Free License (AFL 3.0)
+// that is bundled with this package in the file LICENSE_AFL.txt.
+// It is also available through the world-wide-web at this URL:
+// http://opensource.org/licenses/afl-3.0.php
+// If you did not receive a copy of the license and are unable to
+// obtain it through the world-wide-web, please send an email
+// to license@magento.com so we can send you a copy immediately.
+//
+// DISCLAIMER
+//
+// Do not edit or add to this file if you wish to upgrade Magento to newer
+// versions in the future. If you wish to customize Magento for your
+// needs please refer to http://www.magento.com for more information.
+//
+// @category    design
+// @package     rwd_default
+// @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+// @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+//
+
+/* ============================================ *
+ * Account - Reviews
+ * ============================================ */
+
+@import "../includes"; 
+
+.product-review {
+    .product-img-box {
+        p.label {
+            font-size: $f-size-xl;
+            font-family: $f-stack-special;
+            margin-top: 20px;
+            padding-bottom: $gap;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        .rating-box {
+            float: left;
+
+            &.stars{
+                margin: 0 0 10px !important;
+            }
+        }
+
+        .rating-links .separator,
+        .moveToTab{
+            display: none;
+        }
+
+        .product-image{
+            max-width: 50%;
+            width: auto;
+        }
+    }
+
+    .product-details {
+        h2 {
+            display: block !important;
+            border-bottom: 1px solid $c-module-border;
+            color: $accent-color-1;
+            font-size: $f-size-xl;
+            font-weight: 600;
+            font-family: $f-stack-special;
+            padding-bottom: $gap;
+        }
+    }
+
+    .ratings-table {
+        font-family: $f-stack-special;
+
+
+        th {
+            padding-right: $gap;
+        }
+
+        tr {
+            font-size: $f-size-xs;
+            margin-right: $gap;
+            text-transform: uppercase;
+        }
+    }
+
+    .ratings-description {
+        dt {
+            border-bottom: 1px solid $c-module-border;
+            font-size: $f-size-xl;
+            font-weight: 400;
+            font-family: $f-stack-special;
+            margin-top: 20px;
+            padding: $gap 0;
+            text-transform: uppercase;
+        }
+
+        dd {
+            color: #737373;
+            font-family: $f-stack-special;
+            font-size: $f-size-s;
+            padding-top: 7px;
+        }
+    }
+}
+
+// ---------------------------------------------
+
+@include bp(min-width, $bp-medium + 1) {
+    .product-review {
+        .ratings-table {
+            tr {
+                float: none;
+            }
+        }
+    }
+}
+
+
+
+// ---------------------------------------------
+
+@include bp(max-width, 320px) {
+    .product-review {
+        .ratings-table {
+            tr {
+                float: none;
+            }
+        }
+    }
+}

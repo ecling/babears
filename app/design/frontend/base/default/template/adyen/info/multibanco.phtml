@@ -1,0 +1,10 @@
+<?php /** @var Adyen_Payment_Block_Info_Multibanco $this */ ?>
+<p><?php echo $this->escapeHtml($this->getMethod()->getTitle()) ?></p>
+<?php $multibanco = $this->getInfo()->getAdditionalInformation(); ?>
+<?php if (isset($multibanco['comprafacil.entity'])): ?>
+    <?php echo $this->__('Entity Number') ?>: <?php echo $multibanco['comprafacil.entity'] ?><br/>
+    <?php echo $this->__('Reference') ?>: <?php echo $multibanco['comprafacil.reference'] ?><br/>
+    <?php echo $this->__('Payable Amount Value') ?>: <?php echo Mage::helper('core')->currency($multibanco['comprafacil.amount'], true, false) ?><br/>
+    <?php echo $this->__('Due Date / Expiry Date') ?>: <?php echo $multibanco['comprafacil.deadline_date'] ?><br/>
+    <?php echo $this->__('Payment through the Multibanco or Homebanking network') ?><br/>
+<?php endif; ?>

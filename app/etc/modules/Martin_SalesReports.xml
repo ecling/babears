@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Martin_SalesReports>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Adminhtml/>
+            </depends>
+        </Martin_SalesReports>
+    </modules>
+</config>

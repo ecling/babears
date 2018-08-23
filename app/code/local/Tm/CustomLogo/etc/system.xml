@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <tm translate="label">
+            <label>TemplateMonster</label>
+            <sort_order>100</sort_order>
+        </tm>
+    </tabs>
+    <sections>
+        <customlogo translate="label" module="customlogo">
+            <class>separator-top</class>
+            <label>Custom Logo</label>
+            <tab>tm</tab>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <customlogo_set translate="label">
+                    <label>Custom Logo</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <logo_status translate="label">
+                            <label>Logo status</label>
+                            <frontend_type>Select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <comment>Disable it to use default logo</comment>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </logo_status>
+                        <logo_type translate="label">
+                            <label>Logo Type</label>
+                            <frontend_type>Select</frontend_type>
+                            <source_model>customlogo/source_types_logotype</source_model>
+                            <comment>Disable Type Logo To Change</comment>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <logo_status>1</logo_status>
+                            </depends>
+                        </logo_type>
+                        <logo translate="label">
+                            <label>Upload your logo</label>
+                            <frontend_type>image</frontend_type>
+                            <comment>JPG,GIF,PNG</comment>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">images</upload_dir>
+                            <base_url type="media" scope_info="1">images</base_url>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <logo_status>1</logo_status>
+                            </depends>
+                            <depends>
+                                <logo_type><value>logo_images</value></logo_type>
+                            </depends>
+                        </logo>
+                        <logo_alt translate="label">
+                            <label>Alternate text for logo</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <logo_status>1</logo_status>
+                            </depends>
+                            <depends>
+                                <logo_type><value>logo_images</value></logo_type>
+                            </depends>
+                        </logo_alt>
+                        <logo_desc translate="label">
+                            <label>Logo Text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <logo_status>1</logo_status>
+                            </depends>
+                            <depends>
+                                <logo_type><value>logo_text</value></logo_type>
+                            </depends>
+                        </logo_desc>
+                    </fields>
+                </customlogo_set>
+            </groups>
+        </customlogo>
+    </sections>
+</config>

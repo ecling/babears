@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<tabs>
+		<tm translate="label">
+			<label>TemplateMonster</label>
+			<sort_order>100</sort_order>
+		</tm>
+	</tabs>
+	<sections>
+		<productlistgallery translate="label" module="productlistgallery">
+			<class>separator-top</class>
+			<label>Product List Gallery</label>
+			<tab>tm</tab>
+			<sort_order>180</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>				
+				<list>
+					<label>List View</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>10</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+
+						<image_width translate="label comment">
+							<label>Image width: </label>
+							<comment><![CDATA[Product image width in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</image_width>	
+
+						<image_height translate="label comment">
+							<label>Image height: </label>
+							<comment><![CDATA[Product image height in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</image_height>
+
+                        <active translate="label">
+                            <label>Enable/Disable thumbnails</label>
+                            <comment><![CDATA[Enable/Disable Product list gallery thumbs.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>30</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+
+						<thumb_size_w translate="label comment">
+							<label>Thumbnail size width: </label>
+							<comment><![CDATA[Thumbnail image size in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+						</thumb_size_w>
+
+						<thumb_size_h translate="label comment">
+							<label>Thumbnail size height: </label>
+							<comment><![CDATA[Thumbnail image size in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+						</thumb_size_h>							
+					</fields>
+				</list>
+				<grid>
+					<label>Grid View</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>20</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>0</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+
+						<image_width translate="label comment">
+							<label>Image width: </label>
+							<comment><![CDATA[Product image width in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</image_width>	
+
+						<image_height translate="label comment">
+							<label>Image height: </label>
+							<comment><![CDATA[Product image height in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</image_height>
+
+                        <type_hover translate="label comment">
+                            <label>Type of the product's image preview: </label>
+                            <comment><![CDATA[Select Type Hover (Default Disable) - Select preview type]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>productlistgallery/source_types_hovertype</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </type_hover>
+
+						<thumb_size_w translate="label comment">
+							<label>Thumbnail size width: </label>
+							<comment><![CDATA[Thumbnail image size in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                            <depends>
+                                <type_hover>thumbnails</type_hover>
+                            </depends>
+						</thumb_size_w>
+
+						<thumb_size_h translate="label comment">
+							<label>Thumbnail size height: </label>
+							<comment><![CDATA[Thumbnail image size in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                            <depends>
+                                <type_hover>thumbnails</type_hover>
+                            </depends>
+						</thumb_size_h>
+
+					</fields>
+				</grid>	
+				<home_list>
+					<label>Homepage List View</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>30</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>0</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+
+						<image_width translate="label comment">
+							<label>Image width: </label>
+							<comment><![CDATA[Product image width in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</image_width>	
+
+						<image_height translate="label comment">
+							<label>Image height: </label>
+							<comment><![CDATA[Product image height in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</image_height>
+
+                        <active translate="label">
+                            <label>Enable/Disable thumbnails</label>
+                            <comment><![CDATA[Enable/Disable Product list gallery thumbs.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>30</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+
+						<thumb_size_w translate="label comment">
+							<label>Thumbnail size width: </label>
+							<comment><![CDATA[Thumbnail image size in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+						</thumb_size_w>
+
+						<thumb_size_h translate="label comment">
+							<label>Thumbnail size height: </label>
+							<comment><![CDATA[Thumbnail image size in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+						</thumb_size_h>						
+					</fields>
+				</home_list>
+				<home_grid>
+					<label>Homepage Grid View</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>40</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+
+						<image_width translate="label comment">
+							<label>Image width: </label>
+							<comment><![CDATA[Product image width in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</image_width>
+
+						<image_height translate="label comment">
+							<label>Image height: </label>
+							<comment><![CDATA[Product image height in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</image_height>
+
+                        <type_hover translate="label comment">
+                            <label>Type of the product's image preview: </label>
+                            <comment><![CDATA[Select Type Hover (Default Disable) - Select preview type]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>productlistgallery/source_types_hovertype</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </type_hover>
+
+						<thumb_size_w translate="label comment">
+							<label>Thumbnail size width: </label>
+							<comment><![CDATA[Thumbnail image size in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                            <depends>
+                                <type_hover>thumbnails</type_hover>
+                            </depends>
+						</thumb_size_w>
+
+						<thumb_size_h translate="label comment">
+							<label>Thumbnail size height: </label>
+							<comment><![CDATA[Thumbnail image size in pixels.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                            <depends>
+                                <type_hover>thumbnails</type_hover>
+                            </depends>
+						</thumb_size_h>
+
+					</fields>
+				</home_grid>	
+			</groups>
+		</productlistgallery>
+	</sections>
+</config>

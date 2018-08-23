@@ -1,0 +1,52 @@
+<?php
+$skin = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
+$showInlineIcon = Mage::helper('ebanx')->hasToShowInlineIcon();
+$icon = '<img class="ebanx-method-icon" src="' . $skin . 'frontend/base/default/ebanx/ebanx-tef.png" />';
+$warningTexts = Mage::helper('ebanx')->getSandboxWarningText();
+$isSandbox = Mage::helper('ebanx')->isSandboxMode();
+$sandboxTag = $isSandbox ? '<div class="sandbox-form-tag">' . $warningTexts['tag'] . '</div>' : '';
+
+echo $showInlineIcon ? '<div class="ebanx-method-icon-box">' . $icon . $sandboxTag . '</div>' : null;
+?>
+
+<ul class="form-list ebanx-payment-method ebanx-br-method" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+  <?php include 'sandbox-warning.phtml' ?>
+  <li class="centinel-logos">
+    <label class="ebanx-payment-method-desc">Selecione o seu banco. A seguir, você será redirecionado para concluir o pagamento pelo seu internet banking.</label>
+    <?php if(!$showInlineIcon): ?>
+      <div class="input-box">
+        <?= $icon; ?>
+      </div>
+    <?php endif; ?>
+  </li>
+
+  <?php include 'fields.phtml' ?>
+
+  <li>
+    <label for="ebanx_tef_itau">
+      <input type="radio" id="ebanx_tef_itau" name="ebanx_tef" value="itau" checked>
+      Itaú
+    </label>
+  </li>
+  <li>
+    <label for="ebanx_tef_bradesco">
+      <input type="radio" id="ebanx_tef_bradesco" name="ebanx_tef" value="bradesco">
+      Bradesco
+    </label>
+  </li>
+  <li>
+    <label for="ebanx_tef_bb">
+      <input type="radio" id="ebanx_tef_bb" name="ebanx_tef" value="bancodobrasil">
+      Banco do Brasil
+    </label>
+  </li>
+  <li>
+    <label for="ebanx_tef_banrisul">
+      <input type="radio" id="ebanx_tef_banrisul" name="ebanx_tef" value="banrisul">
+      Banrisul
+    </label>
+  </li>
+  <li>
+    <?php include 'brazil/local_amount.phtml'; ?>
+  </li>
+</ul>

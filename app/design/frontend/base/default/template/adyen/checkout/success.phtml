@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * Adyen Payment Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category	Adyen
+ * @package	Adyen_Payment
+ * @copyright	Copyright (c) 2011 Adyen (http://www.adyen.com)
+ * @license	http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/**
+ * @category   Payment Gateway
+ * @package    Adyen_Payment
+ * @author     Adyen
+ * @property   Adyen B.V
+ * @copyright  Copyright (c) 2014 Adyen BV (http://www.adyen.com)
+ */
+?>
+<?php if ($this->isBoletoPayment()): ?>
+    <div class="adyen-boleto-download-pdf">
+        <?php echo Mage::helper('downloadable')->__('<a href="%s">Click here to download the Boleto payment PDF</a>', $this->getUrlBoletoPDF()) ?>
+    </div>
+<?php endif; ?>
+<?php if ($this->isMultibancoPayment()): ?>
+    <?php $salesOrder = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId()) ?>
+    <?php $multibanco = $salesOrder->getPayment()->getAdditionalInformation(); ?>
+    <?php if (isset($multibanco['comprafacil.entity'])) : ?>
+        <div class="adyen-multibanco">
+            <?php echo $this->__('Entity Number') ?>: <?php echo $multibanco['comprafacil.entity'] ?><br/>
+            <?php echo $this->__('Reference') ?>: <?php echo $multibanco['comprafacil.reference'] ?><br/>
+            <?php echo $this->__('Payable Amount Value') ?>: <?php echo Mage::helper('core')->currency($multibanco['comprafacil.amount'], true, false) ?><br/>
+            <?php echo $this->__('Due Date / Expiry Date') ?>: <?php echo $multibanco['comprafacil.deadline_date'] ?><br/>
+            <?php echo $this->__('Payment through the Multibanco or Homebanking network') ?><br/>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

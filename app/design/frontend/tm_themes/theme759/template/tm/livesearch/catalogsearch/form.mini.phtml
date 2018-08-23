@@ -1,0 +1,29 @@
+<?php
+$catalogSearchHelper = $this->helper('catalogsearch');
+$TmSearchHelper = $this->helper('tm_livesearch');
+?>
+<form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
+    <div class="input-box">
+        <label for="search"><?php echo $this->__('Search:') ?></label>
+        <input
+            id="search"
+            type="search"
+            autocomplete="off"
+            class="input-text required-entry"
+            name="<?php echo $catalogSearchHelper->getQueryParamName() ?>"
+            value="<?php echo $catalogSearchHelper->getEscapedQueryText() ?>"
+            maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength(); ?>"
+            placeholder="<?php echo $this->__($TmSearchHelper->getCfg('livesearch_set/livesearch_placeholder')) ?>"/>
+        <button type="submit" title="<?php echo $this->__('Search') ?>" class="button search-button">
+            <span>
+                <span>
+                    <?php echo $this->__('Search') ?>
+                </span>
+            </span>
+        </button>
+    </div>
+
+    <div id="search_autocomplete" class="search-autocomplete">
+        <?php echo $this->getChildHtml('livesearch.autocomplete') ?>
+    </div>
+</form>

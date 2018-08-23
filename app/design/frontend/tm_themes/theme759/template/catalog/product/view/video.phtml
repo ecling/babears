@@ -1,0 +1,26 @@
+<?php
+/**
+ * Magento
+ *
+**/
+?>
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+
+<?php $attStuff= $_product->getData(); ?>
+<?php if( !empty( $attStuff['videoid'] ) ): ?>        
+    <div class="video-box box-collateral">
+        <h2><?php echo $this->__('Video') ?></h2>  
+        <div class="box-collateral-content">
+            <div class="video">
+                 <iframe src="<?php echo $attStuff['videoid']; ?>?wmode=opaque" id="video-frame" allowfullscreen></iframe>     
+           </div>
+        </div>
+      </div>
+      <script type="text/javascript">
+          jQuery('#video-frame').attr('frameborder','0');
+      </script>
+<?php endif; ?>
+

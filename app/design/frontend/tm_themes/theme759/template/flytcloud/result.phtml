@@ -1,0 +1,50 @@
+<?php
+$track = Mage::registry('track');
+?>
+
+<section>
+    <div class="track-result">
+        <ul>
+            <?php if($track['type']=='ft'): ?>
+            <?php foreach($track['info']['z1'] as $info): ?>
+                <li>   
+                    <span class="a"><?php echo $info['a']?></span>
+                    <span class="z"><?php echo $info['z'];?></span>
+                </li>
+            <?php endforeach; ?>
+            <?php else:?>
+                <?php foreach ($track['info'] as $info):?>
+                    <li>
+                        <span class="a"><?php echo $info->createDate ?></span>
+                        <span class="t"><?php echo $info->occurAddress ?></span>
+                        <span class="z"><?php echo $info->trackContent ?></span>
+                    </li>
+                <?php endforeach;?>
+            <?php endif;?>
+        </ul>
+    </div>
+</section>
+
+<style>
+    .track-result{
+        margin: 20px;
+        font-size: 14px;
+    }
+    .track-result li{
+        margin: 20px 0 20px 200px;
+    }
+    .track-result li span{
+        display:  inline-block;
+    }
+    .track-result li .a{
+        margin-right: 5px;
+    }
+    @media screen and (max-width: 768px){
+        .track-result li{
+            margin: 20px 0;
+        }
+        .track-result li span{
+            display: block;
+        }
+    }
+</style>

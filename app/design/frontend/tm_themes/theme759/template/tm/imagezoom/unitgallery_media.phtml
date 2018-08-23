@@ -1,0 +1,37 @@
+<?php
+/*
+* Name Extension: Tm_ImageZoom
+*/
+    
+    global $_product_type_normal_image, $_product_type_large_image, $_product_type_center_image;
+
+    if(($_product_type_normal_image == null) && ($_product_type_large_image == null) && ($_product_type_center_image == null)):
+        $_product_type_normal_image  = false;
+        $_product_type_large_image   = true;
+        $_product_type_center_image  = false;
+    endif;
+
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+    $_helper_zoom = $this->helper('imagezoom/data');
+?>
+    
+    <?php $imagezoom_data = $_helper_zoom->getImagezoomData(); ?>
+
+    <?php if (count($this->getGalleryImages()) > 0): ?>
+        <div id="gallery" style="display:none;" data-imagezoom='<?php echo json_encode($imagezoom_data); ?>'>
+        <?php $i=0; foreach ($this->getGalleryImages() as $_image): ?>
+            <?php if ($this->isGalleryImageVisible($_image)): ?>
+                <?php  $zoom_data = $this->getGalleryImageUrl($_image);?>
+                <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($imagezoom_data['unite_thumb_width'], $imagezoom_data['unite_thumb_height']); ?>"
+                        alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>"
+                        data-image="<?php echo $zoom_data; ?>"
+                        itemprop="image" 
+                        />      
+            <?php endif; ?>
+        <?php $i++; endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+
+<?php echo $this->getChildHtml('after'); ?>

@@ -1,0 +1,107 @@
+<?php
+/**
+ * Template for checkout page
+ *
+ * @version 20160502
+ */
+?>
+<?php $isActive     = $this->isActive();?>
+<?php $isDebug      = $this->getDebugMode();?>
+<?php if ($isActive):?>
+    <ul class="form-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+
+        <?php if($this->isCustomerLogged()): ?>
+            <?php $cardList = $this->getCustomerCardList();?>
+            <?php if(!empty($cardList)): ?>
+                <?php foreach($cardList as $index => $card):?>
+                    <li>
+                        <input class="checkoutapi-saved-card validate-one-required-by-name" type="radio" id="card-<?php echo $index;?>" value="<?php echo $card['value'];?>" name="payment[customer_card]"/>
+                        <label for="card-<?php echo $index;?>"><?php echo $card['type'] . ' ' . $card['title'];?></label>
+                    </li>
+                <?php endforeach;?>
+                <li>
+                    <input id="checkoutapi-new-card" class="validate-one-required-by-name" type="radio" name="payment[customer_card]" value="new_card"/>
+                    <label for="checkoutapi-new-card">Use New Card</label>
+                </li>
+            <?php endif;?>
+        <?php endif;?>
+
+        <li>
+            <form class="card-form" method="POST" action="<?php echo Mage::helper('core/url')->getCurrentUrl()?>">
+                <input type="hidden" id="cko-kit-card-token" name="payment[checkout_kit_card_token]" value=""/>
+                <div class="checkout-kit-card-block">
+                    <input type="text" placeholder="Name on card" name="payment[checkout_kit_name]" class="chName input-text required-entry"/>
+                </div>
+                <div class="checkout-kit-card-block">
+                    <input class="input-text cardNumber required-entry validate-cc-number" type="text" name="payment[checkout_kit_number]" placeholder="Credit card number">
+                </div>
+                <div class="checkout-kit-card-block">
+                    <input class="input-text expiryMonth required-entry validate-length maximum-length-2 minimum-length-2 validate-digits" type="text" placeholder="MM" maxlength="2" name="payment[checkout_kit_month]">
+                </div>
+                <div class="checkout-kit-card-block">
+                    <input class="input-text expiryYear required-entry validate-length maximum-length-2 minimum-length-2 validate-digits" type="text" placeholder="YY" maxlength="2" name="payment[checkout_kit_year]">
+                </div>
+                <div class="checkout-kit-card-block">
+                    <input class="chCvv input-text cvv required-entry" name="payment[checkout_kit_cvv]" type="text" placeholder="CVV">
+                </div>
+            </form>
+            <script type="text/javascript">
+                //TODO: Use namespace other than CheckoutKit as soon as gateway supports separate CKOConfig for JS and Kit.
+                //This is to avoid namespace conflicts if merchant enables another extension using CheckoutKit as a namespace.
+                window.CKOConfigKit = {
+                    debugMode: '<?php echo $isDebug ? 'true' : 'false'?>',
+                    publicKey: '<?php echo $this->getPublicKey()?>',
+                    customerEmail: '<?php echo $this->getCustomerEmail();?>',
+                    apiError: function (event) {
+                        console.log("Error object: %o", event.data);
+                    }
+                };
+
+                window.checkoutKitIntegrationIsReady = window.checkoutKitIntegrationIsReady || false;
+                if (!window.checkoutKitIntegrationIsReady) {
+
+                    script.onload = function () {
+                        if (typeof CheckoutKit == 'undefined') {
+                            return false;
+                        }
+
+                        CheckoutKit.configure(window.CKOConfigKit);
+                        window.checkoutKitIntegrationIsReady = true;
+                    }
+
+                    var script = document.createElement('script');
+                    script.type = "text/javascript";
+                    script.src = '<?php echo $this->getKitJsPath();?>';
+                    script.async = true;
+                    document.head.appendChild(script);
+                } else {
+                    CheckoutKit.configure(window.CKOConfigKit);
+                }
+				
+				window.checkoutIntegrationScriptKitAdded = true;
+            </script>
+        </li>
+    </ul>
+
+    <?php if (!empty($cardList)):?>
+        <script type="application/javascript">
+            hideNewCard();
+
+            $$('.checkoutapi-saved-card').invoke('observe', 'change', hideNewCard);
+            $('checkoutapi-new-card').observe('change', showNewCard);
+
+            function hideNewCard() {
+                $$('.checkout-kit-card-block').each(Element.hide);
+            }
+
+            function showNewCard() {
+                $$('.checkout-kit-card-block').each(Element.show);
+            }
+        </script>
+    <?php endif;?>
+
+<?php else :?>
+    <ul class="form-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+        <li><?php echo $this->__('Selected Payment Type is not allowed.') ?></li>
+    </ul>
+<?php endif?>

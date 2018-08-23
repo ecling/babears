@@ -1,0 +1,163 @@
+//
+// Magento
+//
+// NOTICE OF LICENSE
+//
+// This source file is subject to the Academic Free License (AFL 3.0)
+// that is bundled with this package in the file LICENSE_AFL.txt.
+// It is also available through the world-wide-web at this URL:
+// http://opensource.org/licenses/afl-3.0.php
+// If you did not receive a copy of the license and are unable to
+// obtain it through the world-wide-web, please send an email
+// to license@magento.com so we can send you a copy immediately.
+//
+// DISCLAIMER
+//
+// Do not edit or add to this file if you wish to upgrade Magento to newer
+// versions in the future. If you wish to customize Magento for your
+// needs please refer to http://www.magento.com for more information.
+//
+// @category    design
+// @package     rwd_default
+// @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+// @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+//
+/* ============================================ *
+ * Catalog - Compare
+ * ============================================ */
+@import "../includes";
+
+.block-compare .product-name:after {
+  @include clearfix;
+}
+
+.compare-table .product-image {
+  display: inline-block;
+}
+
+.catalog-product-compare-index {
+  .title-buttons {
+
+    position: relative;
+
+    h1 {
+
+      @include titleIcon('\e154', 45px);
+    }
+
+    a {
+      position: absolute;
+      top: 20%;
+      left: 0;
+      font-weight: 500;
+
+      &:before {
+        @include custom-icon($font-family-icon, '\e109');
+        font-size: 22px;
+        padding-right: 15px;
+      }
+    }
+
+    .button {
+      float: right;
+      font-size: 31px;
+      padding: 8px 5px;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  .buttons-set {
+    border-top: 0;
+  }
+}
+
+.compare-table {
+
+  margin-top: 15px;
+  @extend .theme-border;
+
+  .product-image {
+    display: inline-block;
+    padding: 10px;
+  }
+
+  thead {
+    th,
+    td {
+      padding-bottom: 0;
+    }
+
+    th {
+      border-bottom: none;
+    }
+  }
+
+  th {
+    vertical-align: top;
+    @extend %th-table;
+    border: solid 1px $c-table-border;
+    border-top: none;
+  }
+
+  td {
+    border-right: solid 1px $c-table-border;
+  }
+
+  .product-shop-row {
+    &.top {
+      td {
+        padding-bottom: 0;
+        border-bottom: 0;
+        text-align: center;
+        vertical-align: top;
+
+      }
+
+      th {
+        border-bottom: none;
+      }
+    }
+
+    &.bottom td {
+      padding-top: 0;
+      text-align: center;
+    }
+  }
+
+  .add-to-row {
+    text-align: center;
+  }
+
+  .btn-remove {
+    &:hover {
+      color: $c-link-hover;
+    }
+    &::after {
+      content: '\e132';
+      font-size: 22px;
+      box-shadow: none;
+    }
+  }
+
+  .btn-cart {
+    @extend %large-button;
+    @extend %button-type2;
+    @include buttonIcon('\e14d');
+  }
+}
+
+@include bp(max-width, $bp-large) {
+  .catalog-product-compare-index {
+    .title-buttons {
+
+      padding-top: 40px;
+
+      a {
+        position: relative;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,51 @@
+<div class="clear"></div>
+        <script src="{{skin url='js/camera.js'}}"> </script>
+        <script>
+        jQuery(function(){
+            jQuery('#camera_wrap').camera({
+                alignmen: 'topCenter',
+                height: '27.34%',
+                minHeight: '200px',
+                loader : false,
+                navigation: true,
+                fx: 'simpleFade',
+                navigationHover:false,       
+                thumbnails: false,
+                playPause: false,
+                pagination:false
+            });
+        });
+        </script>
+
+<div class="fluid_container_wrap">
+    <div class="fluid_container">
+        <div class="camera_wrap camera_orange_skin" id="camera_wrap">
+			
+            <div data-src="{{skin url='images/slide-1.jpg'}}">
+                <div class="camera_caption fadeFromRight">
+					<h3>Get ready for winter!</h3>
+                    <h1>SAVE <br />IN STYLE</h1>
+					<h2>WITH THE DISCOUNT<br /> CLOTHING!</h2>
+					<a href="collection.html">See all collection</a>
+                </div>
+            </div>
+            <div data-src="{{skin url='images/slide-2.jpg'}}">
+               <div class="camera_caption fadeFromRight">
+                    <h3>New arrivals</h3>
+                    <h1 class="c_w">BUY <br />2 ITEMS</h1>
+					<h2>GET ONE FOR FREE</h2>
+					<a href="outerwear.html">See all collection</a>
+                </div>
+            </div>
+            <div data-src="{{skin url='images/slide-3.jpg'}}">
+                 <div class="camera_caption fadeFromRight">
+                    <h3>New Fall Season 2015</h3>
+                    <h1>MEN'S &amp;<br /> WOMEN'S</h1>
+					<h2>AMAZING COLLECTION!</h2>
+					<a href="women.html">See all collection</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>

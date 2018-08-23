@@ -1,0 +1,45 @@
+//
+// Magento
+//
+
+// =============================================
+// Mixin - titleIcon
+// =============================================
+
+// From http://blog.14islands.com/post/37259603246/sass-resolution-mixin
+
+@mixin buttonIcon($icon, $size: 20px, $direct: left) {
+
+  $indent-left: auto;
+  $indent-right: 0.333em;
+  @if $direct == right {
+    $indent-right: auto;
+    $indent-left: 0.333em;
+  }
+
+  span span::before {
+    @include custom-icon($font-family-icon, $icon);
+    font-size: $size;
+    color: $c-button-color;
+    float: $direct;
+    left: $indent-left;
+    right: $indent-right;
+    // padding: 0 0.333em;
+    position: relative;
+    z-index: 4;
+    vertical-align: bottom;
+    display: inline-block;
+
+    @include bp(max-width, $bp-large) {
+      display: none;
+    }
+  }
+
+  &.button-secondary,
+  &.button2 {
+
+
+  }
+
+}
+

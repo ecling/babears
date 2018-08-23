@@ -1,0 +1,48 @@
+<?php
+$num = $this->getRequest()->getParam('num',NULL);
+?>
+<section class="flytcloud-track">
+    <h2>Track Your Order</h2>
+    <form id="flytcloud-track-form" action="<?php echo $this->getUrl('flytcloud/track/index') ?>" method="GET">
+        <div class="flytcloud-track-from">
+            <div class="input-box">
+                <span class="title">Track Number:</span>
+                <input type="input" name="num" id="num" title="" value="<?php echo $num; ?>" class="input-text required-entry" />
+            </div>
+            <div class="actions">
+                <button type="submit" title="Subscribe" class="button"><span><span>Track</span></span></button>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </form>
+</section>
+<style>
+    .flytcloud-track h2{
+        text-align: center;
+    }
+    .flytcloud-track-from{
+        width: 340px;
+        margin: 0 auto;
+    }
+    .flytcloud-track-from .input-box input{
+        line-height: 36px;
+    }
+    .flytcloud-track-from .input-box .title{
+        display: inline-block;
+        font-size: 14px;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+    .flytcloud-track-from .input-box{
+        float: left;
+    }
+    .flytcloud-track-from .actions{
+        float: right;
+    }
+</style>
+
+<script type="text/javascript">
+//<![CDATA[
+    var flytcloudTrackForm = new VarienForm('flytcloud-track-form');
+//]]>
+</script>

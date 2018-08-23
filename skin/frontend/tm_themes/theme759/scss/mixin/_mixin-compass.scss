@@ -1,0 +1,63 @@
+//
+// Magento
+//
+
+// =============================================
+// Mixins - compass
+// =============================================
+
+@mixin boxshadow($top, $left, $blur, $color, $inset:"") {
+	
+      -webkit-box-shadow:$top $left $blur $color #{$inset};
+      -moz-box-shadow:$top $left $blur $color #{$inset};
+      box-shadow:$top $left $blur $color #{$inset};
+    }
+
+/*********************************************/
+
+
+@mixin border-radius($a){
+	-moz-border-radius: $a;
+	  -webkit-border-radius: $a;
+	  border-radius: $a;
+}
+
+/**********************************/
+
+@mixin appearance($b){
+	-moz-appearance: $b;
+	  -webkit-appearance: $b;
+	  appearance: $b;
+}
+/**************************************/
+
+
+@mixin inline-block{
+	display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;	
+}
+
+/***************************************/
+
+@mixin transform($transforms) {
+     -moz-transform: $transforms;
+       -o-transform: $transforms;
+      -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+          transform: $transforms;
+}
+
+/****************************************/
+
+@mixin single-transition($property:all, $speed:300ms, $ease:ease-out) {
+  transition: $property $speed $ease;
+}
+
+/****************************************/
+
+@mixin textshadow($x:1px, $y:1px, $radius:1px, $r:0, $g:0, $b:0, $a:1) {
+  text-shadow: $x $y $radius rgba($r, $g, $b, $a);
+}

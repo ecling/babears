@@ -1,0 +1,8 @@
+
+/app/etc/local.xml
+/var/
+/sitemap/
+/media/
+/includes/
+
+/.idea/

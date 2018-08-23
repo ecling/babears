@@ -1,0 +1,53 @@
+<?php
+    $array[] = array('Data','Sales');
+    $array_table = array();
+    $data = $this->getCollection();
+    foreach($data as $item){
+        $array[] = array($item->getDate(),round($item->getSubtotal()));
+        $array_table[] = array($item->getDate(),round($item->getSubtotal()));
+    }
+    $tableJson = Mage::helper('core')->jsonEncode($array_table);
+    $jsonData = Mage::helper('core')->jsonEncode($array);
+?>
+<?php if(count($array)>1): ?>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable(<?php echo $jsonData;?>);
+
+    var options = {
+      title: 'Company Performance',
+      hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
+      vAxis: {minValue: 0}
+    };
+
+    var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+</script>
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['table']});
+    google.charts.setOnLoadCallback(drawTable);
+
+    function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Date');
+        data.addColumn('number', 'Amount');
+        data.addRows(<?php echo $tableJson;?>);
+
+        var table = new google.visualization.Table(document.getElementById('table_div_amount'));
+
+        table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
+    }
+</script>
+
+<div id="table_div_amount" style="margin-top: 50px; width:500px;"></div>
+
+<div id="chart_div" style="width: 100%; height: 500px;"></div>
+<?php else: ?>
+<p>No Data</p>
+<?php endif;?>

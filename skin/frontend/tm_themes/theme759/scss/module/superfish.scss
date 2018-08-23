@@ -1,0 +1,131 @@
+/* ============================================ *
+ * Nav - Superfish (for device)
+ * ============================================ */
+
+@import "../includes"; 
+
+@include bp(min-width, $bp-large + 1) {
+  // .sf-menu-phone {
+  //   display: none !important;
+  // }
+}
+
+
+@include bp(max-width, $bp-large) {
+  .nav-container {
+    position: relative !important;
+  }
+
+  .pseudoStickyBlock {
+    display: none !important;
+  }
+
+  .sf-menu,
+  .sf-menu-phone {
+    display: none;
+  }
+  
+
+  /* menu icon */
+  .sf-menu-block {
+    display: block; 
+
+  }
+  .nav-container-mobile { 
+    display: block !important; 
+    clear: both;
+    margin:0;
+  }
+
+  .sf-menu-phone {
+    background-color: $menu-item-bg-act;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    border: 1px solid #dcdcdc;
+    border-top: 0;
+    > li {
+      border-bottom: 1px solid #dcdcdc;
+      padding: 10px 20px; 
+      font-size: 14px;
+      text-align: left;
+      > strong {
+        top: 9px; 
+        right: 18px; 
+        font-size: 20px; 
+        line-height: 20px; 
+      }
+
+      &.last {
+        border-bottom: 0;
+      }
+
+    }
+
+    li {  
+      position: relative; 
+      text-transform: uppercase;
+
+       a { 
+        display: inline-block;  
+        color: $menu-item-color;  
+      }
+
+      li {
+        font-size: 13px; 
+        padding: 4px 8px; 
+
+        &.last {
+          padding-bottom: 10px;
+        }
+
+        &::first-child {
+          padding-top: 10px;
+
+          strong {
+            top:10px;
+          }
+        }
+      }
+
+      strong {
+        position: absolute;
+        display: block;
+        top: 10px;
+        right: 5px;
+        width: 24px;
+        font-size: 16px; 
+        line-height: 16px;
+        text-align: center;
+        color: $menu-item-color-act;
+
+        &::before {
+          @include fa-icon;
+          content: "\f105"; 
+        }
+
+        &.opened::before { 
+          @include fa-icon;
+          content: "\f107"; 
+        }
+
+        &:hover { 
+          cursor: pointer; 
+        }
+      }
+
+    }
+
+  }
+
+
+  /* dropdown */
+  .sf-menu-phone ul {  width: auto; padding: 15px 0;  display: none;  }
+  .sf-menu-phone > li.active > a > span {color: inherit;}
+  
+  .sf-menu-phone > li.active > a,
+  .sf-menu-phone > li > a:hover,
+  .sf-menu-phone li li.active > a,
+  .sf-menu-phone li li a:hover { color: $menu-item-color-act; }
+
+}

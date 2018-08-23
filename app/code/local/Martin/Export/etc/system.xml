@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<config>
+    <tabs>
+        <martinexport translate="label" module="flytcloud">
+            <label>Batch Export</label>
+            <sort_order>100</sort_order>
+        </martinexport>
+    </tabs>
+    <sections>
+        <purchaselist translate="label" module="flytcloud">
+            <class>separator-top</class>
+            <label>Export Purchase list</label>
+            <tab>martinexport</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>91</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>0</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <account translate="label">
+                    <label>Basic Info</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>4</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <password>
+                            <label>Password</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>flytcloud/system_config_backend_password</backend_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </password>
+                    </fields>
+                </account>
+            </groups>
+        </purchaselist>
+    </sections>
+</config>

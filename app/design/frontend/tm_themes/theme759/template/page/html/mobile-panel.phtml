@@ -1,0 +1,45 @@
+<?php
+/**
+ * Magento
+ *
+**/
+?>
+
+<!-- *************  Skip Container for Mobile ************* -->    
+<div class="skip-container mobile">
+	<div class="skip-links">
+		<!-- Menu Label -->
+		<a href="#header-nav" class="skip-link skip-nav">
+			<span class="icon"></span>
+			<span class="label"><?php echo $this->__('Menu'); ?></span>
+		</a>
+	
+		<!-- Search Label -->
+		<a href="#header-search" class="skip-link skip-search">
+			<span class="icon"></span>
+			<span class="label"><?php echo $this->__('Search'); ?></span>
+		</a>
+		<!-- Search content -->
+		<div id="header-search" class="skip-content">
+			<?php echo $this->getChildHtml('topSearch') ?>
+		</div>
+	
+		<!-- Account Label -->
+		<a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" data-target-element="#header-account" class="skip-link skip-account">
+			<span class="icon"></span>
+			<span class="label"><?php echo $this->__('Account'); ?></span>
+		</a>
+		<!-- Account content -->
+		<div id="header-account" class="skip-content">
+			<?php echo $this->getChildHtml('store_language_2') ?>
+			<?php echo $this->getChildHtml('currency_switcher_2') ?>
+			<?php echo $this->getChildHtml('topLinks') ?>
+		</div>
+	
+		<!-- Cart -->
+		<div class="header-minicart mobile">
+			<?php echo $this->getChildHtml('minicart_head_mobile'); ?>
+		</div>
+	</div> 
+</div>
+<!-- *************  End Skip Container ************* -->

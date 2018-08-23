@@ -1,0 +1,34 @@
+<?php
+/**
+ * Template for checkout page
+ *
+ * @version 20160203
+ */
+?>
+<?php
+    $overlay            = $this->getOverlayShade();
+    $overlayColor       = $overlay === 'dark' ? '#000' : '#fff';
+    $opacity            = $this->getOverlayOpacity();
+    $opacity            = empty($opacity) || $opacity > 1 ? 0.8 : $opacity;
+    $session            = Mage::getSingleton('chargepayment/session_quote');
+    $checkoutApiMethod  = $session->getJsCheckoutApiParams();
+
+    $session->setJsCheckoutApiParams(array());
+?>
+<?php if(!empty($checkoutApiMethod)): ?>
+    <script type="text/javascript">
+        window.jsCheckoutApi = {
+            method:         '<?php echo $checkoutApiMethod['method'] ?>',
+            kit_number:     '<?php echo !empty($checkoutApiMethod['kit_number']) ? $checkoutApiMethod['kit_number'] : '' ?>',
+            kit_name:       '<?php echo !empty($checkoutApiMethod['kit_name']) ? $checkoutApiMethod['kit_name'] : '' ?>',
+            kit_month:      '<?php echo !empty($checkoutApiMethod['kit_month']) ?$checkoutApiMethod['kit_month'] : '' ?>',
+            kit_year:       '<?php echo !empty($checkoutApiMethod['kit_year']) ? $checkoutApiMethod['kit_year'] : '' ?>',
+            kit_cvv:        '<?php echo !empty($checkoutApiMethod['kit_cvv']) ? $checkoutApiMethod['kit_cvv'] : '' ?>',
+            kit_public_key: '<?php echo !empty($checkoutApiMethod['kit_public_key']) ? $checkoutApiMethod['kit_public_key'] : '' ?>',
+            email:          '<?php echo $this->getCustomerEmail() ?>'
+        };
+    </script>
+<?php endif?>
+<div id="checkout-api-js-hover" style="display: none; z-index: 100; position: fixed; width: 100%; height: 100%; top: 0;left: 0; background-color: <?php echo $overlayColor;?>; opacity:<?php echo $opacity;?>;"></div>
+<div id="checkout-api-default-hover" style="display: none; z-index: 100; position: fixed; width: 100%; height: 100%; top: 0;left: 0;"></div>
+

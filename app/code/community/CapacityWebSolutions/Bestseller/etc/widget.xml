@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets>
+    <bestseller type="bestseller/widget">
+        <name>MageBees:Bestseller Products Widget</name>
+		<parameters>
+            <template>
+                <values>
+                    <list_default translate="label">
+                        <value>bestseller/column/bestseller_default_list.phtml</value>
+                        <label>Bestseller Products Images and Names Template</label>
+                    </list_default>
+				</values>
+            </template>
+        </parameters>
+        <supported_blocks>
+            <left_column>
+                <block_name>left</block_name>
+                <template>
+                    <default>list_default</default>
+				</template>
+            </left_column>
+            <main_content>
+                <block_name>content</block_name>
+                <template>
+                    <default>default_template</default>
+                    <reponsive>responsive_template</reponsive>
+                </template>
+            </main_content>
+            <right_column>
+                <block_name>right</block_name>
+                <template>
+                    <default>list_default</default>
+				</template>
+            </right_column>
+        </supported_blocks>
+		<parameters>
+			<wd_display_heading translate="label">
+				<visible>1</visible>
+				<label>Display Heading</label>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+				<value>1</value>
+			</wd_display_heading>
+			<wd_heading translate="label">
+				<visible>1</visible>
+				<label>Heading</label>
+				<type>text</type>
+				<value>BESTSELLER PRODUCTS</value>
+				<depends>
+					<wd_display_heading><value>1</value></wd_display_heading>
+				</depends>
+			</wd_heading>
+			<wd_choose_products translate="label">
+				<visible>1</visible>
+				<label>Best Seller Products</label>
+				<source_model>bestseller/system_config_source_chooseproducts</source_model>
+				<type>select</type>
+				<value>1</value>
+				</wd_choose_products>
+			<wd_sort_order_both>
+				<visible>1</visible>
+				<label>Sort Order for Both</label>
+				<source_model>bestseller/system_config_source_sortorder</source_model>
+				<type>select</type>
+				<value>1</value>
+				<depends>
+					<wd_choose_products><value>3</value></wd_choose_products>
+				</depends>
+			</wd_sort_order_both>
+			<wd_bundle_products>
+				<visible>1</visible>
+				<label>Display Bundle and Configurable Products</label>
+				<source_model>bestseller/system_config_source_bundleproducts</source_model>
+				<type>select</type>
+				<value>1</value>
+			</wd_bundle_products>
+			<wd_number_of_items translate="label comment">
+				<visible>1</visible>
+				<label>Number Of Items in Main Block</label>
+				<type>text</type>
+				<value>6</value>
+			</wd_number_of_items>
+			<wd_number_of_items_per_row translate="label comment">
+				<visible>1</visible>
+				<label>Number Of Items per row in Main Block</label>
+				<type>text</type>
+				<value>3</value>
+			</wd_number_of_items_per_row>   
+			<wd_thumbnail_height translate="label">
+				<visible>1</visible>
+				<label>Thumbnail Width</label>
+				<type>text</type>
+				<value>135</value>
+			</wd_thumbnail_height> 
+			<wd_thumbnail_width translate="label">
+				<visible>1</visible>
+				<label>Thumbnail Height </label>
+				<type>text</type>
+				<value>135</value>
+			</wd_thumbnail_width>
+			<wd_time_period translate="label">
+				<visible>1</visible>
+				<label>Time Period</label>	
+				<type>text</type>
+				<value>60</value>
+			</wd_time_period>                    
+			<wd_products_price translate="label">
+				<visible>1</visible>
+				<label>Show Products Price</label>	
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+				<value>1</value>
+			</wd_products_price> 
+			<wd_review translate="label">
+				<visible>1</visible>
+				<label>Show Reviews Ratings</label>	
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+			</wd_review> 
+			<wd_add_to_cart translate="label">
+				<visible>1</visible>
+				<label>Add to Cart</label>	
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+				<value>1</value>
+			</wd_add_to_cart> 
+			<wd_active translate="label">
+				<visible>1</visible>
+				<label>Add to Wishlist</label>	
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+			</wd_active>
+			<wd_add_to_compare translate="label">
+				<visible>1</visible>
+				<label>Add to Compare</label>	
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+			</wd_add_to_compare>
+			<wd_out_of_stock translate="label">
+				<visible>1</visible>
+				<label>Display out of stock items</label>	
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+			</wd_out_of_stock>
+			<wd_order_status translate="label">
+				<visible>1</visible>
+				<label>Order Status</label>
+				<source_model>bestseller/system_config_source_orderstatus</source_model>
+				<type>multiselect</type>
+				<value>all</value>
+			</wd_order_status>
+			<template>
+				<visible>1</visible>
+                <label>Template</label>
+                <type>select</type>
+                <value>bestseller/bestseller.phtml</value>
+                <values>
+                    <default_template translate="label">
+                        <value>bestseller/bestseller.phtml</value>
+                        <label>Default Template</label>
+                    </default_template>
+                    <responsive_template translate="label">
+                        <value>bestseller/bestseller-responsive.phtml</value>
+                        <label>Responsive Template</label>
+                    </responsive_template>
+                </values>
+            </template>
+		</parameters>
+	</bestseller>
+</widgets>

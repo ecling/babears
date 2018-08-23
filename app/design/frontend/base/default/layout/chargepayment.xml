@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" ifconfig="payment/checkoutapicard/active">
+                <name>checkout_api_card_list</name>
+                <path>chargepayment/cards</path>
+                <label>My Saved Cards (Checkout.com)</label>
+            </action>
+        </reference>
+    </customer_account>
+    <chargepayment_cards_index>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="chargepayment/customer_cards" name="customer.account.card.list" template="checkoutapi/customer/cardlist.phtml"/>
+            <block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml" />
+        </reference>
+    </chargepayment_cards_index>
+    <chargepayment_api_complete>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="page/html" name="chargepayment.local.complete" template="checkoutapi/chargepayment/local/complete.phtml"/>
+        </reference>
+    </chargepayment_api_complete>
+    <checkout_onepage_index translate="label">
+        <reference name="head">
+            <action method="addJs"><script>checkout_api/core/chargepayment.js</script></action>
+        </reference>
+    </checkout_onepage_index>
+    <checkout_onepage_review>
+        <reference name="checkout.onepage.review.info.items.after">
+            <block name="checkoutapi.frame" type="chargepayment/frame" >
+                <action method="setTemplate" ifconfig="payment/checkoutapijs/active" >
+                    <template>checkoutapi/chargepayment/frame.phtml</template>
+                </action>
+            </block>
+            <block name="checkoutapi.framePhp" type="chargepayment/framePhp" >
+                <action method="setTemplate" ifconfig="payment/checkoutapicard/active" >
+                    <template>checkoutapi/chargepayment/framePhp.phtml</template>
+                </action>
+            </block>
+            <block name="checkoutapi.frameKit" type="chargepayment/frameKit" >
+                <action method="setTemplate" ifconfig="payment/checkoutapikit/active" >
+                    <template>checkoutapi/chargepayment/frameKit.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </checkout_onepage_review>
+    <chargepayment_api_redirect>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="chargepayment/hosted_redirect" name="chargepayment.local.hosted.redirect" template="checkoutapi/chargepayment/hosted/redirect.phtml"/>
+        </reference>
+    </chargepayment_api_redirect>
+    <default>
+        <reference name="head">
+            <action method="addJs"><script>checkout_api/chargepayment.js</script></action>
+            <!-- <action method="addJs"><script>checkout_api/core/chargepayment.js</script></action> -->
+            <action method="addCss"><stylesheet>css/checkout-styles.css</stylesheet></action>
+        </reference>
+        <reference name="after_body_start">
+            <block name="checkoutapi.default" type="chargepayment/default" >
+                <action method="setTemplate">
+                    <template>checkoutapi/chargepayment/default.phtml</template>
+                </action>
+            </block>
+            <!-- <block name="checkoutapi.frame" type="chargepayment/frame" >
+                <action method="setTemplate" ifconfig="payment/checkoutapijs/active" >
+                    <template>checkoutapi/chargepayment/frame.phtml</template>
+                </action>
+            </block> -->
+        </reference>
+    </default>
+</layout>

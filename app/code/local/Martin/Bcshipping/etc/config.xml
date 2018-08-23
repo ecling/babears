@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    Mage
+ * @package     Mage_Auto
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Martin_Bcshipping>
+            <version>1.0.1</version>
+        </Martin_Bcshipping>
+    </modules>
+    <global>
+        <models>
+            <bcshipping>
+                <class>Martin_Bcshipping_Model</class>
+                <resourceModel>bcshipping_resource</resourceModel>
+            </bcshipping>
+            <bcshipping_resource>
+                <class>Martin_Bcshipping_Model_Resource</class>
+                <deprecatedNode>flytcloud_mysql4</deprecatedNode>
+                <entities>
+                    <price>
+                        <table>shipping_price</table>
+                    </price>
+                </entities>
+            </bcshipping_resource>
+        </models>
+        <helpers>
+            <bcshipping>
+                <class>Martin_Bcshipping_Helper</class>
+            </bcshipping>
+        </helpers>
+        <blocks>
+            <bcshipping>
+                <class>Martin_Bcshipping_Block</class>
+            </bcshipping>
+        </blocks>
+        <events>
+            <admin_system_config_section_save_after>
+                <observers>
+                    <bcshipping_change_config_product_price_crontab_update>
+                        <type>object</type>
+                        <class>Martin_Bcshipping_Model_Observer</class>
+                        <method>updatePriceCrontabByConfig</method>
+                    </bcshipping_change_config_product_price_crontab_update>
+                </observers>
+            </admin_system_config_section_save_after>
+            <bcshipping_rule_save_after>
+                <observers>
+                    <bcshipping_change_rule_product_price_crontab_update>
+                        <type>object</type>
+                        <class>Martin_Bcshipping_Model_Observer</class>
+                        <method>updatePriceCrontabByRule</method>
+                    </bcshipping_change_rule_product_price_crontab_update>
+                </observers>
+            </bcshipping_rule_save_after>
+        </events>
+        <sales>
+            <shipping>
+                <carriers>
+                    <bcshipping>
+                        <class>Martin_Bcshipping_Model_Carrier_Bcshipping</class>
+                    </bcshipping>
+                </carriers>
+            </shipping>
+        </sales>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <bcshipping>
+                    <file>bcshipping.xml</file>
+                </bcshipping>
+            </updates>
+        </layout>
+        <routers>
+            <bcshipping>
+                <use>standard</use>
+                <args>
+                    <module>Martin_Bcshipping</module>
+                    <frontName>bcshipping</frontName>
+                </args>
+            </bcshipping>
+        </routers>
+    </frontend>
+    <default>
+        <carriers>
+            <bcshipping>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+                <cutoff_cost>50</cutoff_cost>
+                <model>bcshipping/carrier_bcshipping</model>
+                <name>bcshipping</name>
+                <title>Bellecat Shipping</title>
+                <specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+            </bcshipping>
+        </carriers>
+    </default>
+    <adminhtml>
+        <layout>
+            <updates>
+                <flytcloud>
+                    <file>bcshipping.xml</file>
+                </flytcloud>
+            </updates>
+        </layout>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <bcshipping after="Mage_Adminhtml">Martin_Bcshipping_Adminhtml</bcshipping>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Adyen Payment Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category	Adyen
+ * @package	Adyen_Payment
+ * @copyright	Copyright (c) 2011 Adyen (http://www.adyen.com)
+ * @license	http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/**
+ * @category   Payment Gateway
+ * @package    Adyen_Payment
+ * @author     Adyen
+ * @property   Adyen B.V
+ * @copyright  Copyright (c) 2014 Adyen BV (http://www.adyen.com)
+ */
+-->
+<config>
+    <modules>
+        <Adyen_Fee>
+            <version>2.10.0</version>
+        </Adyen_Fee>
+    </modules>
+    <global>
+        <models>
+            <adyen_fee>
+                <class>Adyen_Fee_Model</class>
+                <resourceModel>adyen_fee_resource</resourceModel>
+            </adyen_fee>
+            <adyen_fee_resource>
+                <class>Adyen_Fee_Model_Resource</class>
+            </adyen_fee_resource>
+        </models>
+        <blocks>
+            <adyen_fee>
+                <class>Adyen_Fee_Block</class>
+            </adyen_fee>
+            <adminhtml>
+                <rewrite>
+                    <sales_order_totals>Adyen_Fee_Block_Adminhtml_Sales_Order_Totals</sales_order_totals>
+                    <sales_order_invoice_totals>Adyen_Fee_Block_Adminhtml_Sales_Order_Invoice_Totals</sales_order_invoice_totals>
+                    <sales_order_creditmemo_totals>Adyen_Fee_Block_Adminhtml_Sales_Order_Creditmemo_Totals</sales_order_creditmemo_totals>
+                </rewrite>
+            </adminhtml>
+            <sales>
+                <rewrite>
+                    <order_totals>Adyen_Fee_Block_Sales_Order_Totals</order_totals>
+                </rewrite>
+            </sales>
+        </blocks>
+        <helpers>
+            <adyen_fee>
+                <class>Adyen_Fee_Helper</class>
+            </adyen_fee>
+        </helpers>
+        <resources>
+            <adyen_fee_setup>
+                <setup>
+                    <module>Adyen_Fee</module>
+                    <class>Adyen_Fee_Model_Resource_Setup</class>
+                </setup>
+            </adyen_fee_setup>
+        </resources>
+        <fieldsets>
+            <sales_convert_quote_address>
+                <payment_fee_amount><to_order>*</to_order></payment_fee_amount>
+                <base_payment_fee_amount><to_order>*</to_order></base_payment_fee_amount>
+                <payment_fee_tax><to_order>*</to_order></payment_fee_tax>
+                <base_payment_fee_tax><to_order>*</to_order></base_payment_fee_tax>
+                <payment_percentage_fee><to_order>*</to_order></payment_percentage_fee>
+                <base_payment_percentage_fee><to_order>*</to_order></base_payment_percentage_fee>
+                <payment_installment_fee_amount><to_order>*</to_order></payment_installment_fee_amount>
+                <base_payment_installment_fee_amount><to_order>*</to_order></base_payment_installment_fee_amount>
+            </sales_convert_quote_address>
+            <sales_convert_order>
+                <payment_fee_amount><to_invoice>*</to_invoice></payment_fee_amount>
+                <base_payment_fee_amount><to_invoice>*</to_invoice></base_payment_fee_amount>
+                <payment_fee_tax><to_invoice>*</to_invoice></payment_fee_tax>
+                <base_payment_fee_tax><to_invoice>*</to_invoice></base_payment_fee_tax>
+                <payment_percentage_fee><to_invoice>*</to_invoice></payment_percentage_fee>
+                <base_payment_percentage_fee><to_invoice>*</to_invoice></base_payment_percentage_fee>
+                <payment_installment_fee_amount><to_invoice>*</to_invoice></payment_installment_fee_amount>
+                <base_payment_installment_fee_amount><to_invoice>*</to_invoice></base_payment_installment_fee_amount>
+                <payment_fee_amount><to_cm>*</to_cm></payment_fee_amount>
+                <base_payment_fee_amount><to_cm>*</to_cm></base_payment_fee_amount>
+                <payment_fee_tax><to_cm>*</to_cm></payment_fee_tax>
+                <base_payment_fee_tax><to_cm>*</to_cm></base_payment_fee_tax>
+                <payment_percentage_fee><to_cm>*</to_cm></payment_percentage_fee>
+                <base_payment_percentage_fee><to_cm>*</to_cm></base_payment_percentage_fee>
+                <payment_installment_fee_amount><to_cm>*</to_cm></payment_installment_fee_amount>
+                <base_payment_installment_fee_amount><to_cm>*</to_cm></base_payment_installment_fee_amount>
+            </sales_convert_order>
+        </fieldsets>
+        <sales>
+            <quote>
+                <totals>
+                    <payment_fee>
+                        <class>adyen_fee/sales_quote_address_total_paymentFee</class>
+                        <after>subtotal,discount</after>
+                        <before>grand_total,tax</before>
+                        <renderer>adyen_fee/checkout_paymentFee</renderer>
+                        <admin_renderer>adyen_fee/adminhtml_sales_order_create_totals_paymentFee</admin_renderer>
+                    </payment_fee>
+                    <payment_fee_tax>
+                        <class>adyen_fee/sales_quote_address_total_tax_paymentFee</class>
+                        <after>subtotal,discount,shipping,tax</after>
+                        <before>grand_total</before>
+                    </payment_fee_tax>
+                    <payment_percentage_fee>
+                        <class>adyen_fee/sales_quote_address_total_paymentPercentageFee</class>
+                        <before>payment_installment_fee</before>
+                        <after>grand_total,payment_fee_tax</after>
+                    </payment_percentage_fee>
+                    <payment_installment_fee>
+                        <class>adyen_fee/sales_quote_address_total_paymentInstallmentFee</class>
+                        <after>grand_total,payment_fee_tax,payment_percentage_fee</after>
+                    </payment_installment_fee>
+                </totals>
+            </quote>
+            <order_invoice>
+                <totals>
+                    <payment_fee>
+                        <class>adyen_fee/total_paymentFee_invoice</class>
+                        <after>subtotal,discount</after>
+                        <before>grand_total,tax</before>
+                    </payment_fee>
+                    <payment_fee_tax>
+                        <class>adyen_fee/total_paymentFee_tax_invoice</class>
+                        <after>subtotal,discount,shipping,tax</after>
+                        <before>grand_total</before>
+                    </payment_fee_tax>
+                    <payment_percentage_fee>
+                        <class>adyen_fee/total_paymentPercentageFee_invoice</class>
+                        <before>payment_installment_fee</before>
+                        <after>grand_total,payment_fee_tax</after>
+                    </payment_percentage_fee>
+                    <payment_installment_fee>
+                        <class>adyen_fee/total_paymentInstallmentFee_invoice</class>
+                        <after>grand_total,payment_fee_tax,payment_percentage_fee</after>
+                    </payment_installment_fee>
+                </totals>
+            </order_invoice>
+            <order_creditmemo>
+                <totals>
+                    <payment_fee>
+                        <class>adyen_fee/total_paymentFee_creditmemo</class>
+                        <after>subtotal,discount</after>
+                        <before>grand_total,tax</before>
+                    </payment_fee>
+                    <payment_fee_tax>
+                        <class>adyen_fee/total_paymentFee_tax_creditmemo</class>
+                        <after>subtotal,discount,shipping,tax</after>
+                        <before>grand_total</before>
+                    </payment_fee_tax>
+                    <payment_percentage_fee>
+                        <class>adyen_fee/total_paymentPercentageFee_creditmemo</class>
+                        <before>payment_installment_fee</before>
+                        <after>grand_total,payment_fee_tax</after>
+                    </payment_percentage_fee>
+                    <payment_installment_fee>
+                        <class>adyen_fee/total_paymentInstallmentFee_creditmemo</class>
+                        <after>grand_total,payment_fee_tax,payment_percentage_fee</after>
+                    </payment_installment_fee>
+                </totals>
+            </order_creditmemo>
+        </sales>
+        <pdf>
+            <totals>
+                <payment_fee translate="title">
+                    <title>Payment Fee</title>
+                    <source_field>payment_fee_amount</source_field>
+                    <font_size>7</font_size>
+                    <display_zero>0</display_zero>
+                    <sort_order>100</sort_order>
+                </payment_fee>
+                <!-- Do not show payment_fee_tax because this is already included into the tax node-->
+                <!--<payment_fee_tax translate="title">-->
+                    <!--<title>Payment Fee Tax</title>-->
+                    <!--<source_field>payment_fee_tax</source_field>-->
+                    <!--<font_size>7</font_size>-->
+                    <!--<display_zero>0</display_zero>-->
+                    <!--<sort_order>101</sort_order>-->
+                <!--</payment_fee_tax>-->
+                <payment_percentage_fee translate="title">
+                    <title>Payment Percentage Fee</title>
+                    <source_field>payment_percentage_fee</source_field>
+                    <font_size>7</font_size>
+                    <display_zero>0</display_zero>
+                    <sort_order>102</sort_order>
+                </payment_percentage_fee>
+                <payment_installment_fee translate="title">
+                    <title>Payment Fee Installments</title>
+                    <source_field>payment_installment_fee_amount</source_field>
+                    <font_size>7</font_size>
+                    <display_zero>0</display_zero>
+                    <sort_order>103</sort_order>
+                </payment_installment_fee>
+            </totals>
+        </pdf>
+    </global>
+    <frontend>
+        <translate>
+            <modules>
+                <Adyen_Fee>
+                    <files>
+                        <default>Adyen_Fee.csv</default>
+                    </files>
+                </Adyen_Fee>
+            </modules>
+        </translate>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <adyen_fee>
+                    <file>adyen_fee.xml</file>
+                </adyen_fee>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Adyen_Fee>
+                    <files>
+                        <default>Adyen_Fee.csv</default>
+                    </files>
+                </Adyen_Fee>
+            </modules>
+        </translate>
+    </adminhtml>
+    <default>
+        <sales>
+            <totals_sort>
+                <payment_fee>15</payment_fee>
+                <payment_percentage_fee>16</payment_percentage_fee>
+                <payment_installment_fee>17</payment_installment_fee>
+            </totals_sort>
+        </sales>
+    </default>
+</config>

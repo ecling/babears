@@ -1,0 +1,86 @@
+<?php
+if (Mage::getStoreConfig('newsletterpopup/general/active', Mage::app()->getStore())):
+    $tm_newsletterpopup_settings = array(
+        'title_newsletter'   => Mage::getStoreConfig('newsletterpopup/general/title_newsletter', Mage::app()->getStore()),
+        'info_newsletter'    => Mage::getStoreConfig('newsletterpopup/general/info_newsletter', Mage::app()->getStore()),
+        'button_newsletter'  => Mage::getStoreConfig('newsletterpopup/general/button_newsletter', Mage::app()->getStore())
+    );
+?>
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="newsletterpopup" aria-hidden="true" id="newsletterpopup">
+		<div class="modal-dialog">
+			<div class="newsletterpopup-content">
+				<button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fa fa-times"></i></span><span class="sr-only">Close</span>
+                </button>
+				<div class="newsletterpopup-indent">
+					<div class="modal-body">
+						<div class="newsletter-title"><?php echo $this->__($tm_newsletterpopup_settings['title_newsletter']); ?></div>
+                        <div class="newsletter-slogan"><?php echo $this->__($tm_newsletterpopup_settings['info_newsletter']); ?></div>
+						<form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail2">
+							<div class="block-content">
+								<div class="form-group">
+									<input type="text" name="email" id="newsletter-popup" title="<?php echo $this->__('Sign up for our newsletter'); ?>" class="input-text required-entry validate-email" />
+								</div>
+								<div class="actions">
+                                    <?php if (@$tm_newsletterpopup_settings['active_icon']): ?>
+                                        <button type="submit" title="<?php echo $this->__('Subscribe') ?>"
+                                                class="button but-icon" name="newsletter_submit"><span class="<?php echo $this->__($tm_newsletterpopup_settings['button_icon_name']); ?>"></span></button>
+                                    <?php else: ?>
+                                        <?php $but_name = $tm_newsletterpopup_settings['button_newsletter']; ?>
+									    <button type="submit" title="<?php echo $this->__('Subscribe') ?>" class="button" name="newsletter_submit"><span><span><?php echo $this->__($but_name) ?></span></span></button>
+                                    <?php endif; ?>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<?php
+	//var_dump(Mage::getSingleton('core/session'));
+
+	// Script init for home page only
+	if(Mage::getSingleton('cms/page')->getIdentifier() == 'home' && Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms') : ?>
+		<script type="text/javascript">
+			//<![CDATA[
+				var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail2');
+			//]]>
+		</script>
+
+		<?php
+		// Popup init conditions
+		if (Mage::getSingleton('core/session')->getSignedUpForNewsletter() == false) { ?>
+			<script>
+				jQuery(document).ready(function() {
+
+					var newsPopup 		= jQuery('#newsletterpopup');
+					var newsPopupClose 	= newsPopup.find('.close');
+					var showNewsPopup 	= sessionStorage.getItem("showNewsPopup");
+					if (showNewsPopup != '0') {
+						newsPopup.modal();
+						disable_scroll();
+					};
+
+					newsPopupClose.click(function(){
+						sessionStorage.setItem("showNewsPopup", '0');
+						enable_scroll();
+					});
+					jQuery('body').click(function(){
+						enable_scroll();
+					});
+
+				});
+
+				function disable_scroll() {
+			         jQuery('body').bind('touchmove', function(e){e.preventDefault()});
+			    }
+
+			    function enable_scroll() {
+			        jQuery('body').unbind('touchmove');
+			    }
+			</script>
+		<?php } ?>
+	<?php endif; ?>
+<?php endif; ?>

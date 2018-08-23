@@ -1,0 +1,69 @@
+<?php
+$order = $this->getOrder();
+$payment = $this->getPayment();
+$dueDate = $this->helper->getDueDate($order->getEbanxDueDate(), 'dd/MM');
+$is_mobile = Zend_Http_UserAgent_Mobile::match(Mage::helper('core/http')->getHttpUserAgent(), $_SERVER);
+?>
+<div class="ebanx-details">
+    <p><strong><?= $order->getBillingAddress()->getFirstname(); ?></strong>, seu boleto foi gerado e a data de vencimento é dia
+        <strong><?= $this->getEbanxDueDate() ?></strong> :)</p>
+    <p>Enviamos uma cópia para o email <strong><?= $order->getBillingAddress()->getEmail(); ?></strong></p>
+    <p>Pague o boleto no Internet Banking de seu banco apenas copiando o código de barras! Você também pode imprimir o
+        boleto e pagar em casas lotéricas e no caixa do seu banco.</p>
+    <p><b>Dica</b>: Pagar seu boleto até às 21h de dias úteis, faz com que o pagamento tenha a chance de ser confirmado
+        mais rápido :)</p>
+
+    <h3 class="text-center">
+        <?php
+        $barCodeFormated = $this->getEbanxBarCodeFormated();
+        echo $barCodeFormated['boleto1'] . '.' . $barCodeFormated['boleto2'] . ' ' . $barCodeFormated['boleto3'] . '.' . $barCodeFormated['boleto4'] . ' ' . $barCodeFormated['boleto5'] . '.' . $barCodeFormated['boleto6'] . ' ' . $barCodeFormated['boleto7'] . ' ' . $barCodeFormated['boleto8'];
+        ?>
+    </h3>
+
+    <div class="ebanx-groups text-center">
+        <button type="button" class="button ebanx-button--copy"
+                data-clipboard-text="<?php echo $this->getEbanxBarCode(); ?>"><?php echo $this->__('Copiar Número'); ?></button>
+    </div>
+
+
+    <div class="ebanx-groups">
+        <div class="ebanx-group">
+            <a href="<?php echo $this->getEbanxUrlPdf(); ?>" target="_blank"
+               class="button banking-ticket__action"><?php echo $this->__('Salvar em PDF'); ?></a>
+        </div>
+        <?php if ($is_mobile): ?>
+            <div class="ebanx-group">
+                <a href="<?php echo $this->getEbanxUrlMobile() ?>" target="_blank"
+                   class="button banking-ticket__action"><?php echo $this->__('Ver Boleto'); ?></a>
+            </div>
+        <?php else: ?>
+            <div class="ebanx-group">
+                <a href="<?php echo $this->getEbanxUrlPrint() ?>" target="_blank"
+                   class="button banking-ticket__action"><?php echo $this->__('Imprimir boleto'); ?></a>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <?php if (!$is_mobile): ?>
+    <div>
+        <iframe id="ebanx-boleto-frame" src="<?php echo $this->getVoucherUrl(); ?>"
+                style="width: 100%; border: 0px; height: 1000px"></iframe>
+    </div>
+    <?php endif; ?>
+
+    <script type="text/javascript" src="https://print.ebanx.com/assets/sources/fingerprint/fingerprint2.min.js"></script>
+    <script type="text/javascript" src="https://print.ebanx.com/assets/sources/fingerprint/browserdetect.js"></script>
+    <script type="text/javascript" src="https://print.ebanx.com/assets/sources/fingerprint/mystiquefingerprint.js"></script>
+    <script type="text/javascript">
+        (function() {
+            var done = null;
+            var options = {
+                justPrint: false,
+                paymentHash: '<?php echo $this->getEbanxPaymentHash(); ?>'
+            };
+            Mystique.registerFingerprint(done, options, '<?php echo $is_mobile ? 'boleto-responsive' : 'boleto-default'; ?>');
+                })();
+    </script>
+
+    <?php include 'apps.phtml' ?>
+</div>

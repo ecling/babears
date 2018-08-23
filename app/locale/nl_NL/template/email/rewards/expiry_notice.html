@@ -1,0 +1,35 @@
+<!--@subject Uw punten op {{var store_name}} zullen binnenkort verlopene@-->
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+    <tr>
+        <td align="center" valign="top" style="padding:20px 0 20px 0">
+            <!-- [ header starts here] -->
+            <table bgcolor="FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+                <tr>
+                    <td valign="top">
+                        <a href="{{store url=""}}" style="color:#1E7EC8;"><img src="{{var logo_url}}" alt="{{var logo_alt}}" border="0"/></a>
+                    </td>
+                </tr>
+                <!-- [ middle starts here] -->
+                <tr>
+                    <td valign="top">
+                        <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;">Beste {{var customer_name}},</p>
+                        <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;">Bij deze willen wij u melden dat uw punten ({{var points_balance}}) op <a href="{{store url=""}}">{{var store_name}}</a> zal verlopen over <b>{{var days_left}} dagen</b>. </p>
+
+                        <p style="font-size:12px; line-height:16px; margin:0 0 8px 0;">U kunt voorkomen dat deze punten verlopen door <a href="{{store url="customer/account/login"}}">in te loggen op uw account</a> en of:</p>
+                        <ul style="font-size:12px; line-height:16px; margin:0 0 16px 0; padding:0;">
+                            <li style="list-style:none inside; padding:0 0 0 10px;">&middot; Geeft de punten uit aan een product of actie óf</li>
+                            <li style="list-style:none inside; padding:0 0 0 10px;">&middot; Verdien meer punten op de website. </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EAEAEA" align="center" style="background:#EAEAEA; text-align:center;"><center><p style="font-size:12px; margin:0;">Met vriendelijke groet, <strong>{{var store.getFrontendName()}}</strong></p></center></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</div>
+</body>

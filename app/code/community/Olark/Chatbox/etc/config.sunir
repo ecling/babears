@@ -1,0 +1,259 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Widget that adds Olark Live Chat to Magento stores.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to support@olark.com so we can send you a copy immediately.
+ *
+ * @category    Olark
+ * @package     Olark_Chatbox
+ * @copyright   Copyright 2012. Habla, Inc. (http://www.olark.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Olark_Chatbox>
+            <version>1.0.7</version>
+            <cache_lifetime>0</cache_lifetime>
+        </Olark_Chatbox>
+    </modules>
+    <global>
+        <helpers>
+            <chatbox>
+                <class>Olark_Chatbox_Helper</class>
+            </chatbox>
+        </helpers>
+        <blocks>
+            <chatbox>
+                <class>Olark_Chatbox_Block</class>
+            </chatbox>
+        </blocks>
+        <models>
+            <olark_chatbox_model_observer>
+                <class>Olark_Chatbox_Model_Observer</class>
+            </olark_chatbox_model_observer>
+        </models>
+        <events>
+
+            <checkout_quote_destroy>
+                <observers>
+                    <olark_chatbox_checkout_quote_destroy>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_checkout_quote_destroy>
+                </observers>
+            </checkout_quote_destroy>
+
+            <controller_action_predispatch_checkout_onepage_index>
+                <observers>
+                    <olark_chatbox_controller_action_predispatch_checkout_onepage_index>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_controller_action_predispatch_checkout_onepage_index>
+                </observers>
+            </controller_action_predispatch_checkout_onepage_index>
+
+            <controller_action_predispatch_checkout_onepage_success>
+                <observers>
+                    <olark_chatbox_controller_action_predispatch_checkout_onepage_success>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_controller_action_predispatch_checkout_onepage_success>
+                </observers>
+            </controller_action_predispatch_checkout_onepage_success>
+
+            <controller_action_predispatch_checkout_multishipping_index>
+                <observers>
+                    <olark_chatbox_controller_action_predispatch_checkout_multishipping_index>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_controller_action_predispatch_checkout_multishipping_index>
+                </observers>
+            </controller_action_predispatch_checkout_multishipping_index>
+
+            <controller_action_predispatch_checkout_controller_action_index>
+                <observers>
+                    <olark_chatbox_controller_action_predispatch_checkout_controller_action_index>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_controller_action_predispatch_checkout_controller_action_index>
+                </observers>
+            </controller_action_predispatch_checkout_controller_action_index>
+
+            <googlecheckout_checkout_before>
+                <observers>
+                    <olark_chatbox_googlecheckout_checkout_before>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_googlecheckout_checkout_before>
+                </observers>
+            </googlecheckout_checkout_before>
+
+            <controller_action_layout_render_before_onestepcheckout_index_index>
+                <observers>
+                    <olark_chatbox_controller_action_layout_render_before_onestepcheckout_index_index>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_controller_action_layout_render_before_onestepcheckout_index_index>
+                </observers>
+            </controller_action_layout_render_before_onestepcheckout_index_index> 
+       
+            <checkout_type_onepage_save_order>
+                <observers>
+                    <olark_chatbox_checkout_type_onepage_save_order>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_checkout_type_onepage_save_order>
+                </observers>  
+            </checkout_type_onepage_save_order>
+
+            <paypal_prepare_line_items>
+                <observers>
+                    <olark_chatbox_paypal_prepare_line_items>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_paypal_prepare_line_items>
+                </observers>
+            </paypal_prepare_line_items>
+
+            <sales_order_place_after>
+                <observers>
+                    <olark_chatbox_sales_order_place_after>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_sales_order_place_after>
+                </observers>
+            </sales_order_place_after>
+
+            <sales_quote_delete_after>
+                <observers>
+                    <olark_chatbox_sales_quote_delete_after>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_sales_quote_delete_after>
+                </observers>
+            </sales_quote_delete_after>
+
+            <checkout_type_onepage_save_order>
+                <observers>
+                    <olark_chatbox_checkout_type_onepage_save_order>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_checkout_type_onepage_save_order>
+                </observers>
+            </checkout_type_onepage_save_order>
+
+            <checkout_submit_all_after>
+                <observers>
+                    <olark_chatbox_checkout_submit_all_after>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_checkout_submit_all_after>
+                </observers>
+            </checkout_submit_all_after>
+
+            <sales_order_payment_cancel>
+                <observers>
+                    <olark_chatbox_sales_order_payment_cancel>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_sales_order_payment_cancel>
+                </observers>
+            </sales_order_payment_cancel>
+
+            <order_cancel_after>
+                <observers>
+                    <olark_chatbox_order_cancel_after>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_order_cancel_after>
+                </observers>
+            </order_cancel_after>
+
+            <sales_order_payment_cancel_invoice>
+                <observers>
+                    <olark_chatbox_sales_order_payment_cancel_invoice>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_sales_order_payment_cancel_invoice>
+                </observers>
+            </sales_order_payment_cancel_invoice>
+
+            <sales_order_payment_void>
+                <observers>
+                    <olark_chatbox_sales_order_payment_void>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_sales_order_payment_void>
+                </observers>
+            </sales_order_payment_void>
+
+            <sales_order_payment_refund>
+                <observers>
+                    <olark_chatbox_sales_order_payment_refund>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_sales_order_payment_refund>
+                </observers>
+            </sales_order_payment_refund>
+
+            <sales_order_payment_cancel>
+                <observers>
+                    <olark_chatbox_sales_order_payment_cancel>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_sales_order_payment_cancel>
+                </observers>
+            </sales_order_payment_cancel>
+
+            <sales_order_invoice_cancel>
+                <observers>
+                    <olark_chatbox_sales_order_invoice_cancel>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_sales_order_invoice_cancel>
+                </observers>
+            </sales_order_invoice_cancel>
+
+            <sales_order_item_cancel>
+                <observers>
+                    <olark_chatbox_sales_order_item_cancel>
+                        <type>singleton</type>
+                        <class>olark_chatbox_model_observer</class>
+                        <method>recordEvent</method>
+                    </olark_chatbox_sales_order_item_cancel>
+                </observers>
+            </sales_order_item_cancel>
+
+        </events>
+    </global>
+</config>

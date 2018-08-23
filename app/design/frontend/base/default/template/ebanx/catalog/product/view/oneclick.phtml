@@ -1,0 +1,33 @@
+<?php
+$_code = 'oneclick';
+$localCurrency  = $this->getLocalCurrency();
+$savedCards = $this->usercards;
+$text = $this->getText();
+$lowerCountry   = strtolower($this->getCountry());
+?>
+<?php if ($this->canShowOneclickButton()): ?>
+<div id="ebanx-one-click-container" class="clearfix">
+  <span id="product-oneclick-ebanx-button" class="button btn-ebanx">Pague com um clique</span>
+  <div class="ebanx-one-click-tooltip" id="ebanx-one-click-tooltip">
+    <span id="ebanx-one-click-close-button"></span>
+      <p>Endereço de entrega: </p>
+      <p class="ebanx-one-click-address"><?= $this->getAddress()['street'] ?></p>
+
+      <p>Escolha o cartão: </p>
+      <ul id="ebanx-one-click-card-list">
+        <?php foreach ($savedCards as $card): ?>
+          <?php include __DIR__ . '/../../../form/card/saved-card.phtml' ?>
+        <?php endforeach; ?>
+        <?php include __DIR__ . '/../../../form/card/instalments.phtml' ?>
+        <li>
+          <p class="total-to-pay">
+            <?= $text['local-amount'] ?><span id="cc-<?= $lowerCountry ?>-local-amount"><strong><?php echo $this->getLocalAmount($localCurrency) ?></strong></span>
+          </p>
+        </li>
+        <li>
+          <span id="ebanx-oneclick-pay-button" class="button btn-ebanx">Pagar</span>
+        </li>
+      </ul>
+  </div>
+</div>
+<?php endif; ?>

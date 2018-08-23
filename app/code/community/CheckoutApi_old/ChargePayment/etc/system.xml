@@ -1,0 +1,1014 @@
+<?xml version="1.0" ?>
+  <config>
+    <sections>
+        <payment>
+            <!--General card group -->
+            <groups>
+                <checkoutapicard>
+                    <label>Checkout.com Credit Card (PCI Version)</label>
+                    <sort_order>1001</sort_order>
+                    <frontend_type>text</frontend_type>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label" >
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </title>
+                        <secretkey translate="label">
+                            <label>Secret Key</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>3</sort_order>
+                            <comment>
+                                <![CDATA[Only used for requests from the merchant server to the Checkout API]]>
+                            </comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </secretkey>
+                        <publickey translate="label">
+                            <label>Private Shared Key</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>4</sort_order>
+                            <comment>
+                                <![CDATA[Used for webhooks from Checkout API]]>
+                            </comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </publickey>
+                        <current_currency translate="label">
+                            <label>Use current currency</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </current_currency>
+                        <order_status translate="label">
+                            <label>New Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_newprocessing</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </order_status>
+                        <void_status translate="label">
+                            <label>When voided change order status to</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_voidstatus</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </void_status>
+                        <cctype_visible translate="label" >
+                            <label>Show card type field</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </cctype_visible>
+                        <autoCapture translate="label">
+                            <label>Auto Capture</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </autoCapture>
+                        <autoCapTime translate="label">
+                            <label>Auto capture time</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>13</sort_order>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[Auto Capture time is required if Auto Capture is yes. Defines the delayed capture time in hours. Default is 0]]>
+                            </comment>
+                        </autoCapTime>
+                        <allowspecific translate="label">
+                            <label>Payment from applicable countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>10</sort_order>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Countries Payment Applicable From</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>11</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <allowspecific>1</allowspecific>
+                            </depends>
+                        </specificcountry>
+                        <debug translate="label">
+                            <label>Debug</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </debug>
+                        <mode translate="label">
+                            <label>Endpoint url mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_apimode</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[When going on live production, Endpoint url mode should be set to live]]>
+                            </comment>
+                        </mode>
+                        <is_3d translate="label">
+                            <label>Is 3D</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_is3d</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </is_3d>
+                    </fields>
+                </checkoutapicard>
+                <checkoutapijs>
+                    <label>Checkout.com Credit Card (Non PCI Version)</label>
+                    <sort_order>1002</sort_order>
+                    <frontend_type>text</frontend_type>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label" >
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </title>
+                        <secretkey translate="label">
+                            <label>Secret Key</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>3</sort_order>
+                            <comment>
+                                <![CDATA[Only used for requests from the merchant server to the Checkout API]]>
+                            </comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </secretkey>
+                        <publickey_web translate="label">
+                            <label>Private Shared Key</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>4</sort_order>
+                            <comment>
+                                <![CDATA[Used for webhooks from Checkout API]]>
+                            </comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </publickey_web>
+                        <publickey translate="label">
+                            <label>Public Key</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>5</sort_order>
+                            <comment>
+                                <![CDATA[Used for JS Checkout API]]>
+                            </comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </publickey>
+                        <current_currency translate="label">
+                            <label>Use current currency</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </current_currency>
+                        <order_status translate="label">
+                            <label>New Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_newprocessing</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </order_status>
+                        <void_status translate="label">
+                            <label>When voided change order status to</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_voidstatus</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </void_status>
+                        <allowspecific translate="label">
+                            <label>Payment from applicable countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>10</sort_order>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Countries Payment Applicable From</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>11</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <allowspecific>1</allowspecific>
+                            </depends>
+                        </specificcountry>
+                        <debug translate="label">
+                            <label>Debug</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </debug>
+                        <mode translate="label">
+                            <label>Endpoint url mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_apimode</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[When going on live production, Endpoint url mode should be set to live.]]>
+                            </comment>
+                        </mode>
+                        <is_3d translate="label">
+                            <label>Is 3D</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_is3d</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </is_3d>
+
+                        <autoCapture translate="label">
+                            <label>Auto Capture</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </autoCapture>
+
+                        <autoCapTime translate="label">
+                            <label>Auto capture time</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>13</sort_order>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[Auto Capture time is required if Auto Capture is yes. Defines the delayed capture time in hours. Default is 0]]>
+                            </comment>
+                        </autoCapTime>
+
+                        <timeout translate="label">
+                            <label>Timeout value for a request to the gateway</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>15</sort_order>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[The timeout value for a request to the gateway. Default is 60 seconds.
+                                Please notify checkout.com support team before increasing the value.]]>
+                            </comment>
+                        </timeout>
+                        <icon_url translate="label">
+                            <label>Lightbox logo url</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>16</sort_order>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[The URL of your company logo. Must be 180 x 36 pixels. Default: Checkout logo.]]>
+                            </comment>
+                        </icon_url>
+                        <theme_color translate="label">
+                            <label>Theme color</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>17</sort_order>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[#HEX value of your chosen theme color.]]>
+                            </comment>
+                        </theme_color>
+                        <use_currency_code translate="label">
+                            <label>Use currency Code</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>18</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[Use ISO3 currency code (e.g. GBP) instead of the currency symbol (e.g. £)]]>
+                            </comment>
+                        </use_currency_code>
+                        <form_title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>19</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[The title of your payment form.]]>
+                            </comment>
+                        </form_title>
+                        <widget_color translate="label">
+                            <label>Widget Color</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[#HEX value of your chosen widget color.]]>
+                            </comment>
+                        </widget_color>
+                        <form_button_color translate="label">
+                            <label>Form Button Color</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[#HEX value of your chosen lightbox submit button color.]]>
+                            </comment>
+                        </form_button_color>
+                        <form_button_color_label translate="label">
+                            <label>Form Button Color Label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[#HEX value of your chosen lightbox submit button label color.]]>
+                            </comment>
+                        </form_button_color_label>
+                        <overlay_shade translate="label">
+                            <label>Overlay Shade</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_overlayShade</source_model>
+                            <sort_order>23</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </overlay_shade>
+                        <overlay_opacity translate="label">
+                            <label>Overlay Opacity</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>24</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[A number between 0.7 and 1]]>
+                            </comment>
+                        </overlay_opacity>
+                        <show_mobile_icons translate="label">
+                            <label>Show Mobile Icons</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[Show widget icons on mobile.]]>
+                            </comment>
+                        </show_mobile_icons>
+                        <widget_icon_size translate="label">
+                            <label>Widget Icon Size</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_widgetIconSize</source_model>
+                            <sort_order>26</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[Available sizes: small, medium,large.]]>
+                            </comment>
+                        </widget_icon_size>
+                        <payment_mode translate="label">
+                            <label>Payment Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_paymentMode</source_model>
+                            <sort_order>27</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[Customise the payment mode: mixed, card, local payment.]]>
+                            </comment>
+                        </payment_mode>
+                    </fields>
+                </checkoutapijs>
+                <checkoutapikit>
+                    <label>Checkout.com Credit Card (Checkout Kit)</label>
+                    <sort_order>1003</sort_order>
+                    <frontend_type>text</frontend_type>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label" >
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </title>
+                        <secretkey translate="label">
+                            <label>Secret Key</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>3</sort_order>
+                            <comment>
+                                <![CDATA[Only used for requests from the merchant server to the Checkout API]]>
+                            </comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </secretkey>
+                        <publickey_web translate="label">
+                            <label>Private Shared Key</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>4</sort_order>
+                            <comment>
+                                <![CDATA[Used for webhooks from Checkout API]]>
+                            </comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </publickey_web>
+                        <publickey translate="label">
+                            <label>Public Key</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>5</sort_order>
+                            <comment>
+                                <![CDATA[Used for JS Checkout API]]>
+                            </comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </publickey>
+                        <current_currency translate="label">
+                            <label>Use current currency</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </current_currency>
+                        <order_status translate="label">
+                            <label>New Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_newprocessing</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </order_status>
+                        <void_status translate="label">
+                            <label>When voided change order status to</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_voidstatus</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </void_status>
+                        <autoCapture translate="label">
+                            <label>Auto Capture</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </autoCapture>
+                        <autoCapTime translate="label">
+                            <label>Auto capture time</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>13</sort_order>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[Auto Capture time is required if Auto Capture is yes. Defines the delayed capture time in hours. Default is 0]]>
+                            </comment>
+                        </autoCapTime>
+                        <allowspecific translate="label">
+                            <label>Payment from applicable countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>11</sort_order>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Countries Payment Applicable From</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>12</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <allowspecific>1</allowspecific>
+                            </depends>
+                        </specificcountry>
+                        <debug translate="label">
+                            <label>Debug</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </debug>
+                        <mode translate="label">
+                            <label>Endpoint url mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_apimode</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[When going on live production, Endpoint url mode should be set to live]]>
+                            </comment>
+                        </mode>
+                        <is_3d translate="label">
+                            <label>Is 3D</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_is3d</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </is_3d>
+                        <timeout translate="label">
+                            <label>Timeout value for a request to the gateway</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>15</sort_order>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[The timeout value for a request to the gateway. Default is 60 seconds.
+                                Please notify checkout.com support team before increasing the value.]]>
+                            </comment>
+                        </timeout>
+                    </fields>
+                </checkoutapikit>
+                <checkoutapihosted>
+                    <label>Checkout.com (Hosted JS Solution)</label>
+                    <sort_order>1004</sort_order>
+                    <frontend_type>text</frontend_type>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label" >
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </title>
+                        <secretkey translate="label">
+                            <label>Secret Key</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>3</sort_order>
+                            <comment>
+                                <![CDATA[Only used for requests from the merchant server to the Checkout API]]>
+                            </comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </secretkey>
+                        <publickey_web translate="label">
+                            <label>Private Shared Key</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>4</sort_order>
+                            <comment>
+                                <![CDATA[Used for webhooks from Checkout API]]>
+                            </comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </publickey_web>
+                        <publickey translate="label">
+                            <label>Public Key</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>5</sort_order>
+                            <comment>
+                                <![CDATA[Used for JS Checkout API]]>
+                            </comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </publickey>
+                        <current_currency translate="label">
+                            <label>Use current currency</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </current_currency>
+                        <order_status translate="label">
+                            <label>New Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_newprocessing</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </order_status>
+                        <void_status translate="label">
+                            <label>When voided change order status to</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_voidstatus</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </void_status>
+                        <autoCapture translate="label">
+                            <label>Auto Capture</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </autoCapture>
+                        <autoCapTime translate="label">
+                            <label>Auto capture time</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>13</sort_order>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[Auto Capture time is required if Auto Capture is yes. Defines the delayed capture time in hours. Default is 0]]>
+                            </comment>
+                        </autoCapTime>
+                        <allowspecific translate="label">
+                            <label>Payment from applicable countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>10</sort_order>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Countries Payment Applicable From</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>11</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <allowspecific>1</allowspecific>
+                            </depends>
+                        </specificcountry>
+                        <debug translate="label">
+                            <label>Debug</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </debug>
+                        <mode translate="label">
+                            <label>Endpoint url mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_apimode</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[When going on live production, Endpoint url mode should be set to live]]>
+                            </comment>
+                        </mode>
+                        <is_3d translate="label">
+                            <label>Is 3D</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_is3d</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </is_3d>
+                        <payment_mode translate="label">
+                            <label>Payment Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>chargepayment/adminhtml_system_config_source_paymentMode</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <comment>
+                                <![CDATA[Customise the payment mode: mixed, card, local payment.]]>
+                            </comment>
+                        </payment_mode>
+                    </fields>
+                </checkoutapihosted>
+            </groups>
+        </payment>
+    </sections>
+  </config>

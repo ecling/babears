@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_newproducts_index>
+	    <reference name="content">
+ 		    <block type="newproducts/adminhtml_newproducts"  name="newproducts" />
+        </reference>
+    </adminhtml_newproducts_index>
+    <adminhtml_newproducts_edit>
+		<reference name="head">
+			<action method="addJs"><script>newproducts/product-selector.js</script></action>
+        </reference>
+		<reference name="left">
+			<block type="adminhtml/store_switcher" name="store_switcher" before="-"></block>
+        </reference>
+    </adminhtml_newproducts_edit>
+</layout>

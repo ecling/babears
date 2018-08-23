@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Tm_Facebook>
+            <active>true</active>
+            <codePool>local</codePool>            
+        </Tm_Facebook>
+    </modules>
+</config>

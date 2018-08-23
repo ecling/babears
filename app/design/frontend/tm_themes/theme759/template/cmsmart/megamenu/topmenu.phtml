@@ -1,0 +1,70 @@
+<?php
+/*
+* Name Extension: TM Megamenu
+*/
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Mage_Catalog_Block_Navigation
+ */
+?>
+<?php
+/**
+ * $this->renderCategoriesMenuHtml() supports optional arguments:
+ * bool Add opener if menu is used as accordion
+ * int Level number for list item class to start from
+ * string Extra class of outermost list items
+ * string If specified wraps children list in div with this class
+ */
+?>
+<?php $_menu = $this->renderCategoriesMenuHtml(FALSE, 0,'level-top'); ?>
+
+<?php
+	$theme = $this->helper('megamenu');
+    $color_span = '#000';
+    if($theme->getCfg('mainmenu/home_color') != ""){
+        $color_span = $theme->getCfg('mainmenu/home_color');
+    }
+	
+?>
+<div class="nav-container">
+	<div class="nav">
+    
+    
+    	<ul id="nav" class="grid-full">
+        
+        <?php //Display "Home" link, if enabled ?>
+		<?php if ($theme->getCfg('mainmenu/home')): ?>
+            <li id="nav-home-link" class="level <?php if (Mage::helper('core/url')->getCurrentUrl() === Mage::helper('core/url')->getHomeUrl()):?> active<?php endif;?>">
+            	<?php if ($theme->getCfg('mainmenu/home_img')): ?>
+                <a class="home-img " href="<?php echo $this->getBaseUrl(); ?>"><?php echo $this->__('Home'); ?></a>
+                <?php else: ?>
+                <a class="" style="background-color:<?php echo $theme->getCfg('mainmenu/home_background'); ?>;" href="<?php echo $this->getBaseUrl(); ?>"><span style="color:111<?php echo $color_span; ?>;"><?php echo $this->__('Home'); ?></span></a>
+                <?php endif; ?>
+            </li>
+        <?php endif; ?>
+
+        <li class="level parent"><a href="<?php echo $this->getUrl('new-arrivals'); ?>"><span><?php echo $this->__('NEW'); ?></span></a></li>
+
+		<?php echo $_menu;?>
+        <?php if ($tmpHtml = $this->getChildHtml('block_header_nav_dropdown')): ?>
+        	<li class="nav-custom-link level0 level-top parent<?php if ($theme->getCfg('mainmenu/custom_block_floating')) echo ' f-right'; ?>">
+            	<?php // Get the block title, and display it as tab title
+                    $blockTitle = Mage::getModel('cms/block')
+						->setStoreId(Mage::app()->getStore()->getId())
+						->load('block_header_nav_dropdown')
+						->getTitle();
+				?>
+                <a class="level-top" href="<?php echo Mage::getBaseUrl();?>news"><span><?php echo $blockTitle; ?></span></a>
+                <ul class="level0">
+					<?php echo $tmpHtml; ?>
+                </ul>
+            </li>
+		<?php endif; ?>
+		
+			<li><?php echo $this->getChildHtml('block_header_nav_share'); ?></li>
+		</ul>
+	</div> <!-- end: nav -->
+</div> <!-- end: nav-container -->

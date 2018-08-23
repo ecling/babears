@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>采购订单批量导出</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="<?php echo $this->getSkinUrl('css/jcDate.css')?>" rel="stylesheet" type="text/css">
+    </head>
+    <body style="padding:20px;line-height: 30px;">
+        <h1 style="text-align: center; font-size:20px;">采购订单批量导出</h1>
+        <form  class="export-filter" action="<?php echo $this->getUrl('*/*/filterPost')?>" method="post">
+            <table style="width:auto;margin:0 auto;">
+                <tr class="target-store">
+                    <td> 订单范围： </td>
+                    <td> <select  name="stores[]" multiple=”multiple” style="width:150px;">
+                            <?php $storeCollection=$this->getStoreCollection(); ?>
+                            <?php foreach ($storeCollection as $store):?>
+                            <option value="<?php echo $store->getId() ?>"> <?php echo $this->__($store->getName()) ?></option>
+                            <?php  endforeach; ?>
+                        </select> </td>
+                </tr>
+                <tr class="startDate"> 
+                    <td> 开始日期： </td>
+                    <td> <input class='jcDate'  name="startDate" /> </td>
+                </tr>
+                <tr class="endDate"> 
+                    <td>结束日期： </td>
+                    <td><input class='jcDate'  name="endDate" value="<?php echo date('Y-m-d');?>"/> </td>
+                </tr>
+                <tr class="password"> 
+                    <td> 密码：</td>
+                    <td><input type="password" name="password" /> </td>
+                </tr>
+                <tr> <td><button>导出订单</button></td></tr>
+            </table>
+           
+            
+            
+            
+        </form>
+    </body>
+    <script src="http://www.lanrenzhijia.com/ajaxjs/1.7.2/jquery-1.7.2.min.js"></script>
+     
+    <?php echo $this->helper('core/js')->includeScript('jcDate/jQuery-jcDate.js') ?> 
+    <script>
+        jQuery(function (){
+                $(".jcDate").jcDate({					       
+                                IcoClass : "jcDateIco",
+                                Event : "click",
+                                Speed : 100,
+                                Left : 0,
+                                Top : 28,
+                                format : "-",
+                                Timeout : 100
+                });
+        });
+</script>
+</html>

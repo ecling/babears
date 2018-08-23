@@ -1,0 +1,13 @@
+<?php
+$order = $this->getOrder();
+$payment = $this->getPayment();
+?>
+<div class="ebanx-details">
+    <p><strong><?= trim($order->getBillingAddress()->getFirstname()) ?></strong>, seu pagamento de
+        <strong><?= $this->formatPriceWithLocalCurrency($this->currencyCode, $payment->getEbanxLocalAmount()); ?></strong>
+        foi aprovado o/</p>
+    <p>Se tiver alguma dúvida em relação ao seu pagamento, acesse a Conta EBANX com o email
+        <strong><?= $order->getBillingAddress()->getEmail() ?></strong>.</p>
+
+    <?php include 'apps.phtml' ?>
+</div>

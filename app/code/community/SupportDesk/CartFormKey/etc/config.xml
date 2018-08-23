@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <SupportDesk_CartFormKey>
+            <version>1.0.0</version>
+        </SupportDesk_CartFormKey>
+    </modules>
+    <global>
+        <models>
+            <supportdesk_cartformkey>
+                <class>SupportDesk_CartFormKey_Model</class>
+            </supportdesk_cartformkey>
+        </models>
+
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <controller_action_before>
+                        <class>supportdesk_cartformkey/observer</class>
+                        <method>disableCsrf</method>
+                    </controller_action_before>
+                </observers>
+            </controller_action_predispatch>
+        </events>
+    </global>
+</config>

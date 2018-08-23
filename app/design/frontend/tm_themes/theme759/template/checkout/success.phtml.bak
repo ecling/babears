@@ -1,0 +1,155 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="page-title">
+    <h1><?php echo $this->__('Your order has been received.') ?></h1>
+</div>
+
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+
+<div class="theme-block">  
+    <h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+    <?php if ($this->getOrderId()):?>
+    <?php if ($this->getCanViewOrder()) :?>
+        <p><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
+    <?php  else :?>
+        <p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
+    <?php endif;?>
+        <p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
+    <?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) :?>
+        <p>
+            <?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl()) ?>
+            <?php echo $this->getChildHtml() ?>
+        </p>
+    <?php endif;?>
+    <?php endif;?>
+    
+    <?php if ($this->getAgreementRefId()): ?>
+        <p><?php echo $this->__('Your billing agreement # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getAgreementUrl()), $this->escapeHtml($this->getAgreementRefId())))?></p>
+    <?php endif;?>
+    
+    <?php if ($profiles = $this->getRecurringProfiles()):?>
+    <p><?php echo $this->__('Your recurring payment profiles:'); ?></p>
+    <ul class="disc">
+    <?php foreach($profiles as $profile):?>
+    <?php $profileIdHtml = ($this->getCanViewProfiles() ? sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getProfileUrl($profile)), $this->escapeHtml($this->getObjectData($profile, 'reference_id'))) : $this->escapeHtml($this->getObjectData($profile, 'reference_id')));?>
+        <li><?php echo $this->__('Payment profile # %s: "%s".', $profileIdHtml, $this->escapeHtml($this->getObjectData($profile, 'schedule_description')))?></li>
+    <?php endforeach;?>
+    </ul>
+    <?php endif;?>
+</div>
+
+    <div class="buttons-set">
+    <button type="button" class="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Continue Shopping')) ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+</div>
+<?php
+$order = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId());
+$total = $order->getGrandTotal();
+$shipping = $order->getShippingAmount();
+$tax = $order->getTaxAmount();
+$store = Mage::app()->getStore();
+$name = $store->getName();
+
+$items = $order->getAllItems();
+$item_details = array() ;
+foreach($items as $item) {
+$det = array() ;
+$det['sku'] = $item->getSku() ;
+$det['name'] = $item->getName() ;
+$det['category'] = get_category_name($item->getProductId()) ;
+$det['price'] = $item->getPrice() ;
+$det['quantity'] = number_format($item->getQtyOrdered(), 0) ; 
+array_push($item_details, $det) ; 
+
+}
+
+function get_category_name($productId) { 
+$product = Mage::getModel('catalog/product')->load($productId);
+$category_name = "" ;
+$cats = $product->getCategoryIds();
+
+$cnt = 0 ;
+foreach ($cats as $category_id) {
+$_cat = Mage::getModel('catalog/category')->load($category_id) ;
+$cnt++ ;
+if($cnt == count($cats)) 
+$category_name.=$_cat->getName() ;
+else 
+$category_name.=$_cat->getName()."," ; 
+} 
+return $category_name ; 
+}
+
+function getItemJs(&$transId, &$item) {
+return <<<HTML
+ga('ecommerce:addItem', {
+'id': '$transId',
+'name': '{$item['name']}',
+'sku': '{$item['sku']}',
+'category': '{$item['category']}',
+'price': '{$item['price']}',
+'quantity': '{$item['quantity']}'
+});
+HTML;
+}
+
+?>
+<script type="text/javascript">
+
+ga('require', 'ecommerce', 'ecommerce.js'); // Load GA ecommerce plug-in.
+ga('ecommerce:addTransaction', {
+'id': '<?php echo $this->getOrderId(); ?>', // Transaction ID. Required
+'affiliation': '<?php echo $name ?>', // Affiliation or store name
+'revenue': '<?php echo $total; ?>', // Grand Total
+'shipping': '<?php echo $shipping; ?>', // Shipping
+'tax': '<?php echo $tax; ?>' // Tax
+});
+// to get items
+<?php
+foreach ($item_details as &$item) {
+echo getItemJs($this->getOrderId(), $item);
+}
+?>
+ga('ecommerce:send');
+</script>
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '604365679718155');
+fbq('track', "PageView");
+fbq('track', 'Purchase', {value: '1.00', currency: 'USD'});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=604365679718155&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+

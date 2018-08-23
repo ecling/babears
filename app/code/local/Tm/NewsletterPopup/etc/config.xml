@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Tm_NewsletterPopup>
+			<version>0.1.0</version>		
+		</Tm_NewsletterPopup>
+	</modules>
+	<frontend>
+		<layout>
+			<updates>
+				<newsletterpopup>
+					<file>tm_newsletterpopup.xml</file>
+				</newsletterpopup>
+			</updates>
+		</layout>	
+		<routers>
+			<newsletter>
+				<args>
+					<modules>
+						<newsletterpopup before="Mage_Newsletter">Tm_NewsletterPopup</newsletterpopup>
+					</modules>
+				</args>
+			</newsletter>
+		</routers>	
+	</frontend>	
+	<global>	
+		<models>
+			<newsletterpopup>
+				<class>Tm_NewsletterPopup_Model</class>
+			</newsletterpopup>
+		</models>
+		<helpers>
+			<newsletterpopup>
+				<class>Tm_NewsletterPopup_Helper</class>
+			</newsletterpopup>
+		</helpers>		
+	</global>
+	<adminhtml>
+		<acl>
+			<resources>
+				<all>
+	                <title>Allow everything</title>
+	            </all>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<newsletterpopup translate="title" module="newsletterpopup">
+											<title>Newsletter Popup Section</title>
+										</newsletterpopup>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</adminhtml>
+    <default>
+        <newsletterpopup>
+            <general>
+                <title_newsletter>Newsletter</title_newsletter>
+                <info_newsletter><![CDATA[Subscribe to the Extreme mailing list to receive information on new arrivals, specials and discounts]]></info_newsletter>
+                <button_newsletter>Subscribe</button_newsletter>
+            </general>
+        </newsletterpopup>
+    </default>
+</config>

@@ -1,0 +1,94 @@
+//
+// Magento
+//
+
+/* ============================================ *
+ * Special Price Countdown
+ * ============================================ */
+
+// ----------------------------------------------
+// Vars
+
+@import "var";
+
+// ----------------------------------------------
+// Mixins
+
+@import "mixins";
+
+
+.special_countdown {
+
+    margin: 15px 0;
+    color: $c-text;
+
+
+    span{
+        display: block;
+        float: left;
+        margin: 0 5px 0 9px;
+        border: solid 1px $c-module-border;
+        text-align: center;
+
+        &.ww{
+            margin-left: 0;
+        }
+
+        strong{
+            font-size: 24px;
+            color: $c-black;
+            padding: 5px 7px;
+        }
+
+        b{
+            display: block;
+            text-align: center;
+            padding: 2px 5px 0 5px;
+            font-weight: normal;
+            font-size: 11px;
+            text-transform: uppercase;
+            border-top: solid 1px $c-module-border;
+            background-color: $c-module-background;
+        }
+
+    }
+
+    i{
+        font-style: normal;
+        padding: 10px 0 0 5px;
+        float: left;
+        vertical-align: bottom;
+    }
+
+    &::after{
+        @include clearfix;
+    }
+
+    @include bp(max-width, $bp-large) {
+        span{
+
+            margin: 0 0px 0 4px;
+
+            strong{
+                font-size: 18px;
+                padding: 5px 8px;
+            }
+        }
+
+    }
+
+     @include bp(max-width, $bp-small) {
+        span{
+
+            strong{
+
+                padding: 5px 5px;
+            }
+
+            b{
+                padding: 2px 5px 0 5px;
+            }
+        }
+
+    }
+}

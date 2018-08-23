@@ -1,0 +1,68 @@
+<?php
+/**
+ * Adyen Payment Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category	Adyen
+ * @package	Adyen_Payment
+ * @copyright	Copyright (c) 2011 Adyen (http://www.adyen.com)
+ * @license	http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/**
+ * @category   Payment Gateway
+ * @package    Adyen_Payment
+ * @author     Adyen
+ * @property   Adyen B.V
+ * @copyright  Copyright (c) 2014 Adyen BV (http://www.adyen.com)
+ */
+?>
+
+<?php $_source  = $this->getSource() ?>
+<?php if ($_source): ?>
+    <?php $amount = $this->geAdyenPaymentInvoiceFeeAmount(); ?>
+    <?php if ($amount !== null): ?>
+        <tr>
+            <td class="label"><?php echo $this->getAdyenPaymentFeeInvoiceFeeLabel() ?></td>
+            <td><input type="text" name="creditmemo[adyen_fee_payment_fee_refund]" value="<?php echo $amount; ?>" class="input-text not-negative-amount" style="width:60px;text-align:right" id="adyen_fee_payment_fee_refund" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><div id="adyen_fee_payment_fee_refund_adv"></div></td>
+        </tr>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            Validation.addAllThese([
+                ['not-negative-amount', '<?php echo $this->helper('adyen_fee')->__('Please enter a positive number in this field.') ?>', function(v) {
+                    if(v.length)
+                        return /^\s*\d+([,.]\d+)*\s*%?\s*$/.test(v);
+                    else
+                        return true;
+                }]
+            ]);
+
+            if ($('adyen_fee_payment_fee_refund')) {
+                $('adyen_fee_payment_fee_refund').advaiceContainer = $('adyen_fee_payment_fee_refund_adv');
+                unblockAdyenSubmit('adyen_fee_payment_fee_refund');
+            }
+
+            function unblockAdyenSubmit(id) {
+                $(id).observe('focus', function(event) {
+                    if ($$('button[class="scalable update-button disabled"]').size() > 0) {
+                        enableElements('submit-button');
+                    }
+                });
+            }
+            //]]>
+        </script>
+
+    <?php endif; ?>
+<?php endif; ?>

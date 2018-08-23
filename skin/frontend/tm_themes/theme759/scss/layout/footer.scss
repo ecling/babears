@@ -1,0 +1,431 @@
+//
+// Magento
+//
+// NOTICE OF LICENSE
+//
+// This source file is subject to the Academic Free License (AFL 3.0)
+// that is bundled with this package in the file LICENSE_AFL.txt.
+// It is also available through the world-wide-web at this URL:
+// http://opensource.org/licenses/afl-3.0.php
+// If you did not receive a copy of the license and are unable to
+// obtain it through the world-wide-web, please send an email
+// to license@magento.com so we can send you a copy immediately.
+//
+// DISCLAIMER
+//
+// Do not edit or add to this file if you wish to upgrade Magento to newer
+// versions in the future. If you wish to customize Magento for your
+// needs please refer to http://www.magento.com for more information.
+//
+// @category    design
+// @package     rwd_default
+// @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+// @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+//
+/* ============================================ *
+ * Footer
+ * ============================================ */
+/* -------------------------------------------- *
+ * Footer
+ */
+@import "../includes";
+
+%footer-title {
+  font-family: $f-stack-default;
+  color: #ffffff;
+  font-size: 15px;
+  display: block;
+  padding: 0 0 20px;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.footer-container {
+  background-color: #232323;
+  color: #888888;
+  padding-bottom: 0;
+  address {
+    border-top: 1px solid #363636;
+    width: 100%;
+    margin: $trim 0 0;
+    padding: $trim 0;
+  }
+}
+
+.footer,
+.footer button {
+  font-family: $f-stack-special;
+}
+
+.footer {
+  font-size: $f-size-xs;
+  clear: both;
+  width: 100%;
+  padding-top: $trim;
+  @include bp(max-width, $bp-xsmall) {
+    padding-top: $trim-small;
+  }
+  h4 {
+    color: #ffffff;
+  }
+  .socials {
+    li {
+      float: left;
+      font-size: 14px;
+      margin-right: 15px;
+      a {
+        color: $accent-color-1;
+        &:hover {
+          color: #ffffff;
+        }
+      }
+    }
+  }
+  .footer-cols-wrapper {
+    padding-bottom: 25px;
+    position: relative;
+  }
+  .col-sm-8 {
+    .footer-col {
+      float: left;
+      width: 33.3333%;
+      border-top: 0;
+      padding-top: 0;
+      margin-top: 0;
+    }
+  }
+  .footer-col {
+    border-top: 1px solid #363636;
+    padding-top: 30px;
+    margin-top: 35px;
+    &:first-child {
+      border-top: 0;
+      padding-top: 0;
+      margin-top: 0;
+    }
+    h4,
+    .block-title strong {
+      @extend %footer-title;
+    }
+    &.last {
+      width: auto;
+      margin-right: 0;
+    }
+
+  }
+  .footer-contacts {
+    border-bottom: 1px solid #363636;
+    margin-bottom: 35px;
+    padding-bottom: 30px;
+    ul {
+      li {
+        padding: 4px 0;
+        i {
+          color: $accent-color-1;
+          font-size: 14px;
+          margin-right: 10px;
+        }
+      }
+      strong {
+        text-transform: uppercase;
+        color: #fff;
+        + a {
+          color: #888888;
+          &:hover {
+            color: #fff;
+          }
+        }
+      }
+      li:nth-child(2) {
+        strong + a {
+          font-weight: bold;
+          color: $accent-color-1;
+          text-transform: uppercase;
+          font-size: 15px;
+          &:hover {
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+  .block-title {
+    border: 0;
+    padding: 0;
+    margin-bottom: 0;
+
+    strong {
+      @extend %footer-title;
+    }
+  }
+
+  .block-title,
+  address {
+    color: $c-text-primary;
+  }
+
+  .links,
+  .footer-col ul {
+
+    padding: 0;
+
+    li {
+
+      line-height: 1.4;
+      padding: 4px 0;
+    }
+
+    a {
+      color: $accent-color-1;
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  .block {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  .block-twitter_timeline,
+  .block-facebook-page,
+  .block-subscribe {
+    margin: 0 0 $trim 0;
+    padding-bottom: 35px;
+    border-bottom: 1px solid #363636;
+  }
+  .block-twitter_timeline {
+    padding-bottom: 0;
+  }
+  .form-subscribe-header {
+    display: none;
+  }
+
+  /* ==================================back-top ================================================== */
+  #back-top {
+    position: fixed;
+    bottom: 40px;
+    z-index: 999;
+    right: 1%;
+    display: none;
+    width: 41px;
+    height: 41px;
+
+    span {
+      display: block;
+      text-align: center;
+      width: 45px;
+      height: 45px;
+      background-color: $accent-color-1;
+      color: #fff;
+      border-radius: 50%;
+      @include transition(all, 0.2s, ease-in-out);
+
+      &::before {
+        @include fa-icon;
+        content: "\f106";
+        font-size: 35px;
+        line-height: 40px;
+      }
+
+      &:hover {
+        background-color: darken($accent-color-1, 15%);
+      }
+    }
+  }
+
+  // ---------------------------------------------
+
+  .block-subscribe .input-box {
+    float: left;
+    width: 70%;
+    padding-top: 0;
+    margin-bottom: 5px;
+    .validation-advice {
+      position: absolute;
+      background: #fff;
+      border: solid 1px $c-module-border-light;
+      padding: 10px;
+    }
+  }
+
+  .block-subscribe .input-text {
+    width: 100%;
+    height: 30px;
+    color: #888888;
+    background-color: #363636;
+    border: 0;
+    @include border-radius(0);
+  }
+  .block-subscribe .block-content {
+    padding-top: 7px;
+    &:after {
+      @include clearfix;
+    }
+  }
+
+  .block-subscribe .actions {
+    float: left;
+    width: auto;
+    margin: 0;
+  }
+  .block-subscribe .actions .button {
+    line-height: 20px;
+    float: left;
+    font-size: $f-size-xs;
+    text-transform: none;
+    padding: 5px 10px;
+    margin-left: 10px;
+  }
+
+  .bugs,
+  address {
+    clear: both;
+  }
+
+  .bugs {
+    display: none;
+  }
+
+  .form-language,
+  .currency-switcher,
+  .store-switcher {
+    clear: both;
+    margin-bottom: $gap;
+  }
+
+  .form-language,
+  .currency-switcher {
+    display: none;
+  }
+
+  @include bp(max-width, $bp-xlarge) {
+    $links-trim: percentage(30px / 960px);
+    $links-width: (100 - ($links-trim * 3)) / 5;
+
+    .footer-col {
+
+      padding-right: 0;
+
+    }
+
+    .footer-col:nth-child(4) {
+      margin-right: 0;
+    }
+
+    .block-subscribe {
+      clear: both;
+      float: none;
+      margin: 0 auto $trim auto;
+
+    }
+  }
+
+  @include bp(max-width, $bp-large) {
+    $links-trim: percentage(30px / 960px);
+    $links-width: (100 - ($links-trim * 3)) / 3;
+
+    .footer-col {
+      padding-right: 0;
+      &.last {
+        @include clearfix;
+        padding-top: 20px;
+        float: none;
+        width: 100%;
+      }
+
+    }
+
+    .footer-col:nth-child(4) {
+      margin-right: 0;
+    }
+
+    .block-subscribe {
+      clear: both;
+      float: none;
+      margin: 0 auto $trim auto;
+    }
+  }
+
+  @include bp(max-width, $bp-medium) {
+    .col-sm-8 .footer-col {
+      float: none;
+      width: 100%;
+    }
+    .footer-col {
+      padding: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      border-bottom: none;
+      border-top: none;
+      float: none;
+      width: 100%;
+
+      &.last {
+        padding: 0;
+      }
+
+      h4,
+      .block-title strong {
+        @include accordionDtBase('right', $c-module-border);
+        display: block;
+        width: 100%;
+        cursor: pointer;
+
+        &.active {
+
+          @include accordionDtBase('down', $c-module-border);
+
+        }
+      }
+
+      &.last {
+        .block-subscribe {
+          .block-title strong {
+            border-bottom: solid 1px $c-module-border-light;
+          }
+
+          .block-content {
+            border: solid 1px $c-module-border-light;
+            border-top: none;
+          }
+        }
+      }
+
+    }
+
+    .footer-col-content,
+    .block-content {
+      padding: $box-spacing;
+      margin-top: 0;
+      border-width: 1px;
+      border-style: solid;
+      border-color: $c-module-border-light;
+    }
+
+    .block-subscribe {
+
+    }
+
+  }
+  a {
+    color: #888888;
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}
+
+@include bp(min-width, $bp-medium+1) {
+  .footer {
+    > .row {
+      > div.col-sm-6 {
+        border-left: 1px solid #363636;
+        border-right: 1px solid #363636;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,416 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+			
+			<action method="removeItem"><type>skin_js</type><name>js/slideshow.js</name></action>
+			<action method="removeItem"><type>skin_js</type><name>js/lib/jquery.cycle2.min.js</name></action>
+			<action method="removeItem"><type>skin_js</type><name>js/lib/jquery.cycle2.swipe.min.js</name></action>
+
+			<action method="removeItem"><type>skin_css</type><name>css/madisonisland.css</name></action>
+			<action method="removeItem"><type>skin_css</type><name>css/madisonisland-ie8.css</name></action>
+			<action method="removeItem"><type>skin_css</type><name>css/styles.css</name></action>
+			<action method="removeItem"><type>link_rel</type><name>//fonts.googleapis.com/css?family=Raleway:300,400,500,700,600</name></action>
+			
+			
+			<action method="addCss"><stylesheet>css/bootstrap.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/owlcarousel/owl.carousel.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/owlcarousel/owl.theme.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/font-awesome.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/material-design.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/camera/css/camera.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/styles.css</stylesheet></action>
+
+			<action method="addCss"><stylesheet>css/layout/global.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/layout/header.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/layout/header-nav.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/layout/header-search.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/layout/header-account.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/layout/header-cart.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/layout/footer.css</stylesheet></action>
+
+			<action method="addCss"><stylesheet>css/module/catalog-product.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/checkout-cart.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/product-list.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/account-reviews.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/catalogsale.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/catalog-compare.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/checkout-multi-address.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/checkout-cart-minicart.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/checkout-onepage.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/cms.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/configurableswatches.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/contacts.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/pricing_conditions.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/newsletterpopup.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/customer.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/review.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/search.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/tags.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/wishlist.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/catalog-msrp.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/module/sidebar.css</stylesheet></action>
+
+			<action method="addCss"><stylesheet>css/module/megamenu.css</stylesheet></action> 
+			<action method="addCss"><stylesheet>css/module/superfish.css</stylesheet></action>
+			<!-- <action method="addCss"><stylesheet>css/module/megamenu-sidebar.css</stylesheet></action> -->
+
+			<action method="addCss"><stylesheet>css/easydropdown.css</stylesheet></action>
+			 <!-- include Google Fonts -->
+			<action method="addLinkRel"><rel>stylesheet</rel><href>//fonts.googleapis.com/css?family=PT+Sans:400,700<![CDATA[&amp;]]>subset=latin,cyrillic</href></action>
+			<action method="addItem"><type>skin_js</type><name>js/tm-stick-up.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/owlcarousel/owl.carousel.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/bootstrap.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/front.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/jquery.easydropdown.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/jquery.animateNumber.js</name></action>
+			
+			<!-- <action method="addItem"><type>skin_js</type><name>js/jquery-ui.js</name></action> -->            
+
+		</reference>
+
+		<!-- <reference name="before_body_end">
+			<block type="page/html_head" name="includes" as="includes" template="page/html/includes.phtml">
+
+			</block>
+		</reference> -->
+
+		<reference name="header">
+
+			<!-- * Currency|Language type2  * -->
+			<reference name="currency">
+				<action method="setTemplate">
+					<template>directory/currency_2.phtml</template>
+				</action>
+			</reference>
+			<reference name="store_language">
+				<action method="setTemplate">
+					<template>page/switch/languages_2.phtml</template>
+				</action>
+			</reference>
+			<!-- *** -->
+			
+			<!-- * Currency|Language mobile  * -->
+			<block type="page/switch" name="store_language_2" as="store_language_2" template="page/switch/languages_2.phtml"/>
+			<block type="directory/currency" name="currency_2" as="currency_switcher_2" template="directory/currency_2.phtml"/>
+			<!-- *** -->
+
+			<block type="checkout/cart_minicart" name="minicart_head_mobile" template="checkout/cart/minicart_mobile.phtml">
+				<block type="checkout/cart_sidebar" name="minicart_content" template="checkout/cart/minicart/items.phtml">
+					<action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>checkout/cart/minicart/default.phtml</template></action>
+					<action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/minicart/default.phtml</template></action>
+					<action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/minicart/default.phtml</template></action>
+					<action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/minicart/default.phtml</template></action>
+
+					<block type="core/text_list" name="cart_sidebar.cart_promotion" as="cart_promotion" translate="label" module="checkout">
+						<label>Mini-cart promotion block</label>
+					</block>
+					<block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label" module="checkout">
+						<label>Shopping Cart Sidebar Extra Actions</label>
+					</block>
+				</block>
+			</block>
+
+		</reference>
+
+		<reference name="left">
+			<!-- <block type="newsletter/subscribe" name="footer.newsletter" as="newsletter" before="footer_store_language" template="newsletter/subscribe.phtml"/> -->
+
+			<block type="checkout/cart_sidebar" name="cart_sidebar" template="checkout/cart/sidebar.phtml" before="-">
+				<action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/sidebar/default.phtml</template></action>
+				<action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/sidebar/default.phtml</template></action>
+				<action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/sidebar/default.phtml</template></action>
+				<block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label" module="checkout">
+					<label>Shopping Cart Sidebar Extra Actions</label>
+				</block>
+			</block>
+
+
+			<block type="wishlist/customer_sidebar" name="wishlist_sidebar" as="wishlist" after="cart_sidebar" template="wishlist/sidebar.phtml" />
+
+			<block type="reports/product_viewed" after="catalog.compare.sidebar" name="left.reports.product.viewed" template="reports/product_viewed.phtml" />
+			<block type="reports/product_compared" after="left.reports.product.viewed" name="left.reports.product.compared" template="reports/product_compared.phtml" />
+			<block type="poll/activePoll" name="left.poll">
+				<action method="setPollTemplate"><template>poll/active.phtml</template><type>poll</type></action>
+				<action method="setPollTemplate"><template>poll/result.phtml</template><type>results</type></action>
+			</block>
+
+		</reference>
+
+		<reference name="right">
+			
+			<action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+			<action method="unsetChild"><name>right.reports.product.viewed</name></action>
+			<action method="unsetChild"><name>left.reports.product.viewed</name></action>
+			<action method="unsetChild"><name>right.reports.product.compared</name></action>
+			<action method="unsetChild"><name>right.poll</name></action>
+		</reference>
+		
+		<reference name="footer">
+			<block type="newsletter/subscribe" name="footer.newsletter" template="newsletter/subscribe.phtml"/>
+			<remove name="footer_currency" /> 
+			<remove name="cms_footer_links_sm" />
+			<reference name="cms_footer_links">
+				<action method="setBlockId"><block_id>footer_links</block_id></action>
+			</reference>    
+			<block type="cms/block" name="footer_list">
+				<action method="setBlockId"><block_id>footer_list</block_id></action>
+			</block>
+			<block type="page/html_wrapper" name="bottom-page" as="bottom-page" translate="label">
+				<label>bottom-page</label>
+				<action method="setElementClass"><value>bottom-page</value></action>
+				<action method="unsetData"><key>cache_lifetime</key></action>
+				<action method="unsetData"><key>cache_tags</key></action>
+			</block>
+			<action method="unsetData"><key>cache_lifetime</key></action>
+			<action method="unsetData"><key>cache_tags</key></action>
+		</reference>
+		
+		<reference name="root">
+			<reference name="footer">
+				<reference name="footer_links">
+					<action method="setTitle"><title></title></action>
+					<block type="sales/guest_links" name="return_link"/>
+					<action method="addLinkBlock"><blockName>return_link</blockName></action>
+					<action method="addLink" translate="label title" after="return_link" module="contacts" ifconfig="contacts/contacts/enabled"><label>Contact Us</label><url>contacts</url><title>Contact Us</title><prepare>true</prepare></action>
+				</reference>
+				
+				<!-- This static block can be created and populated in admin. The footer_links cms block can be used as a starting point. -->
+				<!--<block type="cms/block" name="footer_social_links">
+					<action method="setBlockId"><block_id>footer_social_links</block_id></action>
+				</block>-->
+			</reference>
+		</reference>
+
+		
+		<!-- Add classes for toplinks -->
+		<reference name="top.links">
+			<action method="removeLinkByUrl"><url helper="customer/getAccountUrl"/></action>
+			<action method="addLink" translate="label title" module="customer"><label>My Account</label>
+            <url helper="customer/getAccountUrl"/>
+            <title>My Account</title><prepare/><urlParams/>
+            <position>10</position><liParams/>
+            <aParams>class="my-account-link"</aParams>
+            </action>
+		
+			<action method="removeLinkByUrl"><url helper="customer/getRegisterUrl"/></action>
+			<action method="addLink" translate="label title before_text" module="customer"><label>Register</label>
+            <url helper="customer/getRegisterUrl" />
+            <title>Register</title><prepare/>
+            <urlParams/><position>100</position><li/>
+            <aParams>class="register-link"</aParams>
+            </action>
+            
+            
+            
+		</reference>
+
+		<reference name="wishlist_link">
+			<action method="setAParams">
+				<param><![CDATA[class="wishlist-link"]]></param>
+			</action>
+		</reference>    
+
+		
+
+	</default>
+
+	<cms_menu>
+		<reference name="left_first">
+			<remove name="cms_menu" /> 
+		</reference>
+	</cms_menu>
+
+	<catalog_category_default translate="label">
+		<reference name="root">
+			<action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+		</reference>
+		<reference name="content">
+			<reference name="category.products" >
+				<reference name="product_list">
+					<action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+					<action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>4</count></action>
+					<action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>3</count></action>
+					<action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>3</count></action>
+					<action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>2</count></action>
+					<action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+					<!-- Since the addColumnCountLayoutDepend does not work, we are manually setting the max columns -->
+					<action method="setColumnCount"><count>3</count></action>
+				</reference>
+			</reference>
+		</reference>
+	  
+	</catalog_category_default>
+
+	 <catalog_category_layered translate="label">
+		<reference name="root">
+			<action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+		</reference>
+		<reference name="content">
+			<reference name="category.products">
+				<reference name="product_list">
+					<action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+					<action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>4</count></action>
+					<action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>3</count></action>
+					<action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>3</count></action>
+					<action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>2</count></action>
+					<action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+					<!-- Since the addColumnCountLayoutDepend does not work, we are manually setting the max columns -->
+					<action method="setColumnCount"><count>3</count></action>
+				</reference>
+			</reference>
+		</reference>
+	   
+	</catalog_category_layered>
+
+   
+	<catalog_product_view translate="label">
+
+		<reference name="head">
+			<action method="removeItem"><type>skin_js</type><name>js/front.js</name></action>
+			<action method="addCss"><stylesheet>css/bxslider/jquery.bxslider.css</stylesheet></action>
+			<action method="addItem"><type>skin_js</type><name>js/bxslider/jquery.bxslider.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/front.js</name></action>
+		</reference>
+		
+		<reference name="product.info.additional">
+			<action method="unsetChild"><alias>product_tag_list</alias></action>
+		</reference>
+		<reference name="content">
+			 <!--
+			   Adding Tags to Tabs in Product view page
+			 -->
+			<reference name="product.info">
+				<block type="tag/product_list" name="product_tag_list" template="tag/list.phtml">
+					<action method="addToParentGroup"><group>detailed_info</group></action>
+					<action method="setTitle" translate="value"><value>Tags</value></action>
+				</block>
+
+				<block type="catalog/product_viewother" name="catalog.product.video" template="catalog/product/view/video.phtml">
+					<action method="addToParentGroup"><group>detailed_info</group></action>
+					<action method="setTitle" translate="value"><value>Video</value></action>
+				</block>
+
+				<block type="catalog/product_list_related" name="catalog.product.related.carousel" as="related_products" template="catalog/product/list/related_carousel.phtml" />
+			</reference>
+
+			<!-- remove native share -->
+			<remove name="product.info.sharing" />   
+
+		</reference>
+
+	</catalog_product_view>
+
+	<review_product_list>
+		<reference name="head">
+			<action method="addItem"><type>skin_js</type><script>js/lib/elevatezoom/jquery.elevateZoom-3.0.8.min.js</script></action>
+		</reference>
+		<reference name="root">
+			<action method="setTemplate"><template>page/1column.phtml</template></action>
+		</reference>
+	</review_product_list>
+
+	<review_product_view>
+		<reference name="root">
+			<action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+		</reference>
+	</review_product_view>
+
+	<cms_index_index>
+		<reference name="footer">
+			
+		</reference>
+	</cms_index_index>
+
+	<contacts_index_index>
+		<reference name="root">
+			<action method="setTemplate"><template>page/1column.phtml</template></action>
+		</reference>
+
+	</contacts_index_index>
+
+	<catalog_category_layered_nochildren translate="label">
+		<reference name="right">
+			<action method="unsetChild"><name>left.reports.product.viewed</name></action>
+		</reference>
+	</catalog_category_layered_nochildren>
+
+	<customer_logged_in>
+		<reference name="right">
+			<action method="unsetChild"><name>sale.reorder.sidebar</name></action>
+		</reference>
+
+		<reference name="top.links">
+			<action method="removeLinkByUrl"><url helper="customer/getLogoutUrl"/></action>
+			<action method="addLink" translate="label title" module="customer"><label>Log Out</label><url helper="customer/getLogoutUrl"/><title>Log Out</title><prepare/><urlParams/><position>100</position><liParams/><aParams>class="log-out-link"</aParams></action>
+		</reference>
+	</customer_logged_in>
+
+
+	<customer_logged_out>
+	   <reference name="top.links">
+			<action method="removeLinkByUrl"><url helper="customer/getLoginUrl"/></action>
+			<action method="addLink" translate="label title" module="customer"><label>Log In</label><url helper="customer/getLoginUrl"/><title>Log In</title><prepare/><urlParams/><position>100</position><liParams/><aParams>class="log-in-link"</aParams></action>
+		</reference>
+	</customer_logged_out>
+
+
+
+	<customer_account_index>
+		<reference name="left">
+			<action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+		</reference>
+	</customer_account_index>
+
+	<catalogsearch_result_index>
+		<reference name="root">
+			<action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+		</reference>
+	</catalogsearch_result_index>
+
+	<catalogsearch_advanced_index>
+		<reference name="root">
+			<action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+		</reference>
+	</catalogsearch_advanced_index>
+
+	<catalogsearch_advanced_result>
+		<reference name="root">
+			<action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+		</reference>
+		<reference name="content">
+			<reference name="catalogsearch_advanced_result">
+				<reference name="search_result_list">
+					<action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>4</count></action>
+					<action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>3</count></action>
+					<action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>3</count></action>
+					<action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+				</reference>
+			</reference>
+		</reference>
+		<reference name="left">
+		  
+		</reference>
+		<reference name="right">
+			<action method="insert"><child>catalog.leftnav</child></action>
+		</reference>
+	</catalogsearch_advanced_result>
+
+	<tag_product_list translate="label">
+		<reference name="root">
+			<action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+		</reference>
+	</tag_product_list>
+	<wishlist_index_index>
+		<reference name="my.account.wrapper">
+			<reference name="customer.wishlist">
+				<reference name="customer.wishlist.buttons">
+					<remove name="customer.wishlist.button.share" />
+					<block type="wishlist/customer_wishlist_button" name="customer.wishlist.button.share2" template="wishlist/button/share.phtml" />
+					<!-- <reference name="customer.wishlist.button.share" after="-"></reference> -->
+				</reference>
+			</reference>
+		</reference>
+	</wishlist_index_index>  
+</layout> 
+

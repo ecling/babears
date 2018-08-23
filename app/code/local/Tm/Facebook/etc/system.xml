@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<tabs>
+		<tm translate="label">
+			<label>TemplateMonster</label>
+			<sort_order>100</sort_order>
+		</tm>
+	</tabs>
+	<sections>
+		<facebook translate="label" module="facebook">
+			<class>separator-top</class>
+			<label>Facebook</label>
+			<tab>tm</tab>
+			<sort_order>130</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<facebook_page>
+					<label>Facebook Page Plugin</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>20</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>0</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enable/Disable</label>
+							<comment><![CDATA[Enable/Disable Facebook Page module.]]></comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+
+						<app_id translate="label comment">
+							<label>App ID: </label>
+							<comment><![CDATA[Facebook Application Id. (You can add new on at developers.facebook.com)]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</app_id>
+
+						<page_url translate="label comment">
+							<label>Page URL: </label>
+							<comment><![CDATA[The URL of the Facebook Page.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</page_url>
+
+						<hide_cover translate="label comment">
+							<label>Hive cover: </label>
+							<comment><![CDATA[Hide cover photo in the header.]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>facebook/source_boolean_values</source_model>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</hide_cover>
+
+						<show_facepile translate="label comment">
+							<label>Show Faces: </label>
+							<comment><![CDATA[Show profile photos when friends like this.]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>facebook/source_boolean_values</source_model>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</show_facepile>						
+
+						<show_posts translate="label comment">
+							<label>Show Posts: </label>  
+							<comment><![CDATA[Show posts from the Page's timeline.]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>facebook/source_boolean_values</source_model>
+							<sort_order>80</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</show_posts>
+
+						<data_height translate="label comment">
+							<label>Height: </label>  
+							<comment><![CDATA[The maximum pixel height of the plugin. Min. is 130]]></comment> 
+							<frontend_type>text</frontend_type>
+							<sort_order>90</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</data_height>
+
+						<data_width translate="label comment">
+							<label>Width: </label>  
+							<comment><![CDATA[The pixel width of the plugin. Min. is 280 & Max. is 500]]></comment> 
+							<frontend_type>text</frontend_type>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</data_width>
+					</fields>
+				</facebook_page>
+				<facebook_feed>
+					<label>Facebook Feed</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>30</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>0</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<new translate="label comment">
+							<label>New Num: </label>
+							<comment><![CDATA[The latest product number]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</new>
+						<new_data translate="label comment">
+							<label>New Data: </label>
+							<comment><![CDATA[The latest product days]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</new_data>
+						<hot translate="label comment">
+							<label>Top Sales Num: </label>
+							<comment><![CDATA[Hot Sales number]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</hot>
+						<hot_data translate="label comment">
+							<label>Top Sales Data: </label>
+							<comment><![CDATA[X days hot sales]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</hot_data>
+					</fields>
+				</facebook_feed>
+			</groups>
+		</facebook>
+	</sections>
+</config>

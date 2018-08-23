@@ -1,0 +1,12 @@
+<div class="entry-edit">
+    <?php echo $this->getFormHtml();?>
+    <?php echo $this->getButtonHtml('Show Report',"validator.submit();");?>
+</div>
+<?php echo $this->getChildHtml('form_after');?>
+
+<script type="text/javascript">
+//<![CDATA[
+    var validator  = new varienForm('filter_form','');
+//]]>
+</script>
+

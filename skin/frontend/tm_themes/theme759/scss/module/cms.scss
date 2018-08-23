@@ -1,0 +1,1090 @@
+//
+// Magento
+//
+// NOTICE OF LICENSE
+//
+// This source file is subject to the Academic Free License (AFL 3.0)
+// that is bundled with this package in the file LICENSE_AFL.txt.
+// It is also available through the world-wide-web at this URL:
+// http://opensource.org/licenses/afl-3.0.php
+// If you did not receive a copy of the license and are unable to
+// obtain it through the world-wide-web, please send an email
+// to license@magento.com so we can send you a copy immediately.
+//
+// DISCLAIMER
+//
+// Do not edit or add to this file if you wish to upgrade Magento to newer
+// versions in the future. If you wish to customize Magento for your
+// needs please refer to http://www.magento.com for more information.
+//
+// @category    design
+// @package     rwd_default
+// @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+// @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+//
+/* ============================================ *
+ * CMS Pages
+ * ============================================ */
+// ----------------------------------------------
+// Content for static pages
+@import "../includes";
+@import "../core/form";
+
+.block-facebook-page {
+  > div + div {
+    min-height: 214px;
+  }
+}
+
+.testemonials {
+  border-bottom: 1px solid #363636;
+  padding-bottom: 35px;
+  margin-bottom: 35px;
+  h4 {
+    color: #ffffff;
+  }
+  blockquote {
+    border-left: 0;
+    font-size: 12px;
+    margin: 0 0 10px;
+    padding: 0;
+    em {
+      color: $accent-color-1;
+      font-size: 22px;
+      line-height: 20px;
+      margin-right: 10px;
+    }
+    span {
+      display: block;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+  }
+  @include bp(max-width, $bp-medium) {
+    .col-sm-6 {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.banners {
+  margin-bottom: 35px;
+  img {
+    width: 100%;
+  }
+  a {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    &:hover {
+      img {
+        transform: scale(1.1, 1.1);
+      }
+    }
+    @include bp(max-width, $bp-medium) {
+      margin-bottom: 30px;
+    }
+    &:hover {
+      .s-desc {
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+    }
+  }
+  .col-sm-8 {
+    > a {
+      display: block;
+      margin-bottom: 30px;
+    }
+  }
+  > div {
+    position: relative;
+  }
+  .s-desc {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    @include transition(all, 0.3s, ease-in-out);
+    @include flexbox;
+    @include align-items(center);
+    @include flex(0 1 100%);
+    h1 {
+      font-size: 34px;
+      color: #fff;
+      margin-bottom: 7px;
+      line-height: 1.2;
+    }
+    h2 {
+      font-size: 22px;
+      margin-bottom: 7px;
+      color: $accent-color-1;
+      font-weight: 400;
+    }
+    span {
+      display: block;
+      width: 100%;
+      span {
+        font-size: 15px;
+        font-weight: bold;
+        text-decoration: underline;
+        text-transform: uppercase;
+        color: #fff;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  > .col-sm-8 > a {
+    .s-desc {
+      display: block;
+      h1 {
+        font-size: 44px;
+      }
+      > span {
+        padding-right: 12%;
+        width: auto;
+        display: inline-block;
+        float: right;
+        padding-top: 13%;
+      }
+    }
+  }
+}
+
+.cms-page-view,
+.cms-no-route {
+  .page-title,
+  .page-head {
+    h1,
+    h3 {
+      border: none;
+    }
+  }
+
+  .std {
+
+    img {
+      max-width: 100%;
+    }
+
+    p {
+      color: $c-text;
+      font-size: 14px;
+      line-height: 24px;
+    }
+
+    li {
+      color: $c-text;
+      font-family: $f-stack-serif;
+      font-size: $f-size;
+      font-style: italic;
+      line-height: 24px;
+    }
+  }
+
+  .col-left {
+    &:after {
+      @include clearfix;
+    }
+  }
+}
+
+.cms-no-route {
+  .std {
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.cms-page-view .std,
+.cms-home .std,
+.cms-no-route .std {
+  .messages {
+    margin-bottom: 25px;
+
+    ul {
+      margin-bottom: 0;
+    }
+
+    li {
+      list-style: none;
+      margin-left: 0;
+      font-style: normal;
+      font-family: $f-stack-sans;
+    }
+  }
+}
+
+// ----------------------------------------------
+// Accordition
+
+#accordion {
+  @include accordion;
+
+  li {
+    position: relative;
+    overflow: hidden;
+
+    .plusimage h2 {
+      margin-right: $gap;
+    }
+  }
+}
+
+// ----------------------------------------------
+// Sitemap
+
+.page-sitemap {
+
+  .page-title {
+    h1 {
+      @extend .title-border;
+    }
+  }
+
+  .pager {
+    float: none;
+  }
+  .links {
+    display: block;
+    text-align: right;
+    margin: 0 20px 0 0;
+
+    a {
+      position: relative;
+      @extend %secondary-button;
+      @extend %small-button;
+    }
+  }
+
+  .sitemap {
+    padding: 0;
+    margin: 15px 0;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      top: 11px;
+      left: 0;
+      background-color: $accent-color-1;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 1px;
+      height: 24px;
+      bottom: -15px;
+      left: 0;
+      background-color: $c-page-background;
+    }
+
+    > li {
+      padding-left: 35px;
+      position: relative;
+
+      &.level-0::before {
+        content: '';
+        position: absolute;
+        width: 40px;
+        height: 1px;
+        top: 11px;
+        left: 0;
+        background-color: $accent-color-1;
+      }
+
+      &.level-0 a {
+
+        &::before {
+          @include custom-icon($font-family-icon, '\e081');
+          font-size: 13px;
+          color: $accent-color-1;
+          padding-right: 14px;
+        }
+
+      }
+
+    }
+
+    li {
+      margin: 15px 0;
+
+      ul {
+        margin: 30px 0 30px 25px;
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          width: 1px;
+          height: 100%;
+          top: 11px;
+          left: 0;
+          background-color: $c-module-border-light;
+        }
+        &::after {
+          content: '';
+          position: absolute;
+          width: 1px;
+          height: 24px;
+          bottom: -15px;
+          left: 0;
+          background-color: $c-page-background;
+        }
+
+        li {
+          padding-left: 41px;
+          position: relative;
+
+          a {
+            padding-left: 20px;
+          }
+
+          &:not(.list-container)::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 1px;
+            top: 11px;
+            left: 0;
+            background-color: $c-module-border-light;
+          }
+        }
+
+      }
+
+      a {
+        color: $c-text;
+        display: inline-block;
+
+        &:hover {
+          color: $c-dark;
+        }
+      }
+    }
+
+    @include bp(max-width, $bp-small) {
+
+      li ul {
+        margin-left: 0px;
+      }
+
+    }
+  }
+}
+
+.indent1 {
+  margin-bottom: 57px !important;
+}
+
+.indent2 {
+  margin-bottom: 25px !important;
+}
+
+.custom-page {
+
+  line-height: 1.714em;
+
+  .title-big {
+    h1 {
+      font-size: 50px;
+      line-height: 50px;
+      margin-bottom: 45px;
+    }
+  }
+
+  h3 {
+    line-height: 1.8em;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+}
+
+.ps-static.cms-page-view {
+  .page-title:not(.without-border) {
+    h1, h4 {
+      @extend .title-border;
+    }
+  }
+}
+
+.skills {
+  text-align: center;
+  color: $accent-color-1;
+  padding-top: 16px;
+
+  .term {
+    text-transform: uppercase;
+    font-size: $f-size-xl;
+    font-weight: 500;
+    @extend .indent1;
+  }
+
+  .value {
+    font-size: 56px;
+    line-height: 1.519em;
+    font-weight: 500;
+  }
+}
+
+//--------------------------------------------------
+// Order and Returns
+
+#oar_widget_orders_and_returns_form {
+  .fieldset {
+    @extend .theme-block;
+    margin-bottom: 20px;
+  }
+
+  .buttons-set {
+    border-top: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+//--------------------------------------------------
+// About Us
+
+.custom-title1 {
+  @include themeTitle($icon: '\e13d', $icon_size: 66px, $icon_direct: top, $dimensions: 122px);
+}
+
+.custom-title2 {
+  @include themeTitle($icon: '\e03f', $icon_size: 66px, $icon_direct: top, $dimensions: 122px);
+}
+
+.custom-title3 {
+  @include themeTitle($icon: '\e173', $icon_size: 56px, $icon_direct: top, $dimensions: 122px, $icon-Lheight: 122px);
+}
+
+.team {
+
+  text-align: center;
+
+  figure {
+    display: block;
+    margin: 0 auto 25px;
+    text-align: center;
+
+    a {
+      display: inline-block;
+      overflow: hidden;
+    }
+
+    &:hover img {
+      filter: grayscale(100%);
+      -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+
+    }
+
+    img {
+      border: medium none;
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+
+  h4 {
+    font-weight: 400;
+  }
+
+  .excerpt {
+    text-align: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 1px;
+    @extend .indent1;
+  }
+
+}
+
+.testimonials {
+
+  &::before {
+    @include custom-icon($font-family-icon, '\e09d');
+    display: block;
+    margin: 0 auto 20px;
+    text-align: center;
+    font-size: 84px;
+    line-height: 1em;
+    color: $accent-color-1;
+
+  }
+
+  blockquote {
+    position: relative;
+    text-align: center;
+    font-size: $f-size;
+    border: none;
+
+    cite {
+      @include h4;
+      font-weight: 400;
+      display: block;
+      text-align: center;
+      color: $accent-color-1;
+      text-transform: uppercase;
+    }
+
+    q {
+      display: block;
+      padding: 0 5%;
+    }
+
+  }
+
+  .owl-controls .owl-buttons div {
+
+    &.owl-prev,
+    &.owl-next {
+      position: relative;
+      top: auto;
+      left: auto;
+      right: auto;
+      margin: 0 15px;
+
+    }
+
+    &.owl-next {
+      right: auto;
+      left: auto;
+    }
+
+    @include bp(max-width, $bp-large) {
+      &.owl-prev {
+        left: 7px;
+      }
+
+      &.owl-next {
+        right: 7px;
+      }
+    }
+  }
+
+}
+
+@include bp(max-width, $bp-xsmall) {
+
+  .indent1 {
+    margin-bottom: 20px;
+  }
+
+  .skills {
+
+    .term {
+      font-size: $f-size;
+    }
+
+    .value {
+      font-size: 30px;
+    }
+  }
+}
+
+//--------------------------------------------------
+// Customer Services & Template Settings
+
+.table-bordered .price {
+  font-weight: 500;
+  color: $c-price;
+  font-size: $f-size-xl;
+}
+
+.terms-conditions {
+  h4 {
+    @include titleIcon('\e174', 40px);
+    font-size: 20px;
+    color: $accent-color-1;
+
+    &::before {
+      padding-right: 25px;
+    }
+  }
+
+  p {
+    margin-bottom: 35px;
+  }
+}
+
+@include bp(max-width, $bp-medium) {
+
+  .cms-page-view {
+    .data-table {
+      @include linearize-table;
+
+      thead {
+        display: none;
+      }
+    }
+  }
+
+}
+
+//--------------------------------------------------
+// Privacy Policy
+
+dl.numbered-list {
+  counter-reset: number;
+  dt {
+    counter-increment: number;
+    @include h3;
+    color: $accent-color-1;
+    font-weight: 500;
+    padding-bottom: 10px;
+
+    &::before {
+      content: counter(number);
+      display: inline-block;
+      width: 39px;
+      height: 39px;
+      line-height: 38px;
+      text-align: center;
+      border-radius: 50%;
+      font-size: 16px;
+      color: #fff;
+      margin-right: 18px;
+      background-color: $accent-color-1;
+      box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+    }
+  }
+
+  dd {
+    line-height: 1.714em;
+    margin-bottom: 45px;
+  }
+}
+
+.table.table-list-style {
+  & > tbody > tr > td {
+    border-top: 0;
+    padding: 0px 30px 30px;
+
+    &:not(:last-child) {
+      border-right: solid 1px $c-table-border;
+    }
+
+    @include bp(max-width, $bp-small) {
+      padding: 0 10px 10px;
+    }
+  }
+
+  h4 {
+    float: right;
+    max-width: 300px;
+    text-align: right;
+  }
+}
+
+//--------------------------------------------------
+// FAQs
+
+.faqs-pages {
+
+  h4 {
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: 300;
+    color: $c-link;
+    border-bottom: 1px solid $c-module-border-light;
+    padding: 40px 0;
+    margin-bottom: 0;
+    cursor: pointer;
+    position: relative;
+    &:after {
+      @include fa-icon;
+      content: "\f107";
+      position: absolute;
+      right: 0;
+      font-size: 35px;
+      color: $c-text;
+    }
+    &.id-active {
+      border-color: #fff;
+      &:after {
+        content: "\f106";
+      }
+    }
+    &.last {
+      border: 0;
+    }
+  }
+  .custom-pag-list-3 {
+    padding-top: 10px;
+    margin-bottom: 0;
+    li {
+      list-style: none;
+      font-style: normal;
+      margin: 0;
+      padding: 0 0 20px;
+      font-family: $f-stack-special;
+      overflow: hidden;
+      &:before {
+        @include custom-icon($font-family-icon, '\e081');
+        color: #dfdfdf;
+        float: left;
+        margin-right: 24px;
+      }
+    }
+    a {
+      font-size: 20px;
+      color: $c-link-hover;
+      font-weight: 300;
+      text-transform: uppercase;
+      &:hover {
+        color: $c-link;
+      }
+    }
+  }
+  @include bp(max-width, $bp-medium) {
+    h4 {
+      font-size: 20px;
+      padding: 15px 0;
+    }
+    .custom-pag-list-3 a {
+      font-size: 16px;
+    }
+  }
+}
+
+//--------------------------------------------------
+// Support
+
+.custom-page {
+  .custom-pag-list-2 {
+    margin: 0 -15px;
+    padding-bottom: 70px;
+    &:after {
+      @include clearfix;
+    }
+    li {
+      list-style: none;
+      margin: 0;
+      padding: 0 15px;
+      font-style: normal;
+      font-family: $f-stack-special;
+      width: 25%;
+      float: left;
+      a {
+        display: block;
+        @include boxshadow(0px, 5px, 5px, rgba(0, 0, 0, 0.14));
+        text-align: center;
+        background: $accent-color-1;
+        padding: 45px 40px 33px;
+        color: #fff;
+        min-height: 270px;
+        h4 {
+          color: #fff;
+          line-height: 40px;
+          margin-bottom: 0;
+        }
+        span {
+          font-size: 87px;
+          line-height: 87px;
+          display: block;
+          margin-bottom: 24px;
+          &.fa {
+            font-size: 76px;
+          }
+        }
+        &:hover {
+          background: #fff;
+          color: $accent-color-1;
+          h4 {
+            color: $c-link;
+          }
+        }
+      }
+    }
+    @include bp(max-width, $bp-large) {
+      li {
+        width: 50%;
+        margin-bottom: 30px;
+      }
+    }
+    @include bp(max-width, $bp-small) {
+      li {
+        width: 100%;
+      }
+    }
+  }
+}
+
+//--------------------------------------------------
+// FAQs guarantee
+
+.guarantee-pages {
+
+  .page-title {
+    .icon1 {
+      @include titleIcon('\e06b');
+    }
+    .icon2 {
+      @include titleIcon('\e08c');
+    }
+    .icon3 {
+      @include titleIcon('\e10a');
+    }
+    .icon4 {
+      @include titleIcon('\e116');
+    }
+  }
+  .custom-pag-list-4 {
+    overflow: hidden;
+    margin: 0 -15px;
+    padding-top: 40px;
+    li {
+      list-style: none;
+      margin: 0 0 56px;
+      padding: 0 15px;
+      font-size: 13px;
+      font-style: normal;
+      line-height: 20px;
+      font-family: $f-stack-special;
+      width: 33.33333%;
+      float: left;
+      &:nth-child(3n+1) {
+        clear: left;
+      }
+
+      h4 {
+        font-size: 18px;
+      }
+    }
+
+    &.bullets {
+      h4 {
+        @include titleIcon('\e081', 13px);
+
+        &::before {
+          padding-right: 10px;
+        }
+      }
+    }
+
+    @include bp(max-width, $bp-medium) {
+      li {
+        width: 100%;
+        clear: both;
+      }
+    }
+  }
+  h4 {
+    b {
+      font-size: 16px;
+      color: $accent-color-1;
+      margin-right: 15px;
+    }
+  }
+  .a-center {
+    h4 {
+      padding-top: 30px;
+    }
+  }
+}
+
+.list-decimal {
+  counter-reset: list1;
+  h4 {
+    position: relative;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 0 0 0 55px;
+    margin-bottom: 30px;
+
+    &:after {
+      @include clearfix;
+    }
+    &:before {
+      counter-increment: list1;
+      content: counter(list1, decimal-leading-zero);
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 40px;
+      line-height: 30px;
+      font-weight: 500;
+      color: $c-link;
+    }
+  }
+}
+
+//--------------------------------------------------
+// Shipping & returns
+
+.custom-page {
+  &.custom-style-2 {
+    .page-title {
+      h1 {
+        font-size: 40px;
+        line-height: 40px;
+        margin-bottom: 15px;
+        span {
+          color: $accent-color-1;
+        }
+        b {
+          font-size: 50px;
+          color: $accent-color-1;
+          margin-right: 25px;
+        }
+        @include bp(max-width, $bp-xlarge) {
+          font-size: 23px;
+          line-height: 23px;
+        }
+        @include bp(max-width, $bp-small) {
+          b {
+            display: block;
+            margin-bottom: 20px;
+          }
+        }
+      }
+    }
+    .title-big {
+      h1 {
+        font-size: 60px;
+        line-height: 75px;
+        @include bp(max-width, $bp-xlarge) {
+          font-size: 28px;
+          line-height: 30px;
+        }
+      }
+    }
+    h4 {
+      font-size: 20px;
+      line-height: 20px;
+      margin-bottom: 24px;
+      color: $accent-color-1;
+      font-weight: 500;
+    }
+    .a-center {
+      margin-bottom: 85px;
+      font-size: 13px;
+      line-height: 20px;
+    }
+    p {
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
+
+  .custom-pag-list {
+    margin: 0;
+    padding: 0;
+    li {
+      overflow: hidden;
+      list-style: none;
+      font-size: 13px;
+      line-height: 20px;
+      margin: 0 0 50px;
+      padding: 0;
+      font-style: normal;
+      font-family: $f-stack-special;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      > span {
+        display: block;
+        font-size: 57px;
+        line-height: 110px;
+        color: #fff;
+        width: 110px;
+        height: 110px;
+        float: left;
+        background: $accent-color-1;
+        text-align: center;
+        border-radius: 100%;
+        margin-right: 30px;
+        @include boxshadow(0px, 5px, 5px, rgba(0, 0, 0, 0.14));
+      }
+
+      @include bp(max-width, $bp-xlarge) {
+        text-align: center;
+        > span {
+          float: none;
+          display: inline-block;
+          margin: 0 0 30px;
+        }
+      }
+    }
+    p {
+      overflow: hidden;
+    }
+    &.color-2 {
+      padding-bottom: 40px;
+      li {
+        > span {
+          color: $accent-color-1;
+          background: $c-module-background;
+        }
+      }
+    }
+  }
+}
+
+@include bp(max-width, $bp-xlarge) {
+  @include bp(min-width, $bp-medium+1) {
+    .banners {
+      .s-desc, .col-sm-6 + .col-sm-6 .s-desc, .col-sm-8 > a .s-desc {
+        h1 {
+          font-size: 30px;
+        }
+        h2 {
+          font-size: 19px;
+        }
+      }
+      .col-sm-8 > a .s-desc > span {
+        padding-right: 5%;
+      }
+    }
+  }
+}
+
+@include bp(max-width, 760px) {
+  .banners {
+    .col-sm-8 > a .s-desc {
+      h1 {
+        font-size: 30px;
+      }
+      h2 {
+        font-size: 19px;
+      }
+    }
+    .col-sm-8 > a .s-desc > span {
+      padding-right: 5%;
+    }
+  }
+}
+
+@include bp(max-width, 530px) {
+  .banners {
+    .col-sm-8 > a .s-desc {
+      h1 {
+        font-size: 25px;
+      }
+      h2 {
+        font-size: 14px;
+      }
+    }
+    .col-sm-8 > a .s-desc > span {
+      padding-right: 5%;
+      padding-top: 10%;
+    }
+  }
+}
+
+.form-list li.control {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  clear: both;
+}

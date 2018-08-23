@@ -1,0 +1,28 @@
+<script>
+var facebookMarketingConfig = {
+  pixelAjaxRoute: '<?php echo $this->getAjaxRoute() ?>',
+  pixelId: '<?php echo $this->fetchPixelId() ?>',
+  baseCurrency: '<?php echo $this->fetchBaseCurrency() ?>',
+  timezoneId: '<?php echo $this->fetchTimezone() ?>',
+  storeName: '<?php echo $this->fetchStoreName() ?>',
+  diaSettingsID: '<?php echo $this->getDiaSettingId() ?>',
+  popupOrigin: 'https://www.facebook.com',
+}
+</script>
+<div id='facebook-pixel-selector'>
+  <div id="header">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <i class='logo'></i>
+            </td>
+            <td>
+              <span class='title'>Facebook Pixel</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div id="pixel-flow"></div>
+</div>

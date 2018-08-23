@@ -1,0 +1,56 @@
+<?php
+$result = array();
+$pro = array();
+$bestseller_collection = $this->getBestsellerProduct();
+foreach($bestseller_collection as $collection){
+	$pro[] = $collection->getEntityId();
+}
+if($this->getChooseProducts() == "1") {
+	$result = $pro;
+}elseif($this->getChooseProducts() == "2") {
+   $result = $this->getProductIds();
+}else{
+	if($this->getSortOrder() == 1){
+		$result = array_unique(array_merge($pro, $this->getProductIds()));
+	}elseif($this->getSortOrder() == 2){
+		$result = array_unique(array_merge($this->getProductIds(),$pro));
+	}else{
+		$result = array_unique(array_merge($pro,$this->getProductIds()));
+		shuffle($result);
+	}
+}
+$upperLimit = ($this->getLimit()) ? $this->getLimit() : 1; 
+$itemPerRow = ($this->getItemsPerRow()) ? $this->getItemsPerRow() : 1 ;
+$_columnCount = ($this->getItemsPerRow()) ? $this->getItemsPerRow() : 1 ;
+	
+if (!empty($result)): ?>
+<div class="widget widget-new-products">
+    <div class="block block-products">
+		<?php if($this->getDisplayHeader()): ?>
+        <div class="block-title">
+            <strong><span><?php echo $this->__($this->getHeader()) ?></span></strong>
+        </div>
+		<?php endif; ?>
+        <div class="block-content">
+			<?php $suffix = $this->getNameInLayout(); ?>
+            <ol class="mini-products-list" id="widget-new-products-<?php echo $suffix; ?>">
+            <?php foreach ($result as $result): ?>
+			<?php 
+				$_product = $this->getProducts($result);
+				if(!$_product){
+					continue;
+				} 
+			?>	
+                <li class="item">
+                    <a class="product-image" href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail')->resize($this->getImageWidth(),$this->getImageHeight()) ?>" width="<?php echo $this->getImageWidth() ?>" height="<?php echo $this->getImageHeight() ?>" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" /></a>
+                    <div class="product-details">
+                        <p class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName() , 'name') ?></a></p>
+					</div>
+                </li>
+            <?php endforeach; ?>
+            </ol>
+            <script type="text/javascript">decorateList('widget-new-products-<?php echo $suffix; ?>', 'none-recursive')</script>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Tm_Facebook>
+			<version>0.1.0</version>		
+		</Tm_Facebook>
+	</modules>
+	<frontend>
+		<layout>
+			<updates>
+				<facebook>
+					<file>tm_facebook.xml</file>
+				</facebook>
+			</updates>
+		</layout>		
+	</frontend>	
+	<global>	
+		<models>
+			<facebook>
+				<class>Tm_Facebook_Model</class>
+			</facebook>
+		</models>
+		<helpers>
+			<facebook>
+				<class>Tm_Facebook_Helper</class>
+			</facebook>
+		</helpers>		
+	</global>
+	<adminhtml>
+		<acl>
+			<resources>
+				<all>
+	                <title>Allow everything</title>
+	            </all>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<facebook translate="title" module="facebook">
+											<title>Facebook Section</title>
+										</facebook>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</adminhtml>
+</config>

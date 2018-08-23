@@ -1,0 +1,20 @@
+<script>
+window.facebookAdsToolboxConfig = {
+  hasGzipSupport: <?php echo extension_loaded('zlib') ? 'true' : 'false' ?>,
+  baseUrl: '<?php echo $this->getBaseUrl() ?>',
+  feedAjaxRoute: '<?php echo $this->getAjaxRoute() ?>',
+  feedGenerateNowAjaxRoute: '<?php echo $this->getAjaxGenerateNowRoute() ?>',
+  feedLastRunLogsAjaxRoute: '<?php echo $this->getAjaxLastRunLogsRoute() ?>',
+  feedSetup: {
+    enabled: '<?php echo $this->fetchFeedSetupEnabled() ?>',
+    format: '<?php echo $this->fetchFeedSetupFormat() ?>'
+  }
+}
+</script>
+<div id="facebook-header">
+  <table><tbody>
+    <tr><td><i class='logo'></i></td>
+    <td><span class='title'>Facebook Product Feeds</span></td></tr>
+  </tbody></table>
+</div>
+<div id="feed-flow"></div>

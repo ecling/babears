@@ -1,0 +1,27 @@
+<?php
+/**
+ * Template for checkout page
+ *
+ * @version 20160203
+ */
+?>
+<?php
+$isJs           = $this->isJsApiPaymentMethod();
+$_controller    = Mage::app()->getFrontController()->getRequest()->getControllerName();
+$_code          = $this->getPaymentCode();
+$currentCode    = Mage::app()->getStore()->getCurrentCurrencyCode();
+$baseCode       = Mage::app()->getStore()->getBaseCurrencyCode();
+?>
+<?php if($isJs): ?>
+    <script type="text/javascript">
+        window.jsCheckoutApi = new checkoutApi(
+            '<?php echo $_code ?>',
+            '<?php echo $_controller ?>',
+            null
+        );
+
+        <?php if ($currentCode !== $baseCode):?>
+        $$('#checkout-review-table tfoot tr').last().hide();
+        <?php endif ?>
+    </script>
+<?php endif?>

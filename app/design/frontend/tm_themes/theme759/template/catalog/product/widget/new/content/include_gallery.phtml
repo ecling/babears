@@ -1,0 +1,22 @@
+<div class="product-gallery-img">
+    <?php foreach ($_product->load($_product->getId())->getMediaGalleryImages() as $image): ?>
+        <div class="product-gallery-item">
+            <a href="<?php echo $_product->getProductUrl() ?>">
+                <img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $image->getFile())->resize($gallery_helper->getHomeGridData('image_width'), $gallery_helper->getHomeGridData('image_height')); ?>" alt="" />
+            </a>
+        </div>
+    <?php endforeach; ?>
+</div>
+<script>
+    jQuery(function(){
+        $j(".product-gallery-img").owlCarousel({
+            items: 1,
+            autoPlay:false,
+            stopOnHover:true,
+            pagination: false,
+            singleItem : true,
+            transitionStyle:false,
+            navigation: true
+        });
+    });
+</script>

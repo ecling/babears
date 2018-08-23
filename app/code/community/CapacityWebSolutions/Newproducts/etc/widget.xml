@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets>
+    <newproducts type="newproducts/widget">
+        <name>MageBees:New Products Widget</name>
+		<parameters>
+            <template>
+                <values>
+                    <list_default translate="label">
+                        <value>newproducts/column/newproducts_default_list.phtml</value>
+                        <label>New Products Images and Names Template</label>
+                    </list_default>
+				</values>
+            </template>
+        </parameters>
+        <supported_blocks>
+            <left_column>
+                <block_name>left</block_name>
+                <template>
+                    <default>list_default</default>
+				</template>
+            </left_column>
+            <main_content>
+                <block_name>content</block_name>
+                <template>
+                    <grid>grid_template</grid>
+                    <list>list_template</list>
+                </template>
+            </main_content>
+            <right_column>
+                <block_name>right</block_name>
+                <template>
+                    <default>list_default</default>
+				</template>
+            </right_column>
+        </supported_blocks>
+		<parameters>
+			<wd_display_heading translate="label">
+				<visible>1</visible>
+				<label>Display Heading</label>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+				<value>1</value>
+			</wd_display_heading>
+			<wd_heading translate="label">
+				<required>1</required>
+				<visible>1</visible>
+				<label>Heading</label>
+				<type>text</type>
+				<value>New Products</value>
+				<depends>
+					<wd_display_heading><value>1</value></wd_display_heading>
+				</depends>
+			</wd_heading>
+			<wd_choose_products translate="label">
+				<visible>1</visible>
+				<label>New Products</label>
+				<source_model>newproducts/system_config_source_chooseproducts</source_model>
+				<type>select</type>
+			</wd_choose_products>
+			<wd_choose_type>
+				<visible>1</visible>
+				<label>Use 'New from Date' and 'New to Date'</label>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+				<value>1</value>
+			</wd_choose_type>
+			<wd_new_days>
+				<required>1</required>
+				<visible>1</visible>
+				<label>Product is new threshold</label>
+				<type>text</type>
+				<value>10</value>
+				<depends>
+					<wd_choose_type><value>0</value></wd_choose_type>
+				</depends>
+			</wd_new_days>
+			<wd_display_by>
+				<visible>1</visible>
+				<label>Select New Products Type</label>
+				<source_model>newproducts/system_config_source_choosetype</source_model>
+				<type>select</type>
+			</wd_display_by>
+			<wd_categories translate="label">
+				<required>1</required>
+				<visible>1</visible>
+				<label>Categories</label>
+				<type>multiselect</type>
+				<source_model>newproducts/system_config_source_category</source_model>
+				<depends>
+					<wd_display_by><value>2</value></wd_display_by>
+				</depends>
+			</wd_categories>
+			<wd_sort_by>
+				<visible>1</visible>
+				<label>Sort By</label>
+				<source_model>newproducts/system_config_source_sortby</source_model>
+				<type>select</type>
+			</wd_sort_by>
+			<wd_sort_order>
+				<visible>1</visible>
+				<label>Sort Order</label>
+				<source_model>newproducts/system_config_source_sortorder</source_model>
+				<type>select</type>
+			</wd_sort_order>
+			<wd_products_price translate="label">
+				<visible>1</visible>
+				<label>Show Products Price</label>	
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+			</wd_products_price>
+			<wd_review translate="label">
+				<visible>1</visible>
+				<label>Show Ratings</label>	
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+			</wd_review>
+			<wd_short_desc translate="label">
+				<visible>1</visible>
+				<label>Show Short Description</label>	
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+			</wd_short_desc>
+			<wd_desc_limit translate="label">
+				<required>1</required>
+				<visible>1</visible>
+				<label>Short Description Word Limit</label>	
+				<type>text</type>
+				<depends>
+					<wd_short_desc><value>1</value></wd_short_desc>
+				</depends>
+				<value>10</value>
+			</wd_desc_limit>
+			<wd_add_to_cart translate="label">
+				<visible>1</visible>
+				<label>Add to Cart</label>	
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+			</wd_add_to_cart>
+			<wd_add_to_wishlist translate="label">
+				<visible>1</visible>
+				<label>Add to Wishlist</label>	
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+			</wd_add_to_wishlist>
+			<wd_add_to_compare translate="label">
+				<visible>1</visible>
+				<label>Add to Compare</label>	
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+			</wd_add_to_compare>
+			<wd_out_of_stock translate="label">
+				<visible>1</visible>
+				<label>Display Out of Stock Products</label>	
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+			</wd_out_of_stock>
+			<wd_number_of_items translate="label comment">
+				<required>1</required>
+				<visible>1</visible>
+				<label>Number of Products to Display</label>
+				<type>text</type>
+				<value>10</value>
+			</wd_number_of_items>
+			<wd_show_pager translate="label comment">
+				<visible>1</visible>
+				<label>Display Page Control</label>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<type>select</type>
+			</wd_show_pager>
+			<wd_products_per_page translate="label comment">
+				<required>1</required>
+				<visible>1</visible>
+				<label>Number of Products per Page</label>
+				<type>text</type>
+				<depends>
+					<wd_show_pager><value>1</value></wd_show_pager>
+				</depends>
+				<value>5</value>
+			</wd_products_per_page>
+			<wd_thumbnail_height translate="label">
+				<required>1</required>
+				<visible>1</visible>
+				<label>Thumbnail Width</label>
+				<type>text</type>
+				<value>50</value>
+			</wd_thumbnail_height> 
+			<wd_thumbnail_width translate="label">
+				<required>1</required>
+				<visible>1</visible>
+				<label>Thumbnail Height </label>
+				<type>text</type>
+				<value>50</value>
+			</wd_thumbnail_width>
+			<template>
+				<visible>1</visible>
+                <label>Template</label>
+                <type>select</type>
+                <value>newproducts/newproducts-grid.phtml</value>
+                <values>
+                    <grid_template translate="label">
+                        <value>newproducts/newproducts-grid.phtml</value>
+                        <label>Grid Template</label>
+                    </grid_template>
+                    <list_template translate="label">
+                        <value>newproducts/newproducts-list.phtml</value>
+                        <label>List Template</label>
+                    </list_template>
+                </values>
+            </template>
+		</parameters>
+	</newproducts>
+</widgets>

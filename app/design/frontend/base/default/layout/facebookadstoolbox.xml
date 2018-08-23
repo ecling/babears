@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+  <default>
+    <reference name="head">
+      <block type="Facebook_AdsToolbox/head"
+             name="facebookadstoolbox.head"
+             template="facebookadstoolbox/head.phtml" />
+      <block type="Facebook_AdsToolbox/addToCart"
+             name="facebookadstoolbox.addtocart"
+             template="facebookadstoolbox/addtocart.phtml" />"
+    </reference>
+  </default>
+  <catalog_product_view>
+    <reference name="before_body_end">
+      <block type="Facebook_AdsToolbox/viewContent"
+             name="facebookadstoolbox.viewcontent"
+             template="facebookadstoolbox/viewcontent.phtml" />
+    </reference>
+  </catalog_product_view>
+  <catalog_category_view>
+    <reference name="before_body_end">
+      <block type="Facebook_AdsToolbox/viewCategory"
+             name="facebookadstoolbox.viewcategory"
+             template="facebookadstoolbox/viewcategory.phtml" />
+    </reference>
+  </catalog_category_view>
+  <checkout_onepage_index>
+    <reference name="before_body_end">
+      <block type="Facebook_AdsToolbox/initiateCheckout"
+             name="facebookadstoolbox.initiate_checkout"
+             template="facebookadstoolbox/initiate_checkout.phtml" />
+    </reference>
+  </checkout_onepage_index>
+  <checkout_onepage_success>
+    <reference name="before_body_end">
+      <block type="Facebook_AdsToolbox/purchase"
+             name="facebookadstoolbox.purchase"
+             template="facebookadstoolbox/purchase.phtml" />
+    </reference>
+  </checkout_onepage_success>
+  <catalogsearch_result_index>
+    <reference name="before_body_end">
+      <block type="Facebook_AdsToolbox/search"
+             name="facebookadstoolbox.search"
+             template="facebookadstoolbox/search.phtml" />
+    </reference>
+  </catalogsearch_result_index>
+</layout>

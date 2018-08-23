@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    Mage
+ * @package     Mage_Auto
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Martin_Flytcloud>
+            <version>1.0.1</version>
+        </Martin_Flytcloud>
+    </modules>
+    <global>
+        <resources>
+            <flytcloud_setup>
+                <setup>
+                    <module>Martin_Flytcloud</module>
+                    <class>Martin_Flytcloud_Model_Resource_Setup</class>
+                </setup>
+            </flytcloud_setup>
+        </resources>
+        <models>
+            <flytcloud>
+                <class>Martin_Flytcloud_Model</class>
+                <resourceModel>flytcloud_resource</resourceModel>
+            </flytcloud>
+            <flytcloud_resource>
+                <class>Martin_Flytcloud_Model_Resource</class>
+                <deprecatedNode>flytcloud_mysql4</deprecatedNode>
+                <entities>
+                    <order_shipping_status>
+                        <table>flytcloud_order_shipping_status</table>
+                    </order_shipping_status>
+                    <shipping_status>
+                        <table>flytcloud_shipping_status</table>
+                    </shipping_status>
+                    <shipping_type>
+                        <table>flytcloud_shipping_type</table>
+                    </shipping_type>
+                    <shipping_type_country>
+                        <table>flytcloud_shipping_type_country</table>
+                    </shipping_type_country>
+                </entities>
+            </flytcloud_resource>
+            <sales_resource>
+                <rewrite>
+                    <order_grid_collection>Martin_Flytcloud_Model_Resource_Order_Grid_Collection</order_grid_collection>
+                </rewrite>
+            </sales_resource>
+        </models>
+        <helpers>
+            <flytcloud>
+                <class>Martin_Flytcloud_Helper</class>
+            </flytcloud>
+        </helpers>
+        <blocks>
+            <flytcloud>
+                <class>Martin_Flytcloud_Block</class>
+            </flytcloud>
+            <adminhtml>
+                <rewrite>
+                    <sales_order_grid>Martin_Flytcloud_Block_Sales_Order_Grid</sales_order_grid>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <events>
+            <order_update_load_to_shipper_success>
+                <observers>
+                    <track_observer>
+                        <type>singleton</type>
+                        <class>flytcloud/observer</class>
+                        <method>saveTracks</method>
+                    </track_observer>
+                </observers>
+            </order_update_load_to_shipper_success>
+        </events>
+        <!--<rewrite>
+            <flytcloud_url>
+                <from><![CDATA[#/track-my-order#]]></from>
+                <to>/flytcloud/track/index</to>
+                <complete>1</complete>
+            </flytcloud_url>
+        </rewrite>-->
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <flytcloud>
+                    <file>ftlycloud.xml</file>
+                </flytcloud>
+            </updates>
+        </layout>
+        <routers>
+            <flytcloud>
+                <use>standard</use>
+                <args>
+                    <module>Martin_Flytcloud</module>
+                    <frontName>flytcloud</frontName>
+                </args>
+            </flytcloud>
+        </routers>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <flytcloud>
+                    <file>flytcloud.xml</file>
+                </flytcloud>
+            </updates>
+        </layout>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <flytclooud after="Mage_Adminhtml">Martin_Flytcloud_Admin</flytclooud>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+        
+    </admin>
+    <crontab>
+<!--        <jobs>
+            <catalog_product_index_price_reindex_all>
+                <schedule>
+                    <cron_expr>0 2 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>catalog/observer::reindexProductPrices</model>
+                </run>
+            </catalog_product_index_price_reindex_all>
+        </jobs>-->
+    </crontab>
+    <flytcloud>
+        <shipping>
+            <status>
+                <null />
+                <submited>Submitted to Ship</submited>
+                <completed>Completed</completed>
+            </status>
+        </shipping>
+        <devSetting>
+            <active>1</active>
+            <customerEmail>160547346@qq.com</customerEmail>
+        </devSetting>
+    </flytcloud>
+</config>

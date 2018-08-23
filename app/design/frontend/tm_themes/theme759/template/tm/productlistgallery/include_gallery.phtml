@@ -1,0 +1,28 @@
+<?php if (!sizeof($_product->getData('list_swatch_attr_values'))): ?>
+    <div class="product-gallery-img">
+        <?php foreach ($_product->getMediaGalleryImages() as $image): ?>
+            <div class="product-gallery-item">
+                <a href="<?php echo $_product->getProductUrl() ?>">
+                    <img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $image->getFile())->resize($gallery_helper->getGridData('image_width'), $gallery_helper->getGridData('image_height')); ?>" alt="" />
+                </a>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <script>
+        jQuery(function(){
+            $j(".product-gallery-img").owlCarousel({
+                items: 1,
+                autoPlay:false,
+                stopOnHover:true,
+                pagination: false,
+                singleItem : true,
+                transitionStyle:false,
+                navigation: true
+            });
+        });
+    </script>
+<?php else: ?>
+    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image" itemprop="url">
+        <img id="product-collection-image-<?php echo $_productId; ?>" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($gallery_helper->getGridData('image_width'), $gallery_helper->getGridData('image_height')); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" width="<?php echo $gallery_helper->getGridData('image_width'); ?>" height="<?php echo $gallery_helper->getGridData('image_height'); ?>" itemprop="image" />
+    </a>
+<?php endif;?>

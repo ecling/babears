@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/tm/productlistgallery/style.css</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/tm/productlistgallery/thumbs.js</name></action>
+        </reference>
+    </default>
+    <catalog_category_default>
+        <reference name="content">
+            <reference name="product_list">
+                <action method="setTemplate">
+                    <template>tm/productlistgallery/list.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <reference name="content">
+            <reference name="product_list">
+                <action method="setTemplate">
+                    <template>tm/productlistgallery/list.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </catalog_category_layered>
+    <tag_product_list translate="label">
+        <reference name="content">
+            <reference name="search_result_list">
+                <action method="setTemplate">
+                    <template>tm/productlistgallery/list.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </tag_product_list>
+    <catalogsearch_result_index translate="label">
+        <reference name="content">
+            <reference name="search_result_list">
+                <action method="setTemplate">
+                    <template>tm/productlistgallery/list.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </catalogsearch_result_index>
+    <catalogsearch_advanced_result translate="label">
+        <reference name="content">
+            <reference name="search_result_list">
+                <action method="setTemplate">
+                    <template>tm/productlistgallery/list.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </catalogsearch_advanced_result>
+</layout>

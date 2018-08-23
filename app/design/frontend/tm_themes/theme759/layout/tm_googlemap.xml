@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+	<cms_index_index>		
+			<reference name="head">
+				<action method="addItem"><type>skin_css</type><name>css/tm/googlemap/tm_googlemap.css</name></action>
+			</reference>
+			<reference name="footer">
+				<block type="core/template" name="tm_googlemap_embed" as="tm_googlemap_embed" template="tm/googlemap/embed_map.phtml"/>
+			</reference>
+	</cms_index_index>
+	<contacts_index_index>
+		<reference name="footer">
+			<remove name="tm_googlemap_embed"/>
+		</reference>
+		<reference name="content">
+            <block type="core/template" name="tm_googlemap_contacts" as="tm_googlemap_contacts" before="contact-block" template="tm/googlemap/contacts_map.phtml"/>
+        </reference>
+	</contacts_index_index>
+</layout>

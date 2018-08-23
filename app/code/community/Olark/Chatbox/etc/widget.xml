@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Widget that adds Olark Live Chat to Magento stores.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to support@olark.com so we can send you a copy immediately.
+ *
+ * @category    Olark
+ * @package     Olark_Chatbox
+ * @copyright   Copyright 2012. Habla, Inc. (http://www.olark.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<widgets>
+    <chatbox_chatbox type="chatbox/chatbox" translate="name description" module="chatbox">
+        <name>Olark Live Chat</name>
+        <description>Adds Olark Live Chat to your website.</description>
+        <parameters>
+            <siteID>
+                <label>Olark Site-ID</label>
+                <visible>1</visible>
+                <required>1</required>
+                <type>text</type>
+                <description><![CDATA[
+                    <h3 style="margin-top:1em;font-size:1.5em">
+                        Get started in 5 minutes.
+                    </h3>
+                    <ol style="list-style: decimal; margin-left: 30px; font-size: 1.5em; line-height: 1.5em;">
+                        <li>
+                            <a target="_blank" href="https://olark.com/signup/create_new_account?cartsaver=magento&amp;version=1.0.7&amp;rid=magento-connect">
+                            Create an Olark account</a>
+                            if you don't have one.
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://olark.com/settings/site-id?cartsaver=magento&amp;version=1.0.7&amp;rid=magento-connect">
+                            Find your Site ID</a>
+                            and type it above.
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://olark.com/extensions/cartsaver?cartsaver=magento&amp;version=1.0.7&amp;rid=magento-connect">
+                            Configure CartSaver notifications</a>
+                            in your Olark account.
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://chat.olark.com/?cartsaver=magento&amp;version=1.0.7&amp;rid=magento-connect">
+                            Start chatting with your customers.</a>
+                            That's it!
+                        </li>                        
+                    </ol>
+
+                    <p style="margin-top: 1em">
+                        <strong>Need help?</strong> You can
+                        <a target="_blank" href="http://olark.com/help/magento-connect?cartsaver=magento&amp;version=1.0.7&amp;rid=magento-connect">
+                        read our tutorial</a>,
+                        or contact us by
+                        <a target="_blank" href="http://olark.com/help/magento-connect?cartsaver=magento&amp;version=1.0.7&amp;intent=chat&amp;rid=magento-connect">
+                        live chat</a>
+                        or
+                        <a target="_blank" href="mailto:support+magento@olark.com">
+                        email</a>.
+                    </p>
+
+                    <hr style="border: none; border: solid #ccc 1px; margin: 3em 0 3em 0;"/>
+
+                    <h3>
+                        Save the sale with Olark CartSaver for Magento!
+                    </h3>
+
+                    <p style="margin-top: 1em">
+                        Olark lets you answer questions immediately,
+                        keep customers browsing your store and save the sale!
+                    </p>
+                    
+                    <p style="margin-top: 1em"><strong>See what customers do on your Magento store.</strong> You'll know 
+                      the second customers want to buy when Olark 
+                      CartSaver notifies you in real-time whenever customers 
+                      update their cart, proceed to checkout, and complete the sale. 
+                      Then reach out and help. You'll keep your customers interested 
+                      all the way to purchase.
+                    </p>
+
+                    <p style="margin-top: 1em">
+                        <strong><a target="_blank" href="http://olark.com/redirect/magento-connect?cartsaver=magento&amp;version=1.0.7&amp;rid=magento-connect">
+                        
+                        Learn more and give us a good review in Magento Connect</a></strong>
+                    </p>
+
+                    <hr style="border: none; border: solid #ccc 1px; margin: 3em 0 3em 0;"/>
+
+                    <h3>
+                        Advanced: Developer API snippets
+                    </h3>
+
+                    <p style="margin-top: 1em">
+                        Olark has an extensive Javascript API which developers
+                        can use to change the behavior of how Olark works. 
+                        <a target="_blank" href="http://olark.com/documentation?cartsaver=magento&amp;version=1.0.7&amp;rid=magento-connect">
+                        Read our documentation for more information</a>.</p>
+                        
+                    <p style="margin-top: 1em">To include your own HTML or Javascript, just paste it below. Please <a target="_blank" href="mailto:support+magento@olark.com">get in touch</a> if you run into any problems.</p>
+                    
+                    <p style="margin-top: 1em">
+                        <strong>
+                            Don't forget to wrap your
+                            Javascript in &lt;script&gt;&lt;/script&gt; tags!
+                        </strong>
+                    </p>
+               ]]></description>
+            </siteID>
+            <customConfig>
+                <label>Developer API snippets</label>
+                <visible>1</visible>
+                <required>0</required>
+                <type>textarea</type>
+                <description/>
+            </customConfig>
+        </parameters>
+    </chatbox_chatbox>
+</widgets>

@@ -1,0 +1,12 @@
+<config>
+    <modules>
+        <CheckoutApi_ChargePayment>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Payment/>
+                <Mage_Sales/>
+            </depends>
+        </CheckoutApi_ChargePayment>
+    </modules>
+</config>

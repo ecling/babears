@@ -1,0 +1,2218 @@
+//
+// Magento
+//
+// NOTICE OF LICENSE
+//
+// This source file is subject to the Academic Free License (AFL 3.0)
+// that is bundled with this package in the file LICENSE_AFL.txt.
+// It is also available through the world-wide-web at this URL:
+// http://opensource.org/licenses/afl-3.0.php
+// If you did not receive a copy of the license and are unable to
+// obtain it through the world-wide-web, please send an email
+// to license@magento.com so we can send you a copy immediately.
+//
+// DISCLAIMER
+//
+// Do not edit or add to this file if you wish to upgrade Magento to newer
+// versions in the future. If you wish to customize Magento for your
+// needs please refer to http://www.magento.com for more information.
+//
+// @category    design
+// @package     rwd_default
+// @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+// @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+//
+
+@charset "UTF-8";
+
+/* ============================================ *
+ * Base Styles
+ * ============================================ */
+
+@-ms-viewport {
+  width: device-width;
+}
+
+@-o-viewport {
+  width: device-width;
+}
+
+@viewport {
+  width: device-width;
+}
+
+.header-row,
+.page-header {
+  font-family: $f-stack-special;
+  border: none;
+  margin: 0 auto !important;
+}
+
+// Prevent 300ms delay in IE on touch devices
+a, button {
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  outline: none !important;
+}
+
+body,
+button,
+input,
+select,
+table,
+textarea {
+  font-family: $f-stack-default;
+  color: $c-text;
+  font-size: $f-size;
+  line-height: $b-line-height;
+}
+
+a {
+  color: $c-link;
+  text-decoration: none;
+
+}
+
+a:hover {
+  color: $c-link-hover;
+  text-decoration: none;
+}
+
+a:focus {
+  outline: 0;
+  outline-color: none;
+  text-decoration: none;
+  color: inherit;
+  color: $c-link-hover;
+}
+
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================ *
+ * Typography
+ * ============================================ */
+
+h1, .h1 {
+  @include h1;
+}
+
+h2, .h2 {
+  @include h2;
+}
+
+h3, .h3 {
+  @include h3;
+}
+
+h4, .h4 {
+  @include h4;
+}
+
+h5, .h5 {
+  @include h5;
+}
+
+h6, .h6 {
+  @include h6;
+}
+
+/* ============================================ *
+ * Shared Classes
+ * ============================================ */
+
+.address-list address {
+  margin-bottom: 1em;
+}
+
+.availability {
+  margin-bottom: 0;
+}
+
+.availability .label {
+
+}
+
+.availability.in-stock {
+  color: $c-success;
+  font-weight: 500;
+}
+
+.availability.available-soon,
+.availability.out-of-stock {
+  color: $c-danger;
+}
+
+.availability-only {
+  color: $c-dark;
+  margin-bottom: 0;
+}
+
+.label {
+  display: inline;
+  font-size: 1em;
+  font-weight: normal;
+  text-transform: none;
+  padding: 0;
+  text-align: left;
+  border-radius: 0;
+  line-height: inherit;
+  white-space: normal;
+  color: $label-color;
+}
+
+.clear {
+  clear: both;
+}
+
+/* -------------------------------------------- *
+ * Page Titles
+ */
+
+.page-title,
+.widget-title {
+  text-align: center;
+}
+
+.page-title h1,
+.page-title h2,
+.widget-title h1,
+.widget-title h2 {
+  @include pageTitle;
+}
+
+/* ============================================ *
+ * Buttons
+ * ============================================ */
+
+.sidebar .actions button.button {
+  white-space: normal;
+}
+
+/* Primary Buttons */
+
+.button,
+.cart-table .product-cart-actions .button,
+#co-shipping-method-form .buttons-set .button,
+.footer .button {
+  @extend %primary-button;
+}
+
+/* Secondary Buttons */
+.button.button-secondary {
+  @extend %secondary-button;
+}
+
+a.button {
+  text-decoration: none;
+
+  &::after {
+    display: none;
+  }
+}
+
+a.button:hover {
+  color: #FFFFFF;
+}
+
+/* Disabled - class for anchor, state for form elements */
+.button.disabled,
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Adjacent buttons */
+.button + .button {
+  margin-left: 5px;
+}
+
+.button2 {
+  border: 0;
+  padding: 0 5px;
+  margin: 0;
+  font-size: $f-size-xl;
+  color: $accent-color-1;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  vertical-align: middle;
+
+  &:hover {
+    color: $c-text;
+  }
+}
+
+.button2:focus {
+  outline: none;
+}
+
+.button2 span,
+.button2 span span {
+  line-height: 30px;
+  height: 30px;
+  text-transform: uppercase;
+  display: inline-block;
+
+}
+
+@include bp(max-width, $bp-medium) {
+  .col2-set .buttons-set {
+    .button,
+    .button2 {
+      float: none;
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .back-link {
+      display: none;
+    }
+    .required {
+      display: none;
+    }
+  }
+}
+
+@include bp(max-width, $bp-xsmall) {
+  .buttons-set {
+    .button {
+      float: none;
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: $element-spacing;
+    }
+    .back-link {
+      display: none;
+    }
+    .required {
+      display: none;
+    }
+  }
+}
+
+/* -------------------------------------------- *
+ * Paypal Button
+ */
+
+.paypal-logo.paypal-after {
+  float: left;
+}
+
+.paypal-after .paypal-or {
+  float: left;
+}
+
+.paypal-or {
+  line-height: 34px;
+  margin: 0px 10px 5px;
+}
+
+.paypal-after .paypal-button {
+  float: left;
+}
+
+.paypal-button {
+  line-height: 0px;
+}
+
+.paypal-button img {
+  display: inline;
+}
+
+@include bp(max-width, 740px) {
+  .paypal-or {
+    line-height: 20px;
+  }
+
+  .paypal-logo,
+  .paypal-or,
+  .paypal-button {
+    text-align: center;
+    display: inline-block;
+    margin: 15px 0 0;
+    float: none;
+  }
+}
+
+/* -------------------------------------------- *
+ * Button Sets
+ */
+
+.buttons-set {
+  clear: both;
+  margin: $box-spacing 0;
+  padding-top: $box-spacing;
+  border-top: 1px solid $c-module-border-light;
+  text-align: right;
+
+  p.required {
+    margin: 0;
+    margin-left: $gap;
+    line-height: 33px;
+    float: right;
+  }
+  .back-link {
+    float: left;
+    margin: 0;
+    line-height: 33px;
+
+    small {
+      display: none;
+    }
+
+    &::before {
+      @include custom-icon($font-family-icon, '\e0c7');
+      font-size: 23px;
+      line-height: 16px;
+      display: inline-block;
+      vertical-align: middle;
+      color: $c-link;
+    }
+  }
+  a:not(.button) {
+    line-height: 20px;
+    display: inline-block;
+    padding: 5px;
+  }
+  button.button {
+    float: right;
+    margin-left: 5px;
+    margin-bottom: 5px;
+  }
+
+  &:after {
+    @include clearfix;
+  }
+}
+
+/* -------------------------------------------- *
+ * Icons
+ */
+
+.icon-sprite {
+  background-image: url(../images/icon_sprite.png);
+  background-repeat: no-repeat;
+  @include image-replacement;
+}
+
+@include if-min-resolution(2) {
+  .icon-sprite {
+    background-image: url(../images/icon_sprite@2x.png);
+    background-size: 100px 1000px;
+  }
+}
+
+/* -------------------------------------------- *
+ * Breadcrumbs
+ */
+
+.breadcrumbs {
+  overflow: hidden;
+  margin: -$trim-small 0 33px;
+  background-color: $c-module-background;
+  padding: 14px 0 13px;
+}
+
+.breadcrumbs li {
+  float: left;
+  font-size: $f-size-l;
+  font-family: $f-stack-special;
+  text-transform: none;
+
+  a {
+    display: inline-block;
+    color: $c-text;
+
+    &:hover {
+      color: $c-action;
+    }
+  }
+
+  &.home a {
+
+    font-size: 0;
+    line-height: 0;
+    color: $accent-color-1;
+
+    &::before {
+      font-size: 18px;
+      line-height: 20px;
+      display: inline-block;
+      @include custom-icon($font-family-icon, '\e0ba');
+
+    }
+
+    &:hover::before {
+      color: darken($accent-color-1, 10%);
+    }
+  }
+}
+
+.breadcrumbs strong {
+  color: $c-text;
+  font-weight: normal;
+}
+
+.breadcrumbs span {
+  padding: 0 10px;
+  line-height: 14px;
+  color: #c7c7c7;
+}
+
+@include bp(max-width, $bp-medium) {
+
+  .breadcrumbs {
+    display: none;
+  }
+
+}
+
+.main-container,
+.footer-container {
+  position: relative;
+  //max-width: $max-container-width;
+  margin: 0 auto;
+  padding: $trim-small 0;
+
+  &:after {
+    @include clearfix;
+  }
+}
+
+@include bp(min-width, 480px) {
+
+  .breadcrumbs {
+    margin-top: -$trim;
+  }
+}
+
+/* -------------------------------------------- *
+ * Button - Remove / Previous
+ */
+
+.btn-remove,
+.btn-previous {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  /* Hide text */
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+  position: relative;
+  &:hover::after {
+    @extend %shadow-hover;
+    color: #333;
+  }
+
+  &:active::after {
+    @extend %single-active;
+
+  }
+
+}
+
+.btn-remove {
+  &:after {
+    @include custom-icon($font-family-icon, '\e051');
+    color: $accent-color-1;
+    line-height: 20px;
+    width: 100%;
+    font-size: 18px;
+  }
+  &:hover:after {
+
+  }
+}
+
+.btn-remove2 {
+  border: none;
+  width: auto;
+  height: auto;
+
+  &:before {
+    @include custom-icon($font-family-icon, '\e132');
+    font-size: 22px;
+    color: $accent-color-1;
+  }
+  &:after {
+    display: none;
+  }
+  &:hover {
+    background-color: transparent;
+    @include opacity(0.6);
+  }
+}
+
+.btn-previous {
+  &:after {
+    @include triangle(left, 4px, $c-action);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -2px;
+    margin-top: -4px;
+  }
+  &:hover:after {
+    @include triangle(left, 4px, #FFFFFF);
+  }
+}
+
+.block-layered-nav .currently,
+.mini-products-list,
+#compare-items {
+
+  .btn-remove,
+  .btn-previous {
+    float: right;
+    margin-left: 6px;
+  }
+}
+
+/* -------------------------------------------- *
+ * Checkout Agreements
+ */
+
+.checkout-agreements li {
+  margin-bottom: 20px;
+}
+
+.checkout-agreements .agreement-content {
+  overflow-y: auto;
+  max-width: 670px;
+  max-height: 125px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid $c-module-border;
+  background: $c-module-background;
+}
+
+/* -------------------------------------------- *
+ * CVV Security Code
+ */
+
+.cvv-what-is-this {
+  margin: 7px 0 0;
+  font-size: $f-size;
+  color: $c-danger;
+  line-height: 24px;
+  display: inline-block;
+}
+
+/* -------------------------------------------- *
+ * Container
+ */
+
+.main-container,
+.footer-container {
+  position: relative;
+  //max-width: $max-container-width;
+  margin: 0 auto;
+  padding: $trim-small 0;
+
+  &:after {
+    @include clearfix;
+  }
+}
+
+@include bp(min-width, 480px) {
+
+  .main-container,
+  .footer-container {
+    padding: $trim 0;
+  }
+}
+
+.footer-container {
+  padding-top: 0px;
+}
+
+/* -------------------------------------------- *
+ * Column Layouts
+ */
+
+.col-left {
+  float: left;
+}
+
+.col3-layout .col-main,
+.col2-left-layout .col-main {
+  float: right;
+}
+
+// .main:after,
+// .col-wrapper:after {
+//     @include clearfix;
+// }
+
+// .col-left,
+// .col-right,
+// .col-main {
+//     padding: 0 10px;
+// }
+
+// .col-left {
+//     float: left;
+//     width: percentage(240px/960px);
+//     padding-left: 0; /* Remove the 15px padding */
+//     clear: left;
+
+//     img {
+//         max-width: 100%;
+//     }
+// }
+
+// .col-right {
+//     float: right;
+//     width: percentage(240px/960px);
+//     padding-right: 0; /* Remove the 15px padding */
+
+//     img {
+//         max-width: 100%;
+//     }
+// }
+
+// .col-main {
+//     float: left;
+
+// }
+
+// .col1-layout {
+//     .col-main {
+//         float: none;
+//         width: auto;
+//         padding: 0; /* Remove the 15px padding */
+//     }
+// }
+
+// .col2-left-layout {
+//     .col-main {
+//         float: right;
+//         padding-right: 0; /* Remove the 15px padding */
+//     }
+// }
+
+// .col2-right-layout {
+//     .col-main {
+//         padding-left: 0; /* Remove the 15px padding */
+//     }
+// }
+
+// .col3-layout {
+//     .col-right {
+//         width: percentage(200px/960px);
+//     }
+
+//     .col-wrapper {
+//         float: left;
+//         width: percentage(760px/960px);
+
+//         .col-main {
+//             float: right;
+//             width: percentage(560px/760px);
+//         }
+
+//         .col-left {
+//             width: percentage(200px/760px);
+//         }
+//     }
+// }
+
+// @include bp(max-width, 1000px) {
+//     .col3-layout {
+//         .col-right {
+//             float: left;
+//             clear: left;
+//             padding-left: 0;
+//             padding-right: 10px;
+//             width: percentage(240px/960px);
+//         }
+
+//         .col-wrapper {
+//             float: right;
+//             width: 100%;
+
+//             .col-main {
+//                 float: right;
+//                 width: percentage(720px/960px);
+//             }
+
+//             .col-left {
+//                 width: percentage(240px/960px);
+//             }
+//         }
+//     }
+// }
+
+// @include bp(max-width, $bp-medium) {
+//     .col-left,
+//     .col-right,
+//     .col-main,
+//     .col1-layout .col-left,
+//     .col1-layout .col-right,
+//     .col1-layout .col-main,
+//     .col2-left-layout .col-left,
+//     .col2-left-layout .col-right,
+//     .col2-left-layout .col-main,
+//     .col2-right-layout .col-left,
+//     .col2-right-layout .col-right,
+//     .col2-right-layout .col-main,
+//     .col3-layout .col-wrapper .col-left,
+//     .col3-layout .col-right,
+//     .col3-layout .col-wrapper .col-main {
+//         padding: 0;
+//         margin-bottom: 10px; // Since columns are stacked, we want there to be vertical spacing
+//         float: none;
+//         width: auto;
+//     }
+
+//     .col3-layout .col-wrapper {
+//         float: none;
+//         width: auto;
+//     }
+
+//     .col-main {
+//         float: none;
+//         width: auto;
+//     }
+
+//     .col-main .col-left {
+//         padding: 0; /* On product listing pages, the left column gets moved inside col-main on small viewports */
+//     }
+// }
+
+// /* Content Columns */
+
+// .col2-set {
+//     width: 100%;
+
+//     .col-1,
+//     .col-2 {
+//         width: 50%;
+//         padding: $box-spacing-large;
+
+//         @include bp(max-width, $bp-medium) {
+//             padding: $box-spacing;
+//         }
+//     }
+
+//     .col-1 {
+//         float: left;
+//         padding-left: 0;
+//     }
+
+//     .col-2 {
+//         float: right;
+//         padding-right: 0;
+//     }
+
+//     @include bp(max-width, $bp-xsmall) {
+//         .col-1,
+//         .col-2 {
+//             float: none;
+//             width: auto;
+//             border: 0;
+//             padding-right: 0;
+//             padding-left: 0;
+//         }
+//     }
+
+//     .narrow {
+//         width: 33%;
+//     }
+
+//     .wide {
+//         width: 65%;
+//     }
+
+//     &:after {
+//         @include clearfix;
+//     }
+// }
+
+/* -------------------------------------------- *
+ * Top Container
+ */
+@include bp(min-width, $bp-medium + 1) {
+  .top-container {
+    margin: 0 auto;
+  }
+}
+
+/* -------------------------------------------- *
+ * Global Site Notice
+ */
+
+.global-site-notice {
+  background: $c-dark;
+  color: $c-text-white;
+  font-size: $f-size-xxs;
+
+  .notice-inner {
+    padding-left: 120px;
+    width: 100%;
+    max-width: $max-content-width;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: $f-size-xxs;
+    min-height: 40px;
+    padding-top: (40px - $f-size-xxs) / 2;
+    padding-bottom: (40px - $f-size-xxs) / 2;
+    background-image: url('../images/demo-logo.png');
+    background-position: left;
+    background-repeat: no-repeat;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+/* -------------------------------------------- *
+ * Promotional Message Banner
+ */
+
+.promo-msg {
+  color: $c-text-primary;
+  text-align: center;
+  margin: $box-spacing;
+  text-transform: uppercase;
+  font-family: $f-stack-special;
+}
+
+/* -------------------------------------------- *
+ * Grid
+ */
+
+.grid:after {
+  @include clearfix;
+}
+
+/* -------------------------------------------- *
+ * Messages
+ */
+.success {
+  color: $c-success;
+}
+
+.error {
+  color: $c-danger;
+  font-weight: bold;
+}
+
+.notice {
+  color: $c-warn;
+  font-weight: bold;
+}
+
+/* -------------------------------------------- *
+ * Messages
+ */
+
+.messages {
+  margin-bottom: 25px;
+}
+
+.messages li li {
+  position: relative;
+  margin-bottom: 5px;
+  padding: 7px 10px 7px 20px;
+  background: $c-module-background;
+  font-size: $f-size-l;
+}
+
+.messages li li:before {
+  top: 50%;
+  left: 0;
+  margin-top: -6px;
+}
+
+.messages .error-msg li {
+  color: $c-black;
+  border-left: 5px solid $c-danger;
+  background-color: $c-danger-background;
+}
+
+.messages .error-msg li:before {
+  @include triangle(right, 6px, $c-danger);
+}
+
+.messages .notice-msg li {
+  color: $c-black;
+  border-left: 5px solid $c-warn;
+  background-color: $c-warn-background;
+}
+
+.messages .notice-msg li:before {
+  @include triangle(right, 6px, $c-warn);
+}
+
+.messages .success-msg li {
+  color: $c-black;
+  border-left: 5px solid $c-success;
+  background-color: $c-success-background;
+}
+
+.messages .success-msg li:before {
+  @include triangle(right, 6px, $c-success);
+}
+
+// ---------------------------------------------
+
+@include bp(min-width, 915px) {
+
+  .order-list-grid .col-1 {
+    width: 30%;
+  }
+
+  .order-list-grid .col-2 {
+    width: 50%;
+    padding-right: 20px;
+  }
+
+  .order-list-grid .col-3 {
+    clear: none;
+    width: 20%;
+    padding-top: 0;
+  }
+
+}
+
+/* -------------------------------------------- *
+ * Page Popup
+ */
+
+.page-popup {
+  padding: 20px;
+  background: #FFFFFF;
+  height: auto;
+}
+
+.page-popup h1 {
+  margin: 0 0 0.5em;
+  font-size: 36px;
+}
+
+/* -------------------------------------------- *
+ * Payment Methods
+ */
+
+.payment-methods {
+  margin-bottom: 20px;
+}
+
+.payment-methods dt {
+  padding: 5px 0;
+}
+
+.payment-methods dd {
+  padding-top: 10px;
+}
+
+.payment-methods .form-list {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  margin: 5px 15px 15px;
+  padding: 15px;
+  border: 1px solid $c-module-border;
+  background: $c-module-background;
+}
+
+.payment-methods .form-list:before {
+  @include triangle(up, 10px, $c-module-border);
+  top: -11px;
+  left: 30px;
+}
+
+.payment-methods .form-list:after {
+  @include triangle(up, 10px, $c-module-background);
+  top: -10px;
+  left: 30px;
+}
+
+.payment-methods .form-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* -------------------------------------------- *
+ * Please Wait (Loading Indicator)
+ */
+
+.please-wait {
+  display: inline-block;
+  margin-left: 10px;
+  margin-top: 5px;
+  line-height: 24px;
+  height: 24px;
+  white-space: nowrap; /* Prevent the linebreak in the HTML from causing layout issues */
+
+  img {
+    float: left;
+    margin-right: 5px;
+    width: 24px; // Actual image is 48px, thereby supporting hi-res screens
+  }
+}
+
+/* -------------------------------------------- *
+ * Price Box - Standard
+ */
+
+.price-box {
+  margin: $element-spacing 0;
+}
+
+.price-box p {
+  margin-bottom: 0;
+}
+
+.price-notice {
+  color: $c-text-gray;
+}
+
+.price-box .price {
+  color: $c-price;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.price-box .price-label {
+  color: $c-text-gray;
+  white-space: nowrap;
+}
+
+.price-box .minimal-price-link {
+  padding-left: 1em;
+  color: $c-text-primary;
+  display: block; /* We want this to show on its own line, otherwise the layout looks funky */
+
+  .label {
+    color: $c-text-gray;
+  }
+}
+
+/* -------------------------------------------- *
+ * Price Box - Special
+ */
+
+.price-box .old-price,
+.price-box .special-price {
+  display: block;
+
+  .price-label {
+    display: none;
+  }
+
+  .price {
+    display: inline-block;
+  }
+}
+
+.price-box .old-price {
+  .price {
+    color: $c-old-price;
+    text-decoration: line-through;
+    font-size: $f-size-xs;
+    font-weight: 400;
+  }
+}
+
+.price-box .special-price {
+  .price {
+    color: $c-special-price;
+  }
+  .price-label {
+    color: #D84D3C;
+  }
+}
+
+/* -------------------------------------------- *
+ * Price Box - Taxes
+ */
+
+.price-box .price-excluding-tax,
+.price-box .price-including-tax {
+  display: block;
+}
+
+span.weee {
+  display: block;
+}
+
+/* -------------------------------------------- *
+ * Tier Prices
+ */
+
+.product-pricing,
+.tier-prices,
+.tier-prices-grouped {
+  display: inline-block;
+  padding: 4px 8px;
+  background: #FBF4DE;
+  border: 1px solid #E2D4C7;
+  margin-top: $element-spacing;
+
+  li {
+    font-size: $f-size-xs;
+  }
+  .benefit {
+    font-style: italic;
+  }
+  .price {
+    font-weight: bold;
+  }
+}
+
+/* ============================================ *
+ * Item Options
+ * ============================================ */
+
+.item-options {
+  font-size: $f-size-xs;
+  font-family: $f-stack-special;
+  color: $c-text;
+  font-weight: 400;
+  text-transform: capitalize;
+
+  &:after {
+    @include clearfix;
+  }
+
+  dt {
+    float: left;
+    clear: left;
+    padding-right: 0px;
+    color: $c-dark;
+    font-weight: 400;
+
+    &:after {
+      content: ': ';
+    }
+  }
+
+  dd {
+    float: left;
+    padding-left: 10px;
+    margin: 0 0 6px;
+  }
+}
+
+.truncated,
+.truncated a.dots {
+  cursor: help;
+}
+
+.truncated a.details {
+  cursor: help;
+  @extend %button-border;
+  background-color: $c-backround-light;
+  color: $c-dark;
+  font-weight: 500;
+  display: inline-block;
+  padding: 6px 14px;
+
+  &:hover {
+    @extend %button-border-hover;
+    text-decoration: none;
+  }
+
+}
+
+.truncated .truncated_full_value {
+  position: relative;
+  z-index: 300;
+}
+
+.truncated .truncated_full_value .item-options {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  z-index: 300;
+  width: 200px;
+  padding: 18px;
+  border: 1px solid $c-module-border-light;
+  @include boxshadow(0, 0, 5px, rgba(0, 0, 0, 0.15));
+  background-color: #F6F6F6;
+  top: 31px;
+  right: -80px;
+
+  &::before {
+    @include triangle(up, 14px, $c-module-border-light);
+    top: -14px;
+    left: 50px
+  }
+
+  &::after {
+    @include triangle(up, 14px, $c-module-background);
+    top: -12px;
+    left: 51px
+  }
+
+}
+
+.truncated .truncated_full_value .item-options > p {
+  font-weight: 500;
+  color: $c-dark;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.truncated .show .item-options {
+  visibility: visible;
+  opacity: 1;
+}
+
+@include bp(max-width, $bp-xsmall) {
+
+  .truncated {
+    cursor: inherit;
+
+    a.details {
+      display: none;
+    }
+
+    .truncated_full_value {
+      .item-options {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+        position: static;
+        padding: 10px 0;
+        z-index: 1;
+        width: 100%;
+        border: none;
+        background-color: transparent;
+        box-shadow: none;
+
+        p {
+          float: none;
+        }
+
+        dl {
+          overflow: hidden;
+          margin-bottom: 0;
+        }
+
+        &:after,
+        &:before {
+          display: none !important;
+        }
+      }
+    }
+  }
+
+}
+
+/* -------------------------------------------- *
+ * Printer Friendly Page
+ */
+
+.page-print {
+  width: 6.5in;
+  margin: 20px;
+  background: #FFFFFF;
+}
+
+.sales-order-print {
+  .col-1,
+  .col-2 {
+    float: left;
+    width: 45%;
+    margin-right: 2%;
+    margin-bottom: 30px;
+
+    h2 {
+      margin-bottom: 10px;
+    }
+  }
+
+  .product-name {
+    font-size: 16px;
+    text-transform: none;
+  }
+}
+
+/* -------------------------------------------- *
+ * Add to links
+ */
+
+.add-to-links {
+  margin: $element-spacing 0;
+  font-size: $f-size;
+
+  a {
+    display: inline-block;
+    padding: 0px 3px 3px;
+    font-weight: 500;
+  }
+}
+
+.link-compare,
+.link-wishlist {
+  font-weight: 500;
+
+  &::before {
+    font-size: 18px;
+    padding-right: 5px;
+  }
+}
+
+.link-compare::before {
+  @include custom-icon($font-family-icon, '\e154');
+}
+
+.link-wishlist::before {
+  @include custom-icon($font-family-icon, '\e07f');
+}
+
+.add-to-links .separator {
+  display: none;
+}
+
+/* -------------------------------------------- *
+ * Product Image
+ */
+
+.product-image,
+.no-touch .product-img-box .product-image:not(.zoom-available):hover {
+  position: relative;
+  display: block;
+  background-color: $product-image-bg;
+  border: none;
+  text-align: center;
+
+  img {
+    margin: 0 auto;
+    max-width: 100%;
+  }
+}
+
+@include bp (max-width, $bp-medium) {
+  body .product-img-box .product-image:hover {
+    border-color: $c-module-border-light;
+  }
+}
+
+.no-touch .product-image:hover {
+
+}
+
+/* -------------------------------------------- *
+ * Ratings
+ */
+
+.ratings {
+  margin: 7px 0;
+
+  .rating-box,
+  .rating-links {
+    margin: 5px 0;
+    font-size: $f-size-xs;
+    line-height: 26px;
+  }
+
+  .rating-box {
+    @extend .icon-sprite;
+    width: 65px;
+    height: 13px;
+    background-repeat: repeat-x;
+    background-position: 0 -615px;
+    overflow: hidden;
+  }
+  .rating-box .rating {
+    @extend .icon-sprite;
+    float: left;
+    height: 13px;
+    background-repeat: repeat-x;
+    background-position: 0 -600px;
+  }
+  .amount {
+    display: block;
+    margin: 5px auto;
+  }
+
+  .rating-links {
+
+    a {
+      vertical-align: middle;
+    }
+  }
+
+  .separator {
+    margin: 0 10px;
+    overflow: hidden;
+    text-indent: -999em;
+    position: relative;
+    line-height: 26px;
+    display: inline-block;
+    width: 2px;
+    vertical-align: middle;
+
+    &.temp {
+      float: left;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 100%;
+      background-color: $c-module-border-light;
+    }
+  }
+}
+
+/* -------------------------------------------- *
+ * Standard Formatted Text Block
+ */
+
+.std p {
+  margin: 0 0 $b-margin-bottom;
+}
+
+.std ol {
+  list-style: decimal outside;
+  margin-bottom: $b-margin-bottom;
+}
+
+.std ol li {
+  margin-left: 2em;
+}
+
+.std ul {
+  list-style: disc outside;
+  margin-bottom: $b-margin-bottom;
+}
+
+.std ul li {
+  margin-left: 2em;
+}
+
+.std .note {
+  color: $c-text-gray;
+  font-size: $f-size-s;
+}
+
+/* -------------------------------------------- *
+ * Tabs
+ */
+
+.tabs {
+  margin-bottom: $gap;
+  background: #FFFFFF;
+}
+
+/* -------------------------------------------- *
+ * Toolbar
+ */
+
+.toolbar {
+  margin-bottom: 35px;
+  background-color: $c-module-background;
+  padding: 0;
+  clear: both;
+
+  &:after {
+    @include clearfix;
+  }
+
+  select {
+    width: auto;
+    display: inline-block;
+    float: left;
+    vertical-align: middle;
+    margin: 7px;
+  }
+
+  @extend %custom-select;
+
+  .dropdown {
+
+    border-top: none;
+    border-left: none;
+    border-bottom: none;
+    float: left;
+    width: 270px;
+
+    li,
+    .selected {
+      padding: 18px 20px 17px;
+    }
+
+    .carat {
+      margin: 0;
+    }
+
+    @include bp(max-width, $bp-xlarge) {
+      width: auto;
+      min-width: 130px;
+      .selected {
+        padding-right: 40px;
+      }
+      div {
+        top: 104%;
+        left: auto;
+        min-width: 100%;
+        width: auto;
+        ul {
+          width: auto;
+          min-width: 100%;
+        }
+      }
+    }
+  }
+
+}
+
+.pager-no-toolbar {
+  margin-bottom: $box-spacing;
+}
+
+// This will apply to the bottom toolbar
+.pager-no-toolbar ~ .pager-no-toolbar {
+  margin-top: $box-spacing;
+}
+
+.toolbar,
+.pager {
+  font-family: $f-stack-special;
+  color: $c-text;
+  line-height: 30px;
+  font-size: $f-size-xs;
+
+  li {
+    border: none;
+    margin-right: 2px;
+    > a,
+    > span {
+      display: inline-block;
+      padding: 0;
+      background-color: transparent;
+      border: 1px solid $pager-border;
+      border-radius: 0;
+      vertical-align: top;
+
+    }
+  }
+}
+
+.toolbar label,
+.pager-no-toolbar label {
+  float: left;
+  font-weight: normal;
+  text-transform: none;
+  font-size: 14px;
+  color: $c-gray;
+}
+
+.sorter {
+  float: left;
+
+  label {
+    float: left;
+    margin-right: 5px;
+    display: none;
+
+    &:after {
+      content: ':';
+    }
+  }
+}
+
+.sorter > .sort-by {
+  float: left;
+  margin-left: 0px;
+
+  .selectboxit-container .selectboxit-list {
+    margin-left: -1px;
+  }
+
+  .sort-by-switcher {
+    float: left;
+    position: relative;
+    overflow: hidden;
+    font-size: 0;
+    line-height: 0;
+    vertical-align: top;
+    padding-top: 2px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: $accent-color-1;
+    border-right: solid 1px $c-module-border-light;
+    background-color: $c-module-background;
+
+    &::before {
+      font-size: 24px;
+      line-height: 46px;
+      @include transition(all, 0.3s, ease-in-out);
+      @include custom-icon($font-family-icon, '\e038');
+    }
+
+    &:hover {
+      @extend %shadow-hover;
+
+      &::before {
+        @include transform(rotate(90deg));
+      }
+
+    }
+    &:active {
+      @extend %single-active;
+    }
+  }
+
+  .sort-by-switcher--desc {
+    &:before {
+      @include custom-icon($font-family-icon, '\e038');
+      @include transform(rotate(90deg));
+    }
+
+    &:hover::before {
+      @include transform(rotate(0deg));
+    }
+  }
+}
+
+.sorter > .view-mode {
+  float: left;
+  margin-bottom: 0;
+
+  .grid,
+  .list {
+    float: left;
+    font-size: 0;
+    position: relative;
+    border-right: solid 1px $c-module-border-light;
+    background-color: $c-module-background;
+    line-height: 0;
+    padding: 10px 13px 10px 13px;
+    @include transition(all, 0.1s, ease-in-out);
+    color: $c-text-gray;
+    height: 50px;
+    overflow: hidden;
+
+  }
+  .grid {
+    &:before {
+      @include custom-icon($font-family-icon, '\e180');
+      font-size: 24px;
+      line-height: 28px;
+      font-weight: 100;
+    }
+    //background-position: $toolbar-icon-padding-offset (-500px+$toolbar-icon-padding-offset);
+  }
+  strong.grid {
+    color: $accent-color-1;
+  }
+  a.grid {
+    &:hover {
+      @extend %shadow-hover;
+    }
+    &:active {
+      @extend %single-active;
+    }
+  }
+  .list {
+    // We want the icon to line up with the container width, so we are adding 3px
+    &:before {
+      @include custom-icon($font-family-icon, '\e190');
+      font-size: 24px;
+      line-height: 28px;
+      font-weight: 100;
+    }
+  }
+  strong.list {
+    color: $accent-color-1;
+  }
+  a.list {
+    &:hover {
+      @extend %shadow-hover;
+    }
+    &:active {
+      @extend %single-active;
+    }
+  }
+
+}
+
+.pager {
+  float: right;
+  margin: 0;
+
+  // Custom Select
+  .selectboxit-container {
+    .selectboxit-btn {
+      width: 120px !important;
+      border-right: none;
+      border-left: solid 1px $c-module-border-light;
+    }
+
+    .selectboxit-list {
+      width: 120px;
+
+      li {
+        margin: 0;
+      }
+    }
+  }
+
+  // end Custom Select
+
+  & > .count-container {
+    float: left;
+  }
+
+  .amount {
+    float: left;
+    white-space: nowrap;
+    margin: 10px 20px 0 0;
+    color: $accent-color-1;
+    font-size: 14px;
+
+    strong {
+      font-weight: normal;
+    }
+  }
+
+  .limiter {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+
+    & > label {
+      padding-right: 20px;
+
+      &:after {
+        content: ':';
+      }
+    }
+  }
+
+  .dropdown {
+
+    text-align: left;
+    border: none;
+    border-left: solid 1px $c-module-border-light;
+    width: 120px;
+
+    li,
+    .selected {
+      padding: 18px 20px 17px;
+    }
+  }
+
+}
+
+.category-products {
+  .pages {
+    display: none;
+  }
+}
+
+.pages {
+  float: left;
+  margin: 0;
+
+  strong {
+    display: none;
+  }
+}
+
+.pages li {
+  display: inline-block;
+  margin: 0;
+  float: left;
+  position: relative;
+}
+
+.pages ol li a,
+.pages ol li.current {
+  display: inline-block;
+  border: 0;
+  font-size: $f-size;
+  text-align: center;
+  position: relative;
+  line-height: 50px;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  overflow: hidden;
+  border-right: 1px solid $c-module-border-light;
+  @include transition(all, 0.3s, ease-in-out);
+
+  &.next {
+    border-right: none;
+  }
+}
+
+.pages ol li a {
+
+  color: $c-text;
+  background-color: $c-module-background;
+
+  &:hover {
+    @extend %shadow-hover;
+    color: $c-dark;
+    background-color: $c-module-background-hover;
+  }
+
+  &:active {
+    @extend %single-active;
+  }
+}
+
+.pages ol li.current,
+.pages ol li.current a {
+  color: $c-dark;
+  background-color: $c-module-background-hover;
+}
+
+.pages .next,
+.pages .previous {
+  // New HP5BP technique: https://github.com/h5bp/html5-boilerplate/commit/aa0396eae757c9e03dda4e463fb0d4db5a5f82d7
+  font: 0/0 a;
+  text-shadow: none;
+  position: relative;
+
+  &:before {
+    color: $accent-color-1;
+    font-size: 18px;
+    line-height: 50px;
+  }
+}
+
+.pages .next {
+  &:before {
+    @include custom-icon($font-family-icon, '\e0c2');
+  }
+}
+
+.pages .previous {
+  &:before {
+    @include custom-icon($font-family-icon, '\e0c3');
+  }
+}
+
+.toolbar-bottom .toolbar {
+
+  background: $c-page-background;
+
+  .pager {
+    float: left;
+  }
+
+  .sorter,
+  .count-container {
+    display: none;
+  }
+}
+
+.category-products .toolbar-bottom .toolbar .pages {
+  display: block;
+}
+
+@include bp(max-width, $bp-xsmall) {
+  // Only hide the "amount" element if page has pagination AND is inside of toolbar (since we only want it hiding on product listing)
+  // Otherwise show the amount since there is plenty of space
+  .pager .amount--has-pages {
+    display: none;
+  }
+
+  .pages {
+    float: left;
+  }
+
+  .pages ol li a,
+  .pages ol li.current {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+  }
+
+  .pages .next,
+  .pages .previous {
+
+    &:before {
+      line-height: 30px;
+    }
+  }
+
+  // When there are 5+ pages, it is important to hide this label in order to not break to three lines
+  .limiter label {
+    display: none;
+  }
+}
+
+@include bp(max-width, $bp-medium) {
+  // One one column layouts, the toolbar doesn't have to break until a smaller viewport
+  .col1-layout {
+    .sorter,
+    .pager {
+      width: 100%;
+    }
+
+    .pager {
+      float: left;
+      clear: both;
+
+      .pages {
+        float: left;
+        margin-left: 0;
+      }
+
+      .count-container {
+        float: right;
+      }
+    }
+  }
+}
+
+@include bp(max-width, $bp-large) {
+
+  .sorter {
+    border-bottom: solid 1px $c-module-border-light;
+  }
+  .sorter > .sort-by {
+    float: right;
+  }
+
+  .col2-left-layout,
+  .col2-right-layout,
+  .col3-layout {
+    .sorter,
+    .pager {
+      width: 100%;
+    }
+
+    .pager {
+      float: left;
+      clear: both;
+
+      .pages {
+        float: left;
+        margin-left: 0;
+      }
+
+      .count-container {
+        float: right;
+      }
+    }
+  }
+}
+
+@include bp(max-width, 1279px) {
+
+  .toolbar .view-mode > label {
+    display: none;
+  }
+}
+
+/* ============================================ *
+ * Tax - Full Tax Summary
+ * ============================================ */
+
+#checkout-review-table,
+#shopping-cart-totals-table,
+body.customer-account .data-table {
+  .summary-collapse {
+    position: relative;
+    cursor: pointer;
+
+    &:before {
+      @include triangle(down, 7px, $c-blue);
+      position: static;
+      display: inline-block;
+      margin-right: 5px;
+    }
+    &:hover:before {
+      @include triangle(down, 7px, $c-stimulus);
+      position: static;
+      display: inline-block;
+      margin-right: 5px;
+    }
+  }
+
+  .show-details {
+    .summary-collapse {
+      &:before {
+        @include triangle(up, 7px, $c-blue);
+        position: static;
+        display: inline-block;
+        margin-right: 5px;
+      }
+      &:hover:before {
+        @include triangle(up, 7px, $c-stimulus);
+        position: static;
+        display: inline-block;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+// Center the arrow, as the font is larger in tfoot
+#shopping-cart-totals-table tfoot td .summary-collapse {
+  &:before,
+  &:hover:before {
+    margin-bottom: 5px;
+  }
+}
+
+/* ============================================ *
+ * Magento Helpers
+ * ============================================ */
+
+.a-center {
+  text-align: center;
+}
+
+.a-right,
+.align-right {
+  text-align: right;
+}
+
+.f-right {
+  float: right;
+}
+
+.f-left {
+  float: left;
+}
+
+.no-display {
+  display: none !important;
+}
+
+.nobr,
+.nowrap {
+  white-space: nowrap;
+}
+
+.width-full {
+  width: 100%;
+}
+
+/* ============================================ *
+ * Custom Helpers
+ * ============================================ */
+
+.hidden {
+  display: none;
+}
+
+/* ============================================ *
+ * Print Styles
+ * ============================================ */
+
+.page-print .print-head {
+  margin: 0 0 15px;
+}
+
+.page-print .print-head .logo {
+  float: none;
+  max-height: 50px;
+  width: auto;
+}
+
+/* ============================================ *
+ * OWL controls
+ * ============================================ */
+
+.owl-controls .owl-buttons div {
+  background: none;
+  opacity: 1;
+
+  &.owl-prev,
+  &.owl-next {
+    position: absolute;
+    top: 45%;
+    left: -5px;
+    right: auto;
+    background: none;
+    padding: 0;
+    text-align: center;
+    margin: 0;
+    font-size: 0;
+    opacity: 1;
+
+    &::before {
+      @include fa-icon;
+      font-size: 36px;
+      color: $c-slider-pag;
+      background: none;
+      margin: 0 auto;
+      text-align: center;
+      opacity: 1;
+    }
+
+    &:hover::before {
+      color: $c-slider-pag-hover;
+    }
+
+  }
+
+  &.owl-next {
+    right: -5px;
+    left: auto;
+  }
+
+  &.owl-prev:before {
+    content: $fa-var-angle-left;
+  }
+
+  &.owl-next:before {
+    content: $fa-var-angle-right;
+  }
+
+  @include bp(max-width, $bp-large) {
+    &.owl-prev {
+      left: 25px;
+    }
+
+    &.owl-next {
+      right: 25px;
+    }
+  }
+}
+
+/* ============================================ *
+ * Additional Styles (Transitions etc.)
+ * ============================================ */
+
+a,
+.button,
+a::after,
+a::before,
+.button::after,
+.button::before,
+.button span span::before,
+.btn-remove:after,
+.swatch-link,
+.swatch-link .swatch-label,
+.swatch-link .swatch-text,
+.swatch-link.has-image .swatch-label::before,
+.block .product-image,
+label:after,
+#header-cart,
+.skip-cart .count::before,
+.skip-cart .count {
+  @include transition(all, 0.2s, ease-in-out);
+}
+
+img,
+.truncated .truncated_full_value .item-options,
+{
+  @include transition(all, 0.8s, ease-in-out);
+}
+
+

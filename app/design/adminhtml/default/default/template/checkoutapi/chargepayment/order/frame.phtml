@@ -1,0 +1,71 @@
+<?php
+    $session            = Mage::getSingleton('chargepayment/session_quote');
+    $tokenRedirectUrl   = $session->getAdminTokenRedirectUrl();
+    $session->unsetData('admin_token_redirect_url');
+?>
+<script type="application/javascript">
+    if (typeof directPost !== 'undefined') {
+        directPost.addMethods({
+            submitAdminOrder: function(){
+                if (editForm.validate()) {
+                    var paymentMethodEl = $(editForm.formId).getInputs('radio','payment[method]').find(function(radio) {
+                        return radio.checked;
+                    });
+                    this.hasError = false;
+                    if (paymentMethodEl.value == this.code) {
+                        toggleSelectsUnderBlock($('loading-mask'), false);
+                        $('loading-mask').show();
+                        setLoaderPosition();
+                        this.changeInputOptions('disabled', 'disabled');
+                        this.paymentRequestSent = true;
+                        this.orderRequestSent = true;
+                        $(editForm.formId).writeAttribute('action', this.orderSaveUrl);
+                        $(editForm.formId).writeAttribute('target',
+                            $('order-' + this.iframeId).readAttribute('name'));
+                        $(editForm.formId).appendChild(this.createHiddenElement('controller', this.controller));
+                        disableElements('save');
+                        $(editForm.formId).submit();
+                    } else if (paymentMethodEl.value == '<?php echo CheckoutApi_ChargePayment_Helper_Data::CODE_CREDIT_CARD ?>') {
+                        $(editForm.formId).writeAttribute('action', '<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/CheckoutApi_ChargePayment_Api/place') ?>');
+                        $(editForm.formId).writeAttribute('target', '_top');
+                        disableElements('save');
+                        $(editForm.formId).submit();
+                    } else {
+                        $(editForm.formId).writeAttribute('action', this.nativeAction);
+                        $(editForm.formId).writeAttribute('target', '_top');
+                        disableElements('save');
+                        $(editForm.formId).submit();
+                    }
+                }
+            }
+        });
+    }
+</script>
+<?php if(!empty($tokenRedirectUrl)): ?>
+    <div id="checkout-api-fon" style="width: 100%; height: 100%; position: fixed; z-index: 100; top: 0; left: 0; opacity: 0.8;background-color: #fff "></div>
+    <iframe id="checkout-api-iframe" allowtransparency="true" frameborder="0" name="iframeSubmitOrder" style="width: 50%; background-color: #fff; position: absolute; height: 50%; top: 50%; left:30%; z-index: 101;" src="<?php echo $tokenRedirectUrl; ?>" onload="checkoutApiFrameRedirect(this.contentWindow.location)"></iframe>
+    <script type="application/javascript">
+        function checkoutApiFrameRedirect(urlRedirect) {
+            var targetUrl   = urlRedirect.href;
+            var newUrl      = '<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/CheckoutApi_ChargePayment_Api/verify', array('cko-payment-token' => 'payment_token_value')) ?>';
+
+            if (targetUrl.indexOf('cko-payment-token') > -1) {
+                hideCheckoutApiIframe();
+
+                var pair = targetUrl.split("=");
+
+                if (typeof pair[1] !== 'undefined') {
+                    window.location = newUrl.replace('payment_token_value', pair[1]);
+                }
+            }
+        }
+
+        $('checkout-api-fon').observe('click', hideCheckoutApiIframe);
+
+        function hideCheckoutApiIframe() {
+            $('checkout-api-fon').hide();
+            $('checkout-api-iframe').hide();
+        }
+    </script>
+<?php endif?>
+

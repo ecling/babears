@@ -1,0 +1,12 @@
+//
+// Magento
+//
+// This mixin gets applied to elements that are only buttons on smartphones (or sometimes tablets), such as layered
+// nav links or checkbox labels.
+// Building this as a mixin (rather than an extendable class) since it will be included within mq breakpoints, and
+// extending doesn't work within media queries: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_in_directives
+@mixin touch-button {
+    color: $c-text;
+    background-color: $c-module-background;
+    padding: 5px 10px;
+}

@@ -1,0 +1,75 @@
+/* ============================================ *
+ * Special Price Countdown
+ * ============================================ */
+/***/
+/***/
+/* line 20, ../../../scss/tm/specialpricecountdown/styles.scss */
+#special_countdown {
+  margin: 15px 0;
+  color: #8b8b8b;
+}
+/* line 26, ../../../scss/tm/specialpricecountdown/styles.scss */
+#special_countdown span {
+  display: block;
+  float: left;
+  margin: 0 5px 0 9px;
+  border: solid 1px #CCCCCC;
+  text-align: center;
+}
+/* line 33, ../../../scss/tm/specialpricecountdown/styles.scss */
+#special_countdown span.ww {
+  margin-left: 0;
+}
+/* line 37, ../../../scss/tm/specialpricecountdown/styles.scss */
+#special_countdown span strong {
+  font-size: 24px;
+  color: #000000;
+  padding: 5px 12px;
+}
+/* line 43, ../../../scss/tm/specialpricecountdown/styles.scss */
+#special_countdown span b {
+  display: block;
+  text-align: center;
+  padding: 2px 7px 0 7px;
+  font-weight: normal;
+  font-size: 11px;
+  text-transform: uppercase;
+  border-top: solid 1px #CCCCCC;
+  background-color: #F4F4F4;
+}
+/* line 56, ../../../scss/tm/specialpricecountdown/styles.scss */
+#special_countdown i {
+  font-style: normal;
+  padding: 10px 0 0 5px;
+  float: left;
+  vertical-align: bottom;
+}
+/* line 63, ../../../scss/tm/specialpricecountdown/styles.scss */
+#special_countdown::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+@media only screen and (max-width: 991px) {
+  /* line 68, ../../../scss/tm/specialpricecountdown/styles.scss */
+  #special_countdown span {
+    margin: 0 0px 0 4px;
+  }
+  /* line 72, ../../../scss/tm/specialpricecountdown/styles.scss */
+  #special_countdown span strong {
+    font-size: 18px;
+    padding: 5px 8px;
+  }
+}
+@media only screen and (max-width: 599px) {
+  /* line 83, ../../../scss/tm/specialpricecountdown/styles.scss */
+  #special_countdown span strong {
+    padding: 5px 5px;
+  }
+  /* line 88, ../../../scss/tm/specialpricecountdown/styles.scss */
+  #special_countdown span b {
+    padding: 2px 5px 0 5px;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */

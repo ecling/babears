@@ -1,0 +1,8 @@
+<config>
+  <modules>
+    <Martin_Export>
+      <active>true</active>
+      <codePool>local</codePool>
+    </Martin_Export>
+  </modules>
+</config>

@@ -1,0 +1,224 @@
+//
+// Magento
+//
+// NOTICE OF LICENSE
+//
+// This source file is subject to the Academic Free License (AFL 3.0)
+// that is bundled with this package in the file LICENSE_AFL.txt.
+// It is also available through the world-wide-web at this URL:
+// http://opensource.org/licenses/afl-3.0.php
+// If you did not receive a copy of the license and are unable to
+// obtain it through the world-wide-web, please send an email
+// to license@magento.com so we can send you a copy immediately.
+//
+// DISCLAIMER
+//
+// Do not edit or add to this file if you wish to upgrade Magento to newer
+// versions in the future. If you wish to customize Magento for your
+// needs please refer to http://www.magento.com for more information.
+//
+// @category    design
+// @package     rwd_default
+// @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+// @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+//
+
+@mixin tabs() {
+    .toggle-tabs {
+        display: block;
+        float: left;
+        position: relative;
+        width: 23%;
+        z-index: 9;
+        margin-right: -1px;
+        border-right: solid 1px $c-module-border-light;
+
+        li {
+            border: 1px solid $c-module-border-light;
+            border-bottom: none;
+            background-color: $c-module-background;
+            cursor: pointer;
+            margin-right: -1px;
+
+            > span {
+                @include not-selectable;
+                display: inline-block;
+                padding: 14px 20px;
+                line-height: 40px;
+                cursor: pointer;
+                text-transform: uppercase;
+                color: $c-dark;
+                font-size: $f-size-xl;
+                line-height: normal;
+                position: relative;
+                bottom: -1px;
+                font-weight: 500;
+
+                @include bp(max-width, $bp-large) {
+                    padding: 12px;
+                    font-size: $f-size;
+                }
+            }
+
+            &:first-child{
+                border-top: none;
+            }
+
+            &:last-child{
+                border: 1px solid $c-module-border-light;
+            }
+
+        }
+
+        li.current {
+            
+            background:none;
+            border-right-color: #ffffff;
+
+
+            > span {
+                z-index: 5;
+            }
+        }
+
+        li.current span,
+        li:hover span {
+            color: $accent-color-1;
+        }
+
+
+        &:after {
+            @include clearfix;
+        }
+    }
+
+    > dl {
+        overflow: hidden;
+        border-left: solid 1px $c-module-border;
+        margin: 0;
+
+        > dt {
+            display: none;
+        }
+
+        > dd {
+            width: 100%;
+            display: none;
+            padding: 35px 0 10px 40px;
+            border-top: 0;
+        }
+
+        > dd.current {
+            display: block;
+        }
+    }
+}
+
+@mixin accordionDtBase($arrow-direction: 'down', $border-color: $c-module-border) {
+    @include h4;
+    @include not-selectable;
+    color: $accent-color-1;
+    font-weight: 500;
+    margin-bottom: 0px;
+    padding: 7px 10px 7px 24px;
+    border-top: solid 1px $c-module-border-light;
+    position: relative;
+    background-color: $c-module-background;
+
+    &:after {
+        @include triangle(#{$arrow-direction}, 4px, $c-action);
+        left: 10px;
+        top: 50%;
+        margin-top: -3px;
+    }
+    
+    @include bp(max-width, $bp-medium) {
+        
+        color: $c-dark;
+        font-weight: normal;
+        border: solid 1px $c-module-border-light;
+        border-bottom: none;
+
+        &:hover {
+             background-color: $c-module-background-hover;
+        }
+    }
+
+
+   
+}
+
+@mixin accordion() {
+    .toggle-tabs {
+        display: none;
+    }
+
+    > dl {
+        > dt {
+            @include accordionDtBase;
+            display: block;
+        }
+
+        > dd {
+            padding: 5px $box-spacing-large $box-spacing-large;
+            background-color: $c-module-background;
+            margin: 0;
+
+            @include bp(max-width, $bp-xlarge) {
+                padding: 5px 15px 15px;
+            }
+        }
+        > dd:last-child {
+            border-width: 0 1px 1px 1px;
+        }
+    }
+
+    .selected-filter{
+        background-color: $c-module-background-hover;
+    }
+
+}
+
+@mixin accordionCollapse() {
+    > dl {
+        > dt {
+            cursor: pointer;
+            border-bottom-width: 0;
+
+            &:hover {
+                color: $c-action;
+            }
+            &:after {
+                @include triangle(right, 4px, $c-action);
+            }
+            &.last {
+                border-bottom-width: 1px;
+            }
+        }
+
+        > dd {
+            display: none;
+        }
+    }
+
+    &.accordion-open {
+        > dl {
+            > dt {
+                &.current {
+                    border-bottom-width: 1px;
+                }
+
+                &.current:after {
+                    @include triangle(down, 4px, $c-action);
+                    left: 6px;
+                    top: 50%;
+                    margin-top: -3px;
+                }
+            }
+
+            > dd.current {
+                display: block;
+            }
+        }
+    }
+}

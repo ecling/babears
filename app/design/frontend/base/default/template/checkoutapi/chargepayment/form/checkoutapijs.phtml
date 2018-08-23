@@ -1,0 +1,155 @@
+<?php
+/**
+ * Template for checkout page
+ *
+ * @version 20160202
+ */
+?>
+<?php $isActive = $this->isActive();?>
+<?php if ($isActive):?>
+    <?php $tokenResult = $this->getPaymentTokenResult(); ?>
+	<?php if (!empty($tokenResult)): ?>
+		<ul class="form-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+
+            <?php if($this->isCustomerLogged()): ?>
+                <?php $cardList = $this->getCustomerCardList();?>
+                <?php if(!empty($cardList)): ?>
+                    <?php foreach($cardList as $index => $card):?>
+                        <li>
+                            <input class="checkoutapi-saved-card validate-one-required-by-name" type="radio" id="card-<?php echo $index;?>" value="<?php echo $card['value'];?>" name="payment[customer_card]"/>
+                            <label for="card-<?php echo $index;?>"><?php echo $card['type'] . ' ' . $card['title'];?></label>
+                        </li>
+                    <?php endforeach;?>
+                    <li>
+                        <input id="checkoutapi-new-card" class="validate-one-required-by-name" type="radio" name="payment[customer_card]" value="new_card"/>
+                        <label for="checkoutapi-new-card">Use New Card</label>
+                    </li>
+                <?php endif;?>
+            <?php endif;?>
+
+
+			<?php if ($tokenResult['success']):?>
+			<li>
+				<input type="hidden" id="cko-card-token" name="payment[checkout_card_token]" value=""/>
+				<input type="hidden" id="cko-lp-redirectUrl" name="payment[lp_redirect_url]" value=""/>
+				<input type="hidden" id="cko-lp-lpName" name="payment[lp_name]" value=""/>
+				<script type="text/javascript">
+					window.checkoutIntegrationTotalValue = '<?php echo $tokenResult['value'];?>';
+				
+					window.checkoutIntegrationCurrentConfig = {
+                        debugMode: '<?php echo $this->getDebugMode() ? 'true' : 'false';?>',
+						renderMode: '<?php echo $this->getRenderMode();?>',
+                        publicKey: '<?php echo $this->getPublicKey();?>',
+                        paymentToken: '<?php echo $tokenResult['token'];?>',
+                        customerEmail: '<?php echo $tokenResult['customerEmail'];?>',
+                        customerName: '<?php echo $tokenResult['customerName'];?>',
+                        value: '<?php echo $tokenResult['value'];?>',
+                        currency: '<?php echo $tokenResult['currency'];?>',
+                        widgetContainerSelector: '#payment_form_<?php echo $this->getMethodCode() ?>',
+                        paymentMode: '<?php echo $this->getPaymentMode();?>',
+                        logoUrl: '<?php echo $this->getLogoUrl();?>',
+                        themeColor: '<?php echo $this->getThemeColor();?>',
+                        useCurrencyCode: '<?php echo $this->isUseCurrencyCode() ? 'true' : 'false';?>',
+                        title: '<?php echo $this->getTitle();?>',
+                        widgetColor: '<?php echo $this->getWidgetColor();?>',
+                        styling: {
+							formButtonColor: '<?php echo $this->getFormButtonColor();?>',
+                            formButtonColorLabel: '<?php echo $this->getFormButtonColorLabel();?>',
+                            overlayShade: '<?php echo $this->getOverlayShade();?>',
+                            overlayOpacity: '<?php echo $this->getOverlayOpacity();?>',
+                            showMobileIcons: '<?php echo $this->isShowMobileIcons() ? 'true' : 'false';?>',
+                            widgetIconSize: '<?php echo $this->getWidgetIconSize();?>'
+						},
+                        cardFormMode: '<?php echo $this->getCardFormMode();?>',
+                        lightboxActivated : function(event) {
+							if ($('checkout-api-default-hover') !== null && $('checkout-api-default-hover').length > 0) {
+								$('checkout-api-default-hover').hide();
+							}
+						},
+						lightboxDeactivated: function(event) {
+							if ($('checkout-api-default-hover') !== null && $('checkout-api-default-hover').length > 0) {
+								$('checkout-api-default-hover').hide();
+							}
+
+							$('checkout-api-js-hover').hide();
+						},
+						lpCharged: function (event){
+							if ($('checkout-api-js-hover') !== null && $('checkout-api-js-hover').length > 0) {
+								$('checkout-api-js-hover').show();
+							}
+
+							document.getElementById('cko-lp-redirectUrl').value = event.data.redirectUrl;
+							document.getElementById('cko-lp-lpName').value      = event.data.lpName;
+
+							window.checkoutApiSubmitOrder();
+						},
+						cardTokenised: function(event){
+							if (document.getElementById('cko-card-token').value.length === 0 || document.getElementById('cko-card-token').value != event.data.cardToken) {
+								document.getElementById('cko-card-token').value = event.data.cardToken;
+								if ($('checkout-api-js-hover') !== null && $('checkout-api-js-hover').length > 0) {
+									$('checkout-api-js-hover').show();
+								}
+
+								window.checkoutApiSubmitOrder();
+							}
+						}
+                    };
+				
+					window.checkoutIntegrationIsReady = window.checkoutIntegrationIsReady || false;
+					if (!window.checkoutIntegrationIsReady) {
+						window.CKOConfig = {
+							namespace: 'CKOAPIJS',
+							ready: function() {
+                                if (typeof CKOAPIJS == 'undefined') {
+                                    return false;
+                                }
+                                delete window.CKOConfig;
+
+								CKOAPIJS.render(window.checkoutIntegrationCurrentConfig);
+
+								window.checkoutIntegrationIsReady = true;
+							}
+						};
+
+						var script = document.createElement('script');
+                        script.type = "text/javascript";
+						script.src = '<?php echo $this->getJsPath();?>';
+						script.async = true;
+						document.head.appendChild(script);
+					} else {
+						CKOAPIJS.render(window.checkoutIntegrationCurrentConfig);
+					}
+				</script>
+			</li>
+			<?php else:?>
+				<li><?php echo $this->__($tokenResult['message']) ?></li>
+			<?php endif?>
+		</ul>
+
+        <?php if (!empty($cardList)):?>
+            <script type="application/javascript">
+                hideNewCard();
+
+                $$('.checkoutapi-saved-card').invoke('observe', 'change', hideNewCard);
+                $('checkoutapi-new-card').observe('change', showNewCard);
+
+                function hideNewCard() {
+                    $$('.checkoutapi-li').each(Element.hide);
+                }
+
+                function showNewCard() {
+                    $$('.checkoutapi-li').each(Element.show);
+                }
+            </script>
+        <?php endif;?>
+
+	<?php else:?>
+        <script type="text/javascript">
+            window.checkoutIntegrationTotalValue = 0;
+        </script>
+	<?php endif;?>
+<?php else :?>
+    <ul class="form-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+        <li><?php echo $this->__('Selected Payment Type is not allowed.') ?></li>
+    </ul>
+<?php endif?>

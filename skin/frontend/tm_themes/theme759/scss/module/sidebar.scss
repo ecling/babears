@@ -1,0 +1,465 @@
+//
+// Magento
+//
+/* ============================================ *
+ * Tags
+ * ============================================ */
+@import "../includes";
+
+.sidebar {
+
+  /* -------------------------------------------- *
+  * Block Module
+  */
+
+  .col-left-first {
+    margin-bottom: $block-margin;
+  }
+
+  .block {
+    // padding-bottom: 20px;
+    margin-bottom: $block-margin;
+
+    .amount {
+      margin: 0;
+      padding: 4px 0 15px;
+      font-size: 15px;
+    }
+
+    .product-image {
+      padding: 5px;
+
+      &:hover {
+        @include boxshadow(1px, 2px, 5px, rgba(0, 0, 0, 0.15));
+      }
+    }
+
+    .product-name {
+      font-size: 14px;
+    }
+  }
+
+  .col-left-first {
+
+    .block {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .block:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .block-title {
+    position: relative;
+    padding: 0 0 14px;
+    margin-bottom: 20px;
+    border-bottom: solid 2px $c-module-border-light;
+
+    h2,
+    h3,
+    strong {
+      @include h3;
+      color: $c-text-primary;
+      margin-bottom: 0;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    small {
+      font-size: 100%;
+      font-weight: normal;
+      color: $c-text-gray;
+    }
+  }
+
+  // On account pages, don't remove the top border in order to create separation between block and .block-account
+  body:not(.customer-account) .block:first-child .block-title {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .block-subtitle {
+    @include h4;
+    color: $accent-color-1;
+    font-weight: 500;
+    margin-bottom: $block-spacing;
+  }
+
+  .block-content {
+    margin-top: 5px;
+
+    .subtotal {
+      background-color: $c-module-background;
+      padding: 9px 14px 10px;
+      margin-bottom: $block-spacing;
+      overflow: hidden;
+
+      .label {
+        color: $c-dark;
+        font-weight: 500;
+      }
+
+      .price {
+        float: right;
+        color: $accent-color-1;
+        font-weight: 500;
+      }
+    }
+
+    .product-details {
+
+      color: $accent-color-1;
+
+      strong {
+        font-weight: normal;
+      }
+
+      .btn-edit {
+        color: $c-text;
+
+        &:hover {
+          color: $accent-color-1;
+        }
+      }
+
+      .details {
+        @extend %button-border;
+        background-color: $c-backround-light;
+        color: $c-dark;
+        font-weight: 500;
+        padding: 6px 14px;
+
+        &:hover {
+          @extend %button-border-hover;
+        }
+      }
+    }
+  }
+
+  .block-content.unpad {
+    padding: 0;
+  }
+
+  .block-content li.item {
+    margin: 0 0 $block-spacing 0;
+  }
+
+  .block-content li.item:last-child {
+    margin-bottom: 0;
+  }
+
+  .block .actions {
+    margin: $box-spacing-large 0 0;
+    &:after {
+      @include clearfix;
+    }
+    a {
+      float: right;
+      margin-top: 7px;
+      @include bp(max-width, $bp-large) {
+        float: left;
+      }
+    }
+    .button {
+      float: left;
+      margin-top: 0;
+    }
+  }
+
+  .col-left,
+  .col-right {
+    // Align the vertical height of the anchor to line up with the button
+    .block .actions .button ~ a {
+      line-height: 33px;
+      margin-right: 5px;
+    }
+  }
+
+  /* -------------------------------------------- *
+   * Secondary Navigation
+   */
+
+  .block-account,
+  .block-cms-menu {
+    .block-title {
+      padding-top: 0;
+      border-top: none;
+    }
+
+    li {
+      text-transform: none;
+      font-family: $f-stack-special;
+      margin: 7px 0;
+
+      strong {
+        font-weight: 400;
+        color: $c-action;
+      }
+
+      a {
+        color: $c-text;
+
+        &:hover {
+          color: $c-action;
+        }
+      }
+    }
+  }
+
+  // Block Polls
+
+  .block-poll {
+
+    @extend %custom-radio;
+
+    label {
+      display: inline-block;
+      font-size: $f-size;
+      font-family: $f-stack-special;
+      color: $c-text;
+      font-weight: normal;
+      margin: 0;
+      text-transform: none;
+    }
+
+    #poll-answers {
+      li {
+        margin-bottom: 10px;
+
+        &::after {
+          @include clearfix;
+        }
+
+      }
+
+      .answer {
+        font-size: 12px;
+        width: 65%;
+        display: inline-block;
+      }
+
+      .votes {
+        float: right;
+        width: 30%;
+        padding: 0 0 5px 0;
+        color: $accent-color-1;
+
+      }
+
+      @include bp(max-width, $bp-large) {
+        .answer {
+          width: 100%;
+          float: none;
+          display: block;
+          overflow: hidden;
+          padding-bottom: 3px;
+        }
+        .votes {
+          width: 100%;
+          padding-bottom: 7px;
+        }
+        li {
+          padding-top: 5px;
+          margin-bottom: 5px;
+          border-bottom: solid 1px #ccc;
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+
+      @include bp(max-width, $bp-medium) {
+
+      }
+    }
+  }
+
+  // Block cart
+
+  .block-cart {
+    .actions {
+      padding-top: $box-spacing-large;
+      border-top: solid 1px $c-module-border-light;
+      .button {
+
+      }
+    }
+    .truncated {
+      margin-top: $trim-small;
+      display: inline-block;
+      //float: left;
+
+      .truncated_full_value .item-options {
+
+        left: -40px;
+        top: 42px;
+
+        &::before {
+          @include triangle(up, 14px, $c-module-border-light);
+        }
+
+        &::after {
+          @include triangle(up, 14px, $c-module-background);
+
+        }
+      }
+
+    }
+  }
+
+  // Block wishlist
+  .block-wishlist {
+    .actions a {
+      @extend %primary-button;
+      margin-top: 0;
+
+      &:after {
+        display: none;
+      }
+
+
+      &:hover::before {
+        font-size: 16px;
+      }
+    }
+  }
+
+  // Block Compare
+
+  .block-compare {
+    .actions {
+      .button {
+        margin-bottom: 5px;
+      }
+      a {
+        margin-top: 8px;
+        margin-left: 5px;
+      }
+    }
+  }
+
+  // Block reorder
+
+  .block-reorder {
+    .actions {
+      a {
+        float: right;
+      }
+    }
+  }
+}
+
+@include bp(max-width, $bp-xlarge) {
+
+  .sidebar {
+
+    .block-title {
+
+      h2,
+      h3,
+      strong {
+        font-size: 16px;
+      }
+    }
+
+    .product-image {
+      width: 90px;
+    }
+    .product-details {
+      margin-left: 100px;
+    }
+
+    .block-content .subtotal .price {
+      float: none;
+      display: block;
+    }
+  }
+
+}
+
+@include bp(max-width, $bp-large) {
+
+  .sidebar {
+
+    .product-image {
+      float: none;
+      margin-bottom: 15px;
+    }
+    .product-details {
+      margin-left: 0;
+    }
+
+    .block-subtitle {
+      @include h5;
+      font-weight: bold;
+      color: $accent-color-1;
+    }
+
+  }
+
+}
+
+@include bp(max-width, $bp-medium) {
+
+  .sidebar {
+    // Don't apply to layered nav, since it gets special treatment
+    .block:not(.block-layered-nav) {
+      margin-bottom: 0;
+      padding: 0;
+      border: none;
+
+      .block-title {
+        padding: 0;
+        margin-top: 0;
+        border-bottom: none;
+        border-top: none;
+        margin-bottom: 0;
+
+        > strong {
+          @include accordionDtBase('right', $c-module-border-light);
+          display: block;
+          width: 100%;
+          cursor: pointer;
+
+        }
+
+        &.active {
+          > strong {
+            @include accordionDtBase('down', $c-module-border-light);
+          }
+        }
+      }
+
+      .block-content {
+        padding: $box-spacing;
+        margin-top: 0;
+        border-width: 1px 1px 0;
+        border-style: solid;
+        border-color: $c-module-border-light;
+      }
+
+      &:last-child {
+        .block-title > strong {
+          border-bottom: solid 1px $c-module-border-light;
+        }
+
+        .block-content {
+          border-width: 0 1px 1px 1px;
+        }
+      }
+    }
+
+    .product-image {
+      width: 90px;
+      float: left;
+    }
+    .product-details {
+      margin-left: 100px;
+    }
+
+  }
+
+}
+

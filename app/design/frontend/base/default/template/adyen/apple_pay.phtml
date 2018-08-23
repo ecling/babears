@@ -1,0 +1,455 @@
+<?php
+if ($this->hasApplePayEnabled()):
+    $subtotal = $this->getSubTotal();
+    $productId = $subtotal['productId'];
+    $finalPrice = ($subtotal['amount'] > 0) ? $subtotal['amount'] : '0';
+    $productTitle = $subtotal['label'];
+    $currency = Mage::app()->getStore()->getCurrentCurrencyCode();
+    $_customerData = $this->getCustomerData();
+    $merchantIdentifier = $this->getMerchantIdentifier();
+    $reviewStep = $this->onReviewStep();
+
+    // shippingMethods not needed in review step
+    if (!$reviewStep) {
+        $_shippingMethods = $this->getShippingMethods();
+        $firstItem = null;
+        if(is_array($_shippingMethods) && !empty($_shippingMethods)) {
+            $firstItem = current($_shippingMethods);
+            $firstKey = key($_shippingMethods);
+            $firstItem['key'] = $firstKey;
+        }
+    }
+    ?>
+
+    <div id="adyen-apple-pay-button" class="apple-pay-button-with-text apple-pay-button-black-with-text" style="display: none;">
+        <span class="logo"></span>
+    </div>
+    
+    <script type="text/javascript">
+        // Only show button for browsers that suppoprt ApplePaySession
+        if(window.ApplePaySession) {
+//            var promise = ApplePaySession.canMakePaymentsWithActiveCard("<?php //echo $merchantIdentifier; ?>//");
+//            promise.then(function (canMakePayments) {
+//                if (canMakePayments) {
+                    $('adyen-apple-pay-button').show();
+
+                    // add handlers
+                    var qtyChange = document.getElementById("qty");
+                    if(qtyChange) {
+                        qtyChange.observe('change', adyenQtyChange);
+                    }
+
+
+                    var applePayButton = document.getElementById("adyen-apple-pay-button");
+                    applePayButton.observe('click', applePayButtonClicked);
+                }
+//            });
+//        }
+
+        // global shippingMethods value
+        var shippingMethods = [];
+        var AdyenQtyChangeInProgress = false;
+
+        function adyenQtyChange(event)
+        {
+            AdyenQtyChangeInProgress = true;
+
+            <?php if($_customerData && isset($_customerData['shippingContact'])): ?>
+
+            var countryCode = "<?php echo $_customerData['shippingContact']['countryCode'] ?>";
+            var postalCode =  "<?php echo $_customerData['shippingContact']['postalCode'] ?>";
+
+            <?php else: ?>
+            var countryCode = "";
+            var postalCode =  "";
+            <?php endif; ?>
+
+            // get payment methods with qty
+            var promise = retrieveShippingMethods(countryCode, postalCode);
+            promise.then(function (shippingMethodsResult) {
+                shippingMethods = shippingMethodsResult;
+                AdyenQtyChangeInProgress = false;
+            });
+
+        }
+
+
+        // do request
+        function applePayButtonClicked(event)
+        {
+
+            var amount = <?php echo $finalPrice ?>;
+
+            var qty = getQty();
+            // if a qty is set mutliply the price
+            if(qty && qty > 1) {
+                amount = qty * <?php echo $finalPrice ?>;
+            }
+
+            var lineItems = [
+                {
+                    type: "final",
+                    label: "<?php echo $this->__('subtotal') ?>",
+                    amount: amount
+                }
+            ];
+
+            window.AdyenApplePayLineItemsProducts = {
+                type: "final",
+                label: "<?php echo $this->__('subtotal') ?>",
+                amount: amount
+            };
+
+            <?php if(!$reviewStep):?>
+                if(shippingMethods.length > 0){
+
+                    lineItems.push(
+                        {
+                            type: "final",
+                            label: "<?php echo $this->__('shipping') ?>",
+                            amount: shippingMethods[0].amount
+                        }
+                    );
+
+                    window.AdyenApplePayTotalAmount = amount + shippingMethods[0].amount;
+                    window.AdyenApplePayShippingMethodIdentifier = shippingMethods[0].identifier;
+
+                } else {
+                    <?php if($firstItem && is_array($firstItem)): ?>
+                        lineItems.push(
+                            {
+                                type: "final",
+                                label: "<?php echo $this->__('shipping') ?>",
+                                amount: <?php echo $firstItem['price'] ?>
+                            }
+                        );
+
+                        window.AdyenApplePayTotalAmount = amount + <?php echo $firstItem['price']; ?>;
+                        window.AdyenApplePayShippingMethodIdentifier = "<?php echo $firstItem['key']; ?>";
+
+                    <?php else: ?>
+                        window.AdyenApplePayTotalAmount = amount;
+                    <?php endif; ?>
+                }
+            
+                /** is shippingMethods is not set (is the case if you do not change qty field)
+                 *  retrieve the standard shippingMethods for qty=1
+                 */
+                if(!shippingMethods.length > 0){
+                    <?php foreach($_shippingMethods as $key => $shippingMethod): ?>
+                    shippingMethods.push({
+                        label: "<?php echo $shippingMethod['title']; ?>",
+                        detail: "",
+                        amount: <?php echo $shippingMethod['price']; ?>,
+                        identifier: "<?php echo $key; ?>"
+                    });
+                    <?php endforeach; ?>
+
+                }
+
+            <?php else: ?>
+                
+                // get the shipping method selected in checkout
+                <?php if($this->getShippingMethodAmount() > 0): ?>
+                    window.AdyenApplePayTotalAmount = amount + <?php echo $this->getShippingMethodAmount(); ?>;
+
+                    lineItems.push(
+                        {
+                            type: "final",
+                            label: "<?php echo $this->__('shipping') ?>",
+                            amount: <?php echo $this->getShippingMethodAmount() ?>
+                        }
+                    );
+
+                <?php else: ?>
+                    window.AdyenApplePayTotalAmount = amount;
+                <?php endif; ?>
+            <?php endif; ?>
+
+
+            var billingAddresLines = [];
+            <?php if($_customerData && isset($_customerData['billingContact'])): ?>
+                <?php foreach($_customerData['billingContact']['addressLines'] as $street): ?>
+                    billingAddresLines.push("<?php echo $street; ?>");
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+            var shippingAddresLines = [];
+            <?php if($_customerData && isset($_customerData['shippingContact'])): ?>
+                <?php foreach($_customerData['shippingContact']['addressLines'] as $street): ?>
+                    shippingAddresLines.push("<?php echo $street; ?>");
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+            var paymentRequest = {
+                currencyCode: "<?php echo $currency; ?>",
+                countryCode: "US",
+                total: {
+                    label: "<?php echo $productTitle; ?>",
+                    amount: window.AdyenApplePayTotalAmount
+                },
+                lineItems: lineItems,
+                supportedNetworks: ["amex","discover","masterCard","visa"],
+                merchantCapabilities: ["supports3DS"],
+                shippingMethods: shippingMethods,
+                <?php if($this->optionToChangeAddress()): ?>
+                requiredBillingContactFields:["postalAddress","phone","email","name"],
+                requiredShippingContactFields:["postalAddress","phone","email","name"],
+                <?php endif; ?>
+                shippingType:"<?php echo $this->getShippingType(); ?>" // options are: shipping, delivery, storePickup, servicePickup
+            };
+
+            <?php if($_customerData && isset($_customerData['billingContact'])): ?>
+                paymentRequest.billingContact = {
+                    givenName: "<?php echo $_customerData['billingContact']['givenName']; ?>",
+                    postalCode: "<?php echo $_customerData['billingContact']['postalCode']; ?>",
+                    country:  "<?php echo $_customerData['billingContact']['country']; ?>",
+                    countryCode: "<?php echo $_customerData['billingContact']['countryCode']; ?>",
+                    locality: "<?php echo $_customerData['billingContact']['locality']; ?>",
+                    addressLines: billingAddresLines,
+                    emailAddress: "<?php echo $_customerData['billingContact']['emailAddress']; ?>",
+                    phoneNumber: "<?php echo $_customerData['billingContact']['phoneNumber']; ?>",
+                    familyName:"<?php echo $_customerData['billingContact']['familyName']; ?>",
+                    administrativeArea: "<?php echo $_customerData['billingContact']['administrativeArea']; ?>",// state
+                };
+            <?php endif; ?>
+            <?php if($_customerData && isset($_customerData['shippingContact'])): ?>
+                paymentRequest.shippingContact = {
+                    givenName: "<?php echo $_customerData['shippingContact']['givenName']; ?>",
+                    postalCode: "<?php echo $_customerData['shippingContact']['postalCode']; ?>",
+                    country:  "<?php echo $_customerData['shippingContact']['country']; ?>",
+                    countryCode: "<?php echo $_customerData['shippingContact']['countryCode']; ?>",
+                    locality: "<?php echo $_customerData['shippingContact']['locality']; ?>",
+                    addressLines: billingAddresLines,
+                    emailAddress: "<?php echo $_customerData['shippingContact']['emailAddress']; ?>",
+                    phoneNumber: "<?php echo $_customerData['shippingContact']['phoneNumber']; ?>",
+                    familyName:"<?php echo $_customerData['shippingContact']['familyName']; ?>",
+                    administrativeArea: "<?php echo $_customerData['shippingContact']['administrativeArea']; ?>",// state
+                };
+            <?php endif; ?>
+
+            var session = new ApplePaySession(1, paymentRequest);
+            session.onvalidatemerchant = function(event) {
+                var promise = performValidation(event.validationURL);
+
+                promise.then(function (merchantSession) {
+                    session.completeMerchantValidation(merchantSession);
+                });
+            }
+
+            // https://developer.apple.com/reference/applepayjs/applepaysession
+            // https://developer.apple.com/reference/applepayjs/applepaysession/1778008-completeshippingcontactselection
+            // called on payment sheet load and change of shipping address
+            // Important this is not called if customer is logged in because address details is in request
+            session.onshippingcontactselected = function(event)
+            {
+                var shippingContract = event.shippingContact;
+
+                // always retrieve shippingMethods because qty can be changed
+                var promise = retrieveShippingMethods(shippingContract.countryCode, shippingContract.postalCode);
+                promise.then(function (shippingMethods) {
+
+                    if(shippingMethods.length > 0){
+                        var status = session.STATUS_SUCCESS;
+                        var newTotal = {
+                            label: "<?php echo $productTitle; ?>",
+                            amount: amount + shippingMethods[0].amount
+                        };
+
+                        var newLineItems = [
+                            {
+                                type: "final",
+                                label: "<?php echo $this->__('subtotal') ?>",
+                                amount: amount
+                            },
+                            {
+                                type: "final",
+                                label: "<?php echo $this->__('shipping') ?>",
+                                amount: shippingMethods[0].amount
+                            }
+                        ];
+
+
+                        // set the shippingMethod
+                        window.AdyenApplePayShippingMethodIdentifier = shippingMethods[0].identifier;
+                    } else {
+                        var status = session.STATUS_SUCCESS;
+                        var newTotal = {
+                            label: "<?php echo $productTitle; ?>",
+                            amount: amount
+                        };
+
+                        var newLineItems = [
+                            {
+                                type: "final",
+                                label: "<?php echo $productTitle; ?>",
+                                amount: amount
+                            }
+                        ];
+
+                    }
+
+                    session.completeShippingContactSelection(status, shippingMethods, newTotal, newLineItems);
+                }, function() {
+                    session.completeShippingContactSelection(session.STATUS_FAILURE);
+                });
+            }
+
+            // https://developer.apple.com/reference/applepayjs/applepaysession/1778024-completeshippingmethodselection
+            session.onshippingmethodselected = function(event)
+            {
+                var shippingMethod = event.shippingMethod;
+                var shippingAmount = parseFloat(shippingMethod.amount);
+                var total = amount + shippingAmount;
+
+                window.AdyenApplePayShippingMethodIdentifier = shippingMethod.identifier;
+                window.AdyenApplePayTotalAmount = total;
+
+                var newTotal = {
+                    label: "<?php echo $productTitle; ?>",
+                    amount: amount + shippingAmount
+                };
+
+                var newLineItems = [
+                    window.AdyenApplePayLineItemsProducts,
+                    {
+                        type: "final",
+                        label: "<?php echo $this->__('shipping') ?>",
+                        amount: shippingAmount
+                    }
+                ];
+
+                session.completeShippingMethodSelection(
+                    ApplePaySession.STATUS_SUCCESS,
+                    newTotal,
+                    newLineItems
+                );
+            }
+
+            session.onpaymentauthorized = function(event)
+            {
+                var promise = sendPayment(event.payment);
+
+                promise.then(function(success) {
+                    var status;
+                    if(success)
+                        status = ApplePaySession.STATUS_SUCCESS;
+                    else
+                        status = ApplePaySession.STATUS_FAILURE;
+
+                    session.completePayment(status);
+
+                    if(success) {
+                        // redirect to success page
+                        window.location="/checkout/onepage/success";
+                    }
+                }, function(reason) {
+                    if(reason.message == "ERROR BILLING") {
+                        var status = session.STATUS_INVALID_BILLING_POSTAL_ADDRESS;
+                    } else if(reason.message == "ERROR SHIPPING") {
+                        var status = session.STATUS_INVALID_SHIPPING_POSTAL_ADDRESS;
+                    } else {
+                        var status = session.STATUS_FAILURE;
+                    }
+                    session.completePayment(status);
+                });
+            }
+
+            session.begin();
+        }
+
+
+
+        function performValidation(validationURL)
+        {
+            // Return a new promise.
+            return new Promise(function(resolve, reject) {
+
+                var url = '<?php echo $this->getUrl('adyen/applePay/requestMerchantSession', array('_secure'=>true));?>';
+
+                ajaxReq = new Ajax.Request(url, {
+                    parameters: {validationURL: validationURL, domainName: location.host, isAjax: 1, method: 'POST'},
+                    onSuccess: function (response) {
+                        var data = JSON.parse(response.responseText);
+
+                        if(data) {
+                            resolve(data);
+                        } else {
+                            reject(Error(response.responseText));
+                        }
+
+                    },
+                    onFailure: function() {
+                        reject(Error("Network Error"));
+                    }
+                });
+
+            });
+        }
+
+        function sendPayment(payment) {
+
+            // Return a new promise.
+            return new Promise(function(resolve, reject) {
+                var url = '<?php echo $this->getUrl('adyen/applePay/sendPayment', array('_secure'=>true));?>';
+
+                var qty = document.getElementById("qty");
+                if(qty) {
+                    qty = parseInt(qty.value);
+                } else {
+                    qty = 1;
+                }
+
+                var shippingMethod = window.AdyenApplePayShippingMethodIdentifier;
+                var productId = "<?php echo $productId; ?>";
+
+                ajaxReq = new Ajax.Request(url, {
+                    parameters: {qty: qty, shippingMethod: shippingMethod, productId: productId, payment: JSON.stringify(payment), isAjax: 1, method: 'POST'},
+                    onSuccess: function (response) {
+                        if(response.responseText == "SUCCESS") {
+                            resolve(true);
+                        } else {
+                            reject(Error(response.responseText));
+                        }
+                    },
+                    onFailure: function() {
+                        reject(Error("Network Error"));
+                    }
+                });
+            });
+        }
+        
+        function retrieveShippingMethods(country, zipcode) {
+
+            return new Promise(function(resolve, reject) {
+                var productId = "<?php echo $productId; ?>";
+                var qty = getQty();
+                var url = '<?php echo $this->getUrl('adyen/applePay/retrieveShippingMethods', array('_secure'=>true));?>';
+                ajaxReq = new Ajax.Request(url, {
+                    parameters: {qty: qty, productId: productId, country: country, zipcode: zipcode, isAjax: 1, method: 'POST'},
+                    onSuccess: function (response) {
+                        var data = JSON.parse(response.responseText);
+                        if(data) {
+                            resolve(data);
+                        } else {
+                            reject(Error(response.responseText));
+                        }
+                    },
+                    onFailure: function() {
+                        reject(Error("Network Error"));
+                    }
+                });
+            });
+        }
+
+        function getQty()
+        {
+            var qty = document.getElementById("qty");
+            if(qty) {
+                qty = parseInt(qty.value);
+            }
+            return qty;
+        }
+    </script>
+
+<?php endif; ?>

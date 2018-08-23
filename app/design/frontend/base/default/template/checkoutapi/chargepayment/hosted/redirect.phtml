@@ -1,0 +1,77 @@
+<?php
+    $params = $this->getPostParams();
+    $url    = $this->getPostUrl();
+?>
+
+<script type="text/javascript">
+    <?php if($params['contextId']): ?>
+    ga('require', 'ecommerce', 'ecommerce.js');
+    <?php $_order = Mage::getModel('sales/order')->loadByIncrementId($params['contextId']);?>
+    ga('ecommerce:addTransaction', { 'id': '<?php echo $_order->getData('entity_id')?>', 'affiliation': '<?php echo Mage::app()->getStore()->getName() ?>', 'revenue': '<?php echo $_order->getGrandTotal()?>', 'shipping': '<?php echo $_order->getShippingInclTax()?>', 'tax': '<?php echo  $_order->getTaxAmount()?>', 'currency': '<?php echo $_order->getOrderCurrencyCode();?>'});
+    <?php foreach($_order->getAllVisibleItems() as $_item): ?>
+    <?php if($_item->getParentItem()) continue; ?>
+    ga('ecommerce:addItem', {'id': '<?php echo $_order->getData('entity_id') ?>', 'name': '<?php echo str_replace('\'','', $_item->getName()) ?>', 'sku': '<?php echo $_item->getSku() ?>', 'price': '<?php echo $_item->getPrice() ?>', 'quantity': '<?php echo (int) $_item->getQtyOrdered() ?>'});
+    <?php endforeach;?>
+    ga('ecommerce:send');
+    <?php endif; ?>
+</script>
+
+<?php if($params['contextId']): ?>
+<?php
+    $content_ids = array();
+    foreach($_order->getAllVisibleItems() as $_item){
+        $content_ids[] = '"'.$_item->getProductId().'"';
+    }
+?>
+
+<script>
+  fbq('track', 'Purchase', {
+    source: 'magento',
+    version: "1.9.2.2",
+    pluginVersion: "2.1.14",
+    content_type: "product", 
+    content_ids: [<?php echo implode(',',$content_ids); ?>],
+    value: <?php echo $_order->getBaseGrandTotal() ?>,
+    currency: "<?php echo Mage::app()->getStore()->getCurrentCurrencyCode() ?>"
+  });
+</script>
+<?php endif; ?>
+
+<p><center><?php echo $this->__('You will be redirected to the payment gateway.');?></center></p>
+<p><center><img src="<?php echo $this->getSkinUrl('images/checkoutApi/load.gif');?>" /></center></p>
+<form id="payment-form" style="display:none" action="<?php echo $url?>" method="POST">
+    <input name="publicKey" value="<?php echo $params['publicKey'] ?>"/>
+    <input name="paymentToken" value="<?php echo $params['paymentToken'] ?>"/>
+    <input name="customerEmail" value="<?php echo $params['customerEmail'] ?>"/>
+    <input name="value" value="<?php echo $params['value'] ?>"/>
+    <input name="currency" value="<?php echo $params['currency'] ?>"/>
+    <input name="cardFormMode" value="<?php echo $params['cardFormMode'] ?>"/></input>
+    <input name="paymentMode" value="<?php echo $params['paymentMode'] ?>"/>
+    <input name="environment" value="<?php echo $params['environment'] ?>"/>
+    <input name="redirectUrl" value="<?php echo $params['redirectUrl'] ?>"/>
+    <input name="cancelUrl" value="<?php echo $params['redirectUrl'] ?>"/>
+    <input name="contextId" id="contextId" value="<?php echo $params['contextId'] ?>"/>
+    <input name="billingDetails" id="billingDetails"/>
+</form>
+
+
+<script>
+    (function () {
+        var config = {
+            "addressLine1"  : '<?php echo $params['billingDetails']['addressLine1']?>',
+            "addressLine2"  : '<?php echo $params['billingDetails']['addressLine2']?>',
+            "postcode"      : '<?php echo $params['billingDetails']['postcode']?>',
+            "country"       : '<?php echo $params['billingDetails']['country']?>',
+            "city"          : '<?php echo $params['billingDetails']['city']?>',
+            "state"         : '<?php echo $params['billingDetails']['state']?>',
+        };
+
+        <?php if(!empty($params['billingDetails']['phone'])):?>
+            config.phone = {"number": '<?php echo $params['billingDetails']['phone']['number']?>'};
+        <?php endif;?>
+
+        document.getElementById('billingDetails').value = JSON.stringify(config);
+
+        document.getElementById('payment-form').submit();
+    }());
+</script>

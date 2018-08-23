@@ -1,0 +1,390 @@
+//
+// Magento
+//
+// NOTICE OF LICENSE
+//
+// This source file is subject to the Academic Free License (AFL 3.0)
+// that is bundled with this package in the file LICENSE_AFL.txt.
+// It is also available through the world-wide-web at this URL:
+// http://opensource.org/licenses/afl-3.0.php
+// If you did not receive a copy of the license and are unable to
+// obtain it through the world-wide-web, please send an email
+// to license@magento.com so we can send you a copy immediately.
+//
+// DISCLAIMER
+//
+// Do not edit or add to this file if you wish to upgrade Magento to newer
+// versions in the future. If you wish to customize Magento for your
+// needs please refer to http://www.magento.com for more information.
+//
+// @category    design
+// @package     rwd_default
+// @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+// @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+//
+
+/* ============================================ *
+ * Configurable Swatches
+ * ============================================ */
+
+@import "../includes"; 
+
+/* Clears */
+.clearfix,
+.configurable-swatch-list,
+.product-view .product-options .swatch-attr {
+    &:after {
+        @include clearfix;
+    }
+}
+
+/* General Swatch Styling */
+.swatch-link,
+.swatch-label {
+    display: block;
+    border-radius: $default-border-radius;
+    font-size: $f-size;
+    text-align: center;
+    color: $c-link-sidebar;
+    text-decoration: none;
+    box-sizing: content-box;
+}
+
+.swatch-link {
+    margin: 0 0 3px;
+    position: relative;
+
+    img {
+        border-radius: $default-border-radius;
+        
+    }
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: none;
+        border-color:$c-dark;
+    }
+
+    &:focus{
+        text-decoration: none;
+    }
+    .x {
+        display: none;
+        text-indent: -999em;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: url(../../images/bg_x.png) center no-repeat transparent;
+        z-index: 10;
+    }
+
+    &.has-image {
+        .swatch-label {
+            position: relative;
+        }
+    }
+}
+
+
+.has-image .swatch-label {
+    position: relative;
+    margin: 0;
+    white-space: nowrap;
+    background: none;
+
+    &::after{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.28);
+        border-right: 1px solid rgba(0, 0, 0, 0.28);
+    }
+}
+
+.configurable-swatch-list {
+    margin-left: 0px;
+    zoom: 1;
+    clear: both;
+    -webkit-transform: translateZ(0px);
+
+    li {
+        zoom: 1;
+        margin: 0 2px 0 3px;
+        float: left;
+    }
+
+    .products-grid & li {
+        display: inline-block;
+        float: none;
+        vertical-align: top;
+    }
+
+    .not-available {
+        .x {
+            display: block;
+        }
+
+        .swatch-link {
+            border-color: $c-module-border-light;
+            position: relative;
+
+            &.has-image img {
+                opacity: 0.4;
+                filter: alpha(opacity=40);
+            }
+        }
+
+        .swatch-label {
+            color: #aaa;
+            background: #fff;
+        }
+    }
+
+    .wide-swatch .swatch-label {
+        padding: 0 6px;
+    }
+
+    .not-available a:focus {
+        outline: 0;
+    }
+}
+
+#narrow-by-list dd {
+    .configurable-swatch-list li {
+        margin: 0 3px 0 0; 
+        float: none;
+    }
+
+    .swatch-link{
+        margin: 0;
+        padding: 8px 0;
+    }
+
+    .swatch-link:not(.has-image) {
+        border: none;
+        line-height: $f-size + 11px;
+        margin-right: 2px;
+        text-align: left;
+
+        .swatch-item{
+            float: left;
+            vertical-align: middle;
+        }
+
+        .swatch-text {
+            background: $swatch-label-bg;
+            border-top: 1px solid $swatch-label-bg;
+            border-right: 1px solid $swatch-label-border;
+            border-bottom: 1px solid $swatch-label-border;
+            border-left: 1px solid $swatch-label-bg;
+            border-radius: $default-border-radius;
+            display: block;
+            float: left;
+            line-height: 1.5em;
+            margin: 0 5px 0 0;
+            padding: 5px 13px;
+
+            img {
+                border: 1px solid #fff;
+                border-radius: $default-border-radius;
+                box-sizing: content-box;
+            }
+
+            &::after{
+                display: none;
+            }
+        }
+
+        .count{
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        &:hover .swatch-text {
+            background-color: $swatch-label-bg-hover;
+            border-top-color: $swatch-label-border;
+            border-right-color: $swatch-label-bg-hover;
+            border-bottom-color: $swatch-label-bg-hover;
+            border-left-color: $swatch-label-border;
+        }
+
+        &:active .swatch-text{
+            background-color: darken($swatch-label-bg, 9%);
+        }
+    }
+
+    .swatch-link.has-image {
+        line-height: inherit;
+        text-transform: capitalize;
+
+        .swatch-label {
+            padding: 0;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            position: relative;
+            @extend %swatch-label;
+            
+            &::before{
+                border-color: #fff;
+            }
+    
+        }
+
+        .count{
+            color: $c-link-sidebar;
+        }
+
+        &:hover{
+            .swatch-label{
+                @extend %swatch-label-hover;
+            }
+        }
+    }
+ 
+}
+
+@include bp(max-width, $bp-medium) {
+    // Prevent odd wrapping issue when swatches have both text and images
+    #narrow-by-list dd .configurable-swatch-list li:nth-child(odd) {
+        clear: left;
+    }
+}
+
+.currently {
+    .swatch-current {
+        position: relative;
+
+        .btn-remove {
+            margin-top: -10px;
+            position: absolute;
+            right: 0;
+            top: 50%;
+        }
+
+        span {
+            display: block;
+            float: left;
+
+            &.value{
+                margin-left: 7px;
+            }
+        }
+    }
+
+    .swatch-link {
+        display: inline-block;
+        margin: 0 0 0 3px;
+
+        &:hover {
+            border-color: $c-module-border;
+            cursor: default;
+        }
+    }
+}
+
+/* Other Swatch States */
+
+.product-options .configurable-swatch-list .swatch-link.has-image .swatch-label,
+.products-grid .configurable-swatch-list .swatch-link.has-image .swatch-label,
+.products-list .configurable-swatch-list .swatch-link.has-image .swatch-label,
+.product-options .configurable-swatch-list .swatch-link.has-image .swatch-label,
+.products-grid .configurable-swatch-list .swatch-link.has-image .swatch-label,
+.products-list .configurable-swatch-list .swatch-link.has-image .swatch-label,
+.product-options .swatch-link.has-image .swatch-label,
+.products-grid .swatch-link.has-image .swatch-label,
+.products-list .swatch-link.has-image .swatch-label{
+    @extend %swatch-label;
+}
+
+
+.product-options .configurable-swatch-list .hover .swatch-link.has-image .swatch-label,
+.products-grid .configurable-swatch-list .hover .swatch-link.has-image .swatch-label,
+.products-list .configurable-swatch-list .hover .swatch-link.has-image .swatch-label,
+.product-options .configurable-swatch-list .selected .swatch-link.has-image .swatch-label,
+.products-grid .configurable-swatch-list .selected .swatch-link.has-image .swatch-label,
+.products-list .configurable-swatch-list .selected .swatch-link.has-image .swatch-label,
+.product-options .swatch-link.has-image:hover .swatch-label,
+.products-grid .swatch-link.has-image:hover .swatch-label,
+.products-list .swatch-link.has-image:hover .swatch-label {
+    @extend %swatch-label-hover;
+
+}
+.configurable-swatch-list .selected:not(.not-available) .swatch-link .swatch-label{
+    color: #ffffff;
+}
+
+.configurable-swatch-box {
+    background: none !important;
+
+    select.swatch-select {
+        display: none;
+    }
+
+    .validation-advice {
+        margin: 0 0 5px;
+        background: $c-danger;
+        padding: 2px 5px !important;
+        font-weight: bold;
+        color: #fff !important;
+        float: left;
+        display: block;
+        border-radius: $default-border-radius;
+    }
+}
+
+
+.product-view {
+    .product-options {
+        .swatch-attr {
+            float: none;
+            display: block;
+            clear: both;
+            border: 0;
+
+            .swatch-link{
+                border-width:2px;
+
+                &:hover {
+                    cursor: pointer;
+                    text-decoration: none;
+                   
+                    // color: #fff;
+
+                    // .swatch-label{
+                    //     color: #fff;
+                    // }
+                }
+            }
+
+
+            .select-label {
+                display: inline;
+                text-transform: capitalize;
+                color: $c-text;
+                padding-left: 5px;
+            }
+        }
+
+
+
+        dd .input-box {
+            width: auto;
+            height: auto;
+        }
+
+        .select-label {
+            display: none;
+        }
+    }
+
+    .add-to-cart button.out-of-stock {
+        background-position: -80px -362px;
+        cursor: default;
+    }
+}

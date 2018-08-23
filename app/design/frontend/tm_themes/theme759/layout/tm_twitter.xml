@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+	
+		<cms_index_index>		
+			<reference name="footer">
+				<block type="core/template" name="tm_twitter_timeline" as="tm_twitter_timeline" template="tm/twitter/twitter_timeline.phtml"/>
+			</reference>
+		</cms_index_index>
+		<!-- <reference name="left">
+			<block type="core/template" name="tm_twitter_timeline" as="tm_twitter_timeline" template="tm/twitter/twitter_timeline.phtml"/>
+		</reference>
+		<reference name="right">
+			<block type="core/template" name="tm_twitter_timeline" as="tm_twitter_timeline" template="tm/twitter/twitter_timeline.phtml"/>
+		</reference> -->
+	
+</layout>

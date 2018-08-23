@@ -1,0 +1,50 @@
+<?php
+$resultItems = $this->getSuggestData();
+$TmSearchHelper = $this->helper('tm_livesearch');
+$_item_img_width = $TmSearchHelper->getCfg('livesearch_set/livesearch_img_width');
+$_item_img_height = $TmSearchHelper->getCfg('livesearch_set/livesearch_img_height');
+?>
+
+<ul class="livesearch-results">
+    <?php if(count($resultItems) > 0): ?>
+        <li class="item-count">
+            <?php echo $this->__('Suggested keywords');?>:
+            <a href="<?php echo $this->getUrl().'catalogsearch/result/?q='.$TmSearchHelper->getEscapedQueryText() ;?>">
+                <?php echo $TmSearchHelper->getEscapedQueryText() ?> (<?php echo count($resultItems); ?>)
+            </a>
+        </li>
+        <?php $i = 0; foreach ($resultItems as $_item): ?>
+            <?php if($i < $TmSearchHelper->getCfg('livesearch_set/livesearch_item')): ?>
+            <li class="item">
+                <div class="item-img">
+                    <a href="<?php echo $_item->getProductUrl(); ?>" itemprop="url">
+                        <img
+                            src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize($_item_img_width, $_item_img_height) ?>"
+                            alt="<?php echo $this->escapeHtml($_item->getName()) ?>"
+                            title="<?php echo $_item->getName(); ?>" itemprop="image" />
+                    </a>
+                </div>
+                <div class="item-info">
+                    <div class="item-name" itemprop="name">
+                        <a href="<?php echo $_item->getProductUrl(); ?>"><?php echo $_item->getName(); ?></a>
+                    </div>
+                    <div class="item-price" itemprop="price">
+                        <?php $_product = Mage::getModel('catalog/product')->load($_item->getId()); ?>
+                        <?php echo $this->getLayout()->createBlock('catalog/product_price')->getPriceHtml($_product); ?>
+                    </div>
+                    <?php if($TmSearchHelper->getCfg('livesearch_set/livesearch_desc')):?>
+                        <div class="item-description" itemprop="description" >
+                            <?php echo $_item->getShortDescription() ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </li>
+            <?php endif; $i++ ?>
+        <?php endforeach; ?>
+<!--        --><?php //foreach($suggests as $_suggest): ?>
+<!--            <a href="--><?php //echo $this->getUrl().'catalogsearch/result/?q='.$_suggest->getQueryText() ;?><!--">all</a>-->
+<!--        --><?php //endforeach; ?>
+    <?php else: ?>
+        <li class="item"><?php echo $this->__('Nothing found.'); ?></li>
+    <?php endif; ?>
+</ul>

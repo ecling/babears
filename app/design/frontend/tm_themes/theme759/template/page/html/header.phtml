@@ -1,0 +1,123 @@
+<?php
+/**
+ * Magento
+ *
+ **/
+?>
+
+<?php
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+?>
+
+<?php
+$toplinks_dropdown = false;
+$search_dropdown   = false;
+$theme = $this->helper('customlogo');
+?>
+
+<!-- Ajax Login -->
+<div class="skip-links2"> <span class="skip-link2 skip-account2"></span></div>
+<div id="header-account2" class="skip-content2"></div>
+<!-- End Ajax Login -->
+
+<header id="header" class="page-header">
+
+	
+
+	<div class="container">
+		<div class="page-header-container">
+			<!-- logo -->
+			<?php if ($theme->isEnabled()): ?>
+				<?php if ($theme->getLogoType() == 'logo_images'): ?>
+					<?php if ($theme->getLogoUpload()): ?>
+						<a class="logo" href="<?php echo $this->getUrl('') ?>">
+							<img src="<?php echo Mage::getBaseUrl('media').'images/'.$theme->getLogoUpload(); ?>" alt="<?php echo $theme->getLogoAlt(); ?>" />
+						</a>
+					<?php endif ?>
+				<?php elseif ($theme->getLogoType() == 'logo_text'): ?>
+					<h1 class="logo">
+						<a class="logo-link" href="<?php echo $this->getUrl('') ?>">
+							<?php echo $theme->getLogoDesc(); ?>
+						</a>
+					</h1>
+				<?php endif ?>
+			<?php else: ?>
+				<a class="logo" href="<?php echo $this->getUrl('') ?>">
+					<img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" />
+				</a>
+			<?php endif ?>
+			<!-- end logo -->
+			<div class="header-row-background">
+				<div class="header-row">
+					<div class="header-switchers">
+						<?php echo $this->getChildHtml('store_language') ?>
+						<?php echo $this->getChildHtml('currency_switcher') ?>
+					</div>
+					<!-- Top Links -->
+					<div class="top-links">
+						<?php
+						$toplinksClass  = "top-links-inline";
+						$toplinksID     = "";
+						if($toplinks_dropdown):
+							$toplinksClass  = "skip-content";
+							$toplinksID     = "header-account-dropdown";
+							?>
+							<a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" data-target-element="#<?php echo $toplinksID; ?>" class="skip-link account-dropdown">
+								<span class="label"><?php echo $this->__('Account'); ?></span>
+							</a>
+						<?php endif ?>
+						<div id="<?php echo $toplinksID; ?>" class="<?php echo $toplinksClass; ?>">
+							<?php echo $this->getChildHtml('topLinks') ?>
+						</div>
+					</div>
+					<!-- end Top Links -->
+					<!--<p class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?></p>-->
+				</div>
+				
+			</div>
+			<div class="f-right">
+				<div class="header-minicart desktop">
+					<?php echo $this->getChildHtml('minicart_head'); ?>
+				</div>
+				<!-- Search -->
+				<div class="header-search desktop">
+					<?php
+					$searchClass  = "";
+					$searchID     = "";
+					if($search_dropdown):
+					$searchClass  = "skip-content";
+					$searchID     = "search-dropdown";
+					?>
+					<a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" data-target-element="#<?php echo $searchID; ?>" class="skip-link account-dropdown">
+						<span class="label"><?php echo $this->__('Search'); ?></span>
+					</a>
+					<div id="<?php echo $searchID; ?>" class="<?php echo $searchClass; ?>">
+						<?php endif ?>
+						<?php echo $this->getChildHtml('topSearch') ?>
+						<?php if($search_dropdown): ?>
+					</div>
+				<?php endif ?>
+				</div>
+				<!-- end Search -->
+			</div>
+            
+            <div class="clear"></div>
+            
+            <div class="main-menu">
+				<div id="header-nav" class="skip-content nav-content">
+					<?php echo $this->getChildHtml('topMenu') ?>
+				</div>
+			</div>
+            
+			<?php require_once("mobile-panel.phtml"); ?>
+			<div class="clear"></div>
+		</div>
+	</div>
+
+	
+	<?php echo $this->getChildHtml('topContainer'); ?>
+
+	
+</header>

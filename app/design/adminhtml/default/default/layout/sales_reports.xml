@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_salesreports_order_index>
+        <reference name="content">
+            <block type="adminhtml/store_switcher" name="store_switcher" before="-" />
+            <block type="salesreports/adminhtml_product_filter_form" name="grid.filter.form">
+                <action method="setFieldVisibility">
+                    <field>report_type</field>
+                    <visibility>0</visibility>
+                </action>
+            </block>
+            <block type="salesreports/adminhtml_order_status" name="order.status.chart" template="salesreports/order/status/chart.phtml" />
+            <block type="salesreports/adminhtml_order_country" name="order.country.chart" template="salesreports/order/country/chart.phtml" />
+            <block type="salesreports/adminhtml_order_num" name="order.num.chart" template="salesreports/order/num/chart.phtml" />
+        </reference>
+    </adminhtml_salesreports_order_index>
+    
+    <adminhtml_salesreports_product_grid>
+        <reference name="content">
+            <block type="adminhtml/store_switcher" name="store_switcher" before="-" />
+            <block type="salesreports/adminhtml_product_filter_form" name="grid.filter.form">
+                <action method="setFieldVisibility">
+                    <field>report_type</field>
+                    <visibility>0</visibility>
+                </action>
+            </block>
+            <block type="salesreports/adminhtml_product_ordered" name="ordered.chart" template="salesreports/product/ordered/chart.phtml" />
+            <block type="salesreports/adminhtml_product" name="product" />
+        </reference>
+    </adminhtml_salesreports_product_grid>
+    
+    <adminhtml_salesreports_product_view>
+        <reference name="content">
+            <block type="adminhtml/store_switcher" name="store_switcher" before="-" />
+            <block type="salesreports/adminhtml_product_filter_form" name="grid.filter.form">
+                <action method="setFieldVisibility">
+                    <field>report_type</field>
+                    <visibility>0</visibility>
+                </action>
+            </block>
+            <block type="salesreports/adminhtml_product_num" name="order.num.chart" template="salesreports/order/num/chart.phtml" />
+        </reference>
+    </adminhtml_salesreports_product_view>
+</layout>

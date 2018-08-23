@@ -1,0 +1,206 @@
+<?php
+/*
+* Name Extension: Megamenu
+*/
+
+?>
+<script type="text/javascript" src="<?php echo $this->getJsUrl('cmsmart/megamenu/jquery/jquery-1.7.2.min.js'); ?>"></script>
+<script type="text/javascript">
+var chk=jQuery.noConflict();
+ chk(document).ready(function(){  
+      if(chk('#showhide').is(':checked')){
+        chk('#block').show();
+      } else {
+        chk('#block').hide();
+      }
+      chk('#showhide').click(function(){
+         if(chk('#showhide').is(':checked')){
+            chk('#block').show('slow');
+          } else {
+             chk('#block').hide('slow');
+          }
+      })
+      if(chk('#showhideleft').is(':checked')){
+        chk('#widthleft').show();
+      } else {
+        chk('#widthleft').hide();
+      }
+      chk('#showhideleft').click(function(){
+         if(chk('#showhideleft').is(':checked')){
+            chk('#widthleft').show('slow');
+          } else {
+             chk('#widthleft').hide('slow');
+          }
+      })
+      
+      if(chk('#showhideright').is(':checked')){
+        chk('#widthright').show();
+      } else {
+        chk('#widthright').hide();
+      }
+      chk('#showhideright').click(function(){
+         if(chk('#showhideright').is(':checked')){
+            chk('#widthright').show('slow');
+          } else {
+             chk('#widthright').hide('slow');
+          }
+      })
+ });
+</script>
+<style type="text/css">
+      .entry-edit-head a{
+        float: left;
+        width: 100%;
+        }
+       .active #general_country-head{
+        background: url("images/entry_edit_head_arrow_up.gif") no-repeat scroll 100% 50% transparent;
+       }
+ </style>     
+<?php
+    
+	$theme = $this->helper('megamenu');
+    $block = $theme->getAllOptions();
+	$categoryArr = $theme->getCategoryArr();
+	$toOptionArray = $theme->toOptionArray();
+?>
+<div style="" id="category_tabs_menu"><div class="entry-edit">
+<div class="entry-edit-head collapseable">
+        <a id="general_country-head">
+        <h4 class="icon-head head-edit-form fieldset-legend">Numbers Product</h4>
+        </a>
+        <div class="form-buttons"></div>
+</div>
+<div id="admintestimonials_form" class="fieldset">
+   <table cellspacing="0" class="form-list">
+         <tbody>
+					<tr>
+						<td class="hidden" colspan="2"><input type="hidden" value="" name="category_id" id="category_id"></td>
+					</tr>
+					<tr>
+						<td class="label"><input class="checked" <?php if(@$categoryArr[0]['active_product']== 1){ ?> checked="checked" <?php } ?> style="float: left; margin-right: 5px; margin-top: 3px;" class="checkbox"  type="checkbox" name="active_product" value="1"/><label for="numbers_product"><?php echo $this->__('Numbers Product')?></label></td>
+						<td class="value">
+							<input type="text" class="input-text" value="<?php if(@$categoryArr[0]['numbers_product']){ echo @$categoryArr[0]['numbers_product'];} else { ?> 4  <?php } ?>" name="numbers_product" id="numbers_product">  
+						</td>
+					</tr>
+                    <tr>
+        				<td class="label"><input id="showhide" <?php if(@$categoryArr[0]['active_static_block']== 1){ ?> checked="checked" <?php } ?> style="float: left; margin-right: 5px; margin-top: 3px;" class="checkbox"  type="checkbox" name="active_static_block" value="1"/><label for="static_block"><?php echo $this->__('Static Block ')?></label></td>
+        			</tr>
+         </tbody>           
+         <tbody id="block">
+            
+            <tr>
+					<td class="label"><input <?php if(@$categoryArr[0]['active_static_block_top']== 1){ ?> checked="checked" <?php } ?> style="float: left; margin-right: 5px; margin-top: 3px;" class="checkbox"  type="checkbox" name="active_static_block_top" value="1"/><label for="static_block_top"><?php echo $this->__('Static Block Top')?></label></td>
+					<td class="value">
+							<select class=" select" name="static_block_top" id="status">
+								<?php foreach ($block as $data) { ?>
+									<option <?php if($data['value'] == @$categoryArr[0]['static_block_top']) {?> selected="selected" <?php } ?> value="<?php echo $data['value']?>"><?php echo $data['label']?></option>
+								<?php } ?>		
+							</select>
+						</td>
+			</tr>
+            <tr>
+			     	<td class="label"><input id="showhideleft" <?php if(@$categoryArr[0]['active_static_block_left']== 1){ ?> checked="checked" <?php } ?> style="float: left; margin-right: 5px; margin-top: 3px;" class="checkbox"  type="checkbox" name="active_static_block_left" value="1"/><label for="static_block_left"><?php echo $this->__('Static Block Left')?></label></td>
+				    	<td class="value">
+							<select class=" select" name="static_block_left" id="status">
+								<?php foreach ($block as $data) { ?>
+									<option <?php if($data['value'] == @$categoryArr[0]['static_block_left']) {?> selected="selected" <?php } ?> value="<?php echo $data['value']?>"><?php echo $data['label']?></option>
+								<?php } ?>		
+							</select>
+						</td>
+					</tr>
+                    <tr id="widthleft">
+        			     <td class="label"><?php echo $this->__('Width Block Left')?></label></td>
+        			     <td class="value">
+        							<input type="text" class="input-text" value="<?php if(@$categoryArr[0]['width_block_left']){ echo @$categoryArr[0]['width_block_left'];} else { ?> 164  <?php } ?>" name="width_block_left">  
+        			     </td>
+        			</tr>
+					<tr>
+						<td class="label"><input <?php if(@$categoryArr[0]['active_static_block_bottom']== 1){ ?> checked="checked" <?php } ?> style="float: left; margin-right: 5px; margin-top: 3px;" class="checkbox"  type="checkbox" name="active_static_block_bottom" value="1"/><label for="static_block_bottom"><?php echo $this->__('Static Block Bottom')?></label></td>
+						<td class="value">
+							<select class=" select" name="static_block_bottom" id="status">
+								<?php foreach ($block as $data) { ?>
+									<option <?php if($data['value'] == @$categoryArr[0]['static_block_bottom']) {?> selected="selected" <?php } ?> value="<?php echo $data['value']?>"><?php echo $data['label']?></option>
+								<?php } ?>		
+							</select>
+						</td>
+      
+			         </tr>
+                     
+                
+            <tr>
+					<td class="label"><input id="showhideright" <?php if(@$categoryArr[0]['active_static_block_right']== 1){ ?> checked="checked" <?php } ?>  style="float: left; margin-right: 5px; margin-top: 3px;" class="checkbox"  type="checkbox" name="active_static_block_right" value="1"/><label for="static_block_right"><?php echo $this->__('Static Block Right')?></label></td>
+						<td class="value">
+							<select class=" select" name="static_block_right" id="status">
+								<?php foreach ($block as $data) { ?>
+									<option <?php if($data['value'] == @$categoryArr[0]['static_block_right']) {?> selected="selected" <?php } ?> value="<?php echo $data['value']?>"><?php echo $data['label']?></option>
+								<?php } ?>		
+							</select>
+						</td>
+			</tr>
+            <tr id="widthright">
+        			     <td class="label"><?php echo $this->__('Width Block Right')?></label></td>
+        			     <td class="value">
+        							<input type="text" class="input-text" value="<?php if(@$categoryArr[0]['width_block_right']){ echo @$categoryArr[0]['width_block_right'];} else { ?> 199  <?php } ?>" name="width_block_right">  
+        			     </td>
+        			</tr>
+        </tbody>
+        <tbody>
+       		<td class="label"><input <?php if(@$categoryArr[0]['active_label']== 1){ ?> checked="checked" <?php } ?>  style="float: left; margin-right: 5px; margin-top: 3px;" class="checkbox"  type="checkbox" name="active_label" value="1"/><label for="label"><?php echo $this->__('Label')?></label></td>
+             <td class="value">
+					  <input type="text" class="input-text" value="<?php if(@$categoryArr[0]['label']){ echo @$categoryArr[0]['label'];} ?>" name="label" id="label"/>
+            </td> 
+            <tr>
+					<td class="label"><label for="level_column_count"><?php echo $this->__('Level Column Count ')?></label></td>
+						<td class="value">
+							<select class=" select" name="level_column_count" id="status">
+								<option value="0"><?php echo $this->__('Please select column...') ?></option>
+                  <?php if(is_array($toOptionArray)){ 
+                      foreach ($toOptionArray as $data) { ?>
+  									<option <?php if($data['value'] == @$categoryArr[0]['level_column_count']) {?> selected="selected" <?php } ?> value="<?php echo $data['value']?>"><?php echo $data['label']?></option>
+  								<?php }
+                  } ?>		
+							</select>
+						</td>
+			</tr>
+            <tr>
+			     <td class="label"><input <?php if(@$categoryArr[0]['active_thumbail']== 1){ ?> checked="checked" <?php } ?> style="float: left; margin-right: 5px; margin-top: 3px;" class="checkbox"  type="checkbox" name="active_thumbail" value="1"/><label for="sale_off"><?php echo $this->__('Thumbail')?></label></td>
+            </tr>
+            <tr>
+                <td class="label"><input <?php if(@$categoryArr[0]['category_children']== 1){ ?> checked="checked" <?php } ?> style="float: left; margin-right: 5px; margin-top: 3px;" class="checkbox"  type="checkbox" name="category_children" value="1"/><label for="sale_off"><?php echo $this->__('Disabled category children')?></label></td>
+            </tr>
+         </tbody>   
+         <tbody>
+			
+			<script type="text/javascript">jQuery.noConflict();</script>
+			
+			<script type="text/javascript" src="<?php echo $this->getJsUrl('cmsmart/megamenu/jquery/plugins/mcolorpicker/mcolorpicker.min.js');?>"></script>
+			<script type="text/javascript">
+				jQuery.fn.mColorPicker.init.replace = false;
+				jQuery.fn.mColorPicker.defaults.imageFolder = "<?php echo $this->getJsUrl('cmsmart/megamenu/jquery/plugins/mcolorpicker/images/')?>";
+				jQuery.fn.mColorPicker.init.allowTransparency = true;
+				jQuery.fn.mColorPicker.init.showLogo = false;
+			</script>
+            
+			<script type="text/javascript">
+				jQuery(function($){
+					$("#font-color").attr("data-hex", true).width("250px").mColorPicker();
+                    $("#background-color").attr("data-hex", true).width("250px").mColorPicker();
+				});
+			</script>
+            <tr>
+                    <td class="label"><label for="level_column_count"><?php echo $this->__('Color')?></label></td>
+                    <td class="value">
+                        <input id="font-color" name="font-color" value="<?php echo @$categoryArr[0]['font-color'] ?>" class=" input-text" type="text"/>
+                    </td>
+                
+            </tr> 
+             <tr>
+                    <td class="label"><label for="level_column_count"><?php echo $this->__('Background')?></label></td>
+                    <td class="value">
+                        <input id="background-color" name="background-color" value="<?php echo @$categoryArr[0]['background-color']?>" class=" input-text" type="text"/>
+                    </td>
+                
+            </tr>   
+          </tbody>            
+   </table>
+</div>

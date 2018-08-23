@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="header">
+            <reference name="top.search">
+                <block type="tm_livesearch/include" name="top.search.tm"/>
+            </reference>
+        </reference>
+        <!--<reference name="head">-->
+            <!--<action method="addJs"><script>lib/jquery/jquery-1.10.2.min.js</script></action>-->
+            <!--<action method="addJs"><script>lib/jquery/noconflict.js</script></action>-->
+        <!--</reference>-->
+        <reference name="head">
+            <block type="tm_livesearch/include" name="test"/>
+        </reference>
+    </default>
+    <tm_livesearch_ajax_suggest>
+        <block type="tm_livesearch/autocomplete" name="root" output="toHtml" ifconfig="livesearch/general/active" template="tm/livesearch/catalogsearch/autocomplete.phtml"/>
+    </tm_livesearch_ajax_suggest>
+</layout>

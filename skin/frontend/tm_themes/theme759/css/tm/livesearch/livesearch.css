@@ -1,0 +1,75 @@
+#search_autocomplete {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    display: none;
+}
+#search_autocomplete.show {
+    display: block;
+}
+
+#search_autocomplete .livesearch-results {
+    border: 0;
+    box-shadow: 0 0 21px rgba(0, 0, 0, 0.11);
+    right: 0;
+    position: absolute;
+    top: 0;
+    width: 200%;
+    background: #fff;
+}
+
+#search_autocomplete .livesearch-results li {
+    overflow: hidden;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+}
+#search_autocomplete .livesearch-results li:last-child {
+    margin-bottom: 0;
+    border: 0;
+}
+#search_autocomplete .livesearch-results .item-count {
+    background: #fafafa;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+#search_mini_form .input-box {
+    position: relative;
+}
+
+#search_mini_form .input-box.processing:before {
+    position: absolute;
+    left:3px;
+    top: 7px;
+    content: '';
+    background: url(../../../images/tm/livesearch/ajax-loader.gif) 50% 50% no-repeat;
+    background-size: cover;
+    width: 15px;
+    height: 15px;
+    display: block;
+}
+
+.livesearch-results .item-img {
+    float: left;
+    margin-right: 15px;
+}
+.livesearch-results .item-info {
+    overflow: hidden;
+}
+
+.livesearch-results .item-name {
+    display: block;
+    margin-bottom: 0.5em;
+    font-size: 14px;
+}
+
+.livesearch-results .price-box {
+    margin: 0;
+    line-height: 21px;
+}
+.livesearch-results  .price-box .price {
+    font-size: 18px;
+}
+
+/*# sourceMappingURL=livesearch.css.map */

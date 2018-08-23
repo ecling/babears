@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<tabs>
+		<tm translate="label">
+			<label>TemplateMonster</label>
+			<sort_order>100</sort_order>
+		</tm>
+	</tabs>
+	<sections>
+		<googlemap translate="label" module="googlemap">
+			<class>separator-top</class>
+			<label>Google Map</label>
+			<tab>tm</tab>
+			<sort_order>180</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<embed>
+					<label>Embed Map Settings</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>20</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>0</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enable/Disable</label>
+							<comment><![CDATA[Enable/Disable module.]]></comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+
+						<api_key translate="label comment">
+							<label>API key: </label>
+							<comment><![CDATA[Input Google API key]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</api_key>
+
+						<coordinates translate="label comment">
+							<label>Coordinates: </label>
+							<comment><![CDATA[Set map center coordinates. You can copy them from the google map link. Fox example: 40.5899796,-73.8820439 ]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</coordinates>
+
+						<sensor translate="label comment">
+							<label>Sensor: </label>
+							<comment><![CDATA[Sensor behaviour]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>googlemap/source_boolean_values</source_model>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</sensor>
+
+						<zoom translate="label comment">
+							<label>Zoom: </label>
+							<comment><![CDATA[Specify zoom level. 8 is a maximum zoom out. ]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</zoom>
+
+						<type translate="label comment">
+							<label>Map Type: </label>
+							<comment><![CDATA[Select map type]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>googlemap/source_types_maptypes</source_model>
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</type>	
+
+						<width translate="label comment">
+							<label>Map width: </label>
+							<comment><![CDATA[Set map width]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>80</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</width>
+
+						<height translate="label comment">
+							<label>Map height: </label>
+							<comment><![CDATA[Set map height]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>90</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</height>
+
+						<styles translate="label">
+						    <label>Styles</label>
+						    <comment><![CDATA[Google map styles. Can be taken from snazzymaps.com]]></comment>
+						    <frontend_type>textarea</frontend_type>
+						    <sort_order>100</sort_order>
+						    <show_in_default>1</show_in_default>
+						    <show_in_website>1</show_in_website>
+						    <show_in_store>1</show_in_store>
+						</styles>	
+
+						<ui translate="label comment">
+							<label>Disable UI: </label>
+							<comment><![CDATA[Disable Google Map user interface elements]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>googlemap/source_boolean_values</source_model>
+							<sort_order>110</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</ui>
+
+						<scrollwheel translate="label comment">
+							<label>Scrollwheel: </label>
+							<comment><![CDATA[If false, disables scrollwheel zooming on the map. ]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>googlemap/source_boolean_values</source_model>
+							<sort_order>120</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</scrollwheel>						
+
+						<draggable translate="label comment">
+							<label>Draggable: </label>
+							<comment><![CDATA[If false, prevents the map from being dragged.]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>googlemap/source_boolean_values</source_model>
+							<sort_order>130</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</draggable>
+
+						<marker_data translate="comment">
+                            <label>Markers:</label>
+                            <frontend_model>Tm_GoogleMap_block_MarkerAttributes</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>131</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[1. Title. Set title for marker. <br />
+                            				  2. Coordinates. Set coordinates of marker. You can copy them from the google map link. Fox example: 40.5899796,-73.8820439 <br />
+                            				  3. Image. Marker image filename (e.g. marker.png) It should be placed in skin "images" directory. <br />
+                            				  4. Infowindow. Add content to infowindow displayed on marker click. ]]></comment>
+                        </marker_data>
+					</fields>
+				</embed>
+				<contacts>
+					<label>Contacts Map Settings</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>30</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>0</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enable/Disable</label>
+							<comment><![CDATA[Enable/Disable module.]]></comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+
+						<api_key translate="label comment">
+							<label>API key: </label>
+							<comment><![CDATA[Input Google API key]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</api_key>
+
+						<coordinates translate="label comment">
+							<label>Coordinates: </label>
+							<comment><![CDATA[Set map center coordinates. You can copy them from the google map link. Fox example: 40.5899796,-73.8820439 ]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</coordinates>
+
+						<sensor translate="label comment">
+							<label>Sensor: </label>
+							<comment><![CDATA[Sensor behaviour]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>googlemap/source_boolean_values</source_model>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</sensor>
+
+						<zoom translate="label comment">
+							<label>Zoom: </label>
+							<comment><![CDATA[Specify zoom level. 8 is a maximum zoom out. ]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</zoom>
+
+						<type translate="label comment">
+							<label>Map Type: </label>
+							<comment><![CDATA[Select map type]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>googlemap/source_types_maptypes</source_model>
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</type>	
+
+						<width translate="label comment">
+							<label>Map width: </label>
+							<comment><![CDATA[Set map width]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>80</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</width>
+
+						<height translate="label comment">
+							<label>Map height: </label>
+							<comment><![CDATA[Set map height]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>90</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</height>
+
+						<styles translate="label">
+						    <label>Styles</label>
+						    <comment><![CDATA[Google map styles. Can be taken from snazzymaps.com]]></comment>
+						    <frontend_type>textarea</frontend_type>
+						    <sort_order>100</sort_order>
+						    <show_in_default>1</show_in_default>
+						    <show_in_website>1</show_in_website>
+						    <show_in_store>1</show_in_store>
+						</styles>	
+
+						<ui translate="label comment">
+							<label>Disable UI: </label>
+							<comment><![CDATA[Disable Google Map user interface elements]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>googlemap/source_boolean_values</source_model>
+							<sort_order>110</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</ui>
+						<scrollwheel translate="label comment">
+							<label>Scrollwheel: </label>
+							<comment><![CDATA[If false, disables scrollwheel zooming on the map. ]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>googlemap/source_boolean_values</source_model>
+							<sort_order>120</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</scrollwheel>						
+
+						<draggable translate="label comment">
+							<label>Draggable: </label>
+							<comment><![CDATA[If false, prevents the map from being dragged.]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>googlemap/source_boolean_values</source_model>
+							<sort_order>130</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</draggable>
+
+						<marker_data translate="comment">
+                            <label>Markers:</label>
+                            <frontend_model>Tm_GoogleMap_block_MarkerAttributes</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>131</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[1. Title. Set title for marker. <br />
+                            				  2. Coordinates. Set coordinates of marker. You can copy them from the google map link. Fox example: 40.5899796,-73.8820439 <br />
+                            				  3. Image. Marker image filename (e.g. marker.png) It should be placed in skin "images" directory. <br />
+                            				  4. Infowindow. Add content to infowindow displayed on marker click. ]]></comment>
+                        </marker_data>
+					</fields>
+				</contacts>
+			</groups>
+		</googlemap>
+	</sections>
+</config>

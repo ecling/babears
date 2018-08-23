@@ -1,0 +1,317 @@
+//
+// Magento
+//
+
+// =============================================
+// Compass Defaults
+// =============================================
+
+// Border Radius
+
+$default-border-radius: 0px;
+
+// Transition
+
+$default-transition-property: all;
+$default-transition-duration: 200ms;
+$default-transition-function: linear;
+$default-transition-delay: 0;
+
+// =============================================
+// Primary Break Points
+// =============================================
+
+// These should be used with the bp (max-width, xx) mixin
+// where a min-width is used, remember to +1 to break correctly.
+// If these are changed, they must also be updated in app.js
+
+$bp-xsmall: 479px;
+$bp-small: 599px;
+$bp-medium: 767px;
+$bp-large: 991px;
+$bp-xlarge: 1199px;
+
+// =============================================
+// Base Values
+// =============================================
+
+// Spacing
+
+$min-gap: 3px;
+
+$gap: 10px;
+
+$trim: 30px;
+// This will get applied on viewports smaller than 480px
+$trim-small: 15px;
+
+// Padding that will get applied to content areas
+$box-spacing-large: 30px;
+
+// Standard padding around box elements such as banner messages, etc
+$box-spacing: 10px;
+
+// Standard spacing between elements within a box, such as "Add to cart", "Price box", etc
+$element-spacing: 7px;
+
+$toolbar-icon-padding-offset: 8px;
+
+// Block
+$block-margin: 54px;
+
+$block-spacing: 25px;
+
+// Dimensions
+
+$max-page-width:				100%;
+$max-content-width: 			1170px;
+$max-std-formatted-width: 		50em;
+$container-large-desktop:		$max-content-width + $trim;
+
+$max-container-width: 			$trim + $max-content-width + $trim;
+$container-lg:					$container-large-desktop;
+
+
+
+// =============================================
+// Brand Colors
+// =============================================
+
+// Usually not used directly in Sass partials.
+// Only used to define context-based color vars in this file.
+
+$c-blue: #3399CC;
+$c-green: #54b70b;
+$c-pink: #D85378;
+$c-orange: #F3793B;
+$c-red: #CF5050;
+$c-yellow: #FFDD15;
+$c-black: #000000;
+$c-gray: #333333;
+
+// =============================================
+// Base Colors
+// =============================================
+
+// Body
+$c-body-background: 	#ffffff;
+$c-page-background: 	#ffffff;
+$header-row-background: #f5f5f5;
+$header-row-color:		#888;
+
+$header-search-height:  30px;
+
+//Menu
+$menu-background: #fff;
+$menu-item-color: #333333;
+$menu-item-color-act: #ed9964;
+$menu-item-bg-act: #fff;
+
+
+// Accent Colors
+$accent-color-1: #ed9964;
+$accent-color-2: #333333;
+
+// Text
+
+$c-text: #888888;
+$c-text-gray: #909090;
+$c-text-white: #E6E6E6;
+// Primary font color for headings and other non-link text
+$c-text-primary: $c-gray;
+
+
+$c-price: $accent-color-1;
+$c-old-price: #9b9b9b;
+$c-special-price: $accent-color-1 ;
+
+
+// Interaction
+
+$c-action: $c-gray;
+$c-stimulus: darken($c-gray, 15%);
+$c-subtle: #A0A0A0;
+
+// Notifications
+
+$c-danger: #ee372a;
+$c-danger-background: #FAEBE7;
+
+$c-success: $c-green;
+$c-success-background: #EFF5EA;
+
+$c-warn: #E26703;
+$c-warn-background: #F9EBE6;
+
+$c-dark: #333333;
+
+// Global Elements
+
+$c-divider-border: #ECECEC;
+
+$c-backround-light: #eeeeee;
+$c-backround-dark: #333333;
+
+
+// =============================================
+// Element Colors
+// =============================================
+
+// Buttons
+//
+
+$c-button: $accent-color-1;
+$c-button-color: #ffffff;
+$c-button-hover: #333;
+$c-button-active: #333;
+
+
+// Secondary Buttons
+
+$c-button-secondary: #eeeeee;
+$c-button-secondary-color: #333333;
+$c-button-secondary-hover: darken($c-button-secondary, 5%);
+$c-button-secondary-active: darken($c-button-secondary, 10%);
+
+// Cart Button
+
+$c-button-cart: $accent-color-1;
+$c-button-cart-hover: $accent-color-2;
+$c-button-cart-active: $accent-color-2;
+
+$c-button-subtle: #ECECEC;
+
+// Product
+
+$product-image-bg: #f5f5f5;
+$product-name-color: #333333;
+
+// Product View
+
+
+$view-product-name-size: 18px;
+$view-price-size:        45px;
+$view-btn-cart-height:   50px;
+
+// Forms
+
+$c-input-border: #dfdfdf;
+$c-input-border-focus: darken($c-input-border, 7%);
+
+$c-input-bg: #f5f5f5;
+
+$c-input-placeholder: $c-text-gray;
+$c-input-text: $c-text;
+
+$c-fieldset-border: #dfdfdf;
+$c-fieldset-border-light: #EDEDED;
+
+// Labels
+
+//** Default label text color
+$label-color: $c-text;
+//** Default text color of a linked label
+$label-link-hover-color: $c-text;
+
+// Headings
+
+$c-h1: $c-gray;
+$c-h2: $c-gray;
+$c-h3: $c-gray;
+$c-h4: $c-gray;
+$c-h5: $c-gray;
+$c-h6: $c-gray;
+
+// Link
+$c-link: $accent-color-1;
+$c-link-hover: #333;
+$c-link-focus: #333;
+$c-link-active: #333;
+
+$c-link-sidebar: 		#777777;
+$c-link-sidebar-hover:  #333333;
+
+// Module (generic)
+
+$c-module-background: #f5f5f5;
+$c-module-background-hover: #EDEDED;
+$c-module-background-secondary: #EAF8FF;
+$c-module-background-dark: #AAAAAA;
+// This should be applied whenever the border is surrounding a white element and/or is directly showing on white.
+$c-module-border: #CCCCCC;
+// This should be applied whenever the border is wrapping an element with $c-module-background
+$c-module-border-light: #dfdfdf;
+$c-module-border-dark: #777777;
+$c-module-border-highlight: $c-action;
+
+
+$skip-background: #EDEDED;
+
+
+// Table
+
+$c-table-background: #F4F4F4;
+$c-table-border: $c-module-border-light;
+
+$c-table-zebra-odd: #F8F7F5;
+$c-table-zebra-even: #EEEDED;
+
+// Tabs
+
+$c-tabs-background: #F0F0F0;
+
+// Email
+$c-email-background: #EBEBEB;
+$c-email-background-secondary: #E1F0F8;
+$c-email-border: #C3CED4;
+$c-email-action: #3696C2;
+$c-email-cell: #F1F1F1;
+$c-email-highlighted-background: #FFFDD9;
+$c-email-highlighted-border: #FFF74C;
+
+
+// Swatches
+
+$swatch-label-bg: #ffffff;
+$swatch-label-bg-hover: darken($swatch-label-bg, 6%);
+$swatch-label-border: #dcdcdc;
+
+$c-slider-pag: #c9c9c9;
+$c-slider-pag-hover: $c-dark;
+
+// =============================================
+// Typography
+// =============================================
+
+// Google Web Font stylesheet is included via layout XML
+
+// Font Stacks
+
+$f-stack-sans: 'Helvetica Neue', Verdana, Arial, sans-serif;
+$f-stack-serif: Georgia, Times, 'Times New Roman', serif;
+$f-stack-special: 'PT Sans', sans-serif;
+
+$font-family-icon: 'material-design';
+
+
+/***/
+$f-stack-default: $f-stack-special;
+
+/***/
+
+// Font Sizes
+
+$f-size-xxl: 18px;
+$f-size-xl: 16px;
+$f-size-l: 15px;
+
+$f-size: 13px;
+
+$f-size-s: 13px;
+$f-size-xs: 12px;
+$f-size-xxs: 11px;
+
+// Base Measures
+
+$b-line-height: 1.5;
+$b-margin-bottom: 1.5em;

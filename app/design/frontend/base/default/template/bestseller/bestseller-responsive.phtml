@@ -1,0 +1,118 @@
+<?php
+/***************************************************************************
+ Extension Name	: Bestseller Products
+ Extension URL	: http://www.magebees.com/magento-bestseller-products-extension.html
+ Copyright		: Copyright (c) 2015 MageBees, http://www.magebees.com
+ Support Email	: support@magebees.com 
+ ***************************************************************************/
+?>
+<style>
+.std .products-grid { margin:0 auto; padding:0; list-style:none; }
+.std .products-grid li { margin-left:0; padding:0; list-style:none; }
+</style>
+<?php
+	$result = array();
+	$pro = array();
+	$bestseller_collection = $this->getBestsellerProduct();
+	foreach($bestseller_collection as $collection){
+		$pro[] = $collection->getEntityId();
+	}
+    if($this->getChooseProducts() == "1") {
+		$result = $pro;
+	}elseif($this->getChooseProducts() == "2") {
+	   $result = $this->getProductIds();
+	}else{
+		if($this->getSortOrder() == 1){
+			$result = array_unique(array_merge($pro, $this->getProductIds()));
+		}elseif($this->getSortOrder() == 2){
+			$result = array_unique(array_merge($this->getProductIds(),$pro));
+		}else{
+			$result = array_unique(array_merge($pro, $this->getProductIds()));
+			shuffle($result);
+		}
+	}
+	$upperLimit = ($this->getLimit()) ? $this->getLimit() : 1; 
+	$itemPerRow = ($this->getItemsPerRow()) ? $this->getItemsPerRow() : 1 ;
+	$_columnCount = ($this->getItemsPerRow()) ? $this->getItemsPerRow() : 1 ;
+	
+?>
+
+<?php if($this->getEnabled()): ?>
+<?php if($this->getDisplayHeader()): ?>
+	<div class="page-title category-title">
+		<h1><?php if(count($result) > 0) { echo $this->getHeader(); } ?></h1>
+	</div>
+ <?php endif; ?>
+	  	<ul class="products-grid products-grid--max-<?php echo $_columnCount; ?>-col">
+			<?php
+			$i=0; $x = 1;
+		foreach($result as $result){
+			$_product = $this->getProducts($result);
+			if(!$_product){
+				continue;
+			}
+			if($x <= $upperLimit) {
+			?>
+			<li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+				<a href="<?php echo $this->getBaseUrl().$_product['url_path']; ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>" class="product-image">
+						<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(($this->getImageHeight()) ? $this->getImageHeight() : 135,($this->getImageWidth()) ? $this->getImageWidth() : 135); ?>" alt="<?php echo $this->htmlEscape($_product['name']) ?>"/>
+				</a>
+				<div  class="product-info">
+					<h2 class="product-name">
+						<a href="<?php echo $this->getBaseUrl().$_product['url_path'] ?>" title="<?php echo $this->htmlEscape($_product['name']) ?>"><?php echo $this->htmlEscape($_product['name']) ?></a>
+					</h2>
+					<?php 
+						if($this->getReview()) {
+							$_product = Mage::getModel('catalog/product')->load($_product->getId());
+							echo $this->getReviewsSummaryHtml($_product, 'short'); 
+						}
+						if($this->getProductsPrice()) {
+							$_product = Mage::getModel('catalog/product')->load($_product->getId());
+								echo $this->getPriceHtml($_product, true); 
+						}
+					?>  
+					<div class="actions" style="display:block !important">	
+						<?php if($this->getAddToCart()): ?>
+							<?php if($_product->isSaleable() && !$_product->canConfigure()): ?>
+								<button class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
+									<span><?php echo $this->__('Add to Cart') ?></span>
+								</button>
+							<?php elseif($_product->isSaleable()): ?>
+								 <button class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
+									<span><?php echo $this->__('View Details')?></span>
+								</button> 
+							<?php else: ?>
+								<span class="out-of-stock">
+									<?php echo $this->__('Out of stock') ?>
+								</span>
+							<?php endif; ?>
+						<?php endif; ?>
+						<?php if($this->getActive() || $this->getAddToCompare()):?>
+							<ul class="add-to-links">
+								<?php if($this->getActive()):?>
+									<?php if ($this->helper('wishlist')->isAllow()) : ?>
+										<li><a href="<?php echo $this->getAddToWishlistUrl($_product) ?>" class="addWishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
+									<?php endif; ?>
+								<?php endif; ?>
+								<?php if($this->getAddToCompare()): ?>
+									<?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+										<li><a href="<?php echo $_compareUrl; ?>" class="addCompare"><?php echo $this->__('Add to Compare') ?></a></li>
+									<?php endif; ?>
+								<?php endif; ?>
+							</ul>
+						<?php endif; ?>					
+					</div>
+				</div>	
+			</li>
+		    <?php
+			   	}
+				$x++;
+	        } 
+           ?>
+        </ul>
+		<script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+     
+	
+
+
+ <?php endif; ?>

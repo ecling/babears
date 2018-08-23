@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Tm_GoogleMap>
+            <active>true</active>
+            <codePool>local</codePool>            
+        </Tm_GoogleMap>
+    </modules>
+</config>

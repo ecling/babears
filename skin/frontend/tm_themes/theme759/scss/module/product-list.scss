@@ -1,0 +1,1045 @@
+//
+// Magento
+//
+// NOTICE OF LICENSE
+//
+// This source file is subject to the Academic Free License (AFL 3.0)
+// that is bundled with this package in the file LICENSE_AFL.txt.
+// It is also available through the world-wide-web at this URL:
+// http://opensource.org/licenses/afl-3.0.php
+// If you did not receive a copy of the license and are unable to
+// obtain it through the world-wide-web, please send an email
+// to license@magento.com so we can send you a copy immediately.
+//
+// DISCLAIMER
+//
+// Do not edit or add to this file if you wish to upgrade Magento to newer
+// versions in the future. If you wish to customize Magento for your
+// needs please refer to http://www.magento.com for more information.
+//
+// @category    design
+// @package     rwd_default
+// @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+// @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+//
+/* ================================================= *
+ * General Product List Styles (not module-specific)
+ * ================================================= */
+/* -------------------------------------------- *
+ * Product List General
+ */
+@import "../includes";
+
+.category-image {
+  margin-bottom: $b-margin-bottom;
+}
+
+// Prevent button overlapping when buttons have long text, such as non-English translations
+.products-list .action .button,
+.products-grid .actions .button {
+  white-space: normal;
+}
+
+.product-details {
+  position: relative;
+}
+
+/* -------------------------------------------- *
+ * Product Name
+ */
+
+h2.product-name,
+h3.product-name,
+h4.product-name,
+h5.product-name,
+p.product-name {
+  font-size: $f-size-xl;
+  font-weight: normal;
+  line-height: 1.56em;
+
+  a {
+    color: $product-name-color;
+    &:hover {
+      color: $c-link;
+      text-decoration: none;
+    }
+  }
+}
+
+.products-grid .product-name,
+.products-list .product-name {
+  margin-bottom: 0;
+  font-family: $f-stack-special;
+  text-transform: none;
+
+  a {
+    font-weight: 400;
+  }
+}
+
+.products-list .product-name {
+  margin-bottom: 0;
+}
+
+/*----------------------*/
+
+.products-grid,
+.products-list {
+  .label-product {
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    span {
+      display: inline-block;
+      padding: 0 8px;
+      background-color: #333333;
+      color: #fff;
+      font-size: $f-size-xs;
+      line-height: 20px;
+      float: left;
+      &.sale {
+        background-color: $accent-color-1;
+        float: right;
+      }
+    }
+  }
+
+  .availability.out-of-stock {
+    span {
+      @extend %primary-button;
+      @extend %large-button;
+      @extend %button-type2;
+      // background: lighten($c-button-cart, 30%);
+      opacity: 0.3;
+
+      &:before {
+        @include custom-icon($icon: '\e131');
+        font-size: 20px;
+        color: $c-button-color;
+        margin: 0 10px 0 -10px;
+      }
+
+      &:after {
+        display: none;
+      }
+
+      &:hover {
+        cursor: default;
+        background: $c-button-cart;
+      }
+    }
+  }
+
+}
+
+/* ============================================ *
+ * Product Grid
+ * ============================================ */
+
+$product-column-spacing: 10px;
+
+.products-grid {
+  position: relative;
+
+  &::after {
+    @include clearfix;
+  }
+  > li.item {
+    position: relative;
+    margin-bottom: $product-column-spacing;
+    text-align: center;
+    @include transition(all, 0.3s, ease-in-out);
+    &:after {
+      @include clearfix;
+    }
+  }
+  .product-image {
+    width: 100%;
+    margin-bottom: 13px;
+    padding: 10px;
+
+    img {
+      margin: 0 auto;
+      height: auto;
+      max-width: 100%;
+
+      &:hidden {
+        display: none;
+      }
+    }
+  }
+
+  .configurable-swatch-list {
+    margin-bottom: 10px;
+  }
+
+  .button {
+
+    &.btn-cart {
+      @extend %large-button;
+      @extend %button-type2;
+    }
+
+    &.btn-details {
+      @extend %large-button;
+      @extend %button-type2;
+      @extend %btn-details;
+    }
+  }
+  .wrapper-hover {
+    .product-image {
+      margin-bottom: 0;
+    }
+    padding-bottom: 52px;
+    @include bp(min-width, $bp-large + 1) {
+      .product-details {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: #fff;
+        padding-top: 5px;
+        .wrapper-hover-hiden {
+          height: 0;
+          overflow: hidden;
+          @include transition(all, 0.2s, ease-in-out);
+        }
+      }
+    }
+    &:hover {
+      @include bp(min-width, $bp-large + 1) {
+        .product-details {
+          .wrapper-hover-hiden {
+            height: 59px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include bp(min-width, $bp-medium + 1) {
+  .products-grid li.item {
+    .product-thumbs {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      margin: 0;
+
+      li.product-thumb {
+        margin: 0 0 10px;
+        float: none;
+        display: block;
+        opacity: 0;
+      }
+      a {
+        padding: 5px;
+        background: #fff;
+      }
+    }
+  }
+}
+
+// If the height of the .product-info element changes, this value should be adjusted
+$productsGridActionHeight: 85px;
+
+.products-grid .product-info {
+  position: relative;
+  overflow: hidden;
+}
+
+.products-grid .actions {
+  width: 100%;
+
+}
+
+.products-grid .ratings {
+
+  margin-top: 0;
+}
+
+.products-grid .ratings .amount {
+  display: none;
+}
+
+.products-grid .price-box {
+  color: $c-text-gray;
+  font-size: $f-size-s;
+  margin: 0 0 5px;
+  text-align: center;
+
+  .old-price,
+  .special-price {
+    display: inline-block;
+    margin: 0 5px;
+  }
+
+  &:after {
+    @include clearfix;
+  }
+}
+
+.products-grid .add-to-links {
+  margin: 12px 0 0;
+}
+
+// ------------------ Img product carousel ---------------------------
+.product-image-container {
+  position: relative;
+  .product-gallery-img {
+    max-width: 270px;
+    margin: 0 auto 13px;
+    img {
+      width: 100%;
+    }
+  }
+  .product-gallery-item {
+    display: none;
+    &:first-child {
+      display: block;
+    }
+  }
+  .owl-carousel {
+    .owl-item {
+      padding: 0;
+    }
+    .product-gallery-item {
+      display: block;
+    }
+  }
+  .owl-controls {
+    opacity: 0;
+    margin: 0;
+    div.owl-next,
+    div.owl-prev {
+      top: 45%;
+      background: rgba(0, 0, 0, 0);
+      border-radius: 0;
+      left: -15px;
+      width: 40px;
+      color: $c-link;
+      &:before {
+        color: inherit;
+      }
+      &:hover {
+        &:before {
+          color: inherit;
+        }
+        color: $c-link-hover;
+      }
+    }
+    div.owl-next {
+      left: auto;
+      right: -15px;
+    }
+  }
+}
+
+.wrapper-hover {
+  position: relative;
+  &:hover {
+    .owl-controls {
+      opacity: 1;
+    }
+  }
+}
+
+// ------------------ End ---------------------------
+
+// ---------------------------------------------
+
+.products-grid .product-image {
+
+  @include loadingOverlay();
+}
+
+// ---------------------------------------------
+
+@include bp(max-width, $bp-xlarge) {
+  .products-grid li.item {
+
+    .product-thumbs {
+
+      top: 10px;
+      right: 10px;
+      margin: 0;
+
+      li.product-thumb {
+        margin: 0 0 5px;
+      }
+    }
+  }
+}
+
+@include bp(max-width, $bp-large) {
+  .products-grid li.item {
+
+    .product-thumbs {
+
+      li.product-thumb {
+
+        display: block !important;
+        img {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }
+}
+
+@include bp(max-width, $bp-medium) {
+  /* Config: Three columns + flexible gutter */
+  // Container: 600 - (2 * 30 trim wide) = 540
+
+  %product-image-properties {
+    float: none;
+    margin: 0 auto 15px;
+    overflow: hidden;
+    padding: 5px;
+  }
+  .products-grid {
+
+    li.item {
+
+      .wrapper-hover {
+        border-bottom: solid 1px $c-module-border-light;
+        padding-bottom: $trim;
+
+      }
+
+      &:last-child {
+        .wrapper-hover {
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+      }
+
+      .product-thumbs {
+        margin-top: 10px;
+        float: none;
+
+        li.product-thumb {
+          background: $product-image-bg;
+          display: inline-block !important;
+
+          img {
+            width: 65px;
+            height: 65px;
+          }
+        }
+      }
+    }
+
+    .product-image-container {
+      max-width: 210px;
+      float: none;
+      text-align: center;
+      margin: 0 auto
+    }
+
+    .product-image {
+      @extend %product-image-properties;
+      width: 270px;
+    }
+
+    .product-info {
+      overflow: hidden;
+      clear: both;
+      text-align: center;
+    }
+
+    .ratings .rating-box {
+      margin: 0 0 10px;
+    }
+  }
+
+}
+
+@include bp(max-width, $bp-small) {
+
+  .products-grid {
+    .product-image {
+      width: 210px
+    }
+  }
+
+}
+
+// This mixin outputs the styles to allow for grids with more than 3 columns
+@mixin product-grid($column-count, $container-width, $class-append:"") {
+
+  // Allow this mixin to be used for more specific purposes, such as grids contained within widgets
+  @if $class-append != "" {
+    $class-append: -#{$class-append};
+  }
+
+  /* Config: Columns + flexible gutter */
+  $column-gutters: ($column-count) - 1;
+  $container: $container-width - (2 * $trim);
+  $column-width: ($container - ($column-gutters * $product-column-spacing)) / $column-count;
+
+  /* Undo three-column config */
+  .products-grid--max-#{$column-count}-col#{$class-append} > li:nth-child(odd) {
+    clear: none;
+  }
+  .products-grid--max-#{$column-count}-col#{$class-append} > li:nth-child(3n+1) {
+    clear: none;
+  }
+  .products-grid--max-#{$column-count}-col#{$class-append} > li:nth-child(even),
+  .products-grid--max-#{$column-count}-col#{$class-append} > li:nth-child(3n) {
+    margin-right: percentage($product-column-spacing / $container);
+  }
+
+  /* Set column config */
+  .products-grid--max-#{$column-count}-col#{$class-append} > li {
+    margin-right: percentage($product-column-spacing / $container);
+  }
+  .products-grid--max-#{$column-count}-col#{$class-append} > li {
+    width: percentage($column-width / $container);
+    margin-right: percentage($product-column-spacing / $container);
+  }
+  .products-grid--max-#{$column-count}-col#{$class-append} > li:nth-child(#{$column-count}n+1) {
+    clear: left;
+  }
+  .products-grid--max-#{$column-count}-col#{$class-append} > li:nth-child(#{$column-count}n) {
+    margin-right: 0;
+  }
+}
+
+// ---------------------------------------------
+
+@include bp(min-width, 960px) {
+  @include product-grid(4, 960);
+  @include product-grid(5, 960);
+  @include product-grid(6, 960);
+}
+
+/* ============================================ *
+ * Product List
+ * ============================================ */
+
+.products-list {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  & > li.item {
+    padding-bottom: $trim;
+    margin-bottom: $trim;
+    border-bottom: 1px solid $c-module-border-light;
+    position: relative;
+
+    &:after {
+      @include clearfix;
+    }
+    .product-image,
+    .product-image-container {
+      float: left;
+
+      .product-image {
+        float: none;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 11px;
+      }
+
+      & > img {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+
+  }
+
+  & > li.item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .button {
+
+    &.btn-cart {
+      @extend %button-type2;
+      @extend %large-button;
+    }
+    &.btn-details {
+      @extend %large-button;
+      @extend %button-type2;
+      @extend %btn-details;
+    }
+  }
+
+  .add-to-links {
+    margin: 15px 0 7px;
+  }
+
+  .configurable-swatch-list {
+
+    margin-top: 15px;
+
+    li {
+      margin: 0 8px 0 0;
+    }
+  }
+
+  .product-thumbs {
+
+    margin: 0 -4px;
+
+    li {
+      margin: 0 4px;
+
+      a {
+        background-color: $product-image-bg;
+      }
+    }
+  }
+}
+
+.products-list .product-shop {
+  overflow: hidden;
+  padding-left: ($box-spacing * 3);
+
+  .ratings {
+    margin: 0;
+    overflow: hidden;
+
+    .rating-box,
+    .rating-links,
+    .separator.temp {
+      float: left;
+      margin-top: 5px;
+    }
+    .rating-links {
+      margin-top: 4px;
+    }
+  }
+  .price-box {
+    margin: 0 0 12px;
+    clear: both;
+  }
+
+  .action {
+    margin: $element-spacing 0;
+  }
+  .desc {
+    margin-top: 8px;
+    line-height: 1.714em;
+  }
+
+  .product-primary {
+    float: left;
+    width: 54%;
+    overflow: hidden;
+  }
+  .product-secondary {
+    float: right;
+    width: 42%;
+    text-align: left;
+    clear: right;
+    padding: 0 0 350px ($box-spacing * 3);
+    margin: 0 0 -350px 0px;
+    border-left: solid 1px $c-module-border-light;
+
+  }
+}
+
+@include bp(max-width, $bp-xlarge) {
+
+  .products-list {
+    .button.btn-details,
+    .button.btn-cart {
+
+      padding: 7px 10px;
+
+      span span::before {
+        display: none;
+        font-size: $f-size-xl;
+      }
+
+    }
+
+    .availability.out-of-stock span {
+      padding: 7px 10px;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+
+@include bp(max-width, $bp-large) {
+  .products-list .product-shop {
+
+    .product-primary {
+      float: none;
+      width: auto;
+    }
+    .product-secondary {
+      float: none;
+      width: auto;
+      padding: 10px 0 0;
+      margin: 0;
+      border: none;
+    }
+  }
+}
+
+@include bp(max-width, $bp-small) {
+  .products-list {
+
+    .product-shop {
+      padding: 15px 0 0;
+      clear: both;
+    }
+
+    & > li {
+      .product-image-container {
+        float: none;
+
+        .product-image {
+          width: auto;
+          float: left;
+        }
+      }
+    }
+  }
+}
+
+@include bp(min-width, $bp-xsmall + 1) {
+  .products-list .product-name a {
+    font-size: $f-size-xxl;
+  }
+}
+
+@include bp(max-width, 600px) {
+  .products-list .product-shop .price-box .special-price {
+    padding-left: 0;
+  }
+  .products-list .product-shop {
+    .product-primary,
+    .product-secondary,
+    .desc {
+      float: none;
+      width: 100%;
+      padding-right: 0;
+      text-align: center;
+    }
+  }
+  .products-list {
+    li.item {
+      text-align: center;
+      .product-image-container {
+        float: none;
+        text-align: center;
+        max-width: 300px;
+        margin-right: auto;
+        margin-left: auto;
+        > a {
+          margin-right: auto;
+          margin-left: auto;
+        }
+      }
+      .configurable-swatch-list li {
+        display: inline-block;
+        float: none;
+      }
+    }
+  }
+}
+
+/* ============================================ *
+ * Mini Product List
+ * ============================================ */
+
+.mini-products-list {
+
+  .product-image {
+    float: left;
+    min-width: 50px;
+  }
+  .product-details {
+    margin-left: 120px;
+  }
+
+  // Vertically center product name
+  .product-details .product-name {
+    padding-top: 0px;
+  }
+
+  li {
+    margin-bottom: $gap;
+    clear: both;
+
+    &:after {
+      @include clearfix();
+    }
+  }
+}
+
+.mini-products-images-list {
+
+  &:after {
+    @include clearfix;
+  }
+
+  li.item {
+    float: left;
+    width: 50%;
+    margin: 0;
+    padding: 0 5px 10px 0;
+
+    &:nth-child(even) {
+      padding-right: 0;
+      padding-left: 5px;
+    }
+
+    .product-image {
+      display: block;
+
+      img {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+
+}
+
+/* ============================================ *
+ * Catalog - List
+ * ============================================ */
+
+.category-image {
+  border: 1px solid $c-module-border;
+  padding: 10px;
+
+  img {
+    width: 100%;
+    max-width: 100%;
+
+    &:hidden {
+      display: none;
+    }
+  }
+}
+
+/* ============================================ *
+ * Layered Navigation
+ * ============================================ */
+
+.block-layered-nav .block-subtitle--filter {
+  // Will be shown at smaller viewports
+  display: none;
+  @include accordionDtBase;
+  cursor: pointer;
+}
+
+.block-layered-nav .block-content {
+  // Accordions are fully expanded until a smaller resolution.
+  @include accordion;
+
+}
+
+.block-layered-nav dl dd {
+  margin-bottom: $box-spacing;
+  margin-top: $box-spacing;
+
+  ol > li > span, ol > li > a {
+    padding: 10px 0;
+    display: inline-block;
+    color: $c-link-sidebar;
+
+    &:hover {
+      color: $c-link-sidebar-hover;
+    }
+  }
+  ol > li > a .count {
+    color: $accent-color-1;
+  }
+}
+
+.block-layered-nav {
+  .selected-filter {
+    .currently {
+
+      padding: 23px 25px 0 $box-spacing-large;
+      border-top: solid 1px $c-module-border-light;
+
+      .block-subtitle {
+        display: block;
+        @include h4;
+        color: $accent-color-1;
+        font-weight: 500;
+        margin-bottom: 20px;
+      }
+
+      ol li {
+        margin-bottom: 20px;
+
+        .label {
+          font-weight: bold;
+          text-transform: capitalize;
+          color: $c-dark;
+        }
+
+        &:after {
+          @include clearfix;
+        }
+      }
+    }
+  }
+
+  .actions {
+    text-align: right;
+    margin: 0 !important;
+    padding: 5px 25px $box-spacing-large $box-spacing-large;
+
+    a {
+      @extend %primary-button;
+      @extend %small-button;
+      // background-color: $c-button-secondary;
+      // padding: 6px 13px;
+      // color: $c-button-secondary-color;
+      // @include textshadow(1px, 1px, 0px, 0, 0, 0, 0.3);
+      // font-weight: 500;
+      // border-bottom: solid 1px rgba(0,0,0, 0.28);
+      // border-right: solid 1px rgba(0,0,0, 0.2);
+      // border-top: solid 1px $c-button-secondary;
+      // border-left: solid 1px $c-button-secondary;
+
+      // &:hover{
+      //     border-top: solid 1px rgba(0,0,0, 0.28);
+      //     border-left: solid 1px rgba(0,0,0, 0.2);
+      //     border-bottom: solid 1px $c-button-secondary;
+      //     border-right: solid 1px $c-button-secondary;
+      //     background: darken($c-button-secondary, 3%);
+      // }
+
+      // &:active{
+      //     background: darken($c-button-secondary, 5%);
+      // }
+    }
+  }
+}
+
+@include bp(min-width, $bp-medium+1) {
+  .block-layered-nav .block-content > dl > dt {
+    padding: 24px 30px 5px 30px;
+
+    &:after {
+      display: none;
+    }
+  }
+}
+
+@include bp(max-width, $bp-xlarge) {
+  .block-layered-nav .block-content > dl > dt {
+    padding: 10px 15px 5px 15px;
+
+    &:after {
+      display: none;
+    }
+  }
+  .block-layered-nav {
+    .selected-filter {
+      .currently {
+        padding: 10px 15px;
+
+      }
+
+      .actions {
+        padding: 0 10px 10px;
+      }
+    }
+  }
+}
+
+@include bp(max-width, $bp-medium) {
+  .sidebar .block.block-layered-nav {
+    border-bottom: none;
+  }
+
+  // We don't want "Shop By" to show when there are no filters applied, as the "Filter" link will suffice
+  .block-layered-nav--no-filters .block-title {
+    display: none;
+  }
+
+  .block-layered-nav .block-title > strong {
+    @include h4;
+  }
+  // Remove the top padding and re-add it as margin-top so that the margin will collapse with elements above it
+  .block-layered-nav .block-content {
+    padding-top: 0;
+    margin-top: 15px;
+    @include accordionCollapse;
+
+    dl {
+      dt {
+        padding: 7px 10px 7px 24px;
+        &.last {
+          border-bottom: solid 1px $c-module-border-light;
+        }
+      }
+
+      dd {
+        border: solid 1px $c-module-border-light;
+        border-bottom: none;
+      }
+    }
+  }
+
+  .block-layered-nav .block-subtitle--filter {
+    background-color: $c-action;
+    border: 0;
+    margin-bottom: 0;
+    display: block;
+    color: #FFFFFF;
+
+    &:after {
+      @include triangle(right, 4px, #FFFFFF);
+      right: 10px;
+      top: 50%;
+      margin-top: -5px;
+    }
+
+    &:hover {
+      background-color: $c-button-hover;
+      color: #FFFFFF;
+    }
+
+    &.active:after {
+      @include triangle(down, 4px, #FFFFFF);
+      right: 10px;
+      top: 50%;
+      margin-top: -3px;
+    }
+  }
+
+  #narrow-by-list,
+  #narrow-by-list2 {
+    padding: $box-spacing;
+    border: 1px solid $c-module-border;
+    border-top: 0;
+  }
+
+  .block-layered-nav dl ol > li > a,
+  .block-layered-nav dl ol > li > span {
+    padding: 0px;
+    margin: 0;
+  }
+
+  .block-layered-nav dl ol > li > a {
+    @include touch-button;
+    background: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+}
+

@@ -1,0 +1,79 @@
+<?php $posts = $this->getPosts(); ?>
+<div id="messages_product_view">
+    <?php Mage::app()->getLayout()->getMessagesBlock()->setMessages(Mage::getSingleton('customer/session')->getMessages(true)); ?>
+    <?php echo Mage::app()->getLayout()->getMessagesBlock()->getGroupedHtml(); ?>
+</div>
+<div class="page-title category-title center">
+    <h1 class="title-border"><?php echo Mage::helper('blog')->__('Blog');  ?></h1>
+</div>
+<div class="top-toolbar"><?php echo $this->getChildHtml('aw_blog_comments_toolbar'); ?></div>
+
+<ul class="blog-list">
+    <?php $posts->count() ?>
+    <?php $_iterator = 0; ?>
+
+<?php foreach ($posts as $post): ?>
+    <?php $exerpt_image = $post->getExerptImage();?>
+    <?php $grid_col = $exerpt_image ? 'col-sm-8' : ''; ?>
+    <li class="item<?php if( ++$_iterator == sizeof($posts) ): ?> last<?php endif; ?>">
+        <div class="postWrapper row">
+            <?php if($exerpt_image): ?>
+            <div class="col-xs-12 col-sm-4">
+                <div class="postImage"><?php echo $post->getExerptImage(); ?></div>
+            </div>
+            <?php endif; ?>
+            <div class="col-xs-12 <?php echo $grid_col; ?>">
+                <div class="postTitle">
+                    <h2><a href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a></h2>
+                </div>
+                <?php echo $this->getBookmarkHtml($post) ?>
+                <div class="postDetails">
+                    <span class="postDetails-date"><?php echo $currentDate = date('d.m.Y', strtotime($post->getCreatedTime())); ?></span>
+                    <?php if ($this->getCommentsEnabled()): ?>
+                        <span class="postDetails-coment">
+                            <a href="<?php echo $post->getAddress(); ?>#commentBox" >
+                             <?php // echo Mage::helper('blog')->__('Comments'); ?>
+                              <?php if ($post->getCommentCount() > 0): ?>
+                                <?php echo $post->getCommentCount(); ?>
+                            <?php endif; ?>
+                             <?php if ($post->getCommentCount() < 1): ?>
+                                <?php echo "0"; ?>
+                            <?php endif; ?>
+                         </a>
+                        </span>
+                    <?php endif; ?>
+
+                    <?php 
+                        $tags = $this->getTagsHtml($post);
+                        if($tags): ?>
+                            <span class="tags postDetails-tags"><?php echo $tags; ?></span>
+                    <?php endif; ?>
+                    <?php $postCats = $post->getCats(); ?>
+                    <span class="postDetails-user">
+                        <?php if (!empty($postCats)): ?>
+                            <?php echo Mage::helper('blog')->__('Posted in'); ?>
+                            <?php foreach ($postCats as $data): ?>
+                                <a href="<?php echo $data['url']; ?>"><?php echo $data['title']; ?></a>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                        <?php echo Mage::helper('blog')->__('Posted'); ?>
+                        <?php endif; ?>
+                        <?php echo $this->__("By"); ?> <?php echo $post->getUser(); ?>
+                    </span>
+                </div>
+                <div class="postContent"><?php echo $post->getPostContent(); ?></div>
+            </div>
+        </div>
+    </li>
+<?php endforeach; ?>
+</ul>
+
+<?php if ($posts->count() == 0): ?>
+    <div id="empty-blog" class="alert alert-danger" role="alert"><span><?php echo $this->__('No blog posts available.') ?></span></div>
+<?php endif; ?>
+
+<div class="bottom-toolbar"><?php echo $this->getChildHtml('aw_blog_comments_toolbar'); ?></div>
+
+
+
+

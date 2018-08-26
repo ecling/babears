@@ -1,0 +1,1 @@
+ALTER TABLE `babears`.`catalog_product_option_type_value`     ADD COLUMN `weight` DECIMAL(12,4) DEFAULT '0.00' NULL COMMENT 'Weight' AFTER `sku`;

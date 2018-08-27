@@ -682,12 +682,12 @@ class Mage_Adminhtml_Catalog_ProductController extends Mage_Adminhtml_Controller
          * Initialize product options
          */
         if (isset($productData['options']) && !$product->getOptionsReadonly()) {
-            //option 增加总量计算
+            //option 增加重量计算
             foreach($productData['options'] as $option_id=>$opion){
                 foreach($opion['values'] as $value_id=>$values){
                     $value_price = 0;
-                    if($values['weight']>0){
-                        $value_price = Mage::helper('bcshipping')->getBasePrice($productData['purchase_price'],$productData['shipping_cost'],$values['weight']);
+                    if($values['weight']>0&&$values['purchase_price']>0){
+                        $value_price = Mage::helper('bcshipping')->getBasePrice($values['purchase_price'],$productData['shipping_cost'],$values['weight']);
                         $value_price = $value_price-$price;
                         $productData['options'][$option_id]['values'][$value_id]['price'] = $value_price;
                     }

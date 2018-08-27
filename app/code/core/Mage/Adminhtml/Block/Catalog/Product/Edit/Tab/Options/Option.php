@@ -256,6 +256,8 @@ class Mage_Adminhtml_Block_Catalog_Product_Edit_Tab_Options_Option extends Mage_
                             'item_count' => max($itemCount, $_value->getOptionTypeId()),
                             'option_id' => $_value->getOptionId(),
                             'option_type_id' => $_value->getOptionTypeId(),
+                            'weight' => $_value['weight'],
+                            'purchase_price' => $_value['purchase_price'],
                             'title' => $this->escapeHtml($_value->getTitle()),
                             'price' => ($showPrice)
                                 ? $this->getPriceValue($_value->getPrice(), $_value->getPriceType()) : '',

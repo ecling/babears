@@ -33,6 +33,7 @@ OptionTemplateSelect = '<table class="border" cellpadding="0" cellspacing="0">'+
         '<tr class="headings">'+
             '<th class="type-title"><?php echo Mage::helper('core')->jsQuoteEscape(Mage::helper('catalog')->__('Title')) ?> <span class="required">*</span></th>'+
             '<th class="type-weight"><?php echo Mage::helper('core')->jsQuoteEscape(Mage::helper('catalog')->__('Weight')) ?></th>'+
+            '<th class="type-purchase"><?php echo Mage::helper('core')->jsQuoteEscape(Mage::helper('catalog')->__('Purchase Price')) ?></th>'+
             <?php if ($this->getCanReadPrice() !== false) : ?>
             '<th class="type-price"><?php echo Mage::helper('core')->jsQuoteEscape(Mage::helper('catalog')->__('Price')) ?></th>' +
             '<th class="type-type"><?php echo Mage::helper('core')->jsQuoteEscape(Mage::helper('catalog')->__('Price Type')) ?></th>' +
@@ -57,6 +58,7 @@ OptionTemplateSelectRow = '<tr id="product_option_{{id}}_select_{{select_id}}">'
             '<input type="hidden" id="product_option_{{id}}_select_{{select_id}}_is_delete" name="product[options][{{id}}][values][{{select_id}}][is_delete]" value="">'+
             '<input type="text" class="required-entry input-text select-type-title" id="product_option_{{id}}_select_{{select_id}}_title" name="product[options][{{id}}][values][{{select_id}}][title]" value="{{title}}">{{checkboxScopeTitle}}</td>'+
             '<td><input type="text" class="input-text" name="product[options][{{id}}][values][{{select_id}}][weight]" value="{{weight}}"></td>'+
+            '<td><input type="text" class="input-text" name="product[options][{{id}}][values][{{select_id}}][purchase_price]" value="{{purchase_price}}"></td>'+
             <?php if ($this->getCanReadPrice() !== false) : ?>
             '<td><input type="text" class="input-text validate-number product-option-price" id="product_option_{{id}}_select_{{select_id}}_price" name="product[options][{{id}}][values][{{select_id}}][price]" value="{{price}}"<?php if ($this->getCanEditPrice() === false) : ?> disabled="disabled"<?php endif; ?>></td>' +
             '<td><?php echo $this->getPriceTypeSelectHtml() ?>{{checkboxScopePrice}}</td>' +
